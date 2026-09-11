@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Scraper — Privacy Policy</title>
+<style>
+  :root { --ink:#14121f; --muted:#6b6880; --line:#e6e4ef; --violet:#5b4bd6; --bg:#fbfbfe; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 22px 72px; }
+  h1 { font-size: 30px; letter-spacing:-.4px; margin:0 0 6px; }
+  h2 { font-size: 18px; margin: 34px 0 10px; }
+  .sub { color:var(--muted); margin:0 0 30px; }
+  .lead { background:#fff; border:1px solid var(--line); border-left:3px solid var(--violet);
+          border-radius:10px; padding:16px 18px; margin:0 0 30px; }
+  .lead b { color: var(--violet); }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:15px; }
+  th,td { text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; font-size:13px; }
+  code { background:#f1f0f7; border:1px solid var(--line); border-radius:4px;
+         padding:1px 5px; font-size:13px; }
+  footer { margin-top:44px; padding-top:18px; border-top:1px solid var(--line);
+           color:var(--muted); font-size:14px; }
+  a { color: var(--violet); }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#eceaf6; --muted:#9d99b3; --line:#2c2942; --bg:#131120; }
+    body { background:var(--bg); color:var(--ink); }
+    .lead, table { background:#191730; }
+    .lead { background:#191730; }
+    code { background:#221f3a; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Magic Scraper — Privacy Policy</h1>
+  <p class="sub">Last updated 9 September 2026 · applies to the Magic Scraper Chrome extension</p>
+
+  <p class="lead"><b>Magic Scraper keeps your data on your machine.</b> It has no servers of its
+  own, no analytics and no telemetry. Everything it reads stays in your browser, and everything
+  it produces goes only where you save it. The free extension makes no network requests at all.
+  There is exactly one exception, described below, and it happens only if you buy Pro: your
+  licence key is sent to Gumroad, once, to confirm the purchase.</p>
+
+  <h2>What it reads</h2>
+  <p>When you open the popup on a page, the extension reads that page's visible content —
+  the text, links and image URLs already rendered in your browser — in order to find the
+  repeating rows and turn them into a table. If you turn on drill-down, it also opens the
+  pages your rows link to and reads them the same way.</p>
+  <p>It does not read pages you have not opened the popup on, does not run in the background,
+  and does not touch form fields, passwords or cookies.</p>
+
+  <h2>What it stores, and where</h2>
+  <p>Everything is kept in your own browser using <code>chrome.storage.local</code>. Nothing
+  is uploaded. Clearing the extension's data, or removing the extension, deletes all of it.</p>
+  <table>
+    <tr><th>What</th><th>Why</th></tr>
+    <tr><td>Rows collected by a drill-down run</td>
+        <td>So results survive the popup closing while the run continues.</td></tr>
+    <tr><td>Your setup for a site — speed, excluded columns, renames, removed rows, the link column</td>
+        <td>So you do not reconfigure the same site every visit. Kept per site, for the 20 most recent.</td></tr>
+    <tr><td>A pending drill-down preview</td>
+        <td>So a half-configured chain survives the popup closing.</td></tr>
+  </table>
+
+  <h2>What leaves your machine</h2>
+  <p><strong>Your data: nothing.</strong> The only network requests the extension makes while
+  scraping are to the site you are already on: when a site paginates by URL, it fetches the next
+  page of that same site directly, exactly as your browser would if you clicked the link. Your
+  rows, your columns, the pages you visit and the files you export never leave your machine.</p>
+
+  <p><strong>One exception, and only if you buy Pro: activating your licence.</strong> When you
+  paste a licence key and press Activate, the extension sends <em>that key and the product ID</em>
+  to <code>api.gumroad.com</code>, once, so Gumroad can confirm the purchase. That is the whole
+  request. It carries nothing about the page you are on, the data you have collected, or anything
+  else about you. The answer is saved locally and never checked again &mdash; there is no
+  call on startup, no periodic re-check and no telemetry. A free installation never makes this
+  request at all, and never asks for permission to.</p>
+
+  <p>We do not store your name or email address, even though Gumroad's reply contains them.</p>
+
+  <p>Files you export (CSV, XLSX, JSON) are written to your own downloads folder. Where they go
+  after that is up to you.</p>
+
+  <h2>Permissions, and why each one exists</h2>
+  <table>
+    <tr><th>Permission</th><th>Why</th></tr>
+    <tr><td><code>activeTab</code></td>
+        <td>Read the page you are looking at, only when you open the popup on it.</td></tr>
+    <tr><td><code>scripting</code></td>
+        <td>Run the detection and extraction code inside that page.</td></tr>
+    <tr><td><code>downloads</code></td>
+        <td>Save your CSV / XLSX / JSON file.</td></tr>
+    <tr><td><code>tabs</code>, <code>storage</code>, all-sites access <em>(optional)</em></td>
+        <td>Requested only if you switch on drill-down, which has to open each row's page in a
+            background tab and keep the results while it works. Decline it and the rest of the
+            extension still works.</td></tr>
+    <tr><td><code>api.gumroad.com</code> <em>(optional)</em></td>
+        <td>Requested only when you activate a Pro licence, for the single check described above.
+            Free users are never asked for it.</td></tr>
+  </table>
+
+  <h2>Children</h2>
+  <p>Magic Scraper is a developer and analyst tool. It is not directed at children and collects
+  no personal information from anyone.</p>
+
+  <h2>Your responsibility when scraping</h2>
+  <p>The extension automates reading pages you can already see. You remain responsible for
+  respecting the terms of service, <code>robots.txt</code>, rate limits and copyright of the
+  sites you use it on, and for handling any personal data you collect lawfully.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the updated version will be published at this address with a new
+  date at the top.</p>
+
+  <h2>Contact</h2>
+  <p>Questions or reports: open an issue at
+  <a href="https://github.com/lewisjohnvillamor/magic-scraper-site/issues">github.com/lewisjohnvillamor/magic-scraper-site</a>,
+  or reply to your Gumroad receipt if you have bought Pro.</p>
+
+  <footer><a href="index.html">Magic Scraper</a> &middot; <a href="terms.html">Terms</a></footer>
+</main>
+</body>
+</html>
