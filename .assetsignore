@@ -1,0 +1,7 @@
+# Repo housekeeping, not part of the published site.
+.git
+.gitignore
+.assetsignore
+wrangler.toml
+README.md
+NOTICE

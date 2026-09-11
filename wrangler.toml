@@ -1,0 +1,11 @@
+# Cloudflare Workers, assets-only.
+#
+# There is no Worker script: `[assets]` with no `main` makes this a pure static
+# site, which is all it needs to be. Cloudflare's dashboard now funnels the Git
+# integration through the Workers flow rather than Pages, and `wrangler deploy`
+# refuses to run without this file.
+name = "magic-scraper-site"
+compatibility_date = "2026-09-11"
+
+[assets]
+directory = "."
