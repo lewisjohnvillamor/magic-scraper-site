@@ -1,0 +1,238 @@
+/* Magic Scraper — site styles.
+ *
+ * Fonts are self-hosted rather than pulled from Google. A product whose whole
+ * claim is "nothing leaves your machine" should not make the visitor's browser
+ * phone a third party to render a headline.
+ */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('assets/fonts/fraunces-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('assets/fonts/archivo-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Warm paper rather than blue-white: less screenshot-of-a-dashboard. */
+  --paper:   #faf8f4;
+  --ink:     #17150f;
+  --ink-2:   #5d574a;
+  --rule:    #e0dbd0;
+  --card:    #fffefb;
+  --accent:  #4b3bd0;   /* the extension's violet, used sparingly */
+  --warm:    #b4491f;   /* one warm note, for price and emphasis */
+  --shadow:  24px 24px 0 -12px rgba(23,21,15,.06);
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #14130f; --ink: #f2efe6; --ink-2: #a8a091; --rule: #302c24;
+    --card: #1b1914; --accent: #a695ff; --warm: #e08355;
+    --shadow: 24px 24px 0 -12px rgba(0,0,0,.3);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  font-synthesis-weight: none;
+}
+
+a { color: var(--accent); text-underline-offset: 3px; }
+
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 28px; }
+.narrow { max-width: 680px; }
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  display: flex; align-items: center; gap: 12px;
+  padding: 26px 0; border-bottom: 1px solid var(--rule);
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.glyph {
+  width: 30px; height: 30px; border-radius: 8px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ink);
+}
+.wordmark { font-family: 'Fraunces'; font-weight: 600; font-size: 19px; letter-spacing: -.2px; }
+.masthead nav { margin-left: auto; display: flex; gap: 22px; }
+.masthead nav a {
+  font-size: 14px; color: var(--ink-2); text-decoration: none;
+  font-variation-settings: 'wght' 500;
+}
+.masthead nav a:hover { color: var(--ink); }
+
+/* ---------- hero ---------- */
+
+.hero { padding: 76px 0 12px; }
+.eyebrow {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink-2); margin: 0 0 22px;
+}
+h1 {
+  font-family: 'Fraunces'; font-weight: 600;
+  font-size: clamp(40px, 6.2vw, 68px); line-height: 1.02;
+  letter-spacing: -1.6px; margin: 0 0 22px; max-width: 15ch;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 100;
+}
+h1 i { font-style: italic; color: var(--warm); }
+.standfirst {
+  font-size: 20px; line-height: 1.55; color: var(--ink-2);
+  max-width: 54ch; margin: 0 0 32px;
+}
+.standfirst b { color: var(--ink); font-variation-settings: 'wght' 600; }
+
+.actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block; text-decoration: none; font-size: 15px;
+  padding: 12px 22px; border-radius: 2px;
+  font-variation-settings: 'wght' 600;
+  border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+}
+.btn:hover { background: transparent; color: var(--ink); }
+.btn-quiet { background: transparent; color: var(--ink); border-color: var(--rule); }
+.btn-quiet:hover { border-color: var(--ink); background: transparent; }
+.aside { font-size: 14px; color: var(--ink-2); }
+
+/* ---------- the demo ---------- */
+
+.stage { margin: 54px 0 0; }
+.stage video, .stage img {
+  width: 100%; display: block; border: 1px solid var(--rule); box-shadow: var(--shadow);
+}
+.caption {
+  display: flex; gap: 10px; align-items: baseline;
+  margin-top: 14px; font-size: 14px; color: var(--ink-2);
+}
+.caption b { font-family: var(--mono); font-size: 12px; color: var(--warm); font-weight: 400; }
+
+/* ---------- sections ---------- */
+
+section { padding: 88px 0; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: 0; }
+h2 {
+  font-family: 'Fraunces'; font-weight: 600; font-size: 30px;
+  letter-spacing: -.6px; margin: 0 0 10px;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+}
+.deck { color: var(--ink-2); margin: 0 0 44px; max-width: 52ch; }
+
+/* Numbered editorial rows, not a grid of identical cards. */
+.steps { border-top: 1px solid var(--rule); }
+.step {
+  display: grid; grid-template-columns: 64px 1fr 1.15fr; gap: 28px;
+  padding: 26px 0; border-bottom: 1px solid var(--rule); align-items: baseline;
+}
+.step .n {
+  font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+  letter-spacing: .1em; padding-top: 4px;
+}
+.step h3 {
+  margin: 0; font-family: 'Fraunces'; font-weight: 600; font-size: 21px;
+  letter-spacing: -.3px; font-variation-settings: 'SOFT' 0;
+}
+.step p { margin: 0; color: var(--ink-2); }
+.step code {
+  font-family: var(--mono); font-size: .86em; background: var(--card);
+  border: 1px solid var(--rule); padding: 1px 5px;
+}
+@media (max-width: 720px) {
+  .step { grid-template-columns: 34px 1fr; }
+  .step p { grid-column: 2; }
+}
+
+/* ---------- pricing ---------- */
+
+.plans { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--ink); }
+.plan { padding: 30px 28px; }
+.plan + .plan { border-left: 1px solid var(--ink); background: var(--card); }
+.plan .kind {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink-2);
+}
+.plan .amount {
+  font-family: 'Fraunces'; font-weight: 600; font-size: 44px; letter-spacing: -1.4px;
+  margin: 10px 0 2px; display: flex; align-items: baseline; gap: 10px;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+}
+.plan .amount s { font-size: 22px; color: var(--ink-2); font-variation-settings: 'wght' 400; }
+.plan .terms { color: var(--ink-2); font-size: 14px; margin: 0 0 20px; }
+.plan ul { list-style: none; margin: 0 0 24px; padding: 0; }
+.plan li { padding: 7px 0; border-bottom: 1px dotted var(--rule); font-size: 15px; }
+.plan li:last-child { border-bottom: 0; }
+.plan li b { font-variation-settings: 'wght' 600; }
+.founding {
+  display: inline-block; font-family: var(--mono); font-size: 11px;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--warm); border: 1px solid var(--warm); padding: 3px 8px; margin-bottom: 14px;
+}
+@media (max-width: 720px) {
+  .plans { grid-template-columns: 1fr; }
+  .plan + .plan { border-left: 0; border-top: 1px solid var(--ink); }
+}
+
+/* ---------- the privacy note ---------- */
+
+.claim { border-left: 2px solid var(--warm); padding: 4px 0 4px 26px; margin: 0 0 34px; }
+.claim p { margin: 0 0 14px; font-size: 19px; line-height: 1.5; max-width: 50ch; }
+.claim p:last-child { margin-bottom: 0; }
+.claim b { font-variation-settings: 'wght' 600; }
+
+/* ---------- questions ---------- */
+
+.qa { border-top: 1px solid var(--rule); }
+.qa details { border-bottom: 1px solid var(--rule); padding: 20px 0; }
+.qa summary {
+  cursor: pointer; list-style: none; font-size: 18px;
+  font-family: 'Fraunces'; font-weight: 600; letter-spacing: -.2px;
+  font-variation-settings: 'SOFT' 0;
+  display: flex; justify-content: space-between; gap: 20px;
+}
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::after { content: "+"; color: var(--ink-2); font-family: var(--mono); font-weight: 400; }
+.qa details[open] summary::after { content: "\2212"; }
+.qa p { color: var(--ink-2); margin: 14px 0 0; max-width: 62ch; }
+
+/* ---------- footer ---------- */
+
+footer {
+  border-top: 1px solid var(--rule); padding: 34px 0 60px;
+  color: var(--ink-2); font-size: 14px;
+  display: flex; gap: 18px; flex-wrap: wrap; align-items: baseline;
+}
+footer a { color: var(--ink-2); }
+footer .sep { margin-left: auto; }
+
+/* ---------- long-form pages (privacy, terms) ---------- */
+
+.doc { padding: 60px 0 40px; }
+.doc h1 { font-size: clamp(30px, 4.6vw, 42px); margin-bottom: 8px; max-width: 22ch; }
+.doc .dateline { font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+                 letter-spacing: .06em; margin: 0 0 34px; }
+.doc h2 { font-size: 21px; margin: 42px 0 10px; }
+.doc p { max-width: 66ch; margin: 0 0 16px; }
+.doc table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; max-width: 66ch; }
+.doc th, .doc td { text-align: left; padding: 11px 12px 11px 0; border-bottom: 1px solid var(--rule);
+                   vertical-align: top; font-size: 15px; }
+.doc th { font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+          text-transform: uppercase; color: var(--ink-2); font-weight: 400; }
+.doc code { font-family: var(--mono); font-size: .86em; background: var(--card);
+            border: 1px solid var(--rule); padding: 1px 5px; }

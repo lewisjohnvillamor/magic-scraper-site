@@ -3,253 +3,202 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Magic Scraper — turn any web list into a spreadsheet</title>
+<title>Magic Scraper — any web list, into a spreadsheet</title>
 <meta name="description" content="A Chrome extension that finds the table or list on a page and exports it to CSV, XLSX or JSON. Crawls pagination, follows each row's detail page, and runs entirely in your browser." />
 <link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
 <meta property="og:title" content="Magic Scraper" />
-<meta property="og:description" content="Turn any web list into a spreadsheet. Runs entirely in your browser." />
+<meta property="og:description" content="Any web list, into a spreadsheet. Runs entirely in your browser." />
 <meta property="og:image" content="assets/screenshot.png" />
-<style>
-  :root {
-    --ink:#14121f; --muted:#6b6880; --line:#e6e4ef; --bg:#fbfbfe; --card:#fff;
-    --violet:#5b4bd6; --violet-2:#8b5cf6; --tint:#efecfd;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --ink:#eceaf6; --muted:#9d99b3; --line:#2c2942; --bg:#131120; --card:#191730;
-            --tint:#221f3a; }
-  }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink);
-         font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
-  a { color:var(--violet); }
-  .wrap { max-width:900px; margin:0 auto; padding:0 22px; }
-
-  /* ---------- header ---------- */
-  header { border-bottom:1px solid var(--line); background:var(--card); }
-  .bar { display:flex; align-items:center; gap:12px; padding:14px 0; }
-  .mark { width:34px; height:34px; border-radius:10px; flex:none; display:flex;
-          align-items:center; justify-content:center;
-          background:linear-gradient(145deg,var(--violet),var(--violet-2)); }
-  .name { font-size:18px; letter-spacing:-.3px; }
-  .name b { font-weight:700; }
-  .bar nav { margin-left:auto; display:flex; gap:18px; font-size:14px; }
-  .bar nav a { color:var(--muted); text-decoration:none; }
-  .bar nav a:hover { color:var(--ink); }
-
-  /* ---------- hero ---------- */
-  .hero { padding:56px 0 8px; }
-  h1 { font-size:clamp(32px,5vw,46px); line-height:1.1; letter-spacing:-1.2px; margin:0 0 14px; }
-  h1 em { font-style:normal; color:var(--violet); }
-  .lede { font-size:19px; color:var(--muted); margin:0 0 26px; max-width:620px; }
-  .cta { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
-  .btn { display:inline-block; padding:11px 20px; border-radius:10px; font-weight:600;
-         text-decoration:none; font-size:15px; border:1px solid transparent; }
-  .btn-primary { background:var(--violet); color:#fff; }
-  .btn-primary:hover { background:#4a3cc0; }
-  .btn-ghost { border-color:var(--line); color:var(--ink); background:var(--card); }
-  .note { font-size:14px; color:var(--muted); margin:0 0 34px; }
-
-  figure { margin:0 0 8px; }
-  figure img, figure video { width:100%; display:block; border-radius:12px;
-    border:1px solid var(--line); box-shadow:0 30px 60px -34px rgba(20,18,31,.55); }
-  figcaption { font-size:13px; color:var(--muted); margin-top:8px; }
-
-  /* ---------- sections ---------- */
-  section { padding:46px 0; border-top:1px solid var(--line); }
-  h2 { font-size:24px; letter-spacing:-.4px; margin:0 0 8px; }
-  .sub { color:var(--muted); margin:0 0 26px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; }
-  .card h3 { margin:0 0 6px; font-size:16px; }
-  .card p { margin:0; color:var(--muted); font-size:15px; }
-
-  table { width:100%; border-collapse:collapse; background:var(--card);
-          border:1px solid var(--line); border-radius:12px; overflow:hidden; }
-  th,td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); font-size:15px; }
-  th { font-size:13px; color:var(--muted); font-weight:600; }
-  tr:last-child td { border-bottom:0; }
-  td.y { color:var(--violet); font-weight:700; }
-
-  .price { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:6px 0 16px; }
-  .price b { font-size:34px; letter-spacing:-1px; }
-  .price s { color:var(--muted); }
-  .price .tag { font-size:12px; font-weight:700; color:#92400e; background:#fef3c7;
-                border-radius:999px; padding:3px 10px; }
-
-  details { background:var(--card); border:1px solid var(--line); border-radius:10px;
-            padding:14px 16px; margin-bottom:10px; }
-  details summary { cursor:pointer; font-weight:600; }
-  details p { color:var(--muted); margin:10px 0 0; }
-
-  footer { border-top:1px solid var(--line); padding:26px 0 44px; color:var(--muted); font-size:14px; }
-  footer a { color:var(--muted); }
-</style>
 </head>
 <body>
 
-<header>
-  <div class="wrap bar">
-    <span class="mark" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff"
-           stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
-      </svg>
-    </span>
-    <span class="name">Magic<b>Scraper</b></span>
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="index.html">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
     <nav>
-      <a href="#how">How it works</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#what">What it does</a>
+      <a href="#price">Price</a>
+      <a href="#data">Your data</a>
       <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
     </nav>
   </div>
-</header>
+
+  <div class="hero">
+    <p class="eyebrow">Chrome extension</p>
+    <h1>Any web list, into a <i>spreadsheet</i>.</h1>
+    <p class="standfirst">Open the popup and the table is already found — columns named, links
+      kept, ready to export. It follows pagination, opens the page behind each row, and
+      <b>never sends your data anywhere</b>.</p>
+    <div class="actions">
+      <a class="btn" href="https://villamor1.gumroad.com/l/magicscraper/founding">Get Pro — $19</a>
+      <a class="btn btn-quiet" href="#price">See what's free</a>
+      <span class="aside">Free version has no time limit and no account.</span>
+    </div>
+
+    <div class="stage">
+      <video src="assets/demo.webm" autoplay muted loop playsinline
+             poster="assets/screenshot.png"></video>
+      <p class="caption"><b>00:17</b>
+        <span>Nine products detected on page one. Six pages crawled, 54 rows, exported to CSV.
+          Recorded in one take, no edits.</span></p>
+    </div>
+  </div>
+</div>
 
 <div class="wrap">
 
-  <div class="hero">
-    <h1>Turn any web list<br>into a <em>spreadsheet</em>.</h1>
-    <p class="lede">Open the popup and the table is already found — columns named, links kept.
-      Export to CSV, XLSX or JSON. It crawls pagination, follows each row's detail page, and
-      never sends your data anywhere.</p>
-    <div class="cta">
-      <a class="btn btn-primary" href="https://villamor1.gumroad.com/l/magicscraper/founding">Get Pro — $19 once</a>
-      <a class="btn btn-ghost" href="#pricing">See what's free</a>
-    </div>
-    <p class="note">Free version does everything on the page in front of you, forever.</p>
+  <section id="what">
+    <h2>How a scrape actually goes</h2>
+    <p class="deck">Four steps, in the order you'd hit them. Most pages stop at the first one.</p>
 
-    <figure>
-      <video src="assets/demo.webm" autoplay muted loop playsinline
-             poster="assets/screenshot.png"></video>
-      <figcaption>A real run: nine products detected, six pages crawled, 54 rows, exported.</figcaption>
-    </figure>
-  </div>
-
-  <section id="how">
-    <h2>What it does</h2>
-    <p class="sub">No selectors to write, no account to make.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>Finds the data itself</h3>
-        <p>Tables, card grids, repeated lists, schema.org markup, shadow DOM and same-origin
-           iframes. If it picks the wrong block, cycle to the next one.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>It finds the data</h3>
+        <p>Tables, card grids, repeated lists, <code>schema.org</code> markup, open shadow roots
+          and same-origin iframes. Columns get named from the markup rather than called
+          <code>col_1</code>. Wrong block? Cycle to the next candidate.</p>
       </div>
-      <div class="card">
-        <h3>Point at it yourself</h3>
-        <p>For layouts nothing can guess: click the rows, shift-click extra elements, and
-           merge several areas of a page into one table.</p>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Or you point at it</h3>
+        <p>When a layout is too odd to guess — a table plus a price floating outside it — click
+          the rows, then shift-click the extra elements. Several regions of a page become one
+          table.</p>
       </div>
-      <div class="card">
-        <h3>Crawls pagination</h3>
-        <p>Finds the Next control, follows URL or click pagination, handles infinite scroll,
-           and backs off politely when a site pushes back.</p>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>It walks the pagination</h3>
+        <p>Finds the Next control, follows URL or click pagination, handles infinite scroll, and
+          when a site answers with a <code>429</code> it waits and retries instead of hammering.
+          You can stop mid-run and keep what it has.</p>
       </div>
-      <div class="card">
-        <h3>Follows each row</h3>
-        <p>Drill into every row's detail page and merge those fields back in as extra columns —
-           several levels deep if you need it.</p>
-      </div>
-      <div class="card">
-        <h3>Shapes the data</h3>
-        <p>Rename columns, drop rows and columns, filter, and get a one-line read on which
-           columns came back mostly empty.</p>
-      </div>
-      <div class="card">
-        <h3>Remembers each site</h3>
-        <p>Speed, page limits, excluded columns and renames are saved per site, so a weekly
-           scrape is not a weekly setup.</p>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>It opens the page behind each row</h3>
+        <p>Confirm what to take from one detail page and it repeats that for every row, merging
+          the fields back in as extra columns. Chain several levels deep if the data is buried.</p>
       </div>
     </div>
   </section>
 
-  <section id="pricing">
-    <h2>Pricing</h2>
-    <p class="sub">One payment. No subscription, no account, no cloud.</p>
+  <section id="price">
+    <h2>One payment. Then it's yours.</h2>
+    <p class="deck">No subscription, no seats, no account to create. The free tier isn't a trial —
+      it has no clock on it.</p>
 
-    <table>
-      <tr><th>&nbsp;</th><th>Free</th><th>Pro</th></tr>
-      <tr><td>Detect, pick an area, export CSV / XLSX / JSON</td><td class="y">✓</td><td class="y">✓</td></tr>
-      <tr><td>Rename columns, drop rows, filter, per-site memory</td><td class="y">✓</td><td class="y">✓</td></tr>
-      <tr><td>Pages per crawl</td><td>3</td><td class="y">unlimited</td></tr>
-      <tr><td>Rows per drill-down</td><td>3</td><td class="y">unlimited</td></tr>
-      <tr><td>Multi-level drill chains</td><td>3 rows</td><td class="y">unlimited</td></tr>
-    </table>
+    <div class="plans">
+      <div class="plan">
+        <p class="kind">Free</p>
+        <p class="amount">$0</p>
+        <p class="terms">Everything on the page in front of you.</p>
+        <ul>
+          <li>Detect, pick by hand, export <b>CSV · XLSX · JSON</b></li>
+          <li>Rename columns, drop rows, filter</li>
+          <li>Per-site settings remembered</li>
+          <li><b>3</b> pages per crawl</li>
+          <li><b>3</b> rows per drill-down</li>
+        </ul>
+        <!-- When the listing is approved, replace this with:
+             <a class="btn btn-quiet" href="STORE_URL">Install free</a> -->
+        <span class="aside">In review at the Chrome Web&nbsp;Store.</span>
+      </div>
 
-    <div class="price">
-      <b>$19</b><s>$25</s><span class="tag">Founding price — first 100 buyers</span>
+      <div class="plan">
+        <p class="kind">Pro</p>
+        <span class="founding">Founding price · first 100</span>
+        <p class="amount">$19 <s>$25</s></p>
+        <p class="terms">Paid once. Yours permanently, updates included.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li><b>Unlimited</b> pages per crawl</li>
+          <li><b>Unlimited</b> rows per drill-down</li>
+          <li>Multi-level drill chains</li>
+          <li>Works on every browser you use</li>
+        </ul>
+        <a class="btn" href="https://villamor1.gumroad.com/l/magicscraper/founding">Get Pro</a>
+      </div>
     </div>
-    <div class="cta">
-      <a class="btn btn-primary" href="https://villamor1.gumroad.com/l/magicscraper/founding">Get Pro</a>
-    </div>
-    <p class="note">Paid once, yours permanently, including future updates. Works on every
-      browser you use. 7-day refund, no questions.</p>
+    <p class="aside" style="margin-top:16px">7-day refund, no questions asked. The extension is
+      awaiting Chrome Web Store approval — your licence key works the moment it lands.</p>
   </section>
 
-  <section id="privacy">
+  <section id="data">
     <h2>Where your data goes</h2>
-    <p class="sub">Nowhere. This is the part most scrapers can't say.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>It runs in your browser</h3>
-        <p>Detection, crawling and export all happen locally. There is no server of ours for
-           your data to pass through, because there is no server of ours.</p>
-      </div>
-      <div class="card">
-        <h3>The free version makes no network requests</h3>
-        <p>None at all. Not analytics, not a version check, not a ping.</p>
-      </div>
-      <div class="card">
-        <h3>One exception, if you buy Pro</h3>
-        <p>Activating a licence sends your key to Gumroad once, to confirm the purchase. Nothing
-           about the page you're on goes with it, and nothing is sent afterwards.</p>
-      </div>
+    <p class="deck">Nowhere. Worth spelling out, because most tools in this category route your
+      scrape through their servers.</p>
+
+    <div class="claim">
+      <p>Detection, crawling and export all happen <b>inside your browser</b>. There is no server
+        of ours for your data to pass through, because there is no server of ours.</p>
+      <p>The free version makes <b>no network requests at all</b> — not analytics, not a version
+        check, not a ping.</p>
+      <p>If you buy Pro, activating your licence sends the key to Gumroad <b>once</b> to confirm
+        the purchase. Nothing about the page you're on goes with it, and nothing is sent
+        afterwards.</p>
     </div>
-    <p class="note" style="margin-top:18px">Full detail in the
-      <a href="privacy.html">privacy policy</a>.</p>
+    <p class="aside">Spelled out in full in the <a href="privacy.html">privacy policy</a>.</p>
   </section>
 
-  <section id="faq">
-    <h2>Questions</h2>
-
-    <details>
-      <summary>Do I need the paid version?</summary>
-      <p>Only if you scrape more than three pages at a time, or want the detail page behind
-         every row. Everything else is free and stays free. Try it on the sites you actually
-         care about first — that's what the free limits are for.</p>
-    </details>
-    <details>
-      <summary>Does it work on any site?</summary>
-      <p>Most. It reads what your browser has already rendered, so anything you can see, it can
-         usually take. It cannot reach closed shadow roots, cross-origin iframes, content only a
-         private API returns, or sites behind bot challenges — those are limits of the browser,
-         not of this extension.</p>
-    </details>
-    <details>
-      <summary>Is scraping a site allowed?</summary>
-      <p>That's between you and the site. This is a tool, like a browser or a spreadsheet.
-         Check the terms of the sites you use, respect robots.txt where it applies, and don't
-         hammer anyone — the speed setting exists for that reason.</p>
-    </details>
-    <details>
-      <summary>What happens if I switch computers?</summary>
-      <p>Paste the same licence key. One key works on every browser and machine you use; there
-         is no device limit and nothing to deactivate.</p>
-    </details>
-    <details>
-      <summary>Who makes this?</summary>
-      <p>One person. That means replies come from someone who wrote the code, and also that
-         support is email rather than a helpdesk.</p>
-    </details>
+  <section id="asks">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Do I actually need Pro?</summary>
+        <p>Only if you scrape past three pages, or want the page behind every row. Everything else
+          is free and stays free. Run it on the sites you actually care about first — that's what
+          the limits are for, and it'll tell you more than this page can.</p>
+      </details>
+      <details>
+        <summary>Will it work on the site I have in mind?</summary>
+        <p>Probably. It reads what your browser has already rendered, so what you can see, it can
+          usually take. It can't reach closed shadow roots, cross-origin iframes, data only a
+          private API returns, or anything behind a bot challenge — those are limits of the
+          browser itself, not of this extension. Try the free version on that exact site before
+          paying.</p>
+      </details>
+      <details>
+        <summary>Am I allowed to scrape a site?</summary>
+        <p>That's between you and the site, and this tool doesn't change the answer. Check its
+          terms, respect <code>robots.txt</code> where it applies, think about data-protection law
+          if the rows are about people, and don't hammer anyone — the speed setting is there for
+          exactly that, and the default is deliberately gentle.</p>
+      </details>
+      <details>
+        <summary>What if I change computer?</summary>
+        <p>Paste the same key. One licence covers every browser and machine you use. There's no
+          device count, nothing to deactivate, and no login to lose.</p>
+      </details>
+      <details>
+        <summary>Who's behind it?</summary>
+        <p>One person, not a company. That means replies come from whoever wrote the code, and
+          also that support is an inbox rather than a helpdesk.</p>
+      </details>
+    </div>
   </section>
 
 </div>
 
-<footer>
-  <div class="wrap">
-    Magic Scraper · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> ·
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
     <a href="https://villamor1.gumroad.com/l/magicscraper">Buy Pro</a>
-  </div>
-</footer>
+    <span class="sep">Built by one person.</span>
+  </footer>
+</div>
 
 </body>
 </html>
