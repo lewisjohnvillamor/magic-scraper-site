@@ -13,8 +13,6 @@ many levels deep as needed.
 ## Product
 
 - [Home](https://magicscraper.app): what the extension does, pricing, and where the data goes
-- [Bespoke scraping services](https://magicscraper.app/services): scheduled scrapes, sites
-  behind a login, sites with bot protection, high-volume and multi-site collection
 - [Support](https://magicscraper.app/support): common problems and their fixes, licence-key
   help, refunds
 
