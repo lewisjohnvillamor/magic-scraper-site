@@ -1,0 +1,40 @@
+# Magic Scraper
+
+> A Chrome extension that turns the table or list on the page you are viewing into a
+> spreadsheet, and a bespoke service for the scrapes that do not fit in a browser.
+
+Everything the extension does happens inside the browser. There is no server, no account, and
+nothing about the pages a user scrapes is transmitted anywhere. The free tier includes
+detection, a manual picker, export to CSV/XLSX/JSON, and multi-page crawling with no page
+limit. The paid tier ($25 one-time, $19 for the first 100 buyers) adds unlimited drill-down:
+opening the page behind every row and merging its fields back in as extra columns, chained as
+many levels deep as needed.
+
+## Product
+
+- [Home](https://magicscraper.app): what the extension does, pricing, and where the data goes
+- [Bespoke scraping services](https://magicscraper.app/services): scheduled scrapes, sites
+  behind a login, sites with bot protection, high-volume and multi-site collection
+- [Support](https://magicscraper.app/support): common problems and their fixes, licence-key
+  help, refunds
+
+## Practice site
+
+- [Scrape sandbox](https://magicscraper.app/demo/): a fictional shop built to be scraped.
+  Open to anyone, with any tool, and not rate-limited. Four pages exercise different problems:
+  a card grid with six pages of pagination, a plain HTML table, infinite scroll, and a value
+  that belongs to every row but sits outside the table. Behind the catalogue is a three-level
+  link chain for testing drill-down.
+
+## Legal
+
+- [Privacy policy](https://magicscraper.app/privacy)
+- [Terms](https://magicscraper.app/terms)
+
+## Optional
+
+- What the extension cannot reach: closed shadow roots, cross-origin iframes, data that only a
+  private API returns, PDFs in the browser viewer, and content behind a bot challenge. These
+  are limits of the browser, not of the extension.
+- The single outbound request: activating a paid licence posts the key to api.polar.sh once to
+  confirm the purchase. The free version makes no network requests at all.

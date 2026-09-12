@@ -17,6 +17,108 @@
 <!-- og:image has to be absolute: the crawler resolves it against nothing. -->
 <meta property="og:image" content="https://magicscraper.app/assets/screenshot.png" />
 <meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://magicscraper.app/#org",
+      "name": "Magic Scraper",
+      "url": "https://magicscraper.app",
+      "logo": "https://magicscraper.app/assets/icon.png",
+      "email": "support@magicscraper.app",
+      "sameAs": [
+        "https://github.com/lewisjohnvillamor/magic-scraper-site"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://magicscraper.app/#app",
+      "name": "Magic Scraper",
+      "applicationCategory": "BrowserApplication",
+      "applicationSubCategory": "Chrome extension",
+      "operatingSystem": "Chrome, Edge, Brave, and other Chromium browsers",
+      "url": "https://magicscraper.app",
+      "description": "Finds the table or list on the page you are viewing and exports it to CSV, XLSX or JSON. Crawls pagination, opens the page behind each row, and runs entirely in your browser.",
+      "featureList": [
+        "Automatic detection of tables, card grids and repeated lists",
+        "schema.org JSON-LD and microdata",
+        "Manual area picker for awkward layouts",
+        "Multi-page crawling: Next buttons, numbered pagers, URL paging, infinite scroll",
+        "Drill-down: opens the page behind each row and merges its fields back in",
+        "Multi-level drill chains",
+        "Export to CSV, XLSX, JSON or the clipboard"
+      ],
+      "publisher": {
+        "@id": "https://magicscraper.app/#org"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Detection, manual picking, unlimited multi-page crawling, and export. Drill-down runs on the first 3 rows."
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro",
+          "price": "25",
+          "priceCurrency": "USD",
+          "description": "One-time purchase. Drill-down on every row, through as many levels as needed. No subscription, no account."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://magicscraper.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need Pro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only if you want the page behind every row. Crawling pagination is free, however many pages. Drill-down is the paid feature, and free runs it on the first three rows so you can see what comes back from your own site before deciding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will it work on the site I have in mind?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Probably. It reads what your browser has already rendered, so what you can see, it can usually take. It cannot reach closed shadow roots, cross-origin iframes, data only a private API returns, or anything behind a bot challenge — those are limits of the browser itself. Try the free version on that exact site before paying."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Am I allowed to scrape a site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That is between you and the site. Check its terms of service, respect robots.txt where it applies, consider data-protection law if the rows are about people, and pace your requests — the speed setting exists for that and the default is deliberately gentle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I change computer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste the same key. One licence covers every browser and machine you use. There is no device count, nothing to deactivate, and no login to lose."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does my scraped data go?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nowhere. Detection, crawling and export all happen inside your browser. There is no server for your data to pass through. The free version makes no network requests at all; activating a Pro licence sends the key to Polar once to confirm the purchase, and nothing about the page you are on goes with it."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -36,7 +138,7 @@
       <a href="#price">Price</a>
       <a href="#data">Your data</a>
       <a href="demo/index.html">Sandbox</a>
-      <a href="#bespoke">Bespoke work</a>
+      <a href="services.html">Services</a>
       <a href="privacy.html">Privacy</a>
       <a href="support.html">Support</a>
     </nav>
@@ -202,43 +304,27 @@
         <span class="n">01</span>
         <h3>A site that fights back</h3>
         <p>Data behind a login, a private API, a bot challenge, or markup that changes shape
-          every few weeks. The extension is deliberately limited to what your browser has
-          already rendered &mdash; a dedicated pipeline is not.</p>
+          every few weeks.</p>
       </div>
       <div class="step">
         <span class="n">02</span>
         <h3>The same scrape, on a schedule</h3>
-        <p>Every morning, every Monday, every hour. Delivered where you actually want it: a
-          spreadsheet, a database, an inbox, an API, or a file dropped somewhere you already
-          look.</p>
+        <p>Every morning, every Monday, every hour &mdash; delivered to a spreadsheet, a
+          database, an API or your inbox.</p>
       </div>
       <div class="step">
         <span class="n">03</span>
         <h3>Volume, or many sites at once</h3>
-        <p>Hundreds of thousands of rows, or the same fields pulled from thirty competitors and
-          reconciled into one table.</p>
+        <p>Hundreds of thousands of rows, or the same fields from thirty competitors reconciled
+          into one table.</p>
       </div>
     </div>
 
-    <div class="claim" style="margin-top:34px">
-      <p><b>Tell us what you need and we'll tell you if it's possible.</b> Email
-        <a href="mailto:support@magicscraper.app?subject=Bespoke%20scraping%20project">support@magicscraper.app</a>
-        with:</p>
+    <div class="actions" style="margin-top:30px">
+      <a class="btn" href="services.html">Bespoke scraping &mdash; what we take on</a>
+      <span class="aside">Quoting costs nothing, and we'll say if the free extension already
+        does it.</span>
     </div>
-
-    <ul class="brief">
-      <li><b>The site or sites</b> &mdash; a URL and, if it's behind a login, say so.</li>
-      <li><b>What you need out of it</b> &mdash; which fields, and what the finished file or
-        feed should look like.</li>
-      <li><b>How often</b> &mdash; once, or on a schedule.</li>
-      <li><b>Your budget and deadline</b> &mdash; a figure you have in mind is enough. It tells
-        us straight away whether the scope fits, which saves us both a fortnight of
-        back-and-forth.</li>
-    </ul>
-
-    <p class="aside">You'll get a straight answer, usually within a day or two &mdash; including
-      when the answer is that it can't be done lawfully or reliably, which is worth knowing
-      before you pay anyone. Nothing you send is shared, and quoting costs nothing.</p>
   </section>
 
   <section id="asks">
@@ -279,7 +365,7 @@
       </details>
       <details>
         <summary>Can you scrape something for us?</summary>
-        <p>Yes &mdash; see <a href="#bespoke">bespoke work</a> above. Sites that need a login,
+        <p>Yes &mdash; see <a href="services.html">bespoke scraping</a>. Sites that need a login,
           fight back, or have to be collected on a schedule are a project rather than a tool,
           and we take those on.</p>
       </details>

@@ -1,0 +1,55 @@
+# magicscraper.app
+
+User-agent: *
+Allow: /
+Disallow: /thanks
+
+# The sandbox is meant to be crawled and scraped -- that is what it is for.
+# Its 130 generated product, maker and sourcing pages carry noindex instead,
+# so they can be followed and practised on without filling an index with
+# fictional stock.
+
+# AI crawlers are welcome. This is a niche tool that people find by asking
+# "how do I get this table into a spreadsheet", and an assistant that has read
+# the site can answer that. Named explicitly rather than left to the wildcard,
+# because being listed is the point.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+Sitemap: https://magicscraper.app/sitemap.xml
