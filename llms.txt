@@ -13,6 +13,11 @@ many levels deep as needed.
 ## Product
 
 - [Home](https://magicscraper.app): what the extension does, pricing, and where the data goes
+- [Drill-down guide](https://magicscraper.app/drill-down): how to collect a list and the page
+  behind every row in one pass, with a worked example on the practice site
+- [Instant Data Scraper alternative](https://magicscraper.app/instant-data-scraper-alternative):
+  an honest feature comparison. Both tools auto-detect tables and crawl pagination; the
+  difference is per-row detail-page collection.
 - [Support](https://magicscraper.app/support): common problems and their fixes, licence-key
   help, refunds
 

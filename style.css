@@ -249,3 +249,25 @@ ul.brief li::before {
   content: "\2192"; position: absolute; left: 0; color: var(--warm);
 }
 ul.brief b { color: var(--ink); font-variation-settings: 'wght' 600; }
+
+/* ---------- comparison table ---------- */
+
+table.compare { width: 100%; border-collapse: collapse; margin: 8px 0 0; font-size: 15px; }
+table.compare th, table.compare td {
+  text-align: left; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+table.compare thead th {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-2); font-weight: 400; border-bottom: 1px solid var(--ink);
+}
+table.compare tbody td:first-child { color: var(--ink); width: 42%; }
+table.compare tbody td b { font-variation-settings: 'wght' 600; }
+table.compare td.y, table.compare td.n, table.compare td.q { color: var(--ink-2); }
+table.compare td.y::before { content: "\2713\00a0\00a0"; color: #1d7a4f; font-weight: 700; }
+table.compare td.n::before { content: "\2014\00a0\00a0"; color: var(--ink-2); }
+table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
+@media (max-width: 640px) {
+  table.compare { font-size: 14px; }
+  table.compare tbody td:first-child { width: 40%; }
+}

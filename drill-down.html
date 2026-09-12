@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scrape the detail page behind every row — drill-down | Magic Scraper</title>
+<meta name="description" content="How to scrape a list and the page behind each row in one go: SKU, price, availability and more, merged back in as extra columns. Worked example on a live practice site." />
+<link rel="canonical" href="https://magicscraper.app/drill-down" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/drill-down" />
+<meta property="og:title" content="Scrape the detail page behind every row" />
+<meta property="og:description" content="A list gives you name and price. The SKU is on the product page. Drill-down collects both in one pass — here is how, on a live practice site." />
+<meta property="og:image" content="https://magicscraper.app/assets/screenshot.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Scrape a list and the detail page behind every row",
+  "description": "Collect a paginated list, then follow the link in each row to its own page and merge those fields back into the table as extra columns.",
+  "totalTime": "PT5M",
+  "tool": [{"@type": "HowToTool", "name": "Magic Scraper Chrome extension"}],
+  "step": [
+    {"@type": "HowToStep", "name": "Open the list and let it detect",
+     "text": "Open the page holding the list and click the extension icon. The rows are found and the columns named from the page's own markup.",
+     "url": "https://magicscraper.app/drill-down#detect"},
+    {"@type": "HowToStep", "name": "Crawl the pagination",
+     "text": "On the Crawl tab, auto-detect the Next control and start crawling. Every page is collected into one table, with a randomised delay between requests.",
+     "url": "https://magicscraper.app/drill-down#crawl"},
+    {"@type": "HowToStep", "name": "Choose the link column",
+     "text": "Switch on drill-down and pick the column holding each row's link. The extension says how many of the rows actually have one.",
+     "url": "https://magicscraper.app/drill-down#link"},
+    {"@type": "HowToStep", "name": "Confirm on one page",
+     "text": "Preview the first link. You see exactly what one detail page yields, and confirm it before the run touches the rest.",
+     "url": "https://magicscraper.app/drill-down#preview"},
+    {"@type": "HowToStep", "name": "Run it and export",
+     "text": "The extension opens each row's page in a background tab, reads it, closes it, and merges the fields back in as detail: columns. Export to CSV, XLSX or JSON.",
+     "url": "https://magicscraper.app/drill-down#run"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="index.html">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="demo/index.html">Sandbox</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>The data you want is on the <i>next</i> page.</h1>
+    <p class="standfirst">A catalogue gives you name and price. The SKU, the material, the lead
+      time &mdash; those only exist on each product's own page. Drill-down collects both in one
+      pass, so you never open two hundred tabs by hand.</p>
+    <div class="actions">
+      <a class="btn" href="demo/catalogue.html">Follow along on the sandbox</a>
+      <span class="aside">Fictional shop, nothing rate-limited, free for anyone to practise on.</span>
+    </div>
+
+    <div class="stage">
+      <img src="assets/drill.png" alt="The extension's table showing detail:SKU, detail:Price, detail:Availability and detail:Material columns filled in beside the original columns" width="1280" height="800" />
+      <p class="caption"><b>RESULT</b>
+        <span>Nine rows, each carrying the fields from its own product page &mdash;
+          <code>detail:SKU</code>, <code>detail:Price</code>, <code>detail:Availability</code>,
+          <code>detail:Material</code> &mdash; none of which were in the list.</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="what">
+    <h2>What drill-down actually does</h2>
+    <div class="claim">
+      <p>For each row in your table it opens the page that row links to, in a background tab,
+        reads the fields you confirmed, closes the tab, and writes those fields back into that
+        row as new columns prefixed <code>detail:</code>.</p>
+      <p>You confirm what to take <b>once</b>, on the first page. Everything after that is the
+        same instruction repeated, which is the part worth automating.</p>
+    </div>
+  </section>
+
+  <section id="steps">
+    <h2>Five steps, on a real page</h2>
+    <p class="deck">Open the <a href="demo/catalogue.html">sandbox catalogue</a> in another tab
+      and do these as you read. It has six pages of nine products and a detail page behind every
+      row.</p>
+
+    <div class="steps">
+      <div class="step" id="detect">
+        <span class="n">01</span>
+        <h3>Detect the list</h3>
+        <p>Click the extension icon. The nine products are already found, with columns named
+          from the page's own markup rather than <code>col_1</code>. Wrong block? Press
+          <b>Another table</b> to cycle the other candidates, or <b>Pick manually</b> to click
+          the rows yourself.</p>
+      </div>
+      <div class="step" id="crawl">
+        <span class="n">02</span>
+        <h3>Crawl the pagination first</h3>
+        <p>Open the <b>Crawl</b> tab, press <b>Auto-detect "Next"</b>, then <b>Start
+          crawling</b>. It walks all six pages and collects 54 rows, pausing a randomised moment
+          between requests. Crawling is free and uncapped &mdash; do this part before drilling,
+          so the drill runs over the whole list rather than one page of it.</p>
+      </div>
+      <div class="step" id="link">
+        <span class="n">03</span>
+        <h3>Point it at the link column</h3>
+        <p>Tick <b>Open each row's link and scrape its page</b>, then choose the column holding
+          each product's URL. The extension tells you how many rows actually have a link there
+          &mdash; if it says 0 of 54, you have picked the wrong column, and that is much better
+          to know now.</p>
+      </div>
+      <div class="step" id="preview">
+        <span class="n">04</span>
+        <h3>Confirm on one page before touching the rest</h3>
+        <p>Press <b>Preview the first link</b>. You see precisely what one detail page yields
+          before anything is run at scale. This is the step that stops a 54-page run from
+          collecting the wrong field 54 times.</p>
+      </div>
+      <div class="step" id="run">
+        <span class="n">05</span>
+        <h3>Run it, then export</h3>
+        <p>The rows fill in as it goes, and the run survives the popup being closed. Export to
+          CSV, XLSX or JSON when it finishes. It also tells you which columns came back mostly
+          empty, which is usually a sign the wrong field was picked.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="deeper">
+    <h2>Going more than one level</h2>
+    <p class="deck">Sometimes the thing you want is two clicks past the list.</p>
+
+    <div class="claim">
+      <p>On the sandbox: a product links to <b>its maker</b>, and the maker links to <b>where
+        they source materials</b>. Add a second level and a third, confirm each on one row, and
+        the chain repeats down the whole table. Fields arrive prefixed <code>detail:</code>,
+        <code>detail2:</code>, <code>detail3:</code> so you can tell which page each came
+        from.</p>
+      <p>One thing that matters more than it sounds: the chain follows a link <b>by its label</b>,
+        not by its address. That is why every product on the sandbox links to its maker through
+        an identically-worded <b>"About the maker &rarr;"</b>. A chain confirmed on one row
+        works on all of them only if the link is labelled the same way &mdash; which is how real
+        shops label such links, and the first thing to check if a chain works on row one and
+        fails on row two.</p>
+    </div>
+  </section>
+
+  <section id="care">
+    <h2>Doing it considerately</h2>
+    <div class="claim">
+      <p>Drill-down makes one page load per row. Fifty rows is fifty requests, and the site
+        notices. The pacing setting exists for exactly this and the default is deliberately
+        gentle; if a site answers with an HTTP 429 the extension waits and retries rather than
+        pressing on.</p>
+      <p>Whether you may collect from a given site is between you and that site &mdash; its
+        terms, its <code>robots.txt</code>, and data-protection law if the rows are about
+        people. Practise on the <a href="demo/catalogue.html">sandbox</a>, where none of that
+        applies because none of it is real.</p>
+    </div>
+  </section>
+
+  <section id="dd-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>How much does it cost?</summary>
+        <p>Drill-down is the paid feature. Free runs it on the first three rows of any run, so
+          you can see exactly what comes back from your own site before deciding. A one-time
+          licence opens every row. Detection, the manual picker, export and multi-page crawling
+          are free with no limit.</p>
+      </details>
+      <details>
+        <summary>Can I close the popup while it runs?</summary>
+        <p>Yes. The run continues in the background and the results are saved as they arrive,
+          so reopening the popup shows the progress rather than a blank table.</p>
+      </details>
+      <details>
+        <summary>What if some rows have no link?</summary>
+        <p>They are skipped and keep their original columns. The extension tells you up front
+          roughly how many rows have a usable link, so you find out before the run rather than
+          after.</p>
+      </details>
+      <details>
+        <summary>What if the detail pages are on another domain?</summary>
+        <p>That works, and it is why drill-down asks for all-sites access at the moment you
+          switch it on &mdash; the domains a row links to are not knowable in advance. Decline
+          the prompt and everything else in the extension keeps working.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="index.html">Home</a>
+    <a href="instant-data-scraper-alternative.html">vs Instant Data Scraper</a>
+    <a href="privacy.html">Privacy</a>
+    <a class="sep" href="support.html">Support</a>
+  </footer>
+</div>
+
+</body>
+</html>
