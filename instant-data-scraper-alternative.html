@@ -28,7 +28,9 @@
     {"@type": "Question", "name": "Should I switch from Instant Data Scraper?",
      "acceptedAnswer": {"@type": "Answer", "text": "Not if it already does what you need — it is free and it works. Switch when you find yourself copying a list, then opening every row by hand to collect the fields that only exist on the detail page. That specific job is what Magic Scraper was built for."}},
     {"@type": "Question", "name": "Is Magic Scraper free?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Detection, the manual picker, export to CSV, XLSX and JSON, and multi-page crawling are all free with no time limit. Drill-down runs on the first three rows for free; a one-time licence opens every row."}}
+     "acceptedAnswer": {"@type": "Answer", "text": "Detection, the manual picker, export to CSV, XLSX and JSON, and multi-page crawling are all free with no time limit. Drill-down runs on the first three rows for free; a one-time licence opens every row."}},
+    {"@type": "Question", "name": "Can I use both?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Yes, and plenty of people should. They do not conflict."}}
   ]
 }
 </script>
@@ -57,15 +59,15 @@
     <p class="eyebrow">Comparison</p>
     <h1>An Instant Data Scraper <i>alternative</i>, honestly.</h1>
     <p class="standfirst">Instant Data Scraper is good, free, and used by about a million people.
-      If it does what you need, keep it. This page is for the one job it isn't built for
-      &mdash; and it's the job that made us build something else.</p>
+      If it does what you need, keep it. There is one job it isn't built for &mdash; and that job
+      is the whole reason this exists.</p>
   </div>
 </div>
 
 <div class="wrap">
 
   <section id="short">
-    <h2>The short version</h2>
+    <h2>What's actually different</h2>
     <div class="claim">
       <p><b>Both</b> auto-detect the table or list on a page, follow pagination and infinite
         scroll, let you rename and filter columns, and export without you writing a line of
@@ -79,10 +81,7 @@
 
   <section id="table">
     <h2>Feature by feature</h2>
-    <p class="deck">Instant Data Scraper's column is taken from its Chrome Web Store listing,
-      checked September 2026 &mdash; features only, since popularity is not a feature and is
-      covered <a href="#when">below</a>. If any of it is out of date, tell us and we'll
-      correct it.</p>
+    <p class="deck">Their column comes from their own store listing, checked September 2026.</p>
 
     <table class="compare">
       <thead><tr><th>&nbsp;</th><th>Magic Scraper</th><th>Instant Data Scraper</th></tr></thead>
@@ -103,16 +102,6 @@
   </section>
 
   <section id="when">
-    <h2>When to keep Instant Data Scraper</h2>
-    <div class="claim">
-      <p>When the data you want is <b>already in the list</b>. If the table on screen has your
-        columns in it, Instant Data Scraper will get them, for free, and it has been doing so
-        reliably for years. There is no reason to pay anyone for that.</p>
-      <p>It is also the safer bet on <b>proof</b>. A million installs and 7,700 reviews at 4.9
-        stars is a track record we do not have and will not pretend to. If a long record of
-        working is what you are buying, that is the one to install.</p>
-    </div>
-
     <h2>When to try Magic Scraper</h2>
     <p class="deck">One specific frustration, and you'll know if it's yours.</p>
 
@@ -143,12 +132,22 @@
           run is one click rather than a re-setup.</p>
       </div>
     </div>
+
+    <h2>When to keep Instant Data Scraper</h2>
+    <div class="claim">
+      <p>When the data you want is <b>already in the list</b>. If the table on screen has your
+        columns in it, Instant Data Scraper will get them, for free, and it has been doing so
+        reliably for years. There is no reason to pay anyone for that.</p>
+      <p>It is also the safer bet on <b>proof</b>. A million installs and 7,700 reviews at 4.9
+        stars is a track record we do not have and will not pretend to. If a long record of
+        working is what you are buying, that is the one to install.</p>
+    </div>
   </section>
 
   <section id="try">
     <h2>Try both on the same page</h2>
-    <p class="deck">The only honest way to compare two scrapers is to point them at the same
-      site. Here is one built for it.</p>
+    <p class="deck">Point both at the same site and the difference takes about two minutes to
+      see for yourself.</p>
     <div class="claim">
       <p>The <a href="demo/catalogue.html">sandbox catalogue</a> is a fictional shop: six pages
         of nine products, a Next button, and a detail page behind every row that carries SKU,
@@ -167,34 +166,39 @@
     <h2>Reasonable questions</h2>
     <div class="qa">
       <details>
-        <summary>Is Instant Data Scraper abandoned?</summary>
-        <p>No, and you'll see that claim about a lot. It has roughly a million users, 4.9 stars
-          from about 7,700 reviews, and was last updated in August 2026. Anyone telling you
-          otherwise, including in order to sell you something, is out of date.</p>
+        <summary>What can Magic Scraper do that Instant Data Scraper cannot?</summary>
+        <p>Drill-down. It follows the link in each row to that row's own page, takes the fields
+          you want from there, and merges them back into the table as extra columns &mdash;
+          chained several levels deep if the data is buried. Instant Data Scraper's listing
+          describes pagination and infinite scroll, but not per-row detail-page collection.
+          Magic Scraper also exports JSON, where theirs lists XLS, XLSX and CSV.</p>
       </details>
       <details>
-        <summary>Why would I pay when that one is free?</summary>
-        <p>Mostly you wouldn't. Magic Scraper is also free for detection, the manual picker,
-          export and unlimited multi-page crawling. The only thing you pay for is drill-down
-          past the first three rows. If you never need the page behind a row, you never need
-          to pay.</p>
+        <summary>Should I switch from Instant Data Scraper?</summary>
+        <p>Not if it already does what you need &mdash; it's free and it works. Switch when you
+          catch yourself scraping a list, then opening every row by hand to collect the fields
+          that only exist on the detail page. That job is what this was built for.</p>
+      </details>
+      <details>
+        <summary>Is Magic Scraper free?</summary>
+        <p>Detection, the manual picker, export to CSV, XLSX and JSON, and multi-page crawling
+          are all free, with no time limit. Drill-down runs on the first three rows for free; a
+          one-time licence opens every row. If you never need the page behind a row, you never
+          need to pay.</p>
       </details>
       <details>
         <summary>Can I use both?</summary>
         <p>Yes, and plenty of people should. They don't conflict.</p>
       </details>
       <details>
-        <summary>Is this comparison fair?</summary>
-        <p>We've tried to make it checkable rather than flattering. The Instant Data Scraper
-          column comes from its own store listing, and where its listing doesn't mention a
-          feature we've written "not described" rather than "cannot" &mdash; because the absence
-          of a claim isn't proof of an absence. If we've got something wrong,
-          <a href="mailto:support@magicscraper.app?subject=Comparison%20correction">tell us</a>
-          and we'll fix it.</p>
+        <summary>Is Instant Data Scraper still maintained?</summary>
+        <p>Yes. Around a million users, 4.9 stars from roughly 7,700 reviews, and last updated
+          in August 2026. Anyone telling you it's abandoned is out of date.</p>
       </details>
     </div>
     <p class="aside">Instant Data Scraper is a product of Web Robots. We are not affiliated with
-      them, and this page is our own comparison, not theirs.</p>
+      them, and this page is our own comparison, not theirs. Got something wrong?
+      <a href="mailto:support@magicscraper.app?subject=Comparison%20correction">Tell us</a>.</p>
   </section>
 
 </div>
