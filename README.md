@@ -74,7 +74,7 @@ when the answer is that it can't be done lawfully or reliably.
 **[support@magicscraper.app](mailto:support@magicscraper.app)** reaches someone who can actually
 fix what you hit — no ticket number, no queue.
 
-The extension is sold through [Polar](https://polar.sh), who act as merchant of record. Seven-day
+The extension is sold through [Gumroad](https://gumroad.com), who act as merchant of record. Seven-day
 refund, no questions asked.
 
 Fonts are self-hosted rather than pulled from Google — a site whose whole claim is *nothing

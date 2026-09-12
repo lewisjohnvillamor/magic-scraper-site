@@ -36,5 +36,5 @@ many levels deep as needed.
 - What the extension cannot reach: closed shadow roots, cross-origin iframes, data that only a
   private API returns, PDFs in the browser viewer, and content behind a bot challenge. These
   are limits of the browser, not of the extension.
-- The single outbound request: activating a paid licence posts the key to api.polar.sh once to
+- The single outbound request: activating a paid licence posts the key to api.gumroad.com once to
   confirm the purchase. The free version makes no network requests at all.

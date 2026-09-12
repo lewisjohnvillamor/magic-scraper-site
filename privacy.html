@@ -46,7 +46,7 @@
   own, no analytics and no telemetry. Everything it reads stays in your browser, and everything
   it produces goes only where you save it. The free extension makes no network requests at all.
   There is exactly one exception, described below, and it happens only if you buy Pro: your
-  licence key is sent to Polar, once, to confirm the purchase.</p></div>
+  licence key is sent to Gumroad, once, to confirm the purchase.</p></div>
 
   <h2>What it reads</h2>
   <p>When you open the popup on a page, the extension reads that page's visible content —
@@ -77,13 +77,13 @@
 
   <p><strong>One exception, and only if you buy Pro: activating your licence.</strong> When you
   paste a licence key and press Activate, the extension sends <em>that key and the product ID</em>
-  to <code>api.polar.sh</code>, once, so Polar can confirm the purchase. That is the whole
+  to <code>api.gumroad.com</code>, once, so Gumroad can confirm the purchase. That is the whole
   request. It carries nothing about the page you are on, the data you have collected, or anything
   else about you. The answer is saved locally and never checked again &mdash; there is no
   call on startup, no periodic re-check and no telemetry. A free installation never makes this
   request at all, and never asks for permission to.</p>
 
-  <p>We do not store your name or email address, even though Polar's reply contains them.</p>
+  <p>We do not store your name or email address, even though Gumroad's reply contains them.</p>
 
   <p>Files you export (CSV, XLSX, JSON) are written to your own downloads folder. Where they go
   after that is up to you.</p>
@@ -101,7 +101,7 @@
         <td>Requested only if you switch on drill-down, which has to open each row's page in a
             background tab and keep the results while it works. Decline it and the rest of the
             extension still works.</td></tr>
-    <tr><td><code>api.polar.sh</code> <em>(optional)</em></td>
+    <tr><td><code>api.gumroad.com</code> <em>(optional)</em></td>
         <td>Requested only when you activate a Pro licence, for the single check described above.
             Free users are never asked for it.</td></tr>
   </table>
