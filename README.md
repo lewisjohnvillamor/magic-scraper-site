@@ -58,10 +58,21 @@ Every product links to its maker through an identically-labelled **"About the ma
 than the maker's name — which is how real shops label such links, and what makes a chain
 confirmed on one row work on all of them.
 
-## Who makes it
+## Bespoke scraping
 
-One person, not a company. Support is an inbox rather than a helpdesk, and replies come from
-whoever wrote the code: **[support@magicscraper.app](mailto:support@magicscraper.app)**.
+Some jobs don't fit inside a browser extension: a site behind a login, one that actively fights
+back, a scrape that has to run every morning without you, or the same fields pulled from thirty
+competitors and reconciled into one table. We take those on as projects.
+
+Send the site, the fields you need, how often it should run, and the budget and deadline you
+have in mind, to **[support@magicscraper.app](mailto:support@magicscraper.app)** —
+[more detail here](https://magicscraper.app/#bespoke). You'll get a straight answer, including
+when the answer is that it can't be done lawfully or reliably.
+
+## Support
+
+**[support@magicscraper.app](mailto:support@magicscraper.app)** reaches someone who can actually
+fix what you hit — no ticket number, no queue.
 
 The extension is sold through [Polar](https://polar.sh), who act as merchant of record. Seven-day
 refund, no questions asked.
