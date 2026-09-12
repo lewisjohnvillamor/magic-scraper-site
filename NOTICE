@@ -1,2 +1,11 @@
 Magic Scraper site
 Copyright 2026 Lewis John Villamor
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+The Northwind Supply sandbox under demo/ is fictional. The products, makers,
+prices and SKUs are invented, and any resemblance to a real business is
+coincidental.
+
+Fonts: Fraunces and Archivo, both under the SIL Open Font License 1.1,
+self-hosted in assets/fonts/.

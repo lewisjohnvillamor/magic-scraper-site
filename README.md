@@ -10,7 +10,7 @@ extension, and a practice site anyone is welcome to scrape.
 [![Live](https://img.shields.io/badge/live-magicscraper.app-4b3bd0?style=flat-square)](https://magicscraper.app)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-in_review-b4491f?style=flat-square&logo=googlechrome&logoColor=white)](https://magicscraper.app)
 [![Sandbox](https://img.shields.io/badge/sandbox-open_to_all-0f5c4a?style=flat-square)](https://magicscraper.app/demo/)
-![Static](https://img.shields.io/badge/static_site-no_build_step-5d574a?style=flat-square)
+[![License](https://img.shields.io/badge/license-Apache_2.0-5d574a?style=flat-square)](LICENSE)
 
 </div>
 
@@ -58,19 +58,20 @@ Every product links to its maker through an identically-labelled **"About the ma
 than the maker's name — which is how real shops label such links, and what makes a chain
 confirmed on one row work on all of them.
 
-## Running it locally
+## Who makes it
 
-No build step, no dependencies. Serve the folder:
+One person, not a company. Support is an inbox rather than a helpdesk, and replies come from
+whoever wrote the code: **[support@magicscraper.app](mailto:support@magicscraper.app)**.
 
-```sh
-python3 -m http.server 8000
-```
+The extension is sold through [Polar](https://polar.sh), who act as merchant of record. Seven-day
+refund, no questions asked.
 
-Then open <http://localhost:8000>. Fonts are self-hosted, so it works offline too — a site whose
-whole claim is *nothing leaves your machine* should not make your browser phone a third party to
-render a headline.
+Fonts are self-hosted rather than pulled from Google — a site whose whole claim is *nothing
+leaves your machine* should not make your browser phone a third party to render a headline.
 
-Deployment is Cloudflare Workers, static assets only, on push to `main`.
+## Licence
+
+[Apache 2.0](LICENSE), the same as the extension. See [NOTICE](NOTICE).
 
 ---
 
