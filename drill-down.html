@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Scrape the detail page behind every row — drill-down | Magic Scraper</title>
-<meta name="description" content="How to scrape a list and the page behind each row in one go: SKU, price, availability and more, merged back in as extra columns. Worked example on a live practice site." />
+<title>Drill-down scraping: the page behind every row</title>
+<meta name="description" content="Drill-down follows the link in each row, takes fields from that page, and merges them back as extra columns — chained several levels deep." />
 <link rel="canonical" href="https://magicscraper.app/drill-down" />
 <link rel="icon" href="assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
@@ -13,8 +13,8 @@
 <script>document.documentElement.classList.add('js');</script>
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://magicscraper.app/drill-down" />
-<meta property="og:title" content="Scrape the detail page behind every row" />
-<meta property="og:description" content="A list gives you name and price. The SKU is on the product page. Drill-down collects both in one pass — here is how, on a live practice site." />
+<meta property="og:title" content="Drill-down scraping: the page behind every row" />
+<meta property="og:description" content="Drill-down follows the link in each row, takes fields from that page, and merges them back as extra columns — chained several levels deep." />
 <meta property="og:image" content="https://magicscraper.app/assets/screenshot.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
@@ -50,7 +50,7 @@
 
 <div class="wrap">
   <div class="masthead">
-    <a class="logo" href="index.html">
+    <a class="logo" href="/">
       <span class="glyph" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
              stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -62,9 +62,12 @@
     <button class="burger" type="button" aria-label="Menu"
             aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
     <nav id="site-nav">
-      <a href="index.html">Home</a>
-      <a href="demo/index.html">Sandbox</a>
-      <a href="support.html">Support</a>
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
     </nav>
   </div>
 
@@ -75,7 +78,7 @@
       time &mdash; those only exist on each product's own page. Drill-down collects both in one
       pass, so you never open two hundred tabs by hand.</p>
     <div class="actions">
-      <a class="btn" href="demo/catalogue.html">Follow along on the sandbox</a>
+      <a class="btn" href="/demo/catalogue">Follow along on the sandbox</a>
       <span class="aside">Fictional shop, nothing rate-limited, free for anyone to practise on.</span>
     </div>
 
@@ -104,7 +107,7 @@
 
   <section id="steps">
     <h2>Five steps, on a real page</h2>
-    <p class="deck">Open the <a href="demo/catalogue.html">sandbox catalogue</a> in another tab
+    <p class="deck">Open the <a href="/demo/catalogue">sandbox catalogue</a> in another tab
       and do these as you read. It has six pages of nine products and a detail page behind every
       row.</p>
 
@@ -178,7 +181,7 @@
         pressing on.</p>
       <p>Whether you may collect from a given site is between you and that site &mdash; its
         terms, its <code>robots.txt</code>, and data-protection law if the rows are about
-        people. Practise on the <a href="demo/catalogue.html">sandbox</a>, where none of that
+        people. Practise on the <a href="/demo/catalogue">sandbox</a>, where none of that
         applies because none of it is real.</p>
     </div>
   </section>
@@ -218,10 +221,10 @@
 <div class="wrap">
   <footer>
     <span>Magic Scraper</span>
-    <a href="index.html">Home</a>
-    <a href="instant-data-scraper-alternative.html">vs Instant Data Scraper</a>
-    <a href="privacy.html">Privacy</a>
-    <a class="sep" href="support.html">Support</a>
+    <a href="/">Home</a>
+    <a href="/instant-data-scraper-alternative">vs Instant Data Scraper</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
   </footer>
 </div>
 

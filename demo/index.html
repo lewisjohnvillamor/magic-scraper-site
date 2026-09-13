@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Free web scraping practice site — pagination &amp; infinite scroll</title>
-<meta name="description" content="A fictional shop built to be scraped. Free, any tool, never rate-limited. Practise pagination, infinite scroll and three-level drill-down, with expected row counts to check against." />
+<title>Free web scraping practice site — pagination &amp; scroll</title>
+<meta name="description" content="A fictional shop built to practise scraping on: card grids, a plain table, infinite scroll, and a value that sits outside the table." />
 <link rel="canonical" href="https://magicscraper.app/demo/" />
 <link rel="icon" href="../assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/fraunces-var.woff2" crossorigin />
@@ -13,8 +13,8 @@
 <script>document.documentElement.classList.add('js');</script>
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://magicscraper.app/demo/" />
-<meta property="og:title" content="A free web scraping practice site" />
-<meta property="og:description" content="A fictional shop built to be scraped. Pagination, infinite scroll, awkward layouts and a three-level link chain. Free, any tool, never rate-limited." />
+<meta property="og:title" content="Free web scraping practice site — pagination &amp; scroll" />
+<meta property="og:description" content="A fictional shop built to practise scraping on: card grids, a plain table, infinite scroll, and a value that sits outside the table." />
 <meta property="og:image" content="https://magicscraper.app/assets/screenshot.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
@@ -39,7 +39,7 @@
 
 <div class="wrap">
   <div class="masthead">
-    <a class="logo" href="../index.html">
+    <a class="logo" href="/">
       <span class="glyph" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
              stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -51,9 +51,12 @@
     <button class="burger" type="button" aria-label="Menu"
             aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
     <nav id="site-nav">
-      <a href="../index.html">Extension</a>
-      <a href="../drill-down.html">Drill-down</a>
-      <a href="../support.html">Support</a>
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
     </nav>
   </div>
 
@@ -65,7 +68,7 @@
       <b>any tool</b> &mdash; a browser extension, Python, Scrapy, Playwright, curl, whatever
       you are learning.</p>
     <div class="actions">
-      <a class="btn" href="catalogue.html">Start with the catalogue</a>
+      <a class="btn" href="/demo/catalogue">Start with the catalogue</a>
       <span class="aside">No sign-up. Scrape it as hard as you like.</span>
     </div>
   </div>
@@ -92,7 +95,7 @@
     <div class="steps">
       <div class="step">
         <span class="n">01</span>
-        <h3><a href="catalogue.html">Paginated card grid</a></h3>
+        <h3><a href="/demo/catalogue">Paginated card grid</a></h3>
         <p>Products in <code>&lt;article&gt;</code> cards, not a table &mdash; nine per page,
           six pages, a <b>Next</b> button at the bottom. Tests detection on repeated markup and
           following pagination.<br>
@@ -100,14 +103,14 @@
       </div>
       <div class="step">
         <span class="n">02</span>
-        <h3><a href="table.html">A plain HTML table</a></h3>
+        <h3><a href="/demo/table">A plain HTML table</a></h3>
         <p>A real <code>&lt;table&gt;</code> with a <code>&lt;thead&gt;</code>. The easy case,
           and a good first target for anything you are writing from scratch.<br>
           <b>Expected: 50 rows, 7 columns, one page.</b></p>
       </div>
       <div class="step">
         <span class="n">03</span>
-        <h3><a href="scroll.html">Infinite scroll</a></h3>
+        <h3><a href="/demo/scroll">Infinite scroll</a></h3>
         <p>Eight rows on load, then more appended each time you reach the bottom, five batches
           before it stops. Tests whether your scraper scrolls, waits, and knows when to give
           up.<br>
@@ -115,7 +118,7 @@
       </div>
       <div class="step">
         <span class="n">04</span>
-        <h3><a href="awkward.html">A value outside the table</a></h3>
+        <h3><a href="/demo/awkward">A value outside the table</a></h3>
         <p>A discount that applies to every row but is written once, above the table, and never
           repeated inside it. No amount of automatic detection can infer that &mdash; it is what
           manual selection is for.<br>
@@ -131,7 +134,7 @@
     <table class="compare">
       <thead><tr><th>Level</th><th>Page</th><th>Fields only found there</th></tr></thead>
       <tbody>
-        <tr><td>The list</td><td><a href="catalogue.html">Catalogue</a></td><td>Name, maker, price, rating, stock</td></tr>
+        <tr><td>The list</td><td><a href="/demo/catalogue">Catalogue</a></td><td>Name, maker, price, rating, stock</td></tr>
         <tr><td>&rarr; one</td><td>Product page</td><td>SKU, material, made in, weight, lead time, warranty</td></tr>
         <tr><td>&rarr; two</td><td>Maker page</td><td>Founded, based in, workshop, typical lead time, minimum order</td></tr>
         <tr><td>&rarr; three</td><td>Sourcing page</td><td>Primary material, sourced from, certification, recycled content, last audited</td></tr>
@@ -155,7 +158,7 @@
       <p>Take what you like. It is a static site with no database behind it and no bill attached
         to traffic. If you are load-testing something enormous, a moment's delay between
         requests is polite rather than necessary.</p>
-      <p>It was built to demonstrate the <a href="../index.html">Magic Scraper</a> extension,
+      <p>It was built to demonstrate the <a href="/">Magic Scraper</a> extension,
         but it is not restricted to it and never will be. A practice site that only works with
         one tool is not a practice site.</p>
     </div>
@@ -168,10 +171,10 @@
 <div class="wrap">
   <footer>
     <span>Scrape sandbox</span>
-    <a href="../index.html">Magic Scraper</a>
-    <a href="../drill-down.html">Drill-down guide</a>
-    <a href="../privacy.html">Privacy</a>
-    <a class="sep" href="../support.html">Support</a>
+    <a href="/">Magic Scraper</a>
+    <a href="/drill-down">Drill-down guide</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
   </footer>
 </div>
 

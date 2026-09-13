@@ -1,6 +1,6 @@
 # Magic Scraper
 
-> A Chrome extension that turns the table or list on the page you are viewing into a
+> A Chrome and Edge extension that turns the table or list on the page you are viewing into a
 > spreadsheet, and a bespoke service for the scrapes that do not fit in a browser.
 
 Everything the extension does happens inside the browser. There is no server, no account, and
@@ -20,6 +20,14 @@ many levels deep as needed.
   difference is per-row detail-page collection.
 - [Support](https://magicscraper.app/support): common problems and their fixes, licence-key
   help, refunds
+
+## Bespoke scraping
+
+- [Services](https://magicscraper.app/services): projects that do not fit inside a browser
+  extension — an authorised portal behind a login, a fragile source that fights back, the same
+  fields pulled from thirty competitors and reconciled, or a scrape that has to run every
+  morning unattended. Quoted per project from the site, the fields, the frequency and the
+  budget. Enquiries to support@magicscraper.app.
 
 ## Practice site
 

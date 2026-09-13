@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Magic Scraper — scrape any table or list to Excel, CSV or JSON</title>
-<meta name="description" content="A Chrome extension that finds the table or list on a page and exports it to CSV, XLSX or JSON. Crawls pagination, follows each row's detail page, and runs entirely in your browser." />
+<title>Scrape any web table or list to Excel, CSV or JSON</title>
+<meta name="description" content="Chrome and Edge extension that finds the table or list on any page and exports it to CSV, XLSX or JSON. Crawls pagination. Nothing leaves your browser." />
 <link rel="icon" href="assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
@@ -13,8 +13,8 @@
 <link rel="canonical" href="https://magicscraper.app/" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://magicscraper.app/" />
-<meta property="og:title" content="Magic Scraper — scrape any table or list to Excel, CSV or JSON" />
-<meta property="og:description" content="Any web list, into a spreadsheet. Runs entirely in your browser." />
+<meta property="og:title" content="Scrape any web table or list to Excel, CSV or JSON" />
+<meta property="og:description" content="Chrome and Edge extension that finds the table or list on any page and exports it to CSV, XLSX or JSON. Crawls pagination. Nothing leaves your browser." />
 <!-- og:image has to be absolute: the crawler resolves it against nothing. -->
 <meta property="og:image" content="https://magicscraper.app/assets/screenshot.png" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -35,7 +35,8 @@
       "@id": "https://magicscraper.app/#app",
       "name": "Magic Scraper",
       "applicationCategory": "BrowserApplication",
-      "applicationSubCategory": "Chrome extension",
+      "applicationSubCategory": "Browser extension",
+     "screenshot": "https://magicscraper.app/assets/screenshot.png",
       "operatingSystem": "Chrome, Edge, Brave, and other Chromium browsers",
       "url": "https://magicscraper.app",
       "description": "Finds the table or list on the page you are viewing and exports it to CSV, XLSX or JSON. Crawls pagination, opens the page behind each row, and runs entirely in your browser.",
@@ -123,7 +124,7 @@
 
 <div class="wrap">
   <div class="masthead">
-    <a class="logo" href="index.html">
+    <a class="logo" href="/">
       <span class="glyph" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
              stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -135,14 +136,12 @@
     <button class="burger" type="button" aria-label="Menu"
             aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
     <nav id="site-nav">
-      <a href="#what">What it does</a>
-      <a href="#price">Price</a>
-      <a href="#data">Your data</a>
-      <a href="demo/index.html">Sandbox</a>
-      <a href="drill-down.html">Drill-down</a>
-      <a href="instant-data-scraper-alternative.html">vs&nbsp;Instant&nbsp;Data&nbsp;Scraper</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="support.html">Support</a>
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
     </nav>
   </div>
 
@@ -154,7 +153,7 @@
       <b>never sends your data anywhere</b>.</p>
     <div class="actions">
       <a class="btn" href="https://magicscraper.gumroad.com/l/magicscraper/founding">Get Pro &mdash; $19</a>
-      <a class="btn btn-quiet" href="demo/catalogue.html">Try the sandbox</a>
+      <a class="btn btn-quiet" href="/demo/catalogue">Try the sandbox</a>
       <p class="aside notyet"><b>Not installable yet &mdash; in review at the Chrome and Edge
         stores.</b> Buy at the founding price now and your licence key works the day it lands.
         Seven-day refund either way. The free version, when it lands, has no time limit and no
@@ -169,7 +168,7 @@
       <p class="caption"><b>00:30</b>
         <span>Detect, crawl six pages to 54 rows, open the page behind every row, export.
           Every frame is the extension actually running &mdash; on the
-          <a href="demo/catalogue.html">sandbox</a> you can try yourself.</span></p>
+          <a href="/demo/catalogue">sandbox</a> you can try yourself.</span></p>
     </div>
   </div>
 </div>
@@ -207,7 +206,7 @@
         <h3>It opens the page behind each row</h3>
         <p>Confirm what to take from one detail page and it repeats that for every row, merging
           the fields back in as extra columns. Chain several levels deep if the data is buried
-          &mdash; <a href="drill-down.html">how drill-down works</a>.</p>
+          &mdash; <a href="/drill-down">how drill-down works</a>.</p>
       </div>
     </div>
   </section>
@@ -268,7 +267,7 @@
         the purchase. Nothing about the page you're on goes with it, and nothing is sent
         afterwards.</p>
     </div>
-    <p class="aside">Spelled out in full in the <a href="privacy.html">privacy policy</a>.</p>
+    <p class="aside">Spelled out in full in the <a href="/privacy">privacy policy</a>.</p>
   </section>
 
   <section id="try">
@@ -278,25 +277,25 @@
     <div class="steps">
       <div class="step">
         <span class="n">A</span>
-        <h3><a href="demo/catalogue.html">Card catalogue</a></h3>
+        <h3><a href="/demo/catalogue">Card catalogue</a></h3>
         <p>Six pages of nine, a Next button, and a product page behind every row &mdash; which
           links to its maker, which links to sourcing. <b>Three levels</b>, for practising a
           real drill-down chain rather than a single hop.</p>
       </div>
       <div class="step">
         <span class="n">B</span>
-        <h3><a href="demo/table.html">Price table</a></h3>
+        <h3><a href="/demo/table">Price table</a></h3>
         <p>A plain HTML table with a header row. The easy case, and a good first try.</p>
       </div>
       <div class="step">
         <span class="n">C</span>
-        <h3><a href="demo/scroll.html">Infinite scroll</a></h3>
+        <h3><a href="/demo/scroll">Infinite scroll</a></h3>
         <p>Rows arrive as you scroll, five batches then it stops. Switch on Infinite scroll in
           the Crawl tab.</p>
       </div>
       <div class="step">
         <span class="n">D</span>
-        <h3><a href="demo/awkward.html">Awkward layout</a></h3>
+        <h3><a href="/demo/awkward">Awkward layout</a></h3>
         <p>A discount that belongs to every row but sits outside the table, so nothing can guess
           it. This is what the manual picker is for.</p>
       </div>
@@ -333,7 +332,7 @@
     </div>
 
     <div class="actions" style="margin-top:30px">
-      <a class="btn" href="services.html">Bespoke scraping &mdash; what we take on</a>
+      <a class="btn" href="/services">Bespoke scraping &mdash; what we take on</a>
       <span class="aside">Quoting costs nothing, and we'll say if the free extension already
         does it.</span>
     </div>
@@ -373,7 +372,7 @@
       <details>
         <summary>Who's behind it?</summary>
         <p>Magic Scraper is built and supported by the team that wrote it, so a reply to
-          <a href="support.html">support</a> comes from someone who can actually fix the thing
+          <a href="/support">support</a> comes from someone who can actually fix the thing
           you hit &mdash; not from a queue.</p>
       </details>
     </div>
@@ -384,11 +383,11 @@
 <div class="wrap">
   <footer>
     <span>Magic Scraper</span>
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-    <a href="instant-data-scraper-alternative.html">vs Instant Data Scraper</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/instant-data-scraper-alternative">vs Instant Data Scraper</a>
     <a href="https://magicscraper.gumroad.com/l/magicscraper">Buy Pro</a>
-    <a class="sep" href="support.html">Support</a>
+    <a class="sep" href="/support">Support</a>
   </footer>
 </div>
 
