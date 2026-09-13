@@ -60,6 +60,14 @@ a { color: var(--accent); text-underline-offset: 3px; }
 .wrap { max-width: 1000px; margin: 0 auto; padding: 0 28px; }
 .narrow { max-width: 680px; }
 
+/* Off-screen until focused: the first Tab on any page jumps past the nav. */
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--ink); color: var(--paper);
+  padding: 12px 18px; border-radius: 0 0 9px 0; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
 /* ---------- masthead ---------- */
 
 .masthead {
@@ -172,6 +180,25 @@ h1 i { font-style: italic; color: var(--warm); }
 .stage video, .stage img {
   width: 100%; display: block; border: 1px solid var(--rule); box-shadow: var(--shadow);
 }
+/* Sits under the video: play when the poster is showing, pause once it runs.
+   Present in both states, because a moving thing needs a stop. */
+/* The availability notice sits with the buy button, not three screens below
+   it in the pricing table. It has to break the .actions flex row to do that. */
+.actions .notyet {
+  flex-basis: 100%; margin: 4px 0 0; max-width: 56ch;
+  font-size: 13.5px; line-height: 1.5; color: var(--ink-2);
+}
+.actions .notyet b { color: var(--ink); font-variation-settings: 'wght' 600; }
+
+.vtoggle {
+  margin-top: 12px; min-height: 44px; padding: 0 16px;
+  font: inherit; font-size: 14px; color: var(--ink);
+  background: none; border: 1px solid var(--ink); border-radius: 9px;
+  cursor: pointer;
+}
+.vtoggle:hover { background: var(--ink); color: var(--paper); }
+.vtoggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 .caption {
   display: flex; gap: 10px; align-items: baseline;
   margin-top: 14px; font-size: 14px; color: var(--ink-2);

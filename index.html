@@ -119,6 +119,7 @@
 </script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <div class="wrap">
   <div class="masthead">
@@ -139,6 +140,7 @@
       <a href="#data">Your data</a>
       <a href="demo/index.html">Sandbox</a>
       <a href="drill-down.html">Drill-down</a>
+      <a href="instant-data-scraper-alternative.html">vs&nbsp;Instant&nbsp;Data&nbsp;Scraper</a>
       <a href="privacy.html">Privacy</a>
       <a href="support.html">Support</a>
     </nav>
@@ -153,12 +155,17 @@
     <div class="actions">
       <a class="btn" href="https://magicscraper.gumroad.com/l/magicscraper/founding">Get Pro &mdash; $19</a>
       <a class="btn btn-quiet" href="demo/catalogue.html">Try the sandbox</a>
-      <span class="aside">Free version has no time limit and no account.</span>
+      <p class="aside notyet"><b>Not installable yet &mdash; in review at the Chrome and Edge
+        stores.</b> Buy at the founding price now and your licence key works the day it lands.
+        Seven-day refund either way. The free version, when it lands, has no time limit and no
+        account.</p>
     </div>
 
     <div class="stage">
-      <video src="assets/promo.mp4" autoplay muted loop playsinline
-             poster="assets/screenshot.png"></video>
+      <video id="promo" src="assets/promo.mp4" muted loop playsinline
+             preload="none" poster="assets/screenshot.webp"
+             aria-label="Magic Scraper detecting a table, crawling six pages and drilling every row"></video>
+      <button class="vtoggle" type="button" aria-controls="promo">Play the 30-second demo</button>
       <p class="caption"><b>00:30</b>
         <span>Detect, crawl six pages to 54 rows, open the page behind every row, export.
           Every frame is the extension actually running &mdash; on the
@@ -167,7 +174,7 @@
   </div>
 </div>
 
-<div class="wrap">
+<div id="main" class="wrap">
 
   <section id="what">
     <h2>How a scrape actually goes</h2>
@@ -224,7 +231,7 @@
         </ul>
         <!-- When the listing is approved, replace this with:
              <a class="btn btn-quiet" href="STORE_URL">Install free</a> -->
-        <span class="aside">In review at the Chrome Web&nbsp;Store.</span>
+        <span class="aside">In review at the Chrome and Edge stores.</span>
       </div>
 
       <div class="plan">
@@ -243,8 +250,8 @@
       </div>
     </div>
     <p class="aside" style="margin-top:16px">7-day refund, no questions asked. Crawling is free
-      and uncapped either way — Pro is only for drill-down. The extension is awaiting Chrome
-      Web Store approval; your licence key works the moment it lands.</p>
+      and uncapped either way — Pro is only for drill-down. The extension is in review at the
+      Chrome and Edge stores; your licence key works the moment it lands.</p>
   </section>
 
   <section id="data">
