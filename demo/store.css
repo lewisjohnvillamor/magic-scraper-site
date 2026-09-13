@@ -46,7 +46,7 @@ img { max-width: 100%; display: block; }
 .strip b { font-variation-settings: 'wght' 600; }
 
 header.site { border-bottom: 1px solid var(--rule); background: #fff; position: sticky; top: 0; z-index: 40; }
-.bar { display: flex; align-items: center; gap: 30px; padding: 15px 0; }
+.bar { display: flex; align-items: center; gap: 30px; padding-block: 15px; }
 .brand { font-size: 19px; letter-spacing: -.4px; text-decoration: none; white-space: nowrap; }
 .brand b { font-variation-settings: 'wght' 700; }
 .brand span { color: var(--brand); }
@@ -195,7 +195,7 @@ footer.site { background: var(--wash); border-top: 1px solid var(--rule); paddin
 footer.site .cols { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 36px; }
 @media (max-width: 820px) { footer.site .cols { grid-template-columns: 1fr 1fr; } }
 footer.site h5 {
-  font-size: 11px; text-transform: uppercase; letter-spacing: .11em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: .11em;
   color: var(--ink-3); margin: 0 0 12px; font-variation-settings: 'wght' 600;
 }
 footer.site ul { list-style: none; margin: 0; padding: 0; }
@@ -228,4 +228,73 @@ footer.site .fine .sep { margin-left: auto; }
 .sandbox .tag {
   border: 1px solid #3a4048; border-radius: 5px; padding: 2px 8px;
   font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #9aa2ad;
+}
+
+/* ---------- mobile pass ----------
+   The storefront chrome was a single flex row that assumed desktop width, so
+   the header pushed the document to 751px and every page scrolled sideways at
+   any phone size. Layout only: no element is added, removed or renamed, so
+   what the extension detects here is unchanged. */
+
+@media (max-width: 700px) {
+
+  .shell { padding: 0 16px; }
+
+  /* The header row: brand, nav and tools could not share 390px. Give the nav
+     and the tools their own lines and let the nav scroll if it must. */
+  .bar { flex-wrap: wrap; gap: 12px 18px; padding-block: 12px; }
+  .bar nav {
+    order: 3; width: 100%; gap: 18px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding-bottom: 2px;
+  }
+  .bar nav::-webkit-scrollbar { display: none; }
+  .bar nav a { white-space: nowrap; padding: 11px 0; display: inline-block; }
+  .brand { padding: 8px 0; display: inline-block; }
+  .sandbox a, .sandbox .shell > a { display: inline-block; padding: 8px 0; }
+  .tools { margin-left: auto; gap: 10px; }
+  .search { width: 100%; min-width: 0; flex: 1 1 120px; }
+
+  /* A sticky header that eats a third of a phone screen is worse than one
+     that scrolls away. */
+  header.site { position: static; }
+
+  /* Data tables stay tables -- stacking a price list destroys it -- so they
+     scroll inside their own box rather than the page. */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-scroll table.data { width: auto; min-width: 100%; }
+  .table-scroll th, .table-scroll td { white-space: nowrap; }
+
+  /* Spec pairs read better stacked than squeezed into 42/58. */
+  .specs th, .specs td { display: block; width: auto; padding: 0; }
+  .specs th { padding-top: 12px; color: var(--ink-3); }
+  .specs td { padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+  .specs tr:last-child td { border-bottom: 0; }
+
+  /* Four related products across a phone is 80px each. */
+  /* minmax(0,...) not 1fr: a 1fr track refuses to go below its content's
+     min-width, which is what pushed the related row past the viewport. */
+  .grid, .related .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* The listing toolbar put a 140px select on a margin-left:auto span. */
+  .toolbar { flex-wrap: wrap; gap: 8px 12px; }
+  .toolbar .right { margin-left: 0; }
+  .toolbar select { max-width: 100%; }
+
+  .gallery .thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  /* A card is ~168px at two-up. The price/stars row is a nowrap flex line
+     that is wider than that, and a grid track only stops the track from
+     growing -- it does not stop the content inside it from spilling. */
+  .product .row { flex-wrap: wrap; gap: 4px 9px; }
+  .product .stars { letter-spacing: 0; }
+  .product h3 { overflow-wrap: anywhere; }
+
+  .pager { flex-wrap: wrap; gap: 6px; }
+  .pager a, .pager span { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+
+  footer.site .cols { grid-template-columns: 1fr; gap: 26px; }
+  footer.site h5 { font-size: 12px; }
+  footer.site li { padding: 6px 0; }
+  footer.site .fine .sep { margin-left: 0; }
 }

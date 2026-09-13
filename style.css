@@ -87,7 +87,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
 
 .burger {
   display: none; margin-left: auto; padding: 0;
-  width: 42px; height: 42px; flex: none;
+  width: 44px; height: 44px; flex: none;
   align-items: center; justify-content: center;
   background: none; color: var(--ink);
   border: 1px solid var(--rule); border-radius: 9px; cursor: pointer;
@@ -324,4 +324,81 @@ table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
 @media (max-width: 640px) {
   table.compare { font-size: 14px; }
   table.compare tbody td:first-child { width: 40%; }
+}
+
+/* ---------- mobile pass ----------
+   Everything below 620px. The site is otherwise fluid, so these are the
+   places where a desktop-shaped control does not survive a phone: rows that
+   assume horizontal room, tap targets sized for a cursor, and type set small
+   enough to read on a 27" display but not in a hand. */
+
+@media (max-width: 620px) {
+
+  /* Side gutters: 28px of the 390 is a lot to give away. */
+  .wrap { padding-left: 20px; padding-right: 20px; }
+
+  /* Footer links were a 22px-tall wrapped row -- legible, but a coin-toss to
+     hit. Stack them into full-width rows instead. */
+  footer {
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 26px 0 44px;
+  }
+  footer > span {
+    font-variation-settings: 'wght' 600; color: var(--ink);
+    padding-bottom: 10px;
+  }
+  footer a {
+    display: block; padding: 12px 0; min-height: 44px;
+    border-top: 1px dotted var(--rule); box-sizing: border-box;
+  }
+  footer .sep { margin-left: 0; }
+
+  /* The wordmark is a link and was 30px tall. */
+  .logo { min-height: 44px; }
+
+  /* Two-column reference tables (privacy's what/why, support's symptom/fix)
+     run edge to edge and past the wrap padding at this width. Stack each row
+     into a labelled block -- the pairing survives, the horizontal squeeze
+     does not. */
+  .doc table, .doc tbody, .doc tr, .doc th, .doc td {
+    display: block; width: auto;
+  }
+  .doc tr { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .doc tr:last-child { border-bottom: 0; }
+  .doc th {
+    padding: 0 0 6px; text-align: left; width: auto;
+    border: 0;
+  }
+  .doc td { padding: 0; border: 0; }
+  table.symptoms th { width: auto; padding-right: 0; }
+
+  /* Stacked, a two-word header row is just a pair of orphan labels above the
+     data. Drop it -- the pairs below are self-describing. Not .symptoms,
+     whose every row opens with a th that is the label, not a heading. */
+  .doc table:not(.compare):not(.symptoms) tr:first-child { display: none; }
+
+  /* And give the pair some hierarchy, or the label runs straight into its
+     explanation with nothing to separate them. */
+  .doc td:first-child {
+    font-variation-settings: 'wght' 600; color: var(--ink);
+  }
+  .doc td + td { color: var(--ink-2); padding-top: 5px; }
+
+  /* The comparison table is three columns of short verdicts -- stacking it
+     would destroy the comparison, so let it scroll instead. */
+  .compare-scroll, table.compare {
+    display: block; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+
+  /* 11px is fine on a desktop monitor and squinting on a phone. */
+  /* .doc th and table.compare thead th each set 11px with a class in the
+     selector, so a bare `th` here loses on specificity. Name them. */
+  .founding, .doc th, table.compare thead th { font-size: 12px; }
+  /* A grid track of 1fr will not shrink below its content's min-width,
+     so a long word in a card pushes the whole row past the screen. */
+  .steps, .plans, .grid { grid-template-columns: minmax(0, 1fr); }
+
+  /* Heading links are the only route to the sandbox from here, and a
+     26px line is a small thing to hit with a thumb. */
+  .step h3 a { display: inline-block; padding: 9px 0; }
 }
