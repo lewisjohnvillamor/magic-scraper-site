@@ -10,6 +10,7 @@
 <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/fraunces-var.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/archivo-var.woff2" crossorigin />
 <link rel="stylesheet" href="../style.css" />
+<script>document.documentElement.classList.add('js');</script>
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://magicscraper.app/demo/" />
 <meta property="og:title" content="A free web scraping practice site" />
@@ -46,7 +47,9 @@
       </span>
       <span class="wordmark">Magic Scraper</span>
     </a>
-    <nav>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
       <a href="../index.html">Extension</a>
       <a href="../drill-down.html">Drill-down</a>
       <a href="../support.html">Support</a>
@@ -171,5 +174,6 @@
   </footer>
 </div>
 
+<script src="../nav.js" defer></script>
 </body>
 </html>
