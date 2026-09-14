@@ -1,6 +1,6 @@
 # Magic Scraper
 
-> A Chrome and Edge extension that turns the table or list on the page you are viewing into a
+> A browser extension for Chrome, Edge and other Chromium browsers that turns the table or list on the page you are viewing into a
 > spreadsheet, and a bespoke service for the scrapes that do not fit in a browser.
 
 Everything the extension does happens inside the browser. There is no server, no account, and
@@ -12,6 +12,9 @@ many levels deep as needed.
 
 ## Product
 
+- [Install free](https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck):
+  the Chrome Web Store listing. Installs on Chrome, Edge, Brave, Opera, Vivaldi, Arc and
+  any other Chromium browser.
 - [Home](https://magicscraper.app): what the extension does, pricing, and where the data goes
 - [Drill-down guide](https://magicscraper.app/drill-down): how to collect a list and the page
   behind every row in one pass, with a worked example on the practice site

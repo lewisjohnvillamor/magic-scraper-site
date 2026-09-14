@@ -8,7 +8,7 @@
 extension, and a practice site anyone is welcome to scrape.
 
 [![Live](https://img.shields.io/badge/live-magicscraper.app-4b3bd0?style=flat-square)](https://magicscraper.app)
-[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-in_review-b4491f?style=flat-square&logo=googlechrome&logoColor=white)](https://magicscraper.app)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-install-1d7a4f?style=flat-square&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck)
 [![Sandbox](https://img.shields.io/badge/sandbox-open_to_all-0f5c4a?style=flat-square)](https://magicscraper.app/demo/)
 [![License](https://img.shields.io/badge/license-Apache_2.0-5d574a?style=flat-square)](LICENSE)
 
@@ -17,6 +17,9 @@ extension, and a practice site anyone is welcome to scrape.
 ---
 
 ## The extension
+
+**[Install free from the Chrome Web Store](https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck)** — works on Chrome, Edge, Brave, Opera,
+Vivaldi, Arc and any other Chromium browser.
 
 Magic Scraper finds the table or list on the page you are looking at and exports it to CSV, XLSX
 or JSON. Detection, the manual picker and multi-page crawling are free; drill-down — opening the
