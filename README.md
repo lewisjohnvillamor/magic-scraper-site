@@ -85,7 +85,11 @@ leaves your machine* should not make your browser phone a third party to render 
 
 ## Licence
 
-[Apache 2.0](LICENSE), the same as the extension. See [NOTICE](NOTICE).
+**This site and the Northwind Supply sandbox** are [Apache 2.0](LICENSE) — fork the
+sandbox, use it in a tutorial, build on it. See [NOTICE](NOTICE).
+
+**The extension itself is not open source.** It is proprietary and governed by the
+[Terms](https://magicscraper.app/terms).
 
 ---
 
