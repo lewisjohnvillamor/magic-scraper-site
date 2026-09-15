@@ -35,10 +35,33 @@ many levels deep as needed.
 ## Practice site
 
 - [Scrape sandbox](https://magicscraper.app/demo/): a fictional shop built to be scraped.
-  Open to anyone, with any tool, and not rate-limited. Four pages exercise different problems:
-  a card grid with six pages of pagination, a plain HTML table, infinite scroll, and a value
-  that belongs to every row but sits outside the table. Behind the catalogue is a three-level
-  link chain for testing drill-down.
+  Open to anyone, with any tool, and not rate-limited. Eleven pages, each one a different
+  problem, and each one states its expected result so a scraper can be checked against it:
+
+  - [Catalogue](https://magicscraper.app/demo/catalogue): a card grid, nine per page, six
+    pages of pagination — 54 products
+  - [Trade list](https://magicscraper.app/demo/table): a plain HTML table — 50 rows, 7 columns
+  - [New arrivals](https://magicscraper.app/demo/scroll): infinite scroll — 8 rows on load,
+    40 after five batches
+  - [Clearance](https://magicscraper.app/demo/awkward): a discount that applies to every row
+    but sits outside the table — 10 rows plus one value no row contains
+  - [Shop the look](https://magicscraper.app/demo/shadow): 12 products inside an open shadow
+    root, none of them in the light DOM
+  - [Stock and delivery](https://magicscraper.app/demo/iframe): a 24-row table inside a
+    same-origin iframe, with no table in the parent document
+  - Product data (https://magicscraper.app/demo/feed, noindex): 20 products marked up in both
+    schema.org JSON-LD and microdata, the two agreeing exactly
+  - [Customer reviews](https://magicscraper.app/demo/reviews): a Load more button — 12 on
+    load, 48 after three clicks
+  - [Warehouse stock](https://magicscraper.app/demo/stock): an ARIA data grid built from divs
+    — 30 rows, 6 columns, no table element on the page
+  - [Returns log](https://magicscraper.app/demo/returns): deliberately dirty data — 24 rows,
+    three date formats, three currency formats, 13 empty cells, 2 exact duplicates
+  - [Delivery rates](https://magicscraper.app/demo/rates): two tables of different widths on
+    one page — 8 rows and 14
+
+  Behind the catalogue is a three-level link chain for testing drill-down: 120 product pages,
+  8 maker pages and 8 sourcing pages, each level holding fields the level above does not.
 
 ## Legal
 

@@ -5,9 +5,11 @@ Allow: /
 Disallow: /thanks
 
 # The sandbox is meant to be crawled and scraped -- that is what it is for.
-# Its 130 generated product, maker and sourcing pages carry noindex instead,
+# Its 136 generated product, maker and sourcing pages carry noindex instead,
 # so they can be followed and practised on without filling an index with
-# fictional stock.
+# fictional stock. Two more carry it: /demo/feed, which marks twenty invented
+# products up in JSON-LD and microdata and has no business being read as a real
+# product feed, and /demo/iframe-stock, which is the inside of a frame.
 
 # AI crawlers are welcome. This is a niche tool that people find by asking
 # "how do I get this table into a spreadsheet", and an assistant that has read

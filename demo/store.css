@@ -298,3 +298,91 @@ footer.site .fine .sep { margin-left: auto; }
   footer.site li { padding: 6px 0; }
   footer.site .fine .sep { margin-left: 0; }
 }
+
+/* ---------- the later sandbox pages ----------
+   Shop the look, Stock & delivery, Product data, Customer reviews, Warehouse
+   stock, Returns log and Delivery rates. Same shop, harder markup. */
+
+/* [hidden] is only a default, and every author rule here outranks it. Say it
+   once, loudly, so a hidden element is actually hidden. */
+[hidden] { display: none !important; }
+
+.lede { max-width: 62ch; color: var(--ink-2); margin: 0 0 22px; }
+h2.sub {
+  font-size: 20px; letter-spacing: -.4px; margin: 38px 0 8px;
+  font-variation-settings: 'wght' 600;
+}
+.aside-note {
+  max-width: 68ch; margin: 26px 0 0; padding: 14px 18px;
+  background: var(--wash); border-left: 3px solid var(--rule); border-radius: 0 8px 8px 0;
+  font-size: 14px; color: var(--ink-2);
+}
+.aside-note code {
+  background: #fff; border: 1px solid var(--rule); border-radius: 4px;
+  padding: 1px 5px; font-size: 12.5px;
+}
+
+/* Stock & delivery: the table lives in its own document. */
+.frame { width: 100%; height: 520px; border: 1px solid var(--rule); border-radius: 10px;
+         background: #fff; display: block; }
+
+/* Warehouse stock: divs wearing table roles, which is what a data grid is. */
+.agrid { border-top: 1px solid var(--ink); font-size: 14px; }
+.agrid [role="row"] {
+  display: grid; grid-template-columns: 1.7fr 1fr .8fr .8fr .9fr .9fr;
+  border-bottom: 1px solid var(--rule);
+}
+.agrid [role="columnheader"], .agrid [role="cell"] { padding: 11px 14px; }
+.agrid [role="columnheader"] {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--ink-3); font-variation-settings: 'wght' 600;
+}
+.agrid [role="rowgroup"] + [role="rowgroup"] [role="row"]:hover { background: var(--wash); }
+.agrid .num { text-align: right; font-variant-numeric: tabular-nums; }
+.agrid a { color: var(--brand); text-decoration: none; font-variation-settings: 'wght' 600; }
+.agrid a:hover { text-decoration: underline; }
+
+/* Customer reviews: a Load more button, not pagination and not scroll. */
+.rev { border-bottom: 1px solid var(--rule); padding: 17px 0; }
+.rev:first-child { border-top: 1px solid var(--rule); }
+.rev .top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.rev .who { font-variation-settings: 'wght' 600; }
+.rev .stars { color: var(--gold); letter-spacing: .5px; }
+.rev .when, .rev .item { color: var(--ink-3); font-size: 13px; }
+.rev .item a { color: var(--ink-2); }
+.rev .ok {
+  color: var(--brand); font-size: 11px; text-transform: uppercase; letter-spacing: .07em;
+  font-variation-settings: 'wght' 600;
+}
+.rev p { margin: 6px 0 0; color: var(--ink-2); }
+.more {
+  display: block; margin: 28px auto 0; min-height: 48px;
+  background: #fff; border: 1px solid var(--rule); border-radius: 8px;
+  padding: 13px 30px; font: inherit; font-size: 15px; cursor: pointer;
+  font-variation-settings: 'wght' 600;
+}
+.more:hover { border-color: var(--ink-3); }
+.more[disabled] { color: var(--ink-3); cursor: default; }
+
+/* Product data: the same twenty products, microdata and JSON-LD. */
+.feed { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.feedrow { border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; }
+.feedrow h3 { margin: 0 0 12px; font-size: 16px; font-variation-settings: 'wght' 600; }
+.feedrow dl {
+  margin: 0; display: grid; grid-template-columns: 8.5em minmax(0, 1fr);
+  gap: 5px 12px; font-size: 14px;
+}
+.feedrow dt { color: var(--ink-3); }
+.feedrow dd { margin: 0; }
+.feedrow .go { margin: 14px 0 0; font-size: 14px; }
+.feedrow .go a { color: var(--brand); text-decoration: none; font-variation-settings: 'wght' 600; }
+.feedrow .go a:hover { text-decoration: underline; }
+
+@media (max-width: 700px) {
+  .frame { height: 440px; }
+  .table-scroll .agrid { min-width: 760px; }
+  .feed { grid-template-columns: minmax(0, 1fr); }
+  .feedrow dl { grid-template-columns: 7.5em minmax(0, 1fr); }
+  .aside-note { padding: 13px 15px; }
+  h2.sub { margin-top: 30px; }
+}

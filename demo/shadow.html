@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Shop the look &mdash; Northwind Supply</title><meta name="description" content="Sandbox page whose products live inside an open shadow root, so a scraper that only queries the light DOM finds nothing. Twelve products, free to scrape."><link rel="canonical" href="https://magicscraper.app/demo/shadow"><link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="store.css"></head><body><div class="sandbox"><div class="shell"><span class="tag">Sandbox</span><b>Practice site for Magic Scraper.</b> The twelve products below are inside an <b>open shadow root</b>, not the page. Detection should still find them. <a href="index.html">All sandbox pages</a> &middot; <a href="../index.html">About the extension</a> &middot; <a href="../privacy.html">Privacy</a></div></div><div class="strip">Free shipping on trade orders over <b>$400</b> &middot; Samples dispatched same day</div><header class="site"><div class="shell bar"><a class="brand" href="catalogue.html">North<b>wind</b> <span>Supply</span></a><nav><a href="catalogue.html">Catalogue</a><a href="table.html">Trade list</a><a href="scroll.html">New arrivals</a><a href="awkward.html">Clearance</a></nav><div class="tools"><input class="search" type="search" placeholder="Search 54 products" aria-label="Search"><a class="cart" href="#">Basket<b>0</b></a></div></div></header><div class="shell"><p class="crumbs"><a href="catalogue.html">Home</a> / Shop the look</p><div class="head"><h1>Shop the look</h1><p>Twelve pieces our buyers picked this month.</p></div><div style="padding-bottom:70px"><p class="lede">The gallery below is a web component. Its markup lives in an open shadow root rather than in the page, so <code>document.querySelector</code> will not find a single product in it &mdash; and neither will a scraper that stops at the light DOM.</p><nw-showcase></nw-showcase><p class="aside-note">Nothing is hidden from you here: open DevTools and you will see <code>#shadow-root (open)</code> under <code>&lt;nw-showcase&gt;</code>. A closed root would be a different matter, and neither this extension nor any other can read one.</p></div></div><footer class="site"><div class="shell"><div class="cols"><div><h5>Northwind Supply</h5><p style="color:var(--ink-2);font-size:14px;margin:0">Household goods for people who keep things. Trade accounts welcome.</p><div class="signup"><input type="email" placeholder="Email address" aria-label="Email address"><button type="button">Join</button></div></div><div><h5>Shop</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="table.html">Trade list</a></li><li><a href="scroll.html">New arrivals</a></li><li><a href="awkward.html">Clearance</a></li><li><a href="shadow.html">Shop the look</a></li><li><a href="#">Gift cards</a></li></ul></div><div><h5>Help</h5><ul><li><a href="rates.html">Delivery rates</a></li><li><a href="iframe.html">Stock &amp; delivery</a></li><li><a href="reviews.html">Customer reviews</a></li><li><a href="returns.html">Returns log</a></li><li><a href="#">Contact</a></li></ul></div><div><h5>About</h5><ul><li><a href="#">Our makers</a></li><li><a href="stock.html">Warehouse stock</a></li><li><a href="feed.html">Product data</a></li><li><a href="#">Journal</a></li></ul></div></div><div class="fine"><span>&copy; 2026 Northwind Supply</span><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a><span class="sep">A fictional shop. Nothing here is for sale.</span></div></div></footer><script id="showcase-data" type="application/json">[{"name": "Wool Jug, Charcoal", "maker": "Fieldhouse", "price": 243.0, "sku": "NW-1083", "rating": 3.5, "url": "item83.html", "category": "Kitchen", "hue": 191, "shape": 3}, {"name": "Cedar Mug Set, Bone", "maker": "Aoyama Works", "price": 260.0, "sku": "NW-1074", "rating": 4.1, "url": "item74.html", "category": "Tabletop", "hue": 218, "shape": 2}, {"name": "Ceramic Kettle, Bone", "maker": "Tessa Ruiz Studio", "price": 60.0, "sku": "NW-1090", "rating": 3.4, "url": "item90.html", "category": "Kitchen", "hue": 90, "shape": 2}, {"name": "Cast Iron Cutting Board, Large", "maker": "Tessa Ruiz Studio", "price": 399.0, "sku": "NW-1014", "rating": 3.8, "url": "item14.html", "category": "Kitchen", "hue": 158, "shape": 2}, {"name": "Wool Runner", "maker": "Hallam & Co.", "price": 380.0, "sku": "NW-1094", "rating": 4.6, "url": "item94.html", "category": "Tabletop", "hue": 238, "shape": 2}, {"name": "Oak Desk Lamp, Bone", "maker": "Tessa Ruiz Studio", "price": 309.0, "sku": "NW-1027", "rating": 3.5, "url": "item27.html", "category": "Lighting", "hue": 279, "shape": 3}, {"name": "Smoked Glass Skillet, Clay", "maker": "Mirren Ceramics", "price": 282.1, "sku": "NW-1113", "rating": 4.1, "url": "item113.html", "category": "Kitchen", "hue": 221, "shape": 1}, {"name": "Pewter Bookend, Bone", "maker": "Brock Forge", "price": 72.0, "sku": "NW-1043", "rating": 4.1, "url": "item43.html", "category": "Decor", "hue": 151, "shape": 3}, {"name": "Jute Side Table, Rust", "maker": "Northwind Own", "price": 98.0, "sku": "NW-1093", "rating": 4.7, "url": "item93.html", "category": "Furniture", "hue": 201, "shape": 1}, {"name": "Walnut Side Table, Large", "maker": "Tessa Ruiz Studio", "price": 64.0, "sku": "NW-1003", "rating": 4.8, "url": "item3.html", "category": "Furniture", "hue": 111, "shape": 3}, {"name": "Marble Mirror, Ink", "maker": "Hallam & Co.", "price": 218.0, "sku": "NW-1109", "rating": 3.6, "url": "item109.html", "category": "Decor", "hue": 73, "shape": 1}, {"name": "Rattan Bowl, Sage", "maker": "Aoyama Works", "price": 315.0, "sku": "NW-1052", "rating": 4.2, "url": "item52.html", "category": "Tabletop", "hue": 124, "shape": 0}]</script><script>
+(function () {
+  var CSS = ".g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px 22px}"
+    + "@media(max-width:820px){.g{grid-template-columns:repeat(3,minmax(0,1fr))}}"
+    + "@media(max-width:640px){.g{grid-template-columns:repeat(2,minmax(0,1fr))}}"
+    + "article{font:inherit}"
+    + ".shot{display:block;aspect-ratio:4/3;border-radius:10px;overflow:hidden;"
+    + "background:#f6f7f9;margin-bottom:12px}"
+    + ".shot svg{width:100%;height:100%;display:block}"
+    + "h3{margin:0 0 3px;font-size:15px;font-weight:600}"
+    + "h3 a{color:inherit;text-decoration:none}h3 a:hover{text-decoration:underline}"
+    + ".maker{color:#8d93a1;font-size:13px;margin:0 0 6px}"
+    + ".row{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}"
+    + ".price{font-weight:700}.stars{color:#d8a33a;font-size:12px}"
+    + ".stars em{color:#8d93a1;font-style:normal;margin-left:4px}"
+    + ".sku{font-size:12px;color:#8d93a1;margin:2px 0 0}";
+
+  function star(r) {
+    var n = Math.round(r), s = "";
+    for (var i = 0; i < 5; i++) s += i < n ? "\u2605" : "\u2606";
+    return s;
+  }
+
+  var SHAPES = [
+    '<circle cx="200" cy="150" r="74" fill="H" opacity=".26"/>',
+    '<rect x="132" y="82" width="136" height="136" rx="10" fill="H" opacity=".26"/>',
+    '<path d="M158 96h84l-12 104a30 30 0 0 1-30 26h0a30 30 0 0 1-30-26z" fill="H" opacity=".26"/>',
+    '<path d="M126 226V150a74 74 0 0 1 148 0v76z" fill="H" opacity=".26"/>'
+  ];
+
+  function shot(p) {
+    var solid = "hsl(" + p.hue + " 30% 38%)";
+    return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" '
+      + 'role="img" aria-label="Product photograph">'
+      + '<defs><linearGradient id="s' + p.sku + '" x1="0" y1="0" x2="1" y2="1">'
+      + '<stop offset="0" stop-color="hsl(' + p.hue + ' 36% 92%)"/>'
+      + '<stop offset="1" stop-color="hsl(' + ((p.hue + 28) % 360) + ' 30% 83%)"/>'
+      + '</linearGradient></defs>'
+      + '<rect width="400" height="300" fill="url(#s' + p.sku + ')"/>'
+      + SHAPES[p.shape].split("H").join(solid)
+      + "</svg>";
+  }
+
+  function card(p) {
+    return "<article>"
+      + '<a class="shot" href="' + p.url + '" aria-hidden="true" tabindex="-1">'
+      + shot(p) + "</a>"
+      + "<h3><a href=\"" + p.url + "\">" + p.name + "</a></h3>"
+      + '<p class="maker">' + p.maker + " \u00b7 " + p.category + "</p>"
+      + '<div class="row"><span class="price">$' + p.price.toFixed(2) + "</span>"
+      + '<span class="stars">' + star(p.rating) + "<em>" + p.rating.toFixed(1) + "</em></span></div>"
+      + '<p class="sku">' + p.sku + "</p></article>";
+  }
+
+  // An open shadow root: readable by anything that walks into it on purpose,
+  // invisible to anything that only queries the light DOM.
+  class Showcase extends HTMLElement {
+    connectedCallback() {
+      if (this.shadowRoot) return;
+      const root = this.attachShadow({ mode: "open" });
+      const rows = JSON.parse(document.getElementById("showcase-data").textContent);
+      root.innerHTML = "<style>" + CSS + "</style>"
+        + '<div class="g">' + rows.map(card).join("") + "</div>";
+    }
+  }
+  customElements.define("nw-showcase", Showcase);
+})();
+</script></body></html>

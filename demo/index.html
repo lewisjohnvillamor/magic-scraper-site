@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Free web scraping practice site — pagination &amp; scroll</title>
-<meta name="description" content="A fictional shop built to practise scraping on: card grids, a plain table, infinite scroll, and a value that sits outside the table." />
+<title>Free web scraping practice site &mdash; 11 pages, every awkward case</title>
+<meta name="description" content="A fictional shop built to practise scraping on: pagination, tables, infinite scroll, a Load more button, shadow DOM, iframes, schema.org markup and data that is a mess." />
 <link rel="canonical" href="https://magicscraper.app/demo/" />
 <link rel="icon" href="../assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/fraunces-var.woff2" crossorigin />
@@ -13,8 +13,8 @@
 <script>document.documentElement.classList.add('js');</script>
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://magicscraper.app/demo/" />
-<meta property="og:title" content="Free web scraping practice site — pagination &amp; scroll" />
-<meta property="og:description" content="A fictional shop built to practise scraping on: card grids, a plain table, infinite scroll, and a value that sits outside the table." />
+<meta property="og:title" content="Free web scraping practice site &mdash; 11 pages, every awkward case" />
+<meta property="og:description" content="A fictional shop built to practise scraping on: pagination, tables, infinite scroll, a Load more button, shadow DOM, iframes, schema.org markup and data that is a mess." />
 <meta property="og:image" content="https://magicscraper.app/assets/screenshot.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
@@ -25,9 +25,11 @@
     {"@type": "Question", "name": "Is this practice site free to scrape?",
      "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free, open to anyone, and works with any tool — a browser extension, Python and BeautifulSoup, Scrapy, Playwright, Puppeteer, curl, or whatever you are learning. Nothing on it is real and nothing is rate-limited, so you can hammer it."}},
     {"@type": "Question", "name": "What scraping problems does it cover?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Four: a paginated card grid with a Next button, a plain HTML table with a header row, an infinite-scroll feed that appends rows as you scroll, and a page where a value applies to every row but sits outside the table. Behind the catalogue there is also a three-level link chain for practising detail-page collection."}},
+     "acceptedAnswer": {"@type": "Answer", "text": "Eleven. Four straightforward ones: a paginated card grid, a plain HTML table, infinite scroll, and a value that applies to every row but sits outside the table. Then seven harder ones: products inside an open shadow root, a table inside a same-origin iframe, the same twenty products marked up in both schema.org JSON-LD and microdata, a Load more button, a data grid built from divs with ARIA roles and no table element, a deliberately dirty returns log, and two tables of different widths on one page. Behind the catalogue there is also a three-level link chain for practising detail-page collection."}},
     {"@type": "Question", "name": "How do I know my scraper got it right?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Each page lists its expected result. The catalogue holds 54 products across 6 pages of 9. The trade list is 50 rows in one table. New arrivals reaches 40 rows after five scroll batches. Clearance is 10 rows plus one discount that is not inside the table."}},
+     "acceptedAnswer": {"@type": "Answer", "text": "Each page lists its expected result. The catalogue holds 54 products across 6 pages of 9. The trade list is 50 rows. New arrivals reaches 40 rows after five scroll batches. Clearance is 10 rows plus one discount no row contains. Shop the look is 12 products in a shadow root. Stock and delivery is 24 rows inside an iframe. Product data is 20 products marked up twice. Customer reviews is 12 on load and 48 after three clicks. Warehouse stock is 30 rows and 6 columns with no table element. The returns log is 24 rows including two exact duplicates. Delivery rates is two tables, 8 rows and 14."}},
+    {"@type": "Question", "name": "Does it have a shadow DOM or iframe page to test against?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Yes, one of each. Shop the look renders twelve products inside an open shadow root, so a scraper that only queries the light DOM finds nothing on the page at all. Stock and delivery puts its table inside a same-origin iframe, which is a separate document with its own DOM. Both are the cases people most often discover their tool cannot handle, which is why they are here rather than described."}},
     {"@type": "Question", "name": "Will scraping it get me blocked?",
      "acceptedAnswer": {"@type": "Answer", "text": "No. There is no rate limiting, no bot detection and no login. It is a static site that exists to be scraped, which is exactly what makes it safe to learn on — unlike practising against a real shop, where you risk an IP ban or worse."}}
   ]
@@ -63,10 +65,11 @@
   <div class="hero">
     <p class="eyebrow">Free practice site</p>
     <h1>Somewhere safe to point a <i>scraper</i>.</h1>
-    <p class="standfirst">A fictional shop, built to be scraped. Nothing on it is real, nothing
-      is rate-limited, and there is no login and no bot detection. Use it with
-      <b>any tool</b> &mdash; a browser extension, Python, Scrapy, Playwright, curl, whatever
-      you are learning.</p>
+    <p class="standfirst">A fictional shop, built to be scraped. Eleven pages, each one a
+      different thing that breaks scrapers &mdash; up to and including shadow DOM, iframes and
+      a returns log with nothing tidy in it. Nothing here is real, nothing is rate-limited, and
+      there is no login and no bot detection. Use it with <b>any tool</b> &mdash; a browser
+      extension, Python, Scrapy, Playwright, curl, whatever you are learning.</p>
     <div class="actions">
       <a class="btn" href="/demo/catalogue">Start with the catalogue</a>
       <span class="aside">No sign-up. Scrape it as hard as you like.</span>
@@ -88,7 +91,7 @@
   </section>
 
   <section id="pages">
-    <h2>Four problems, one shop</h2>
+    <h2>Start here: the four common ones</h2>
     <p class="deck">Each page is a different thing that breaks scrapers. Expected results are
       listed so you can tell whether yours is right.</p>
 
@@ -123,6 +126,74 @@
           repeated inside it. No amount of automatic detection can infer that &mdash; it is what
           manual selection is for.<br>
           <b>Expected: 10 rows, plus one discount no row contains.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="harder">
+    <h2>Then the seven that actually catch people out</h2>
+    <p class="deck">These are the ones people discover their tool cannot do, usually halfway
+      through a job. Same shop, same styling &mdash; what changes is the markup underneath.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="n">05</span>
+        <h3><a href="/demo/shadow">Products inside a shadow root</a></h3>
+        <p>The gallery is a web component, and its markup lives in an <b>open shadow root</b>.
+          <code>document.querySelectorAll('article')</code> returns nothing: there is not one
+          product in the light DOM. A closed root is beyond any extension. An open one is only
+          beyond the ones that never look.<br>
+          <b>Expected: 12 products, none of them in the page's own DOM.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">06</span>
+        <h3><a href="/demo/iframe">A table inside an iframe</a></h3>
+        <p>The stock table is a separate document in a <b>same-origin iframe</b>. Point a
+          scraper at the page URL and it will report that there is no table here, and it will be
+          telling the truth about this document.<br>
+          <b>Expected: 24 rows, 6 columns, and 0 tables in the parent page.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">07</span>
+        <h3><a href="/demo/feed">JSON-LD and microdata</a></h3>
+        <p>Twenty products marked up twice over: <b>schema.org microdata</b> in the HTML and
+          <b>JSON-LD</b> in the head. The two agree exactly, so you can check one against the
+          other &mdash; and the machine-readable price sits in a <code>content</code> attribute,
+          not in the visible text.<br>
+          <b>Expected: 20 products, identical read either way.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">08</span>
+        <h3><a href="/demo/reviews">A Load more button</a></h3>
+        <p>Not pagination and not infinite scroll: a button that fetches the next batch, with a
+          deliberate delay, so clicking without waiting gets you nothing. Three clicks to the
+          end, and then the button is removed rather than just going quiet.<br>
+          <b>Expected: 12 on load, 48 after three clicks.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">09</span>
+        <h3><a href="/demo/stock">A grid with no table in it</a></h3>
+        <p><code>&lt;div&gt;</code> elements wearing <code>role="table"</code>,
+          <code>role="row"</code> and <code>role="cell"</code>. This is how most JavaScript data
+          grids render, and why <code>table tr td</code> comes back empty on half the web apps
+          you will ever point a scraper at.<br>
+          <b>Expected: 30 rows, 6 columns, 0 &lt;table&gt; elements.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">10</span>
+        <h3><a href="/demo/returns">Data that is a mess</a></h3>
+        <p>Dates in three formats, money in three more, empty cells, <code>N/A</code> where a
+          number should be, entity-encoded names, and two parcels logged twice by two different
+          people. Getting it out is the easy part. This page is about what happens next.<br>
+          <b>Expected: 24 rows, 13 empty cells, 2 rows that repeat exactly.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">11</span>
+        <h3><a href="/demo/rates">Two tables on one page</a></h3>
+        <p>Different widths, both real. Automatic detection takes the bigger one, so getting the
+          other means asking for it &mdash; which is what an <b>Another table</b> control is
+          for, in any tool that has one.<br>
+          <b>Expected: 8 rows and 5 columns, or 14 rows and 6.</b></p>
       </div>
     </div>
   </section>
