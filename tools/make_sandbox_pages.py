@@ -16,8 +16,10 @@ import json
 import os
 import random
 import re
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 DEMO = os.path.join(HERE, "..", "demo")
 
 # ---------------------------------------------------------------- source data
@@ -783,6 +785,14 @@ def main():
     print("\nexpected results, for the sandbox index:")
     for k, v in counts.items():
         print("  %-8s %s" % (k, v))
+
+    # Titles and link-preview tags live in seo_sandbox.py, which owns them for
+    # all eleven sandbox pages -- including the four that predate this
+    # generator. Running it here means regenerating a page can never quietly
+    # put "Shop the look - Northwind Supply" back in the <title>.
+    print()
+    import seo_sandbox
+    seo_sandbox.main()
 
 
 if __name__ == "__main__":
