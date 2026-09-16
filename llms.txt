@@ -60,8 +60,11 @@ many levels deep as needed.
   - [Delivery rates](https://magicscraper.app/demo/rates): two tables of different widths on
     one page — 8 rows and 14
 
-  Behind the catalogue is a three-level link chain for testing drill-down: 120 product pages,
-  8 maker pages and 8 sourcing pages, each level holding fields the level above does not.
+  Behind the catalogue is a ten-level link chain for testing drill-down, running product ->
+  maker -> sourcing -> material lot -> supplier -> origin site -> certificate -> certifying
+  body -> audit report -> standard. 120 product pages, 8 makers, 8 sourcing pages and 30
+  traceability pages, each level holding fields the level above does not. A row costs ten page
+  loads, so it is also the place to learn what pacing a run means.
 
 ## Legal
 

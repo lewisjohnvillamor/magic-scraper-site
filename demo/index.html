@@ -26,7 +26,7 @@
     {"@type": "Question", "name": "Is this practice site free to scrape?",
      "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free, open to anyone, and works with any tool — a browser extension, Python and BeautifulSoup, Scrapy, Playwright, Puppeteer, curl, or whatever you are learning. Nothing on it is real and nothing is rate-limited, so you can hammer it."}},
     {"@type": "Question", "name": "What scraping problems does it cover?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Eleven. Four straightforward ones: a paginated card grid, a plain HTML table, infinite scroll, and a value that applies to every row but sits outside the table. Then seven harder ones: products inside an open shadow root, a table inside a same-origin iframe, the same twenty products marked up in both schema.org JSON-LD and microdata, a Load more button, a data grid built from divs with ARIA roles and no table element, a deliberately dirty returns log, and two tables of different widths on one page. Behind the catalogue there is also a three-level link chain for practising detail-page collection."}},
+     "acceptedAnswer": {"@type": "Answer", "text": "Eleven. Four straightforward ones: a paginated card grid, a plain HTML table, infinite scroll, and a value that applies to every row but sits outside the table. Then seven harder ones: products inside an open shadow root, a table inside a same-origin iframe, the same twenty products marked up in both schema.org JSON-LD and microdata, a Load more button, a data grid built from divs with ARIA roles and no table element, a deliberately dirty returns log, and two tables of different widths on one page. Behind the catalogue there is also a ten-level link chain, from a product to its maker, its sourcing, the material lot, the supplier, the origin site, the certificate, the certifying body, the audit report and the standard that audit used."}},
     {"@type": "Question", "name": "How do I know my scraper got it right?",
      "acceptedAnswer": {"@type": "Answer", "text": "Each page lists its expected result. The catalogue holds 54 products across 6 pages of 9. The trade list is 50 rows. New arrivals reaches 40 rows after five scroll batches. Clearance is 10 rows plus one discount no row contains. Shop the look is 12 products in a shadow root. Stock and delivery is 24 rows inside an iframe. Product data is 20 products marked up twice. Customer reviews is 12 on load and 48 after three clicks. Warehouse stock is 30 rows and 6 columns with no table element. The returns log is 24 rows including two exact duplicates. Delivery rates is two tables, 8 rows and 14."}},
     {"@type": "Question", "name": "Does it have a shadow DOM or iframe page to test against?",
@@ -200,16 +200,26 @@
   </section>
 
   <section id="chain">
-    <h2>A three-level link chain</h2>
-    <p class="deck">One hop proves nothing. This one goes three deep on purpose.</p>
+    <h2>A ten-level link chain</h2>
+    <p class="deck">One hop proves nothing, and three is where most practice sites stop. Northwind
+      traces a material all the way back to the standard its auditor worked to, which is what a
+      real traceability record looks like &mdash; and gives you ten levels of genuinely different
+      fields to chain through.</p>
 
     <table class="compare">
       <thead><tr><th>Level</th><th>Page</th><th>Fields only found there</th></tr></thead>
       <tbody>
         <tr><td>The list</td><td><a href="/demo/catalogue">Catalogue</a></td><td>Name, maker, price, rating, stock</td></tr>
-        <tr><td>&rarr; one</td><td>Product page</td><td>SKU, material, made in, weight, lead time, warranty</td></tr>
-        <tr><td>&rarr; two</td><td>Maker page</td><td>Founded, based in, workshop, typical lead time, minimum order</td></tr>
-        <tr><td>&rarr; three</td><td>Sourcing page</td><td>Primary material, sourced from, certification, recycled content, last audited</td></tr>
+        <tr><td>&rarr; 1</td><td>Product</td><td>SKU, material, made in, weight, lead time, warranty</td></tr>
+        <tr><td>&rarr; 2</td><td>Maker</td><td>Founded, based in, workshop, typical lead time, minimum order</td></tr>
+        <tr><td>&rarr; 3</td><td>Sourcing</td><td>Primary material, sourced from, certification, recycled content, last audited</td></tr>
+        <tr><td>&rarr; 4</td><td>Material lot</td><td>Lot reference, region of origin, received, quantity, storage</td></tr>
+        <tr><td>&rarr; 5</td><td>Supplier</td><td>Founded, based in, people, contract since, payment terms</td></tr>
+        <tr><td>&rarr; 6</td><td>Origin site</td><td>Coordinates, land, practice, season</td></tr>
+        <tr><td>&rarr; 7</td><td>Certificate</td><td>Number, scheme owner, issued, expires, scope</td></tr>
+        <tr><td>&rarr; 8</td><td>Certifying body</td><td>Accreditation, scope, accredited since</td></tr>
+        <tr><td>&rarr; 9</td><td>Audit report</td><td>Audit date, outcome, findings, next audit due</td></tr>
+        <tr><td>&rarr; 10</td><td>Standard</td><td>Owner, audit type, sampling rule, cycle, published</td></tr>
       </tbody>
     </table>
 
@@ -218,9 +228,13 @@
         <b>&ldquo;About the maker &rarr;&rdquo;</b>, not through the maker's name. That is
         deliberate, and it is how real shops label such links: a chain you confirm on one row
         only works on the rest if the label is the same everywhere. If your scraper works on
-        row one and fails on row two, that is usually why.</p>
-      <p>120 product pages, 8 makers, 8 sourcing pages. Enough that a full run takes long enough
-        to be worth pacing.</p>
+        row one and fails on row two, that is usually why. Every hop below it works the same
+        way &mdash; <b>Material lot</b>, <b>Supplier</b>, <b>Origin site</b> and the rest are
+        worded identically on every page at that level.</p>
+      <p>120 product pages, 8 makers, 8 sourcing pages and 30 traceability pages behind them.
+        <b>Ten levels is expensive on purpose</b>: a row costs ten page loads, so fifty rows is
+        five hundred. If you are going to learn what pacing a run means, learn it here rather
+        than on somebody's shop.</p>
     </div>
   </section>
 
