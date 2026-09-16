@@ -74,5 +74,5 @@ many levels deep as needed.
   private API returns, PDFs in the browser viewer, and content behind a bot challenge. These
   are limits of the browser, not of the extension.
 - The single outbound request: activating a paid licence posts the key to api.gumroad.com once to
-  confirm the purchase. The free version never contacts a server of ours; crawling fetches further pages of the site
-  you are already on, and nothing about them is sent anywhere else.
+  confirm the purchase. Detection and export make no network requests at all. The only requests the free version
+  makes are for further pages of the site you are already on, and only during a crawl.
