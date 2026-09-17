@@ -260,6 +260,8 @@ h2 {
 .plan li { padding: 7px 0; border-bottom: 1px dotted var(--rule); font-size: 15px; }
 .plan li:last-child { border-bottom: 0; }
 .plan li b { font-variation-settings: 'wght' 600; }
+/* A qualifier on a feature line: quieter than the claim, but never hidden. */
+.plan li .q { color: var(--ink-2); font-size: 13px; }
 .founding {
   display: inline-block; font-family: var(--mono); font-size: 11px;
   letter-spacing: .1em; text-transform: uppercase;
