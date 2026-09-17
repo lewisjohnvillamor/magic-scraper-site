@@ -128,10 +128,16 @@
       </div>
       <div class="step">
         <span class="n">05</span>
-        <h3>Delivered where you actually work</h3>
-        <p>A CSV or Excel file, a Google Sheet that updates itself, rows appended to your
-          database, a JSON endpoint, or a file dropped in S3 or Drive. A report nobody opens is
-          not a deliverable.</p>
+        <h3>Delivered where you actually work &mdash; Sheets, or anywhere else</h3>
+        <p><b>A Google Sheet that refreshes itself</b> is the one people ask for most: you open
+          the tab you already had open, and this morning's rows are in it. Also Excel on
+          SharePoint or Drive, rows appended to Postgres or BigQuery, a JSON endpoint you can
+          poll, a webhook into Slack or Zapier, or a file dropped in S3. If it takes an API key
+          or an OAuth consent, that is our side of the job, not yours.</p>
+        <p class="aside">The extension deliberately cannot do this. Writing into your Google
+          account needs an OAuth token and somewhere to keep it, which means a server and an
+          account &mdash; the two things it promises never to have. So it lives here instead,
+          where there <em>is</em> a server and you know about it.</p>
       </div>
       <div class="step">
         <span class="n">06</span>

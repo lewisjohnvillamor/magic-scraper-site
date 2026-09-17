@@ -431,3 +431,42 @@ table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
      26px line is a small thing to hit with a thumb. */
   .step h3 a { display: inline-block; padding: 9px 0; }
 }
+
+/* ---------- what's being built ----------
+   Two columns that have to read as different in kind, not just in order: one
+   is a list of things that exist, the other of things that do not. Same card,
+   different mark against each line, so the distinction survives skim-reading. */
+.cols2 {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+}
+.cols2 .panel { padding: 26px 28px; }
+.cols2 .panel + .panel { border-left: 1px solid var(--rule); background: var(--card); }
+.cols2 .panel h3 {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink-2); margin-bottom: 14px;
+}
+.ticks, .dots { list-style: none; }
+.ticks li, .dots li {
+  position: relative; padding: 9px 0 9px 26px; font-size: 15px; line-height: 1.5;
+  border-bottom: 1px dotted var(--rule);
+}
+.ticks li:last-child, .dots li:last-child { border-bottom: 0; }
+.ticks li::before {
+  content: "✓"; position: absolute; left: 0; top: 9px;
+  color: var(--accent); font-weight: 700;
+}
+/* An open circle: present on the page, absent from the product. */
+.dots li::before {
+  content: ""; position: absolute; left: 3px; top: 17px;
+  width: 8px; height: 8px; border-radius: 50%;
+  border: 1.5px solid var(--ink-2);
+}
+/* Not "later" — never, and for a stated reason. */
+.dots li.never::before { border-color: var(--warm); background: var(--warm); }
+.dots li.never { color: var(--ink-2); }
+
+@media (max-width: 720px) {
+  .cols2 { grid-template-columns: 1fr; }
+  .cols2 .panel + .panel { border-left: 0; border-top: 1px solid var(--rule); }
+}
