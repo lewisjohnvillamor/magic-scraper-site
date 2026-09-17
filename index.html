@@ -392,20 +392,23 @@
       <div class="panel">
         <h3>Not built yet</h3>
         <ul class="dots">
-          <li><b>Reorder columns</b> &mdash; you can include, exclude and rename them today,
-            but not drag them around</li>
-          <li><b>Download the image files</b>, not just their URLs</li>
-          <li><b>Video and media URLs</b> &mdash; only images are captured now</li>
-          <li><b>A detached window</b> you can move and resize, instead of the popup</li>
-          <li class="never"><b>Writing into Google Sheets</b> &mdash; not planned for the
-            extension at any point. It needs an account and a server of ours, and that trade
-            isn't worth making. <a href="/services">We do it as a service</a> instead.</li>
+          <li data-item="reorder"><b>Reorder columns</b> &mdash; you can include, exclude and
+            rename them today, but not drag them around</li>
+          <li data-item="images"><b>Download the image files</b>, not just their URLs</li>
+          <li data-item="media"><b>Video and media URLs</b> &mdash; only images are captured now</li>
+          <li data-item="window"><b>A detached window</b> you can move and resize, instead of
+            the popup</li>
+          <li class="never" data-item="sheets"><b>Writing into Google Sheets</b> &mdash; not
+            planned for the extension at any point. It needs an account and a server of ours,
+            and that trade isn't worth making. <a href="/services">We do it as a service</a>
+            instead. Say if you'd want it anyway.</li>
         </ul>
       </div>
     </div>
-    <p class="aside" style="margin-top:18px">Something you need that isn't here?
-      <a href="/support">Tell us</a> &mdash; what people actually ask for is how this list gets
-      ordered.</p>
+    <p class="aside" style="margin-top:18px" id="voteNote">Press <b>I'd use this</b> on
+      anything you want &mdash; that is how the list gets ordered. A vote is anonymous; leave an
+      address only if you want telling when it ships.
+      <a href="/support">Something missing? Say so.</a></p>
   </section>
 
   <section id="asks">
@@ -475,5 +478,6 @@
 </div>
 
 <script src="nav.js" defer></script>
+<script src="roadmap.js" defer></script>
 </body>
 </html>

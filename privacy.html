@@ -46,7 +46,7 @@
 
 <div id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="dateline">Last updated 12 September 2026 · applies to the Magic Scraper browser extension for Chrome and Edge</p>
+  <p class="dateline">Last updated 17 September 2026 · applies to the Magic Scraper browser extension for Chrome and Edge</p>
 
   <div class="claim"><p><b>Magic Scraper keeps your data on your machine.</b> It has no servers of its
   own, no analytics and no telemetry. Everything it reads stays in your browser, and everything
@@ -63,16 +63,32 @@
   and does not touch form fields, passwords or cookies.</p>
 
   <h2>What it stores, and where</h2>
-  <p>Everything is kept in your own browser using <code>chrome.storage.local</code>. Nothing
-  is uploaded. Clearing the extension's data, or removing the extension, deletes all of it.</p>
+  <p>Everything is kept in your own browser. Nothing is uploaded. It lives in three places, and
+  it is worth knowing which, because they are not all cleared the same way.</p>
   <table>
     <tr><th>What</th><th>Why</th></tr>
-    <tr><td>Rows collected by a drill-down run</td>
-        <td>So results survive the popup closing while the run continues.</td></tr>
+    <tr><td>Rows from a drill-down run</td>
+        <td>So results survive the popup closing while the run continues. IndexedDB on the extension's own origin. Removing the extension deletes it.</td></tr>
     <tr><td>Your setup for a site — speed, excluded columns, renames, removed rows, the link column</td>
         <td>So you do not reconfigure the same site every visit. Kept per site, for the 20 most recent.</td></tr>
     <tr><td>A pending drill-down preview</td>
         <td>So a half-configured chain survives the popup closing.</td></tr>
+    <tr><td>A crawl's rows, written as it goes</td>
+        <td>So a long run survives the tab closing, a crash, or the power going out. Held in
+            <b>IndexedDB on the scraped site's own origin</b> rather than in the extension,
+            because that is the only storage without a 10&nbsp;MB ceiling.
+            <b>Removing the extension does not delete this</b> &mdash; clear that site's data in
+            your browser, or press Clear in the popup.</td></tr>
+    <tr><td>Up to five past runs of the same list</td>
+        <td>So a new run can be compared with the last one and tell you what changed. Same
+            per-site IndexedDB, and the same caveat about deletion.</td></tr>
+    <tr><td>Saved setups, and any schedule attached to one</td>
+        <td>So the next site like this one takes seconds. Settings only &mdash; a setup never
+            holds scraped rows. You can export them to a file, and that file is yours.</td></tr>
+    <tr><td>Auto-saved CSV files</td>
+        <td>A long run writes itself a CSV every few thousand rows into your downloads folder, so
+            a run that dies is not lost. Ordinary files: they stay after the extension is
+            removed.</td></tr>
   </table>
 
   <h2>What leaves your machine</h2>
@@ -107,10 +123,29 @@
         <td>Requested only if you switch on drill-down, which has to open each row's page in a
             background tab and keep the results while it works. Decline it and the rest of the
             extension still works.</td></tr>
+    <tr><td><code>alarms</code> <em>(optional)</em></td>
+        <td>Requested only if you put one of your own saved setups on a schedule. It is a timer
+            and nothing else: it wakes the extension when a run is due. Scheduled runs happen
+            only while your browser is open &mdash; an extension cannot wake a browser that is
+            shut, and there is no server of ours to do it instead.</td></tr>
     <tr><td><code>api.gumroad.com</code> <em>(optional)</em></td>
         <td>Requested only when you activate a Pro licence, for the single check described above.
             Free users are never asked for it.</td></tr>
   </table>
+
+  <h2>Scheduled runs</h2>
+  <p>If you schedule a saved setup, the extension opens that page in a background tab at the
+  time you chose, collects it, writes a CSV to your downloads folder and closes the tab again
+  &mdash; without you watching. Two things follow from that, and you should know both before
+  you switch it on.</p>
+  <ul>
+    <li>It visits that site in your browser, as you, on a timer. If you are signed in to the
+      site, the run is signed in too, exactly as it would be if you opened the page yourself.</li>
+    <li>It writes files to your downloads folder while you are doing something else.</li>
+  </ul>
+  <p>Nothing about those runs is sent anywhere. The rows, the files and the schedule itself stay
+  on your machine, and a schedule stops the moment you switch it off or remove the extension.</p>
+
 
   <h2>Children</h2>
   <p>Magic Scraper is a developer and analyst tool. It is not directed at children and collects
@@ -120,6 +155,21 @@
   <p>The extension automates reading pages you can already see. You remain responsible for
   respecting the terms of service, <code>robots.txt</code>, rate limits and copyright of the
   sites you use it on, and for handling any personal data you collect lawfully.</p>
+
+  <h2>About this website</h2>
+  <p>Everything above is about the <b>extension</b>, which has no server and never did. This
+  <b>website</b> is a different thing and now has one small piece of one, so it is worth saying
+  plainly rather than leaving you to find it.</p>
+  <p>The &ldquo;What&rsquo;s being built&rdquo; list on the home page has an <b>I&rsquo;d use
+  this</b> button. Pressing it stores a number &mdash; how many people pressed it &mdash; and a
+  random id your browser makes up for itself, so that pressing twice does not count twice. That
+  id identifies nobody, is not a cookie, is not joined to anything, and is not shared. No IP
+  address is logged and there is no analytics on this site.</p>
+  <p>If you then choose to leave an email address, that address is kept, with the item you left
+  it on, for one purpose: telling you when that thing ships. It is optional, the vote is already
+  counted without it, and asking to be removed at
+  <a href="mailto:support@magicscraper.app">support@magicscraper.app</a> is enough.</p>
+  <p>None of this touches the extension. It has no idea the website exists.</p>
 
   <h2>Changes</h2>
   <p>If this policy changes, the updated version will be published at this address with a new

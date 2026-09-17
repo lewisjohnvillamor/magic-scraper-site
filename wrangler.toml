@@ -1,14 +1,31 @@
-# Cloudflare Workers, assets-only.
+# Cloudflare Workers: static assets, plus one small API.
 #
-# There is no Worker script: `[assets]` with no `main` makes this a pure static
-# site, which is all it needs to be. Cloudflare's dashboard now funnels the Git
-# integration through the Workers flow rather than Pages, and `wrangler deploy`
-# refuses to run without this file.
+# This was assets-only for a long time and the comment here said so. What
+# changed is the roadmap's vote counter -- see src/index.js. Everything that is
+# not /api/roadmap is still served straight from the assets binding, so the site
+# behaves exactly as it did.
 name = "magic-scraper-site"
+main = "src/index.js"
 compatibility_date = "2026-09-11"
 
 [assets]
 directory = "."
+# The Worker needs to hand everything else back to the static assets, which
+# requires the binding to be named.
+binding = "ASSETS"
 # Serve the branded 404 instead of Cloudflare's bare one. Without this a
 # mistyped URL is a dead end with no way back to the site.
 not_found_handling = "404-page"
+
+# ---------------------------------------------------------------------------
+# ONE SETUP STEP, and the vote counter is inert until it is done.
+#
+#   wrangler kv namespace create ROADMAP
+#
+# That prints an id. Uncomment the two lines below, paste it in, and deploy.
+# Until then /api/roadmap returns 503 and the roadmap page quietly falls back to
+# a mailto link -- the site is never broken by this being missing.
+#
+# [[kv_namespaces]]
+# binding = "ROADMAP"
+# id = "paste-the-id-here"

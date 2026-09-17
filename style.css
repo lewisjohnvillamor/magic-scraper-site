@@ -470,3 +470,40 @@ table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
   .cols2 { grid-template-columns: 1fr; }
   .cols2 .panel + .panel { border-left: 0; border-top: 1px solid var(--rule); }
 }
+
+/* ---------- roadmap voting ----------
+   The button sits under its item rather than beside it: the text is the point
+   and the vote is a footnote to it, not a call to action competing with the
+   install buttons further up the page. */
+.voterow { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.vote {
+  font: inherit; font-size: 13px; line-height: 1;
+  padding: 7px 12px; border: 1px solid var(--rule); border-radius: 999px;
+  background: none; color: var(--ink-2); cursor: pointer;
+  text-decoration: none; display: inline-block;
+}
+.vote:hover { border-color: var(--ink-2); color: var(--ink); }
+.vote:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.vote:disabled { cursor: default; border-color: var(--accent); color: var(--accent); }
+.votecount { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+.votemail { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+.votemail label { font-size: 13px; color: var(--ink-2); display: block; }
+.votemail label span { opacity: .7; }
+.votemail input {
+  display: block; margin-top: 4px; width: 230px; max-width: 100%;
+  font: inherit; font-size: 14px; padding: 7px 10px;
+  border: 1px solid var(--rule); border-radius: 8px;
+  background: var(--paper); color: var(--ink);
+}
+.votemail input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.votemail button {
+  font: inherit; font-size: 13px; padding: 8px 14px; cursor: pointer;
+  border: 1px solid var(--ink); border-radius: 8px;
+  background: var(--ink); color: var(--paper);
+}
+.votemail .ok { font-size: 13px; color: var(--ink-2); margin: 0; }
+
+@media (max-width: 720px) {
+  .votemail input { width: 100%; }
+}
