@@ -278,6 +278,16 @@ h2 {
 .plan li b { font-variation-settings: 'wght' 600; }
 /* A qualifier on a feature line: quieter than the claim, but never hidden. */
 .plan li .q { color: var(--ink-2); font-size: 13px; }
+/* Built, tested, and not in the stores yet. The same warm as the arrows in
+   "What's being built", because it means the same thing: on its way, not here.
+   Marking these is the difference between a buyer waiting a week and a buyer
+   asking for their money back. */
+.soon {
+  display: inline-block; white-space: nowrap; vertical-align: 1px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--warm);
+  border: 1px solid currentColor; border-radius: 2px; padding: 0 5px;
+}
 .founding {
   display: inline-block; font-family: var(--mono); font-size: 11px;
   letter-spacing: .1em; text-transform: uppercase;
@@ -452,26 +462,48 @@ table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
    Two columns that have to read as different in kind, not just in order: one
    is a list of things that exist, the other of things that do not. Same card,
    different mark against each line, so the distinction survives skim-reading. */
-.cols2 {
+.cols2, .cols3 {
   display: grid; grid-template-columns: 1fr 1fr; gap: 0;
   border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
 }
-.cols2 .panel { padding: 26px 28px; }
-.cols2 .panel + .panel { border-left: 1px solid var(--rule); background: var(--card); }
-.cols2 .panel h3 {
+/* Three states rather than two: what the stores serve today, what is built and
+   waiting on a review, and what does not exist. The middle one is the reason
+   this is three columns -- folded into either neighbour it would be a lie. */
+.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+.cols2 .panel, .cols3 .panel { padding: 26px 24px; }
+.cols2 .panel + .panel, .cols3 .panel + .panel {
+  border-left: 1px solid var(--rule); background: var(--card);
+}
+.cols3 .panel + .panel + .panel { background: transparent; }
+.cols2 .panel h3, .cols3 .panel h3 {
   font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
   text-transform: uppercase; color: var(--ink-2); margin-bottom: 14px;
 }
-.ticks, .dots { list-style: none; }
-.ticks li, .dots li {
+.panel h3 .ver {
+  display: inline-block; text-transform: none; letter-spacing: 0;
+  color: var(--accent); border: 1px solid currentColor;
+  padding: 1px 6px; margin-left: 6px; font-size: 11px; border-radius: 2px;
+}
+.panel-note {
+  font-size: 13px; line-height: 1.5; color: var(--ink-2);
+  margin: -6px 0 14px; padding-bottom: 12px; border-bottom: 1px dotted var(--rule);
+}
+.ticks, .dots, .queued { list-style: none; padding-left: 0; margin: 0; }
+.ticks li, .dots li, .queued li {
   position: relative; padding: 9px 0 9px 26px; font-size: 15px; line-height: 1.5;
   border-bottom: 1px dotted var(--rule);
 }
-.ticks li:last-child, .dots li:last-child { border-bottom: 0; }
+.ticks li:last-child, .dots li:last-child, .queued li:last-child { border-bottom: 0; }
 .ticks li::before {
   content: "✓"; position: absolute; left: 0; top: 9px;
   color: var(--accent); font-weight: 700;
 }
+/* An arrow, not a tick: written and tested, but not on your machine yet. */
+.queued li::before {
+  content: "\2192"; position: absolute; left: 0; top: 9px;
+  color: var(--warm); font-weight: 700;
+}
+
 /* An open circle: present on the page, absent from the product. */
 .dots li::before {
   content: ""; position: absolute; left: 3px; top: 17px;
@@ -482,9 +514,19 @@ table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
 .dots li.never::before { border-color: var(--warm); background: var(--warm); }
 .dots li.never { color: var(--ink-2); }
 
+/* Three columns need more room than two. Below 1000px the third drops under
+   the first two; below 720px they stack. */
+@media (max-width: 1000px) {
+  .cols3 { grid-template-columns: 1fr 1fr; }
+  .cols3 .panel:nth-child(3) {
+    grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--rule);
+  }
+}
 @media (max-width: 720px) {
-  .cols2 { grid-template-columns: 1fr; }
-  .cols2 .panel + .panel { border-left: 0; border-top: 1px solid var(--rule); }
+  .cols2, .cols3 { grid-template-columns: 1fr; }
+  .cols2 .panel + .panel, .cols3 .panel + .panel {
+    border-left: 0; border-top: 1px solid var(--rule);
+  }
 }
 
 /* ---------- roadmap voting ----------
