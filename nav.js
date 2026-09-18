@@ -46,7 +46,7 @@
   var btn = document.querySelector('.vtoggle');
   if (!v || !btn) return;
 
-  var PLAY = 'Play the 30-second demo';
+  var PLAY = 'Play the 36-second demo';
   var PAUSE = 'Pause the demo';
 
   function label() {

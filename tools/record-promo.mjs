@@ -48,8 +48,12 @@ await pop.addStyleTag({ content: `
   html::after { content:""; position:fixed; inset:0; z-index:-1;
     background:linear-gradient(90deg,rgba(14,13,20,.90) 0%,rgba(14,13,20,.82) 38%,
                rgba(14,13,20,.46) 62%,rgba(14,13,20,.30) 100%); }
+  /* 1.42, not 1.5: with the drill step open and its progress line running the
+     popup is about 720 CSS px tall, and 1.5 pushed the header off the top of
+     the 1080 frame -- the row/page chips are the one thing that must stay in
+     shot. The recorder logs the composed height so this stays honest. */
   body { position:absolute; right:110px; top:50%;
-         transform:translateY(-50%) scale(1.5); transform-origin:right center;
+         transform:translateY(-50%) scale(1.42); transform-origin:right center;
          border-radius:14px; overflow:hidden;
          box-shadow:0 50px 110px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.12); }
 ` });
@@ -72,27 +76,42 @@ await pop.waitForTimeout(1200); beat('crawlDone');
 console.log('  crawled:', await pop.evaluate(() =>
   document.getElementById('statRows').textContent + ' rows / ' + document.getElementById('statPages').textContent + ' pages'));
 
-await pop.click('.tab[data-tab="data"]');
-await pop.waitForTimeout(1400); beat('backToData');
+// Stay on the Crawl tab and open the drill step: the drill's own progress line
+// ("Drilling 31 / 54...") lives there, so the run has something to watch. The
+// Data tab during a drill is a still table plus the quality banner warning that
+// the detail columns are still empty, which is true but not a promo.
+await pop.click('.step[data-step="3"] .step-head');
+await pop.waitForTimeout(900);
+await pop.check('#drillEnable');
+await pop.waitForTimeout(1100); beat('drillReady');
 
-// drill every row of page one so nothing is blank on camera
+// drill every row of the crawl so nothing is blank on camera
 const items = await pop.evaluate(async () => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
   const r = await new Promise((res) => chrome.tabs.sendMessage(tabs[0].id, { type: 'MDS_FULL_DATA' }, res));
   const col = Object.keys(r.rows[0]).find((k) => /^link$/i.test(k));
-  return r.rows.slice(0, 9).map((row, i) => ({ index: i, url: row[col] })).filter((x) => x.url);
+  // Every row, not the first nine. Drilling a subset leaves the other rows'
+  // detail columns blank, and the popup correctly says so -- "11 of 22 columns
+  // are mostly empty" is not a caption you want in a promo, and the fix is to
+  // do the thing the video claims rather than to hide the warning.
+  return r.rows.map((row, i) => ({ index: i, url: row[col] })).filter((x) => x.url);
 });
 beat('drillStart');
 await pop.evaluate((its) => chrome.runtime.sendMessage({
   type: 'MDS_DRILL_START', items: its,
-  opts: { minDelay: 0.15, maxDelay: 0.25, area: -1, openOnError: false, maxRows: 0 }
+  opts: { minDelay: 0.05, maxDelay: 0.1, area: -1, openOnError: false, maxRows: 0 }
 }), items);
-for (let i = 0; i < 90; i++) {
+for (let i = 0; i < 400; i++) {
   const st = await sw.evaluate(async () => (await chrome.storage.local.get('mds_drill_status')).mds_drill_status || null);
   if (st && st.running === false) break;
   await pop.waitForTimeout(400);
 }
-await pop.waitForTimeout(1500); beat('drillDone');
+await pop.waitForTimeout(1600); beat('drillDone');
+console.log('  popup height on camera:',
+  Math.round(await pop.evaluate(() => document.body.getBoundingClientRect().height)), 'px of 1080');
+
+await pop.click('.tab[data-tab="data"]');
+await pop.waitForTimeout(1400); beat('backToData');
 
 // slide across to the columns that came from the detail pages
 await pop.evaluate(() => {
@@ -104,7 +123,7 @@ await pop.evaluate(() => {
 await pop.waitForTimeout(2600); beat('scrolled');
 
 await pop.click('#exportCsv');
-await pop.waitForTimeout(2000); beat('exported');
+await pop.waitForTimeout(2200); beat('exported');
 
 const path = await pop.video().path();
 await ctx.close();
