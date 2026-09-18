@@ -149,6 +149,22 @@ a { color: var(--accent); text-underline-offset: 3px; }
   font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
   text-transform: uppercase; color: var(--ink-2); margin: 0 0 22px;
 }
+.eyebrow .sep { margin: 0 9px; opacity: .5; }
+
+/* "In active development", beside the eyebrow. The dot breathes rather than
+   blinks -- a hard blink beside a headline reads as an error state. */
+.building { color: var(--accent); white-space: nowrap; }
+.building i {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; margin-right: 7px; vertical-align: 1px;
+  animation: breathe 2.6s ease-in-out infinite;
+}
+@keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .building i { animation: none; } }
+@media (max-width: 520px) {
+  .eyebrow .sep { display: none; }
+  .building { display: block; margin-top: 8px; }
+}
 h1 {
   font-family: 'Fraunces'; font-weight: 600;
   font-size: clamp(40px, 6.2vw, 68px); line-height: 1.02;
