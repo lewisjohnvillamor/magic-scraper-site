@@ -56,11 +56,41 @@
     document.querySelector('.stage').classList.toggle('playing', playing);
   }
 
+  /* Some browsers cannot decode H.264 -- Firefox without the OpenH264 plugin,
+     and Chromium builds compiled without proprietary codecs. There the poster
+     stays up and the button does nothing at all when pressed, which is the one
+     thing the rest of this page is careful never to do. Say so, and hand over
+     the file instead. */
+  function noCodec() {
+    if (!btn.parentNode) return;
+    var a = document.createElement('a');
+    a.className = 'vtoggle';
+    a.href = v.currentSrc || v.getAttribute('src');
+    a.setAttribute('download', '');
+    a.textContent = 'Download the demo (36s)';
+    btn.parentNode.replaceChild(a, btn);
+    var cap = document.querySelector('.caption span');
+    if (cap) {
+      var note = document.createElement('b');
+      note.className = 'warn';
+      note.textContent = 'This browser cannot play H.264 video. ';
+      cap.insertBefore(note, cap.firstChild);
+    }
+  }
+
+  // An autoplay a browser refuses is NotAllowedError and is fine -- the poster
+  // is the fallback. A codec it cannot decode is NotSupportedError, or leaves
+  // v.error set, and is not fine.
+  function refused(e) {
+    if (v.error || (e && e.name === 'NotSupportedError')) noCodec();
+  }
+
   btn.addEventListener('click', function () {
-    if (v.paused) { v.play().catch(function () {}); } else { v.pause(); }
+    if (v.paused) { v.play().catch(refused); } else { v.pause(); }
   });
   v.addEventListener('play', label);
   v.addEventListener('pause', label);
+  v.addEventListener('error', noCodec);
 
   function mq(q) { return window.matchMedia && window.matchMedia(q).matches; }
   var conn = navigator.connection || {};
@@ -68,7 +98,7 @@
 
   if (mq('(min-width: 821px)') && !mq('(prefers-reduced-motion: reduce)') && cheap) {
     v.autoplay = true;
-    v.play().catch(function () {});   /* a refused autoplay just leaves the poster */
+    v.play().catch(refused);   /* a refused autoplay just leaves the poster */
   }
   label();
 })();
