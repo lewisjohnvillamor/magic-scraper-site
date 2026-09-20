@@ -180,6 +180,14 @@ def main():
     )
     print("\n%d lines in the pool; roughly 20-24 on the board in any minute" % POOL)
 
+    # As in make_bulk_pages.py: seo_sandbox.py owns the titles and link-preview
+    # tags. Regenerating this page to fix its board logic put the shop's
+    # generic <title> back, and the site shipped with it -- so the fix runs
+    # here rather than being something to remember.
+    print()
+    import seo_sandbox
+    seo_sandbox.main()
+
 
 if __name__ == "__main__":
     main()

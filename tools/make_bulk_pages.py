@@ -133,10 +133,12 @@ def main():
         S.page(
             fname,
             "Bulk trade list" + ("" if n == 1 else ", page %d" % n),
-            "Sandbox bulk list: %s rows across %d pages of %d. For testing a long "
-            "crawl, the preview cap and auto-save." % (format(TOTAL, ","), PAGES, PER_PAGE),
-            "A long one: <b>%s rows across %d pages</b>. Crawl it to see the preview cap "
-            "and the auto-save." % (format(TOTAL, ","), PAGES),
+            "Sandbox bulk list: %s rows across %d pages of %d. A long crawl to test "
+            "pagination, the preview cap and recovering a run that died part-way."
+            % (format(TOTAL, ","), PAGES, PER_PAGE),
+            "A long one: <b>%s rows across %d pages</b>. Crawl it to see the preview cap, "
+            "and close the tab part-way to see the run offered back."
+            % (format(TOTAL, ","), PAGES),
             '<a href="catalogue.html">Home</a> / Bulk trade list',
             "Bulk trade list",
             "Showing %s&ndash;%s of %s variants." % (
@@ -147,6 +149,14 @@ def main():
 
     print("\n%s rows across %d pages of %d, %d unique SKUs"
           % (format(TOTAL, ","), PAGES, PER_PAGE, len(skus)))
+
+    # Titles and link-preview tags live in seo_sandbox.py, which owns them for
+    # every sandbox page. Running it here means regenerating this one can never
+    # quietly put the shop's generic title back in the <head> -- which is
+    # exactly what happened to /demo/live, and it shipped that way.
+    print()
+    import seo_sandbox
+    seo_sandbox.main()
 
 
 if __name__ == "__main__":
