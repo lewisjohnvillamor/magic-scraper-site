@@ -103,6 +103,40 @@ reads as a teaser for it, which is the opposite of true and is exactly the
 mistake that had the Gumroad page selling a 3-page crawl cap that does not
 exist.
 
+## Posting them
+
+Each cut carries a different bed, so **the music credit changes with the
+file**. CC BY 4.0 requires attribution and an empty description puts the
+upload outside its licence, so this is not optional:
+
+| File | Credit |
+|---|---|
+| `brag.mp4` | Happy Beats / Business Moves **Vol. 1** |
+| `brag-drill.mp4` | Happy Beats / Business Moves **Vol. 12** |
+| `brag-long.mp4` | Happy Beats / Business Moves **Vol. 11** |
+
+All by Sascha Ende (https://ende.app), CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/). The tracks carry no Content
+ID, so YouTube's copyright check passes clean -- which is not the same as
+being licensed, and is not a reason to skip the credit.
+
+**On YouTube**, the long cut went up on 20 September 2026 as a Short, titled
+*Scrape any web page to CSV without writing code*. Three things that are easy
+to miss in that flow: the **made-for-kids** answer is mandatory and sits above
+the fold, custom **thumbnails** must be uploaded or a frame is auto-picked,
+and an upload stays **private** until the last step is changed.
+
+Description order matters as much as it does in the cut itself: the first two
+lines carry the pitch because YouTube truncates the rest behind "...more", and
+**free is listed first and in full** for the same reason it is in the video.
+Keep the "does not bypass logins, paywalls, rate limits or bot protection"
+line -- it costs nothing and is what keeps the listing clear of the policy a
+scraper is most likely to be pulled under.
+
+Pick a thumbnail that is **not** a Pro moment. The frame at ~11.6s of the long
+cut -- the crawl finishing -- promises something a free install actually
+delivers; the chain builder does not.
+
 ## Sound
 
 `make-sfx.sh` synthesises all six cues with ffmpeg — tick, thud, riser, land,
