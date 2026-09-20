@@ -5,10 +5,13 @@
 
 Everything the extension does happens inside the browser. There is no server, no account, and
 nothing about the pages a user scrapes is transmitted anywhere. The free tier includes
-detection, a manual picker, export to CSV/XLSX/JSON, and multi-page crawling with no page
-limit. The paid tier ($25 one-time, $19 for the first 100 buyers) adds unlimited drill-down:
-opening the page behind every row and merging its fields back in as extra columns, chained as
-many levels deep as needed.
+detection, a manual picker, export to CSV/XLSX/JSON, multi-page crawling with no page limit,
+and getting back a long run whose tab died part-way. Drill-down -- opening the page behind
+every row and merging its fields back in as extra columns -- runs free on the first 3 rows of
+a run. The paid tier ($25 one-time, $19 for the first 100 buyers) drills every row and chains
+as many levels deep as needed, saves setups under a name to reuse and export, compares a run
+with the previous one of the same list, and runs a saved setup on a schedule while the browser
+is open.
 
 ## Product
 
