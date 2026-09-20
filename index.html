@@ -62,14 +62,14 @@
           "name": "Free",
           "price": "0",
           "priceCurrency": "USD",
-          "description": "Detection, manual picking, unlimited multi-page crawling, export, and an auto-saved CSV every 5,000 rows. Drill-down runs on the first 3 rows."
+          "description": "Detection, manual picking, unlimited multi-page crawling, export, and recovery of a run that died with its tab. Drill-down runs on the first 3 rows."
         },
         {
           "@type": "Offer",
           "name": "Pro",
           "price": "25",
           "priceCurrency": "USD",
-          "description": "One-time purchase. Drill-down on every row, through as many levels as needed, plus control of the auto-save interval, recovery of an interrupted run, named setups you can export, comparison with the previous run, and running a saved setup on a schedule while Chrome is open. No subscription, no account."
+          "description": "One-time purchase. Drill-down on every row, through as many levels as needed, plus named setups you can export, comparison with the previous run, and running a saved setup on a schedule while Chrome is open. No subscription, no account."
         }
       ]
     },
@@ -82,7 +82,7 @@
           "name": "Do I need Pro?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Only if you want the page behind every row, or the conveniences around a long run. Crawling pagination is free, however many pages, and a long crawl auto-saves itself a CSV every 5,000 rows for free. Drill-down is the paid feature, and free runs it on the first three rows so you can see what comes back from your own site before deciding. Pro also sets the auto-save interval, recovers a run that died with its tab, saves named setups, and compares a run with the last one."
+            "text": "Only if you want the page behind every row. Crawling pagination is free, however many pages, and if the tab dies partway through a long run the rows are offered back next time you open the popup \u2014 also free. Drill-down is the paid feature, and free runs it on the first three rows so you can see what comes back from your own site before deciding. Pro adds named setups, running one on a schedule, and comparing a run with the last one."
           }
         },
         {
@@ -232,7 +232,7 @@
           <li>Rename columns, drop rows, filter</li>
           <li>Per-site settings remembered</li>
           <li>Crawl pagination — <b>unlimited</b> pages</li>
-          <li>Auto-saves a CSV every <b>5,000</b> rows <span class="soon">next update</span></li>
+          <li><b>Brings back a run that died with its tab</b> <span class="soon">next update</span></li>
           <li><b>3</b> rows per drill-down</li>
         </ul>
         <a class="btn btn-quiet" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install free</a>
@@ -250,8 +250,7 @@
           <li>Everything in Free</li>
           <li><b>Every row</b> drilled, not just three</li>
           <li>Multi-level drill chains, no cap on rows or levels</li>
-          <li>Auto-save on <b>your</b> interval, or off <span class="soon">next update</span></li>
-          <li>Bring back a run that died with its tab <span class="soon">next update</span></li>
+          <li>Drill-down results kept between sessions</li>
           <li>Name a setup, reuse it, export it <span class="soon">next update</span></li>
           <li>Compare a run with the last one <span class="soon">next update</span></li>
           <li>Put a setup on a schedule &mdash; <span class="q">while Chrome is open</span> <span class="soon">next update</span></li>
@@ -264,7 +263,7 @@
       and uncapped either way. Install the free version first &mdash; three drilled rows tell
       you whether the fields you need come back.</p>
     <p class="aside" style="margin-top:10px"><span class="soon">next update</span> marks a line
-      that is <b>built and tested but not in the stores yet</b> &mdash; it arrives in v1.20.13,
+      that is <b>built and tested but not in the stores yet</b> &mdash; it arrives in v1.20.14,
       as an update to whatever you install today, at no further cost.
       <a href="#next">The three states are set out below.</a></p>
   </section>
@@ -397,8 +396,8 @@
         </ul>
       </div>
       <div class="panel">
-        <h3>Next update <span class="ver">v1.20.13</span></h3>
-        <p class="panel-note">Built and tested here, waiting on a store review. Twenty-eight
+        <h3>Next update <span class="ver">v1.20.14</span></h3>
+        <p class="panel-note">Built and tested here, waiting on a store review. Twenty-nine
           releases in one upload.</p>
         <ul class="queued">
           <li><b>Run a saved setup on a schedule</b> &mdash; daily or every few hours, while
@@ -406,10 +405,11 @@
           <li><b>Compare a run with the last one</b> &mdash; a Changes tab beside Data and
             Crawl, as a table, with the old value struck through beside the new one — with a
             worked example on it before you have two runs to compare</li>
-          <li><b>Bring back a run that died with its tab</b></li>
+          <li><b>Bring back a run that died with its tab</b> &mdash; and it is
+            <b>free</b>, not Pro</li>
           <li><b>Named setups</b> you can reuse on the next site and hand to a colleague</li>
-          <li><b>Auto-save a CSV</b> as the crawl goes, so a long run is never lost &mdash;
-            and a scheduled run writes it without stopping on a file chooser</li>
+          <li>A long crawl is no longer protected by a CSV your browser might stop to
+            ask about &mdash; the rows are kept in the page as it goes, and offered back</li>
           <li>Exports up to <b>a million rows</b>, and drilled rows that no longer hit a
             storage ceiling</li>
         </ul>
@@ -442,12 +442,12 @@
       <details>
         <summary>Do I actually need Pro?</summary>
         <p>Only if you want the page behind every row. Crawling pagination is free, however many
-          pages — that part isn't metered at all, and a long crawl auto-saves itself a CSV every
-          5,000 rows so nothing is lost to a closed tab. Drill-down is the paid feature, and free
-          runs it on the first three rows so you can see exactly what comes back from your own site
-          before deciding. Pro also puts the auto-save interval under your control, brings back a
-          run that died with its tab, saves setups under a name, and compares a run with the last
-          one of the same list.</p>
+          pages — that part isn't metered at all, and if the tab dies partway through a long run
+          the rows are offered back the next time you open the popup, which is also free.
+          Drill-down is the paid feature, and free runs it on the first three rows so you can see
+          exactly what comes back from your own site before deciding. Pro adds saved setups you
+          can name and reuse, running one on a schedule, and comparing a run with the last one of
+          the same list.</p>
       </details>
       <details>
         <summary>Can it run on a schedule while I'm not there?</summary>

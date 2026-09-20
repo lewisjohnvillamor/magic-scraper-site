@@ -85,10 +85,15 @@
     <tr><td>Saved setups, and any schedule attached to one</td>
         <td>So the next site like this one takes seconds. Settings only &mdash; a setup never
             holds scraped rows. You can export them to a file, and that file is yours.</td></tr>
-    <tr><td>Auto-saved CSV files</td>
-        <td>A long run writes itself a CSV every few thousand rows into your downloads folder, so
-            a run that dies is not lost. Ordinary files: they stay after the extension is
-            removed.</td></tr>
+    <tr><td>An interrupted run</td>
+        <td>A crawl writes its rows to your browser's own storage, on the site's origin, as it
+            goes &mdash; so a tab that dies does not take them with it. Offered back the next
+            time you open the popup there, and thrown away as soon as a run finishes cleanly or
+            you discard it. Nothing is downloaded for this.</td></tr>
+    <tr><td>A scheduled run's CSV</td>
+        <td>Only if you set a schedule. Each run writes its result into your downloads folder,
+            because nobody is there to press export. An ordinary file: it stays after the
+            extension is removed.</td></tr>
   </table>
 
   <h2>What leaves your machine</h2>
