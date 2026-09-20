@@ -1,0 +1,76 @@
+<!doctype html><meta charset="utf-8">
+<title>Magic Scraper — short form</title>
+<link rel="stylesheet" href="../vendor/motion-anything/kinetic-headline.css">
+<link rel="stylesheet" href="../vendor/motion-anything/count-up.css">
+<link rel="stylesheet" href="stage.css">
+<body>
+<div class="frame">
+  <!-- The footage. Two plates: the forty-page crawl, and the landscape promo's
+       plate for the drill and the comparison. Cropped by CSS to a vertical
+       column through the middle of each. -->
+  <div class="screen">
+    <video id="v-bulk" class="plate" muted playsinline preload="auto"></video>
+    <video id="v-main" class="plate" muted playsinline preload="auto"></video>
+    <div class="vignette"></div>
+  </div>
+
+  <!-- Captions. One per beat; the controller reveals and hides them. -->
+  <!-- Captions. One per beat; the controller reveals and hides them.
+       Every kinetic line is its own element with PLAIN TEXT inside: the recipe
+       splits on `el.textContent`, so a <br> or an <em> inside one is silently
+       flattened -- which is how "the page behind" first rendered as
+       "the pagebehind" and an accented word lost its colour. Lines stack via
+       .ln, and the accent is a class on the line rather than a tag inside it. -->
+  <div class="caps">
+    <div class="cap" data-beat="hook">
+      <p class="eyebrow" data-kinetic="letters" data-kinetic-anim="pop">CHROME EXTENSION</p>
+      <h1>
+        <span class="ln" data-kinetic data-kinetic-anim="rise">Any list on any page</span>
+        <span class="ln accent" data-kinetic data-kinetic-anim="rise">into a spreadsheet</span>
+      </h1>
+    </div>
+    <div class="cap" data-beat="find">
+      <h1><span class="ln" data-kinetic data-kinetic-anim="rise">It finds the table</span></h1>
+      <p class="sub" data-kinetic data-kinetic-anim="fade">Columns named from the markup</p>
+    </div>
+    <div class="cap" data-beat="crawl">
+      <h1><span class="ln" data-kinetic data-kinetic-anim="drop">40 pages, on its own</span></h1>
+      <p class="stat"><span class="n" data-count="2000" data-count-duration="2400">0</span> <b>rows</b></p>
+    </div>
+    <div class="cap" data-beat="drill">
+      <h1>
+        <span class="ln" data-kinetic data-kinetic-anim="rise">Opens the page behind</span>
+        <span class="ln accent" data-kinetic data-kinetic-anim="rise">every single row</span>
+      </h1>
+      <p class="sub" data-kinetic data-kinetic-anim="fade">SKU, stock and material, merged in</p>
+    </div>
+    <div class="cap" data-beat="changes">
+      <h1>
+        <span class="ln" data-kinetic data-kinetic-anim="drop">And what</span>
+        <span class="ln accent" data-kinetic data-kinetic-anim="drop">changed since last time</span>
+      </h1>
+      <p class="sub" data-kinetic data-kinetic-anim="fade">Old price struck through beside the new</p>
+    </div>
+    <div class="cap" data-beat="out">
+      <h1><span class="ln" data-kinetic="letters" data-kinetic-anim="pop">CSV XLSX JSON</span></h1>
+      <p class="sub" data-kinetic data-kinetic-anim="fade">Nothing leaves your machine</p>
+    </div>
+  </div>
+
+  <div class="endcard" data-beat="end">
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="#fff"
+           stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 20 L14 10"/><path d="M18 3 v5 M15.5 5.5 h5"/>
+      </svg>
+    </div>
+    <h1><span class="ln" data-kinetic data-kinetic-anim="rise">Magic Scraper</span></h1>
+    <p class="free" data-kinetic data-kinetic-anim="fade">Free to detect, crawl and export</p>
+    <p class="url">magicscraper.app</p>
+  </div>
+
+  <div class="progress"><i id="bar"></i></div>
+</div>
+<script src="../vendor/motion-anything/kinetic-headline.js"></script>
+<script src="../vendor/motion-anything/count-up.js"></script>
+<script src="stage.js"></script>

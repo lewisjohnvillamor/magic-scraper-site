@@ -1,0 +1,85 @@
+/* The short-form stage: 1080x1920, built to be recorded rather than browsed.
+ *
+ * Safe areas matter more than anything else here. TikTok puts its own controls
+ * down the right edge and a caption block across the bottom, so the reading
+ * zone is roughly y 260-1480 and x 60-940. Everything that has to be read
+ * lives inside that; the footage can run past it. */
+@font-face { font-family:'Fraunces'; src:url('../../assets/fonts/fraunces-var.woff2') format('woff2');
+             font-weight:100 900; font-display:block; }
+@font-face { font-family:'Archivo'; src:url('../../assets/fonts/archivo-var.woff2') format('woff2');
+             font-weight:100 900; font-display:block; }
+
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body { width:1080px; height:1920px; overflow:hidden; background:#07060c; }
+
+.frame { position:relative; width:1080px; height:1920px;
+  background:
+    radial-gradient(120% 60% at 50% 0%, #241a4d 0%, rgba(36,26,77,0) 62%),
+    radial-gradient(120% 55% at 50% 100%, #10203f 0%, rgba(16,32,63,0) 60%),
+    #07060c;
+  font-family:'Archivo',system-ui,sans-serif; color:#fff; }
+
+/* ── the footage ─────────────────────────────────────────────────────────── */
+/* A window on the plate rather than the whole frame: the popup sits in the
+   middle of a 1920x1080 capture, so the crop is a column through the centre. */
+.screen { position:absolute; left:48px; right:48px; top:150px; height:1160px;
+  border-radius:34px; overflow:hidden; background:#0b0a10;
+  box-shadow:0 60px 130px -40px rgba(0,0,0,.95), 0 0 0 1px rgba(255,255,255,.10); }
+/* Each plate is cropped to a column through the popup, and the popup is not in
+   the same place in both: the landscape plate pins it 110px from the right
+   edge, so a centre crop slices it in half. --dx moves the crop to where the
+   popup actually is. */
+.plate { position:absolute; left:50%; top:50%;
+  transform:translate(calc(-50% + var(--dx,0px)), -50%) scale(var(--sc,1.22));
+  width:1920px; height:1080px; opacity:0; transition:opacity 220ms ease; }
+#v-bulk { --dx:0px;    --sc:1.30; }   /* centred by record-bulk-plate.mjs */
+/* -680, not -520: the transform scales before it translates, so the offset has
+   to be the popup's distance from the frame centre TIMES the scale. At -520 the
+   popup's right edge was still clipped. */
+#v-main { --dx:-680px; --sc:1.30; }   /* pinned right by record-promo.mjs */
+.plate.on { opacity:1; }
+.plate.on { opacity:1; }
+.vignette { position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg,rgba(7,6,12,.55) 0%,rgba(7,6,12,0) 22%,
+             rgba(7,6,12,0) 62%,rgba(7,6,12,.82) 100%); }
+
+/* ── captions ────────────────────────────────────────────────────────────── */
+.caps { position:absolute; left:56px; right:56px; top:1380px; height:420px; }
+.cap { position:absolute; inset:0; opacity:0; pointer-events:none;
+  transition:opacity 180ms ease; }
+.cap.on { opacity:1; }
+
+.eyebrow { font-family:ui-monospace,'SF Mono',monospace; font-size:26px; letter-spacing:.32em;
+  color:#a78bfa; margin-bottom:22px; }
+.cap h1 { font-family:'Fraunces'; font-weight:660; font-size:88px; line-height:1.02;
+  letter-spacing:-2.6px; text-shadow:0 6px 44px rgba(0,0,0,.92);
+  font-variation-settings:'SOFT' 0,'WONK' 1; }
+.ln { display:block; }
+.ln.accent { color:#a78bfa; }
+/* Line two follows line one rather than racing it. */
+.ln + .ln .k-unit { transition-delay: calc(var(--k-delay, 0ms) + 190ms); }
+.sub { margin-top:22px; font-size:34px; color:#cfc8e6; text-shadow:0 3px 26px rgba(0,0,0,.95); }
+
+.stat { margin-top:26px; display:flex; align-items:baseline; gap:16px; }
+.stat .n { font-family:'Fraunces'; font-weight:800; font-size:108px; letter-spacing:-3px;
+  color:#fff; font-variant-numeric:tabular-nums; text-shadow:0 6px 44px rgba(0,0,0,.9); }
+.stat b { font-size:38px; font-weight:600; color:#a78bfa; letter-spacing:.02em; }
+
+/* ── end card ────────────────────────────────────────────────────────────── */
+.endcard { position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:16px; text-align:center;
+  background:radial-gradient(90% 50% at 50% 50%, #1b1338 0%, #07060c 70%);
+  opacity:0; transition:opacity 340ms ease; }
+.endcard.on { opacity:1; }
+.endcard .mark { display:grid; place-items:center; width:104px; height:104px; border-radius:30px;
+  margin-bottom:26px; background:linear-gradient(145deg,#5b4bd6,#8b5cf6);
+  box-shadow:0 22px 50px -12px rgba(91,75,214,.8); }
+.endcard h1 { font-family:'Fraunces'; font-weight:700; font-size:104px; letter-spacing:-3px; }
+.endcard .free { font-size:38px; color:#cfc8e6; }
+.endcard .url { margin-top:40px; font-family:ui-monospace,monospace; font-size:34px;
+  letter-spacing:.14em; color:#a78bfa; }
+
+/* ── a progress hairline, so a short loop reads as going somewhere ───────── */
+.progress { position:absolute; left:0; right:0; top:0; height:10px; background:rgba(255,255,255,.14); }
+.progress i { display:block; height:100%; width:0;
+  background:linear-gradient(90deg,#5b4bd6,#a78bfa); }

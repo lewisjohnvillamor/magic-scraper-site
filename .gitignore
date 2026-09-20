@@ -1,3 +1,9 @@
 __pycache__/
 *.pyc
 node_modules
+
+# Working copies of the recorded plates, dropped next to the short-form stage
+# so the page can load them same-origin. Regenerate with
+# tools/record-bulk-plate.mjs and tools/record-promo.mjs; they are tens of MB
+# and the scripts that make them are the thing worth keeping.
+tools/tiktok/*.webm
