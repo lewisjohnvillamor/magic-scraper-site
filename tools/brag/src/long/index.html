@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:#faf8f4; }
+      #root { width:100%; height:100%; position:relative; }
+      .clip { position:absolute; inset:0; }
+      .act { z-index:3; }
+      #flash { background:#fffdf7; opacity:0; pointer-events:none; z-index:50; }
+      #bg { overflow:hidden; z-index:0; background:#faf8f4; }
+      #bg img { position:absolute; left:0; top:0; width:1080px; height:3000px; }
+      #scrim { z-index:1; background:rgba(250,248,244,.66); pointer-events:none; }
+      /* STATIC grain. Drifting it took a 20s cut from 4.7MB to 68MB. */
+      #grain { z-index:2; pointer-events:none; opacity:.045;
+               background-image:url('assets/grain.png'); background-repeat:repeat;
+               mix-blend-mode:multiply; }
+    </style>
+  </head>
+  <body>
+    <!-- The long cut: three payoffs instead of one. Bed is vol-11 (114.84 BPM),
+         trimmed at its 1.60s accent. Every line sits on a beat taken from the
+         track's own analysis, and the three reveals land on real strong cues
+         at 9.998, 17.893 and 25.788, with the end card on 30.525. -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="35.8"
+         data-width="1080" data-height="1920">
+
+      <div id="bg" class="clip" data-start="0" data-duration="35.8" data-track-index="0">
+        <img src="assets/backdrop.png" alt="" />
+      </div>
+      <div id="scrim" class="clip" data-start="0" data-duration="35.8" data-track-index="1"></div>
+      <div id="grain" class="clip" data-start="0" data-duration="35.8" data-track-index="2"></div>
+
+      <div id="act-story" class="clip act" data-composition-id="story"
+           data-start="0" data-duration="35.8" data-track-index="3"
+           data-composition-src="compositions/story.html"></div>
+
+      <div id="flash" class="clip" data-start="0" data-duration="35.8" data-track-index="4"></div>
+
+      <audio id="bed" src="assets/music-long.mp3" data-start="0" data-duration="35.8"
+             data-volume="0.62" data-track-index="5"></audio>
+
+      <audio id="sfx-tick-01" src="assets/tick.wav" data-start="0.002" data-duration="0.06" data-volume="0.42" data-track-index="3"></audio>
+      <audio id="sfx-tick-02" src="assets/tick.wav" data-start="1.047" data-duration="0.06" data-volume="0.42" data-track-index="4"></audio>
+      <audio id="sfx-tick-03" src="assets/tick.wav" data-start="2.104" data-duration="0.06" data-volume="0.42" data-track-index="5"></audio>
+      <audio id="sfx-tick-04" src="assets/tick.wav" data-start="3.682" data-duration="0.06" data-volume="0.42" data-track-index="6"></audio>
+      <audio id="sfx-tick-05" src="assets/tick.wav" data-start="4.739" data-duration="0.06" data-volume="0.3" data-track-index="7"></audio>
+      <audio id="sfx-tick-06" src="assets/tick.wav" data-start="5.261" data-duration="0.06" data-volume="0.3" data-track-index="8"></audio>
+      <audio id="sfx-tick-07" src="assets/tick.wav" data-start="5.784" data-duration="0.06" data-volume="0.3" data-track-index="9"></audio>
+      <audio id="sfx-tick-08" src="assets/tick.wav" data-start="6.306" data-duration="0.06" data-volume="0.3" data-track-index="10"></audio>
+      <audio id="sfx-tick-09" src="assets/tick.wav" data-start="7.897" data-duration="0.06" data-volume="0.42" data-track-index="11"></audio>
+      <audio id="sfx-tick-10" src="assets/tick.wav" data-start="13.679" data-duration="0.06" data-volume="0.42" data-track-index="12"></audio>
+      <audio id="sfx-tick-11" src="assets/tick.wav" data-start="15.258" data-duration="0.06" data-volume="0.42" data-track-index="13"></audio>
+      <audio id="sfx-tick-12" src="assets/tick.wav" data-start="16.837" data-duration="0.06" data-volume="0.42" data-track-index="14"></audio>
+      <audio id="sfx-tick-13" src="assets/tick.wav" data-start="21.051" data-duration="0.06" data-volume="0.42" data-track-index="15"></audio>
+      <audio id="sfx-tick-14" src="assets/tick.wav" data-start="23.152" data-duration="0.06" data-volume="0.42" data-track-index="16"></audio>
+      <audio id="sfx-thud"  src="assets/thud.wav"  data-start="6.841" data-duration="0.45" data-volume="0.85" data-track-index="17"></audio>
+      <audio id="sfx-riser-1" src="assets/riser.wav" data-start="9.1" data-duration="0.9" data-volume="0.5" data-track-index="18"></audio>
+      <audio id="sfx-land-1"  src="assets/land.wav"  data-start="9.998" data-duration="0.5" data-volume="0.78" data-track-index="19"></audio>
+      <audio id="sfx-riser-2" src="assets/riser.wav" data-start="16.99" data-duration="0.9" data-volume="0.5" data-track-index="20"></audio>
+      <audio id="sfx-land-2"  src="assets/land.wav"  data-start="17.893" data-duration="0.5" data-volume="0.78" data-track-index="21"></audio>
+      <audio id="sfx-riser-3" src="assets/riser.wav" data-start="24.89" data-duration="0.9" data-volume="0.5" data-track-index="22"></audio>
+      <audio id="sfx-land-3"  src="assets/land.wav"  data-start="25.788" data-duration="0.5" data-volume="0.78" data-track-index="23"></audio>
+      <audio id="sfx-chime" src="assets/chime.wav" data-start="30.58" data-duration="1.2" data-volume="0.5" data-track-index="24"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const root = gsap.timeline({ paused: true });
+
+      // A slow crawl down the page for the whole cut. Linear on purpose.
+      root.fromTo('#bg img', { y: 0 }, { y: -1080, duration: 35.8, ease: 'none' }, 0);
+
+      // A flash on each payoff and on the outro.
+      [9.998, 17.893, 25.788, 30.525].forEach(function (at) {
+        root.to('#flash', { opacity: 0.85, duration: 0.07, ease: 'power2.out' }, at - 0.07);
+        root.to('#flash', { opacity: 0, duration: 0.34, ease: 'power2.in' }, at);
+      });
+
+      window.__timelines['main'] = root;
+      root.seek(0);
+    </script>
+  </body>
+</html>

@@ -15,10 +15,18 @@ is what makes the video, not the video. `build.sh` assembles everything else
 from files already in this repo or the extension repo beside it, so a fresh
 clone rebuilds both cuts without hunting for an asset.
 
-| Cut | Argument | Reveal |
-|---|---|---|
-| `cut1` → `brag.mp4` | copying by hand, then one click | the crawl finished |
-| `drill` → `brag-drill.mp4` | the field is never on the list | the chain builder, ten levels |
+| Cut | Length | Argument | Payoff |
+|---|---|---|---|
+| `cut1` → `brag.mp4` | 20.5s | copying by hand, then one click | the crawl finished |
+| `drill` → `brag-drill.mp4` | 20.7s | the field is never on the list | the chain builder, ten levels |
+| `long` → `brag-long.mp4` | 35.8s | all three, in sequence | crawl, then chain, then Changes |
+
+**20 seconds is not a limit.** It is the `/brag` skill's house rule (15-25s)
+and nothing technical -- Hyperframes renders any length. The real constraint is
+material: at 20s there is room for one product moment, at 35s for three. The
+long cut exists because the Changes tab is the thing nothing else in the
+category does, and it could not be reached inside 20s without cutting the
+argument that earns it.
 
 The drill cut's payoff is `chain-builder.png`, captured by
 `tools/shoot_chain.mjs` in the extension repo. It is the panel where the chain
@@ -35,10 +43,17 @@ homepage is not a licence amendment and attribution is the licence's one term,
 so credit them wherever a cut is posted -- the lines are in
 `brag-output/share-copy.txt`.
 
-| Cut | Track | Tempo | Trim | Reveal |
+| Cut | Track | Tempo | Trim | Reveal(s) |
 |---|---|---|---|---|
-| `cut1` | Business Moves Vol. 1 | 120.19 BPM | 3.02s | 14.00s, beat 28 |
-| `drill` | Business Moves Vol. 12 | 109.96 BPM | 8.74s | 14.19s, beat 26 |
+| `cut1` | Business Moves Vol. 1 | 120.19 BPM | 3.02s | 14.00 |
+| `drill` | Business Moves Vol. 12 | 109.96 BPM | 8.74s | 14.19 |
+| `long` | Business Moves Vol. 11 | 114.84 BPM | 1.60s | 9.998, 17.893, 25.788 |
+
+The long cut is timed against the track's **detected beat array**, not an
+idealised period. The two short cuts could use `n x beat` because their single
+reveal happened to fall on one; across 35s the drift makes that wrong, and no
+strong cue landed on an exact multiple of the nominal 0.5225s. Its lines sit on
+real beats and its three payoffs on real strong cues.
 
 The trim is never arbitrary. Each track's beats start a little way in, so
 cutting there puts every beat on an exact multiple of video time -- and in
@@ -51,9 +66,10 @@ Vol. 12 is the slower of the two on purpose. The drill cut is a descent, and
 its ten rungs fall one per beat at 0.546s; a 120 BPM pulse made the same
 ladder read as a chase.
 
-`build.sh` needs the source mp3s in `brag-output/` (`.music-source.mp3` and
-`.music-source-drill.mp3`). They are not committed, because this repo is
-public and redistributing someone's track is a different act from using it.
+`build.sh` needs the source mp3s in `brag-output/`: `.music-source.mp3`,
+`.music-source-drill.mp3` and `.music-source-long.mp3`. They are not
+committed, because this repo is public and redistributing someone's track is a
+different act from using it.
 
 ## Sound
 

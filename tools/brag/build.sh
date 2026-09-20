@@ -54,6 +54,7 @@ trim_music() {           # <source> <start> <length> <out>
 }
 trim_music "${MUSIC_SRC:-$OUT/.music-source.mp3}"             3.02 20.5  "$OUT/music.mp3"
 trim_music "${MUSIC_SRC_DRILL:-$OUT/.music-source-drill.mp3}" 8.74 20.74 "$OUT/music-drill.mp3"
+trim_music "${MUSIC_SRC_LONG:-$OUT/.music-source-long.mp3}"   1.60 35.8  "$OUT/music-long.mp3"
 
 build_one() {
   local name="$1" src="$HERE/src/$1" proj="$OUT/$1" out="$2" poster_at="$3"
@@ -73,7 +74,7 @@ JSON
   printf '{ "id": "magic-scraper-%s", "name": "magic-scraper-%s" }\n' "$name" "$name" > "$proj/meta.json"
 
   cp "$SITE/assets/fonts/fraunces-var.woff2" "$SITE/assets/fonts/archivo-var.woff2" "$proj/assets/"
-  cp "$OUT/music.mp3" "$OUT/music-drill.mp3" "$OUT/sfx/"*.wav "$proj/assets/"
+  cp "$OUT/music.mp3" "$OUT/music-drill.mp3" "$OUT/music-long.mp3" "$OUT/sfx/"*.wav "$proj/assets/"
 
   # GSAP vendored: a composition must make no network request at render time.
   [ -f "$OUT/gsap.min.js" ] || curl -sSfL -o "$OUT/gsap.min.js" \
@@ -84,7 +85,14 @@ JSON
   # uses chain-builder.png -- the panel where the chain is configured, rebuilt
   # there by tools/shoot_chain.mjs.
   cp "$EXT/docs/store/cws-screenshot-2-crawl.png" "$proj/assets/s2-crawl.png"
+  cp "$EXT/docs/store/cws-screenshot-4-changes.png" "$proj/assets/s4-changes.png"
   cp "$EXT/docs/store/chain-builder.png" "$proj/assets/chain-builder.png"
+
+  # Each cut drifts the page it is arguing about: cut1 the table, the others
+  # the catalogue. Built from a live capture, pre-blurred so the drift is free.
+  cp "$OUT/backdrop-${name}.png" "$proj/assets/backdrop.png" 2>/dev/null \
+    || cp "$OUT/backdrop.png" "$proj/assets/backdrop.png"
+  cp "$OUT/grain.png" "$proj/assets/grain.png"
 
   (cd "$proj" && "$HF" check)
   [ -n "${CHECK_ONLY:-}" ] && return 0
@@ -116,7 +124,9 @@ JSON
 case "${1:-all}" in
   cut1)  build_one cut1  "$OUT/brag.mp4"       15.4 ;;
   drill) build_one drill "$OUT/brag-drill.mp4" 15.6 ;;
+  long)  build_one long  "$OUT/brag-long.mp4"  19.5 ;;
   all)   build_one cut1  "$OUT/brag.mp4"       15.4
-         build_one drill "$OUT/brag-drill.mp4" 15.6 ;;
-  *) echo "usage: $0 [cut1|drill|all]" >&2; exit 2 ;;
+         build_one drill "$OUT/brag-drill.mp4" 15.6
+         build_one long  "$OUT/brag-long.mp4"  19.5 ;;
+  *) echo "usage: $0 [cut1|drill|long|all]" >&2; exit 2 ;;
 esac

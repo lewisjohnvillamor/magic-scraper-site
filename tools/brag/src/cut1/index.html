@@ -9,6 +9,28 @@
       html, body { width: 1080px; height: 1920px; overflow: hidden; background: #faf8f4; }
       #root { width: 100%; height: 100%; position: relative; }
       .clip { position: absolute; inset: 0; }
+      .act { z-index: 3; }
+
+      /* This rule was missing entirely: the #flash div and its tweens shipped
+         without a background, so the act-change flash has been an invisible
+         transparent div in every render of this cut so far. */
+      #flash { background: #fffdf7; opacity: 0; pointer-events: none; z-index: 50; }
+
+      /* The table page being scraped, behind the argument about scraping it.
+         The drill cut uses /demo/catalogue, so the pair rhyme rather than
+         repeat. Stacked twice and pre-blurred in ffmpeg, so drifting it costs
+         nothing at render time. */
+      #bg { overflow: hidden; z-index: 0; background: #faf8f4; }
+      #bg img { position: absolute; left: 0; top: 0; width: 1080px; height: 3000px; }
+      /* The backdrop alone competed with the type where the rows are densest. */
+      #scrim { z-index: 1; background: rgba(250,248,244,.66); pointer-events: none; }
+      /* STATIC. Drifting grain took the drill cut from 4.7MB to 68MB: noise
+         that changes every frame defeats inter-frame prediction outright. */
+      #grain {
+        z-index: 2; pointer-events: none; opacity: .045;
+        background-image: url('assets/grain.png'); background-repeat: repeat;
+        mix-blend-mode: multiply;
+      }
     </style>
   </head>
   <body>
@@ -20,11 +42,17 @@
     <div id="root" data-composition-id="main" data-start="0" data-duration="20.5"
          data-width="1080" data-height="1920">
 
-      <div id="act-kinetic" class="clip" data-composition-id="kinetic"
+      <div id="bg" class="clip" data-start="0" data-duration="20.5" data-track-index="0">
+        <img src="assets/backdrop.png" alt="" />
+      </div>
+      <div id="scrim" class="clip" data-start="0" data-duration="20.5" data-track-index="1"></div>
+      <div id="grain" class="clip" data-start="0" data-duration="20.5" data-track-index="2"></div>
+
+      <div id="act-kinetic" class="clip act" data-composition-id="kinetic"
            data-start="0" data-duration="14" data-track-index="0"
            data-composition-src="compositions/kinetic.html"></div>
 
-      <div id="act-reveal" class="clip" data-composition-id="reveal"
+      <div id="act-reveal" class="clip act" data-composition-id="reveal"
            data-start="14" data-duration="6.5" data-track-index="1"
            data-composition-src="compositions/reveal.html"></div>
 
@@ -65,6 +93,10 @@
       // The root holds no animation of its own: each act owns its timeline and
       // the runtime activates them as registered composition siblings.
       const root = gsap.timeline({ paused: true });
+
+      // One slow crawl down the page for the whole cut. Linear: an eased
+      // drift draws the eye, and this must never be looked at.
+      root.fromTo('#bg img', { y: 0 }, { y: -1080, duration: 20.5, ease: 'none' }, 0);
       // Two act changes, two flashes. Fast up, slower down: a hit, then a
       // recovery, rather than a symmetrical blink.
       [14, 18].forEach(function (at) {

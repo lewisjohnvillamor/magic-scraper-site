@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family:'Fraunces'; src:url('assets/fraunces-var.woff2') format('woff2-variations');
+                   font-weight:100 900; font-display:block; }
+      @font-face { font-family:'Archivo'; src:url('assets/archivo-var.woff2') format('woff2-variations');
+                   font-weight:100 900; font-display:block; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:transparent; }
+      #story { width:100%; height:100%; position:relative;
+               font-family:'Archivo', system-ui, sans-serif; color:#17150f; }
+
+      /* Type. One inner .t span per line -- a flex container makes every
+         inline child its own anonymous item and eats the whitespace between
+         them, which is what turned "<em>Every</em> row." into "Everyrow." */
+      .ln { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+            font-family:'Fraunces'; font-weight:600; font-size:132px; line-height:1.02;
+            letter-spacing:-2.5px; text-align:center; padding:0 90px; }
+      .ln .t { display:block; }
+      .ln.sm { font-size:104px; letter-spacing:-2px; }
+      .ln em { font-style:normal; color:#4b3bd0; }
+      .ln.grind { color:#6f6858; font-size:96px; letter-spacing:-1px; }
+      .ln.stop { color:#b4491f; font-size:180px; letter-spacing:-5px; }
+
+      /* Captions sit above a shot rather than centred in the frame. */
+      .cap { position:absolute; left:0; right:0; top:118px; text-align:center;
+             font-family:'Fraunces'; font-weight:600; font-size:100px;
+             letter-spacing:-2px; line-height:1.02; }
+      .cap em { font-style:normal; color:#4b3bd0; }
+
+      /* Two crop geometries. The store composites are 1280x800 pages with the
+         popup at (776,98) 460x602, shown at 1.9x. chain-builder.png is a bare
+         460-wide popup at 2x, so 920x1852, shown at 874 wide = 0.95. */
+      .shot { position:absolute; left:103px; overflow:hidden; border-radius:22px;
+              box-shadow:0 50px 100px -30px rgba(23,21,15,.4); }
+      .shot.composite { top:452px; width:874px; height:1144px; }
+      .shot.composite img { position:absolute; width:2432px; height:1520px; left:-1474px; top:-186px; }
+      .shot.panel { top:486px; width:874px; height:912px; }
+      .shot.panel img { position:absolute; width:874px; height:1759px; left:0; top:-390px; }
+
+      #end { position:absolute; inset:0; background:#faf8f4;
+             display:flex; flex-direction:column; align-items:center; justify-content:center; }
+      .mark { width:148px; height:148px; border-radius:34px; background:#4b3bd0;
+              display:flex; align-items:center; justify-content:center; margin-bottom:44px; }
+      .wordmark { font-family:'Fraunces'; font-weight:600; font-size:92px; letter-spacing:-1.5px; }
+      .claims { display:flex; gap:16px; margin-top:50px; }
+      .claims span { font-size:32px; color:#5d574a; background:#fffefb;
+                     border:1px solid #e0dbd0; border-radius:999px; padding:16px 30px; }
+      .url { font-family:ui-monospace, monospace; font-size:36px; margin-top:56px; }
+    </style>
+  </head>
+  <body>
+    <!-- Three payoffs, each landing on a real detected accent in the bed:
+         9.998, 17.893 and 25.788, with the end card on 30.525. The beats are
+         taken from the track's own analysis rather than an idealised period,
+         because the detected grid is not perfectly uniform. -->
+    <div id="story" data-composition-id="story" data-start="0" data-duration="35.8"
+         data-width="1080" data-height="1920">
+
+      <!-- Act A: the problem -->
+      <div id="a1" class="ln sm clip"    data-start="0.002" data-duration="1.045" data-track-index="0"><span class="t">A list.</span></div>
+      <div id="a2" class="ln sm clip"    data-start="1.047" data-duration="1.057" data-track-index="1"><span class="t">On a page.</span></div>
+      <div id="a3" class="ln sm clip"    data-start="2.104" data-duration="1.578" data-track-index="2"><span class="t">You need it in a<br />spreadsheet.</span></div>
+      <div id="a4" class="ln sm clip"    data-start="3.682" data-duration="1.057" data-track-index="3"><span class="t">So you start<br />copying.</span></div>
+      <div id="a5" class="ln grind clip" data-start="4.739" data-duration="0.522" data-track-index="4"><span class="t">Copying.</span></div>
+      <div id="a6" class="ln grind clip" data-start="5.261" data-duration="0.523" data-track-index="5"><span class="t">Copying.</span></div>
+      <div id="a7" class="ln grind clip" data-start="5.784" data-duration="0.522" data-track-index="6"><span class="t">Copying.</span></div>
+      <div id="a8" class="ln grind clip" data-start="6.306" data-duration="0.535" data-track-index="7"><span class="t">Copying.</span></div>
+      <div id="a9" class="ln stop clip"  data-start="6.841" data-duration="1.056" data-track-index="8"><span class="t">Stop.</span></div>
+      <div id="a10" class="ln clip"      data-start="7.897" data-duration="2.101" data-track-index="9"><span class="t">One click.</span></div>
+
+      <!-- Payoff 1 -->
+      <div id="c1" class="cap clip"          data-start="9.998" data-duration="3.681" data-track-index="10">Your list.<br /><em>All of it.</em></div>
+      <div id="s1" class="shot composite clip" data-start="9.998" data-duration="3.681" data-track-index="11"><img src="assets/s2-crawl.png" alt="" /></div>
+
+      <!-- Act B: depth -->
+      <div id="b1" class="ln sm clip" data-start="13.679" data-duration="1.579" data-track-index="12"><span class="t">But the field<br />you need</span></div>
+      <div id="b2" class="ln sm clip" data-start="15.258" data-duration="1.579" data-track-index="13"><span class="t">isn&rsquo;t on the list.</span></div>
+      <div id="b3" class="ln sm clip" data-start="16.837" data-duration="1.056" data-track-index="14"><span class="t">It&rsquo;s <em>behind</em> it.</span></div>
+
+      <!-- Payoff 2 -->
+      <div id="c2" class="cap clip"      data-start="17.893" data-duration="3.158" data-track-index="15">Ten levels.<br /><em>One setup.</em></div>
+      <div id="s2" class="shot panel clip" data-start="17.893" data-duration="3.158" data-track-index="16"><img src="assets/chain-builder.png" alt="" /></div>
+
+      <!-- Act C: change -->
+      <div id="d1" class="ln sm clip" data-start="21.051" data-duration="2.101" data-track-index="17"><span class="t">Run it again<br />next week.</span></div>
+      <div id="d2" class="ln sm clip" data-start="23.152" data-duration="2.636" data-track-index="18"><span class="t">What <em>moved</em>?</span></div>
+
+      <!-- Payoff 3 -->
+      <div id="c3" class="cap clip"          data-start="25.788" data-duration="4.737" data-track-index="19">The old price,<br /><em>struck through.</em></div>
+      <div id="s3" class="shot composite clip" data-start="25.788" data-duration="4.737" data-track-index="20"><img src="assets/s4-changes.png" alt="" /></div>
+
+      <div id="end" class="clip" data-start="30.525" data-duration="5.275" data-track-index="21">
+        <div class="mark">
+          <svg viewBox="0 0 24 24" width="72" height="72" fill="none" stroke="#faf8f4"
+               stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+          </svg>
+        </div>
+        <div class="wordmark">Magic Scraper</div>
+        <div class="claims"><span>No server</span><span>No account</span><span>No upload</span></div>
+        <div class="url">magicscraper.app</div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      document.querySelectorAll('.ln').forEach(function (el) {
+        const at = parseFloat(el.dataset.start);
+        const dur = parseFloat(el.dataset.duration);
+        if (el.classList.contains('grind')) {
+          tl.fromTo(el, { opacity: 0, y: -14 },
+            { opacity: 1, y: 0, duration: 0.12, ease: 'power2.out' }, at);
+          tl.to(el, { opacity: 0.5, y: 26, duration: dur - 0.14, ease: 'none' }, at + 0.12);
+        } else if (el.classList.contains('stop')) {
+          tl.fromTo(el, { opacity: 0, scale: 1.55 },
+            { opacity: 1, scale: 1, duration: 0.26, ease: 'power4.out' }, at);
+        } else {
+          tl.fromTo(el, { opacity: 1, y: 26, clipPath: 'inset(0% 0% 100% 0%)' },
+            { y: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.3, ease: 'power3.out' }, at);
+        }
+      });
+
+      // Each payoff: caption punches in, the product lands a beat later and
+      // then holds still, with only a slow push so the frame is never dead.
+      [['#c1', '#s1', 9.998, 3.68], ['#c2', '#s2', 17.893, 3.15],
+       ['#c3', '#s3', 25.788, 4.73]].forEach(function (p) {
+        const cap = p[0], shot = p[1], at = p[2], hold = p[3];
+        tl.fromTo(cap, { opacity: 0, y: 40, scale: 1.06 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'power4.out' }, at);
+        tl.fromTo(shot, { opacity: 0, y: 240, scale: 0.93 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.66, ease: 'power3.out' }, at + 0.07);
+        tl.to(shot, { scale: 1.02, duration: hold - 0.8, ease: 'none' }, at + 0.73);
+      });
+
+      tl.fromTo('#end', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 30.525);
+      tl.fromTo('#end .mark', { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.8)' }, 30.58);
+      tl.fromTo('#end .wordmark', { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 30.73);
+      tl.fromTo('#end .claims span', { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 30.93);
+      tl.fromTo('#end .url', { opacity: 0 }, { opacity: 1, duration: 0.45 }, 31.4);
+
+      window.__timelines['story'] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
