@@ -9,7 +9,7 @@
       @font-face { font-family:'Archivo'; src:url('assets/archivo-var.woff2') format('woff2-variations');
                    font-weight:100 900; font-display:block; }
       * { margin:0; padding:0; box-sizing:border-box; }
-      html, body { width:1080px; height:1920px; overflow:hidden; background:#faf8f4; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:transparent; }
       #descent {
         width:100%; height:100%; position:relative;
         font-family:'Archivo', system-ui, sans-serif; color:#17150f;
@@ -28,7 +28,7 @@
         display:flex; align-items:center; gap:26px;
       }
       .lvl .n {
-        font-family:ui-monospace, monospace; font-size:26px; color:#b4491f;
+        font-family:ui-monospace, monospace; font-size:30px; color:#8f3a18;
         width:44px; flex:0 0 44px;
       }
       .lvl .name {
@@ -86,8 +86,9 @@
         el.style.paddingLeft = (i * INDENT) + 'px';
       });
 
-      tl.fromTo('#dhead', { opacity: 0, y: 26 },
-        { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }, 0);
+      tl.fromTo('#dhead',
+        { opacity: 1, y: 22, clipPath: 'inset(0% 0% 100% 0%)' },
+        { y: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.36, ease: 'power3.out' }, 0);
 
       // Elbow down-then-right between consecutive rungs, so the line lands on
       // each name instead of drifting away from the indent.
@@ -110,9 +111,17 @@
         tl.fromTo(el, { opacity: 0, x: -34 },
           { opacity: 1, x: 0, duration: 0.26, ease: 'power3.out' }, at);
         // Recede as the next one lands, so the newest rung is always the
-        // brightest and the stack reads as distance rather than a list.
+        // brightest and the stack reads as distance rather than a list. Not
+        // below ~0.55: at 0.34 the older rungs measured 1.2:1 against the
+        // backdrop, which does not read as depth, it reads as out of focus.
         if (i < levels.length - 1) {
-          tl.to(el, { opacity: 0.34, duration: 0.3, ease: 'power1.out' }, at + 0.546);
+            // Recede the label, not the ordinal. Fading the whole rung took the
+          // 26px number down to 1.2:1, which is unreadable rather than
+          // distant; the numbers are the index you read the depth off.
+          tl.to(el.querySelectorAll('.name, .tick'),
+            { opacity: 0.5, duration: 0.3, ease: 'power1.out' }, at + 0.546);
+          tl.to(el.querySelector('.n'),
+            { opacity: 0.82, duration: 0.3, ease: 'power1.out' }, at + 0.546);
         }
       });
 

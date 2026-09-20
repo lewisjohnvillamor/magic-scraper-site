@@ -9,7 +9,28 @@
       html, body { width:1080px; height:1920px; overflow:hidden; background:#faf8f4; }
       #root { width:100%; height:100%; position:relative; }
       .clip { position:absolute; inset:0; }
+      .act { z-index:3; }
       #flash { background:#fffdf7; opacity:0; pointer-events:none; z-index:50; }
+
+      /* The page being scraped, behind the argument about scraping it. A real
+         capture of /demo/catalogue, stacked twice and pre-blurred so it can
+         drift the whole cut without a costly runtime filter, and washed back
+         to 22% over paper so it is texture rather than content. */
+      #bg { overflow:hidden; z-index:0; background:#faf8f4; }
+      #bg img { position:absolute; left:0; top:0; width:1080px; height:3000px; }
+
+      /* Grain. 256px tile, overlay, barely there -- it stops large flat areas
+         of paper from banding once the video is compressed. */
+      /* A paper scrim over the page. The backdrop alone measured fine in a
+         sparse crop and competed badly where the product cards actually are;
+         this keeps the texture and takes back the legibility. */
+      #scrim { z-index:1; background:rgba(250,248,244,.66); pointer-events:none; }
+
+      #grain {
+        z-index:2; pointer-events:none; opacity:.045;
+        background-image:url('assets/grain.png'); background-repeat:repeat;
+        mix-blend-mode:multiply;
+      }
     </style>
   </head>
   <body>
@@ -25,15 +46,21 @@
     <div id="root" data-composition-id="main" data-start="0" data-duration="20.735"
          data-width="1080" data-height="1920">
 
-      <div id="act-setup" class="clip" data-composition-id="setup"
+      <div id="bg" class="clip" data-start="0" data-duration="20.735" data-track-index="0">
+        <img src="assets/backdrop.png" alt="" />
+      </div>
+      <div id="scrim" class="clip" data-start="0" data-duration="20.735" data-track-index="1"></div>
+      <div id="grain" class="clip" data-start="0" data-duration="20.735" data-track-index="2"></div>
+
+      <div id="act-setup" class="clip act" data-composition-id="setup"
            data-start="0" data-duration="6.548" data-track-index="0"
            data-composition-src="compositions/setup.html"></div>
 
-      <div id="act-descent" class="clip" data-composition-id="descent"
+      <div id="act-descent" class="clip act" data-composition-id="descent"
            data-start="6.548" data-duration="7.639" data-track-index="1"
            data-composition-src="compositions/descent.html"></div>
 
-      <div id="act-payoff" class="clip" data-composition-id="payoff"
+      <div id="act-payoff" class="clip act" data-composition-id="payoff"
            data-start="14.187" data-duration="6.548" data-track-index="2"
            data-composition-src="compositions/payoff.html"></div>
 
@@ -67,6 +94,15 @@
     <script>
       window.__timelines = window.__timelines || {};
       const root = gsap.timeline({ paused: true });
+
+      // One slow crawl down the page for the whole cut -- 1080px over 20.7s,
+      // about 52px a second. Linear on purpose: an eased drift draws the eye,
+      // and this must never be the thing being looked at.
+      root.fromTo('#bg img', { y: 0 }, { y: -1080, duration: 20.735, ease: 'none' }, 0);
+      // Grain is deliberately STATIC. Drifting it looked marginally better and
+      // cost 26 Mbps: noise that changes every frame defeats inter-frame
+      // prediction outright, and the same cut went from 4.7MB to 68MB. Held
+      // still it is nearly free, because every frame predicts it perfectly.
       [14.187, 18.007].forEach(function (at) {
         root.to('#flash', { opacity: 0.85, duration: 0.07, ease: 'power2.out' }, at - 0.07);
         root.to('#flash', { opacity: 0, duration: 0.34, ease: 'power2.in' }, at);

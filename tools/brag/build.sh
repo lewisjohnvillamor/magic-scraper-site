@@ -89,7 +89,12 @@ JSON
   (cd "$proj" && "$HF" check)
   [ -n "${CHECK_ONLY:-}" ] && return 0
 
-  (cd "$proj" && "$HF" render --output "$out")
+  # CRF 20, not the default 16. The default is near-lossless, which was free
+  # while the frames were flat paper and cost 26 Mbps the moment a grain layer
+  # and a drifting backdrop arrived -- the same cut went 4.7MB -> 68MB. Every
+  # platform re-encodes on upload, so those bits are spent twice and kept
+  # never.
+  (cd "$proj" && "$HF" render --output "$out" --crf "${CRF:-20}")
 
   # Poster baked as frame 0 so the idle thumbnail is a chosen frame everywhere.
   ffmpeg -hide_banner -v error -y -ss "$poster_at" -i "$out" -frames:v 1 -q:v 2 "${out%.mp4}.jpg"

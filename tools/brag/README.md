@@ -75,6 +75,19 @@ flash in both cuts is eight lines of CSS and GSAP instead, and flashes to the
 page colour lifted rather than to white, which would punch a hole in a warm
 frame.
 
+## Size
+
+Rendered at **CRF 20**, overriding the default 16. Two things blow the file up
+and both are avoidable:
+
+- **Animated grain is ruinous.** Noise that changes every frame defeats
+  inter-frame prediction outright. Drifting the grain took this cut from 4.7MB
+  to **68MB** -- 26 Mbps -- for a difference nobody would notice. Held still,
+  it is nearly free: every frame predicts it perfectly.
+- **CRF 16 is near-lossless.** That was invisible while the frames were flat
+  paper and expensive the moment a photographic backdrop arrived. Every
+  platform re-encodes on upload, so those bits are spent twice and kept never.
+
 ## Gotchas that cost a render each
 
 - **An `<audio>` without an `id` renders silent.** Nothing warns at playback;
