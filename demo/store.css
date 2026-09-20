@@ -137,7 +137,17 @@ aside.rail .count { color: var(--ink-3); font-size: 12px; }
 }
 .pager a:hover { border-color: var(--ink-3); color: var(--ink); }
 .pager .on { background: var(--ink); border-color: var(--ink); color: #fff; }
-.pager .next { font-variation-settings: 'wght' 600; color: var(--ink); }
+.pager .next, .pager .prev { font-variation-settings: 'wght' 600; color: var(--ink); }
+/* Forty page numbers do not fit, so the bulk list shows a window with gaps in
+   it. The gap is a separator, not a control: no box, no hover. */
+.pager .gap { min-width: 0; border: 0; padding: 7px 2px; color: var(--ink-3); }
+/* A fifty-row table is taller than the viewport and wider than a phone. */
+.tablewrap { overflow-x: auto; }
+.tablewrap table.data { min-width: 940px; }
+.tablewrap table.data td { padding: 9px 12px; font-size: 14px; }
+table.data td.sku { font-variant-numeric: tabular-nums; color: var(--ink-2); white-space: nowrap; }
+table.data td.price { font-variation-settings: 'wght' 600; white-space: nowrap; }
+table.data td.was { color: var(--ink-3); text-decoration: line-through; white-space: nowrap; }
 
 /* ---------- tables ---------- */
 
@@ -386,3 +396,20 @@ h2.sub {
   .aside-note { padding: 13px 15px; }
   h2.sub { margin-top: 30px; }
 }
+
+
+/* The live board's header strip. The dot pulses so it is obvious at a glance
+   that the page is not static, which is the whole point of it. */
+.liveband {
+  display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap;
+  margin: 0 0 22px; padding: 13px 16px; font-size: 14px; line-height: 1.5;
+  border: 1px solid #bfe0cd; border-radius: 10px; background: #f2fbf6; color: #14512f;
+}
+.liveband .dot {
+  width: 9px; height: 9px; border-radius: 50%; background: #1d8a52;
+  align-self: center; animation: livepulse 2s ease-in-out infinite;
+}
+.liveband span:last-child { color: #2c6b48; }
+@keyframes livepulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+@media (prefers-reduced-motion: reduce) { .liveband .dot { animation: none } }
+.hint { margin-top: 14px; color: var(--ink-3); font-size: 14px; }

@@ -5,7 +5,7 @@ Allow: /
 Disallow: /thanks
 
 # The sandbox is meant to be crawled and scraped -- that is what it is for.
-# Its 166 generated product, maker, sourcing and traceability pages carry
+# Its 205 generated product, maker, sourcing, traceability and bulk-list pages carry
 # noindex instead, so they can be followed and practised on without filling an index with
 # fictional stock. Two more carry it: /demo/feed, which marks twenty invented
 # products up in JSON-LD and microdata and has no business being read as a real

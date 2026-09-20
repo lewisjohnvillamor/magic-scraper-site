@@ -1,0 +1,107 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A board that changes every minute &mdash; Northwind Supply</title><meta name="description" content="Sandbox live page: prices, stock and the line-up change once a minute, deterministically from the clock. For testing run-to-run comparison."><link rel="canonical" href="https://magicscraper.app/demo/live"><link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="store.css"></head><body><div class="sandbox"><div class="shell"><span class="tag">Sandbox</span><b>Practice site for Magic Scraper.</b> This one <b>changes every minute</b>. Scrape it, wait for the clock to turn, scrape it again, and compare the two runs. <a href="index.html">All sandbox pages</a> &middot; <a href="../index.html">About the extension</a> &middot; <a href="../privacy.html">Privacy</a></div></div><div class="strip">Free shipping on trade orders over <b>$400</b> &middot; Samples dispatched same day</div><header class="site"><div class="shell bar"><a class="brand" href="catalogue.html">North<b>wind</b> <span>Supply</span></a><nav><a href="catalogue.html">Catalogue</a><a href="table.html">Trade list</a><a href="scroll.html">New arrivals</a><a href="awkward.html">Clearance</a></nav><div class="tools"><input class="search" type="search" placeholder="Search 54 products" aria-label="Search"><a class="cart" href="#">Basket<b>0</b></a></div></div></header><div class="shell"><p class="crumbs"><a href="catalogue.html">Home</a> / Live board</p><div class="head"><h1>Live trade board</h1><p>Prices and availability as of this minute. It moves on its own.</p></div><div class="liveband"><span class="dot" aria-hidden="true"></span><b>The board changes every minute.</b> <span>Reading for <time id="stamp"></time> &middot; next in <b id="countdown">--</b>s. Scrape it, wait for the clock to turn, scrape it again &mdash; the Changes tab compares the two.</span></div><div class="tablewrap"><table class="data" id="board"><thead><tr><th>SKU</th><th>Product</th><th>Maker</th><th>Price</th><th>Stock</th><th>Updated</th></tr></thead><tbody></tbody></table></div><p class="hint" id="movednote"></p></div><footer class="site"><div class="shell"><div class="cols"><div><h5>Northwind Supply</h5><p style="color:var(--ink-2);font-size:14px;margin:0">Household goods for people who keep things. Trade accounts welcome.</p><div class="signup"><input type="email" placeholder="Email address" aria-label="Email address"><button type="button">Join</button></div></div><div><h5>Shop</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="table.html">Trade list</a></li><li><a href="scroll.html">New arrivals</a></li><li><a href="awkward.html">Clearance</a></li><li><a href="shadow.html">Shop the look</a></li><li><a href="#">Gift cards</a></li></ul></div><div><h5>Help</h5><ul><li><a href="rates.html">Delivery rates</a></li><li><a href="iframe.html">Stock &amp; delivery</a></li><li><a href="reviews.html">Customer reviews</a></li><li><a href="returns.html">Returns log</a></li><li><a href="#">Contact</a></li></ul></div><div><h5>About</h5><ul><li><a href="#">Our makers</a></li><li><a href="stock.html">Warehouse stock</a></li><li><a href="feed.html">Product data</a></li><li><a href="#">Journal</a></li></ul></div></div><div class="fine"><span>&copy; 2026 Northwind Supply</span><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a><span class="sep">A fictional shop. Nothing here is for sale.</span></div></div></footer><script>
+/* The board is a pure function of the minute, so two people looking at
+   it in the same minute see the same thing and the difference between
+   one minute and the next is something you can check rather than take
+   on trust.
+
+   Most lines hold completely still. The first draft re-rolled every
+   row every minute, which does produce a diff -- a diff in which all
+   twenty rows changed, which demonstrates nothing. Three lines are
+   repriced, one sells out, one comes back, one drops off and the one
+   that dropped off last minute returns. Everything else is identical,
+   including the Updated column, which holds the minute that row last
+   moved rather than the current time -- a clock in every row would
+   make every row a change. */
+var POOL = [{"sku": "NW-1001", "name": "Cast Iron Mug Set, Oat", "url": "item1.html", "maker": "Fieldhouse", "base": 239.0}, {"sku": "NW-1002", "name": "Wool Skillet, Large", "url": "item2.html", "maker": "Aoyama Works", "base": 139.0}, {"sku": "NW-1003", "name": "Walnut Side Table, Large", "url": "item3.html", "maker": "Tessa Ruiz Studio", "base": 64.0}, {"sku": "NW-1004", "name": "Wool Bowl, Clay", "url": "item4.html", "maker": "Aoyama Works", "base": 55.0}, {"sku": "NW-1005", "name": "Slate Vase, Ink", "url": "item5.html", "maker": "Brock Forge", "base": 386.0}, {"sku": "NW-1006", "name": "Oak Jug, Small", "url": "item6.html", "maker": "Mirren Ceramics", "base": 426.0}, {"sku": "NW-1007", "name": "Stoneware Desk Lamp, Bone", "url": "item7.html", "maker": "Northwind Own", "base": 376.0}, {"sku": "NW-1008", "name": "Smoked Glass Coaster Set, Ecru", "url": "item8.html", "maker": "Northwind Own", "base": 259.0}, {"sku": "NW-1009", "name": "Oak Coaster Set, Ink", "url": "item9.html", "maker": "Fieldhouse", "base": 279.0}, {"sku": "NW-1010", "name": "Cedar Mirror, Ecru", "url": "item10.html", "maker": "Oakleaf Mill", "base": 401.0}, {"sku": "NW-1011", "name": "Oak Cutting Board, Ink", "url": "item11.html", "maker": "Tessa Ruiz Studio", "base": 57.0}, {"sku": "NW-1012", "name": "Enamel Bowl", "url": "item12.html", "maker": "Mirren Ceramics", "base": 235.0}, {"sku": "NW-1013", "name": "Walnut Pendant, Natural", "url": "item13.html", "maker": "Aoyama Works", "base": 107.0}, {"sku": "NW-1014", "name": "Cast Iron Cutting Board, Large", "url": "item14.html", "maker": "Tessa Ruiz Studio", "base": 399.0}, {"sku": "NW-1015", "name": "Smoked Glass Desk Lamp, Small", "url": "item15.html", "maker": "Northwind Own", "base": 391.0}, {"sku": "NW-1016", "name": "Ash Tray, Fern", "url": "item16.html", "maker": "Tessa Ruiz Studio", "base": 397.0}, {"sku": "NW-1017", "name": "Oak Cutting Board, Bone", "url": "item17.html", "maker": "Fieldhouse", "base": 381.0}, {"sku": "NW-1018", "name": "Jute Stool, Ecru", "url": "item18.html", "maker": "Brock Forge", "base": 216.0}, {"sku": "NW-1019", "name": "Marble Runner, Sage", "url": "item19.html", "maker": "Oakleaf Mill", "base": 295.0}, {"sku": "NW-1020", "name": "Walnut Planter, Natural", "url": "item20.html", "maker": "Hallam & Co.", "base": 416.0}, {"sku": "NW-1021", "name": "Copper Coaster Set, Rust", "url": "item21.html", "maker": "Brock Forge", "base": 255.0}, {"sku": "NW-1022", "name": "Smoked Glass Bookend, Fern", "url": "item22.html", "maker": "Aoyama Works", "base": 360.0}, {"sku": "NW-1023", "name": "Marble Cutting Board, Clay", "url": "item23.html", "maker": "Tessa Ruiz Studio", "base": 262.0}, {"sku": "NW-1024", "name": "Stoneware Kettle, Large", "url": "item24.html", "maker": "Northwind Own", "base": 213.0}, {"sku": "NW-1025", "name": "Cork Mirror, Oat", "url": "item25.html", "maker": "Brock Forge", "base": 58.0}, {"sku": "NW-1026", "name": "Copper Throw, Large", "url": "item26.html", "maker": "Mirren Ceramics", "base": 412.0}];
+var N = POOL.length;
+var STOCK = ["In stock", "In stock", "Low stock", "Made to order"];
+function mod(a, b) { return ((a % b) + b) % b; }
+function rng(seed) {                 // mulberry32
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+// Three lines are repriced each minute, rotating through the pool.
+function lastReprice(i, m) {
+  var best = -Infinity;
+  for (var d = 0; d < 3; d++) best = Math.max(best, m - mod(m - (i - d), N));
+  return best;
+}
+// A repriced line keeps its new price until its next turn, the way a
+// shop does -- not bouncing back a minute later.
+function priceAt(i, m) {
+  var at = lastReprice(i, m);
+  var r = rng(i * 7919 + at);
+  return Math.round(Math.max(4, POOL[i].base * (1 + (r() - 0.5) * 0.24)) * 100) / 100;
+}
+function rowAt(i, m) {
+  if (mod(m, N) === i) return null;                       // off the board
+  return { price: priceAt(i, m),
+           stock: mod(m * 11 + 3, N) === i ? "Sold out" : STOCK[i % STOCK.length] };
+}
+function lastMoved(i, m) {
+  var cur = rowAt(i, m);
+  for (var k = 1; k <= N; k++) {
+    var prev = rowAt(i, m - k);
+    if (!prev || prev.price !== cur.price || prev.stock !== cur.stock) return m - k + 1;
+  }
+  return m - N;
+}
+function boardFor(m) {
+  var rows = [];
+  for (var i = 0; i < N; i++) {
+    var r = rowAt(i, m);
+    if (!r) continue;
+    rows.push({ sku: POOL[i].sku, name: POOL[i].name, url: POOL[i].url,
+                maker: POOL[i].maker, price: r.price, stock: r.stock,
+                moved: lastMoved(i, m) });
+  }
+  return rows;
+}
+function hhmm(minute) {
+  var d = new Date(minute * 60000);
+  return String(d.getHours()).padStart(2, "0") + ":" +
+         String(d.getMinutes()).padStart(2, "0");
+}
+var shownMinute = null;
+function draw() {
+  var now = new Date();
+  var minute = Math.floor(now.getTime() / 60000);
+  document.getElementById("countdown").textContent = 60 - now.getSeconds();
+  if (minute === shownMinute) return;
+  shownMinute = minute;
+  var rows = boardFor(minute), prev = boardFor(minute - 1);
+  document.getElementById("stamp").textContent = hhmm(minute);
+  document.getElementById("stamp").setAttribute("datetime", now.toISOString());
+  var out = "";
+  for (var i = 0; i < rows.length; i++) {
+    var x = rows[i];
+    out += '<tr><td class="sku">' + x.sku + '</td>' +
+      '<td><a href="' + x.url + '">' + x.name + "</a></td>" +
+      "<td>" + x.maker + "</td>" +
+      '<td class="price">$' + x.price.toFixed(2) + "</td>" +
+      "<td>" + x.stock + "</td>" +
+      "<td>" + hhmm(x.moved) + "</td></tr>";
+  }
+  document.querySelector("#board tbody").innerHTML = out;
+  // Printed here so the extension's answer can be checked against the
+  // page rather than believed.
+  var was = {}; prev.forEach(function (p) { was[p.sku] = p; });
+  var now2 = {}; rows.forEach(function (p) { now2[p.sku] = p; });
+  var changed = 0, added = 0, gone = 0;
+  rows.forEach(function (p) {
+    var b = was[p.sku];
+    if (!b) { added++; return; }
+    if (b.price !== p.price || b.stock !== p.stock) changed++;
+  });
+  prev.forEach(function (p) { if (!now2[p.sku]) gone++; });
+  document.getElementById("movednote").textContent =
+    rows.length + " lines. Since the minute before: " + changed + " changed, " +
+    gone + " gone, " + added + " new — the rest are untouched.";
+}
+draw(); setInterval(draw, 1000);
+</script></body></html>

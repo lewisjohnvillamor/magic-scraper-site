@@ -40,11 +40,14 @@ TITLES = {
     "stock":     "ARIA data grid, no table &mdash; web scraping practice",
     "returns":   "Messy data to clean up &mdash; web scraping practice",
     "rates":     "Two tables on one page &mdash; web scraping practice",
+    "bulk":      "2,000 rows across 40 pages &mdash; web scraping practice",
+    "live":      "A page that changes every minute &mdash; web scraping practice",
 }
 
 # The catalogue's other five pages are noindex, so their titles are only ever
 # read in a tab. They still get to say which page they are.
 PAGED = {"page%d" % n: TITLES["catalogue"] + ", page %d" % n for n in range(2, 7)}
+PAGED.update({"bulk%d" % n: TITLES["bulk"] + ", page %d" % n for n in range(2, 41)})
 
 
 def plain(s):
