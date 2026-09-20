@@ -18,34 +18,51 @@ clone rebuilds both cuts without hunting for an asset.
 | Cut | Argument | Reveal |
 |---|---|---|
 | `cut1` → `brag.mp4` | copying by hand, then one click | the crawl finished |
-| `drill` → `brag-drill.mp4` | the field is never on the list | merged detail columns |
+| `drill` → `brag-drill.mp4` | the field is never on the list | the chain builder, ten levels |
 
-## The beat grid
+The drill cut's payoff is `chain-builder.png`, captured by
+`tools/shoot_chain.mjs` in the extension repo. It is the panel where the chain
+is *configured*, not the table it eventually produces -- which matters,
+because a cut arguing about depth should not resolve into a flat table. The
+ten rungs of the animated ladder land on the ten rungs of the real one.
 
-Both cuts sit on one grid, which is why they feel like a pair.
+## The beat grids
 
-The bed is *Happy Beats / Business Moves Vol. 1* by Sascha Ende (ende.app),
-**CC BY 4.0** — commercial use is explicitly permitted. The author says
-attribution is no longer required, but a waiver posted on a homepage is not a
-licence amendment and attribution is the licence's one term, so credit it
-wherever a cut is posted. The line is in `brag-output/share-copy.txt`.
+A grid each, so the two do not sound like one video cut twice. Both beds are
+by Sascha Ende (ende.app) under **CC BY 4.0**, which permits commercial use.
+The author says attribution is no longer required, but a waiver posted on a
+homepage is not a licence amendment and attribution is the licence's one term,
+so credit them wherever a cut is posted -- the lines are in
+`brag-output/share-copy.txt`.
 
-It runs at **120.19 BPM** with its beats starting at 3.02s. Trimming there puts
-every beat on a clean 0.50s multiple of video time, and the track's strong cue
-at 17.02s becomes **t=14.0s** — which is where both cuts reveal the product.
-The edits were built backwards from that.
+| Cut | Track | Tempo | Trim | Reveal |
+|---|---|---|---|---|
+| `cut1` | Business Moves Vol. 1 | 120.19 BPM | 3.02s | 14.00s, beat 28 |
+| `drill` | Business Moves Vol. 12 | 109.96 BPM | 8.74s | 14.19s, beat 26 |
 
-`build.sh` needs the source mp3 at `brag-output/.music-source.mp3` (or
-`MUSIC_SRC=`). It is not committed, because this repo is public and
-redistributing someone's track is a different act from using it.
+The trim is never arbitrary. Each track's beats start a little way in, so
+cutting there puts every beat on an exact multiple of video time -- and in
+both cases a **strong cue** then lands on the reveal: vol-1's at 17.02s
+becomes t=14.00, vol-12's at 22.93s becomes t=14.19. The edits were built
+backwards from that, which is why the product arrives on a beat rather than
+near one.
+
+Vol. 12 is the slower of the two on purpose. The drill cut is a descent, and
+its ten rungs fall one per beat at 0.546s; a 120 BPM pulse made the same
+ladder read as a chase.
+
+`build.sh` needs the source mp3s in `brag-output/` (`.music-source.mp3` and
+`.music-source-drill.mp3`). They are not committed, because this repo is
+public and redistributing someone's track is a different act from using it.
 
 ## Sound
 
 `make-sfx.sh` synthesises all six cues with ffmpeg — tick, thud, riser, land,
 tap, chime. Made rather than sourced for two reasons. Licensing: the SFX packs
 we looked at either stated no terms, or shipped one pre-rendered track welded
-to another block's timing. And fit: each cue is cut shorter than the 0.50s gap
-it sits in, so nothing smears into the next line.
+to another block's timing. And fit: every cue is shorter than the
+beat gap it sits in -- 0.50s on cut1, 0.546s on drill -- so nothing smears
+into the next line.
 
 ## What is not used, and why
 

@@ -36,22 +36,24 @@ fi
 
 [ -f "$OUT/sfx/tick.wav" ] || "$HERE/make-sfx.sh" "$OUT/sfx" >/dev/null
 
-# The music bed, trimmed onto the beat grid. vol-1 runs at 120.19 BPM and its
-# beats start at 3.02s, so trimming there puts every beat on a clean 0.50s
-# multiple of video time -- and the track's strong cue at 17.02s lands at
-# t=14.0s, which is where both cuts reveal the product.
-# CC BY 4.0, Sascha Ende / ende.app. Credit it wherever the video is posted.
-MUSIC_SRC="${MUSIC_SRC:-$OUT/.music-source.mp3}"
-if [ ! -f "$OUT/music.mp3" ]; then
-  if [ ! -f "$MUSIC_SRC" ]; then
-    echo "!! need the source track at $MUSIC_SRC" >&2
-    echo "   happy-beats-business-moves-vol-1-by-ende-dot-app.mp3 from ende.app (CC BY 4.0)" >&2
-    exit 1
+# The beds, trimmed onto each cut's grid. The trim is never arbitrary: each
+# track's beats start a little way in, so cutting there puts every beat on an
+# exact multiple of video time -- and a strong cue then lands on the reveal.
+#   cut1  vol-1  120.19 BPM  trim 3.02  cue 17.02 -> t=14.00
+#   drill vol-12 109.96 BPM  trim 8.74  cue 22.93 -> t=14.19
+# Both CC BY 4.0, Sascha Ende / ende.app. Credit them wherever a cut is posted.
+trim_music() {           # <source> <start> <length> <out>
+  local src="$1" start="$2" len="$3" dst="$4"
+  [ -f "$dst" ] && return 0
+  if [ ! -f "$src" ]; then
+    echo "!! need the source track at $src (ende.app, CC BY 4.0)" >&2; exit 1
   fi
-  ffmpeg -hide_banner -v error -y -ss 3.02 -i "$MUSIC_SRC" -t 20.5 \
-    -af "afade=t=in:st=0:d=0.4,afade=t=out:st=19.2:d=1.3" \
-    -c:a libmp3lame -q:a 3 "$OUT/music.mp3"
-fi
+  ffmpeg -hide_banner -v error -y -ss "$start" -i "$src" -t "$len" \
+    -af "afade=t=in:st=0:d=0.4,afade=t=out:st=$(awk -v l="$len" 'BEGIN{printf "%.3f", l-1.3}'):d=1.3" \
+    -c:a libmp3lame -q:a 3 "$dst"
+}
+trim_music "${MUSIC_SRC:-$OUT/.music-source.mp3}"             3.02 20.5  "$OUT/music.mp3"
+trim_music "${MUSIC_SRC_DRILL:-$OUT/.music-source-drill.mp3}" 8.74 20.74 "$OUT/music-drill.mp3"
 
 build_one() {
   local name="$1" src="$HERE/src/$1" proj="$OUT/$1" out="$2" poster_at="$3"
@@ -71,18 +73,18 @@ JSON
   printf '{ "id": "magic-scraper-%s", "name": "magic-scraper-%s" }\n' "$name" "$name" > "$proj/meta.json"
 
   cp "$SITE/assets/fonts/fraunces-var.woff2" "$SITE/assets/fonts/archivo-var.woff2" "$proj/assets/"
-  cp "$OUT/music.mp3" "$OUT/sfx/"*.wav "$proj/assets/"
+  cp "$OUT/music.mp3" "$OUT/music-drill.mp3" "$OUT/sfx/"*.wav "$proj/assets/"
 
   # GSAP vendored: a composition must make no network request at render time.
   [ -f "$OUT/gsap.min.js" ] || curl -sSfL -o "$OUT/gsap.min.js" \
     "https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"
   cp "$OUT/gsap.min.js" "$proj/assets/"
 
-  # Product frames come from the extension repo's store screenshots -- real
-  # captures of the real popup, rebuilt there by tools/make_store_shots.mjs.
-  for shot in cws-screenshot-2-crawl:s2-crawl cws-screenshot-3-drill:s3-drill; do
-    cp "$EXT/docs/store/${shot%%:*}.png" "$proj/assets/${shot##*:}.png"
-  done
+  # Real captures of the real popup, from the extension repo. The drill cut
+  # uses chain-builder.png -- the panel where the chain is configured, rebuilt
+  # there by tools/shoot_chain.mjs.
+  cp "$EXT/docs/store/cws-screenshot-2-crawl.png" "$proj/assets/s2-crawl.png"
+  cp "$EXT/docs/store/chain-builder.png" "$proj/assets/chain-builder.png"
 
   (cd "$proj" && "$HF" check)
   [ -n "${CHECK_ONLY:-}" ] && return 0
@@ -108,8 +110,8 @@ JSON
 
 case "${1:-all}" in
   cut1)  build_one cut1  "$OUT/brag.mp4"       15.4 ;;
-  drill) build_one drill "$OUT/brag-drill.mp4" 13.6 ;;
+  drill) build_one drill "$OUT/brag-drill.mp4" 15.6 ;;
   all)   build_one cut1  "$OUT/brag.mp4"       15.4
-         build_one drill "$OUT/brag-drill.mp4" 13.6 ;;
+         build_one drill "$OUT/brag-drill.mp4" 15.6 ;;
   *) echo "usage: $0 [cut1|drill|all]" >&2; exit 2 ;;
 esac
