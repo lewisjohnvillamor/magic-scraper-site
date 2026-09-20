@@ -7,3 +7,11 @@ node_modules
 # tools/record-bulk-plate.mjs and tools/record-promo.mjs; they are tens of MB
 # and the scripts that make them are the thing worth keeping.
 tools/tiktok/*.webm
+
+# A /brag run (github.com/latent-spaces/brag): a scaffolded Hyperframes project
+# plus its render. The composition is small but its assets are not -- copies of
+# the four store screenshots, the fonts, a vendored GSAP, snapshot frames and a
+# 4.5MB MP4, all regenerable with `hyperframes render` inside it. A finished
+# video that the site actually uses belongs in assets/ alongside the other
+# three, deliberately placed rather than swept in by a directory add.
+brag-output/
