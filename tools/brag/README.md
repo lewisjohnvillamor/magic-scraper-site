@@ -19,7 +19,7 @@ clone rebuilds both cuts without hunting for an asset.
 |---|---|---|---|
 | `cut1` → `brag.mp4` | 20.5s | copying by hand, then one click | the crawl finished |
 | `drill` → `brag-drill.mp4` | 20.7s | the field is never on the list | the chain builder, ten levels |
-| `long` → `brag-long.mp4` | 35.8s | all three, in sequence | crawl, then chain, then Changes |
+| `long` → `brag-long.mp4` | 44.2s | all three, then what each costs | crawl, chain, Changes, free/Pro |
 
 **20 seconds is not a limit.** It is the `/brag` skill's house rule (15-25s)
 and nothing technical -- Hyperframes renders any length. The real constraint is
@@ -49,6 +49,9 @@ so credit them wherever a cut is posted -- the lines are in
 | `drill` | Business Moves Vol. 12 | 109.96 BPM | 8.74s | 14.19 |
 | `long` | Business Moves Vol. 11 | 114.84 BPM | 1.60s | 9.998, 17.893, 25.788 |
 
+The long cut runs to 44.2s: its free/Pro card lands on the 30.525 cue and the
+outro on 38.42.
+
 The long cut is timed against the track's **detected beat array**, not an
 idealised period. The two short cuts could use `n x beat` because their single
 reveal happened to fall on one; across 35s the drift makes that wrong, and no
@@ -70,6 +73,35 @@ ladder read as a chase.
 `.music-source-drill.mp3` and `.music-source-long.mp3`. They are not
 committed, because this repo is public and redistributing someone's track is a
 different act from using it.
+
+## The free/Pro boundary
+
+Two of the long cut's three payoffs -- the ten-level chain and the Changes tab
+-- are **Pro**. Showing them without saying so is how a free install turns
+into a refund, so each carries the product's own Pro chip (popup.css
+`--accent` #17703f on `--accent-soft` #eef9f2, `#bfe0cd` border -- not an
+invented badge), arriving half a second after the product so the feature reads
+first and its price second. A free/Pro card then closes the cut.
+
+Every line on it is written against the build, because this boundary has been
+got wrong in four separate places:
+
+| Free | Pro |
+|---|---|
+| Detect, pick and export | Drill-down on **every** row |
+| Crawl every page, no cap | Saved setups you can reuse |
+| Get a dead run's rows back | Compare a run with the last |
+| Drill-down on the first **3 rows** | Run a setup on a schedule |
+
+`maxPages: 0` means Infinity and nothing in the crawl path checks `plan.pro`;
+recovery has been free since 1.20.14; and `FREE_ROWS = 3` is a cap on **rows**
+-- never on levels, chains, pages or depth. There are exactly four `plan.pro`
+gates in the popup and all four are in the right column.
+
+**Free goes first, and complete.** Lead with the paid list and the free tier
+reads as a teaser for it, which is the opposite of true and is exactly the
+mistake that had the Gumroad page selling a 3-page crawl cap that does not
+exist.
 
 ## Sound
 

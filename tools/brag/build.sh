@@ -54,7 +54,7 @@ trim_music() {           # <source> <start> <length> <out>
 }
 trim_music "${MUSIC_SRC:-$OUT/.music-source.mp3}"             3.02 20.5  "$OUT/music.mp3"
 trim_music "${MUSIC_SRC_DRILL:-$OUT/.music-source-drill.mp3}" 8.74 20.74 "$OUT/music-drill.mp3"
-trim_music "${MUSIC_SRC_LONG:-$OUT/.music-source-long.mp3}"   1.60 35.8  "$OUT/music-long.mp3"
+trim_music "${MUSIC_SRC_LONG:-$OUT/.music-source-long.mp3}"   1.60 44.2  "$OUT/music-long.mp3"
 
 build_one() {
   local name="$1" src="$HERE/src/$1" proj="$OUT/$1" out="$2" poster_at="$3"
@@ -124,9 +124,9 @@ JSON
 case "${1:-all}" in
   cut1)  build_one cut1  "$OUT/brag.mp4"       15.4 ;;
   drill) build_one drill "$OUT/brag-drill.mp4" 15.6 ;;
-  long)  build_one long  "$OUT/brag-long.mp4"  19.5 ;;
+  long)  build_one long  "$OUT/brag-long.mp4"  19.0 ;;
   all)   build_one cut1  "$OUT/brag.mp4"       15.4
          build_one drill "$OUT/brag-drill.mp4" 15.6
-         build_one long  "$OUT/brag-long.mp4"  19.5 ;;
+         build_one long  "$OUT/brag-long.mp4"  19.0 ;;
   *) echo "usage: $0 [cut1|drill|long|all]" >&2; exit 2 ;;
 esac

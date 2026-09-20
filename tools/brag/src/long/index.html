@@ -25,22 +25,22 @@
          trimmed at its 1.60s accent. Every line sits on a beat taken from the
          track's own analysis, and the three reveals land on real strong cues
          at 9.998, 17.893 and 25.788, with the end card on 30.525. -->
-    <div id="root" data-composition-id="main" data-start="0" data-duration="35.8"
+    <div id="root" data-composition-id="main" data-start="0" data-duration="44.2"
          data-width="1080" data-height="1920">
 
-      <div id="bg" class="clip" data-start="0" data-duration="35.8" data-track-index="0">
+      <div id="bg" class="clip" data-start="0" data-duration="44.2" data-track-index="0">
         <img src="assets/backdrop.png" alt="" />
       </div>
-      <div id="scrim" class="clip" data-start="0" data-duration="35.8" data-track-index="1"></div>
-      <div id="grain" class="clip" data-start="0" data-duration="35.8" data-track-index="2"></div>
+      <div id="scrim" class="clip" data-start="0" data-duration="44.2" data-track-index="1"></div>
+      <div id="grain" class="clip" data-start="0" data-duration="44.2" data-track-index="2"></div>
 
       <div id="act-story" class="clip act" data-composition-id="story"
-           data-start="0" data-duration="35.8" data-track-index="3"
+           data-start="0" data-duration="44.2" data-track-index="3"
            data-composition-src="compositions/story.html"></div>
 
-      <div id="flash" class="clip" data-start="0" data-duration="35.8" data-track-index="4"></div>
+      <div id="flash" class="clip" data-start="0" data-duration="44.2" data-track-index="4"></div>
 
-      <audio id="bed" src="assets/music-long.mp3" data-start="0" data-duration="35.8"
+      <audio id="bed" src="assets/music-long.mp3" data-start="0" data-duration="44.2"
              data-volume="0.62" data-track-index="5"></audio>
 
       <audio id="sfx-tick-01" src="assets/tick.wav" data-start="0.002" data-duration="0.06" data-volume="0.42" data-track-index="3"></audio>
@@ -64,7 +64,9 @@
       <audio id="sfx-land-2"  src="assets/land.wav"  data-start="17.893" data-duration="0.5" data-volume="0.78" data-track-index="21"></audio>
       <audio id="sfx-riser-3" src="assets/riser.wav" data-start="24.89" data-duration="0.9" data-volume="0.5" data-track-index="22"></audio>
       <audio id="sfx-land-3"  src="assets/land.wav"  data-start="25.788" data-duration="0.5" data-volume="0.78" data-track-index="23"></audio>
-      <audio id="sfx-chime" src="assets/chime.wav" data-start="30.58" data-duration="1.2" data-volume="0.5" data-track-index="24"></audio>
+      <audio id="sfx-land-4"  src="assets/land.wav"  data-start="30.525" data-duration="0.5" data-volume="0.62" data-track-index="26"></audio>
+      <audio id="sfx-tick-15" src="assets/tick.wav"  data-start="33.16"  data-duration="0.06" data-volume="0.4" data-track-index="27"></audio>
+      <audio id="sfx-chime" src="assets/chime.wav" data-start="38.47" data-duration="1.2" data-volume="0.5" data-track-index="24"></audio>
     </div>
 
     <script>
@@ -72,10 +74,10 @@
       const root = gsap.timeline({ paused: true });
 
       // A slow crawl down the page for the whole cut. Linear on purpose.
-      root.fromTo('#bg img', { y: 0 }, { y: -1080, duration: 35.8, ease: 'none' }, 0);
+      root.fromTo('#bg img', { y: 0 }, { y: -1080, duration: 44.2, ease: 'none' }, 0);
 
       // A flash on each payoff and on the outro.
-      [9.998, 17.893, 25.788, 30.525].forEach(function (at) {
+      [9.998, 17.893, 25.788, 30.525, 38.42].forEach(function (at) {
         root.to('#flash', { opacity: 0.85, duration: 0.07, ease: 'power2.out' }, at - 0.07);
         root.to('#flash', { opacity: 0, duration: 0.34, ease: 'power2.in' }, at);
       });

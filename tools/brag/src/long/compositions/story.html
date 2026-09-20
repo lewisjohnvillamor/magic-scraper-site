@@ -41,6 +41,47 @@
       .shot.panel { top:486px; width:874px; height:912px; }
       .shot.panel img { position:absolute; width:874px; height:1759px; left:0; top:-390px; }
 
+      /* The product's own Pro chip, not an invented badge: popup.css uses
+         --accent #17703f on --accent-soft #eef9f2 with a #bfe0cd border. Two
+         of the three payoffs are Pro features and the video has to say so in
+         the moment, not only in a summary at the end. */
+      .pro-tag {
+        position:absolute; left:0; right:0; top:352px; text-align:center;
+      }
+      .pro-tag span {
+        font-family:'Archivo', system-ui, sans-serif; font-weight:600;
+        font-size:34px; letter-spacing:.14em; text-transform:uppercase;
+        color:#17703f; background:#eef9f2; border:2px solid #bfe0cd;
+        border-radius:999px; padding:12px 30px;
+      }
+
+      /* The free/Pro split. Earning the extra ten seconds: a viewer who has
+         just watched two paid features needs to know which is which before
+         they install, not after they have paid. */
+      /* Optically centred for the full two-block height (~920px), so the
+         finished card sits in the frame rather than riding the top edge.
+         The free list alone therefore starts high and the block fills down,
+         which is the build. */
+      #plans { position:absolute; inset:0; padding:430px 88px 0; }
+      .plan { margin-bottom:56px; }
+      .plan h3 {
+        font-family:'Archivo', system-ui, sans-serif; font-weight:700;
+        font-size:34px; letter-spacing:.16em; text-transform:uppercase;
+        margin-bottom:26px;
+      }
+      .plan.free h3 { color:#5d574a; }
+      .plan.pro h3  { color:#17703f; }
+      .plan li {
+        list-style:none; font-family:'Fraunces'; font-weight:600;
+        font-size:62px; line-height:1.28; letter-spacing:-1.1px; color:#17150f;
+      }
+      .plan.pro li { color:#17150f; }
+      .plan .note {
+        font-family:'Archivo', system-ui, sans-serif; font-size:32px;
+        color:#5d574a; margin-top:20px;
+      }
+      .rule { height:2px; background:#e0dbd0; margin:0 0 52px; }
+
       #end { position:absolute; inset:0; background:#faf8f4;
              display:flex; flex-direction:column; align-items:center; justify-content:center; }
       .mark { width:148px; height:148px; border-radius:34px; background:#4b3bd0;
@@ -57,7 +98,7 @@
          9.998, 17.893 and 25.788, with the end card on 30.525. The beats are
          taken from the track's own analysis rather than an idealised period,
          because the detected grid is not perfectly uniform. -->
-    <div id="story" data-composition-id="story" data-start="0" data-duration="35.8"
+    <div id="story" data-composition-id="story" data-start="0" data-duration="44.2"
          data-width="1080" data-height="1920">
 
       <!-- Act A: the problem -->
@@ -83,6 +124,7 @@
 
       <!-- Payoff 2 -->
       <div id="c2" class="cap clip"      data-start="17.893" data-duration="3.158" data-track-index="15">Ten levels.<br /><em>One setup.</em></div>
+      <div id="t2" class="pro-tag clip" data-start="17.893" data-duration="3.158" data-track-index="22"><span>Pro</span></div>
       <div id="s2" class="shot panel clip" data-start="17.893" data-duration="3.158" data-track-index="16"><img src="assets/chain-builder.png" alt="" /></div>
 
       <!-- Act C: change -->
@@ -91,9 +133,37 @@
 
       <!-- Payoff 3 -->
       <div id="c3" class="cap clip"          data-start="25.788" data-duration="4.737" data-track-index="19">The old price,<br /><em>struck through.</em></div>
+      <div id="t3" class="pro-tag clip" data-start="25.788" data-duration="4.737" data-track-index="23"><span>Pro</span></div>
       <div id="s3" class="shot composite clip" data-start="25.788" data-duration="4.737" data-track-index="20"><img src="assets/s4-changes.png" alt="" /></div>
 
-      <div id="end" class="clip" data-start="30.525" data-duration="5.275" data-track-index="21">
+      <!-- Free / Pro. Written against the build, because this boundary has
+           been got wrong repeatedly: crawling is uncapped on free, recovery is
+           free since 1.20.14, and the free drill-down limit is 3 ROWS -- never
+           a cap on levels, chains, pages or depth. -->
+      <div id="plans" class="clip" data-start="30.525" data-duration="7.895" data-track-index="21">
+        <div class="plan free">
+          <h3>Free, no time limit</h3>
+          <ul>
+            <li>Detect, pick and export</li>
+            <li>Crawl every page &mdash; no cap</li>
+            <li>Get a dead run&rsquo;s rows back</li>
+            <li>Drill-down on the first 3 rows</li>
+          </ul>
+        </div>
+        <div class="rule"></div>
+        <div class="plan pro">
+          <h3>Pro &mdash; one payment</h3>
+          <ul>
+            <li>Drill-down on <em>every</em> row</li>
+            <li>Saved setups you can reuse</li>
+            <li>Compare a run with the last</li>
+            <li>Run a setup on a schedule</li>
+          </ul>
+          <div class="note">No subscription. No account. Works on every browser you use.</div>
+        </div>
+      </div>
+
+      <div id="end" class="clip" data-start="38.42" data-duration="5.78" data-track-index="24">
         <div class="mark">
           <svg viewBox="0 0 24 24" width="72" height="72" fill="none" stroke="#faf8f4"
                stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -138,14 +208,36 @@
         tl.to(shot, { scale: 1.02, duration: hold - 0.8, ease: 'none' }, at + 0.73);
       });
 
-      tl.fromTo('#end', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 30.525);
+      // The chip arrives a beat after the product, so the feature reads first
+      // and the price of it second.
+      [['#t2', 17.893], ['#t3', 25.788]].forEach(function (p) {
+        tl.fromTo(p[0], { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, p[1] + 0.5);
+      });
+
+      // Free first and complete, then Pro. Put the paid list first and the
+      // free tier reads as a teaser for it, which is the opposite of true.
+      tl.fromTo('#plans .free h3', { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }, 30.525);
+      tl.fromTo('#plans .free li', { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.34, stagger: 0.26, ease: 'power3.out' }, 30.7);
+      tl.fromTo('#plans .rule', { scaleX: 0 },
+        { scaleX: 1, duration: 0.4, ease: 'power2.out' }, 33.16);
+      tl.fromTo('#plans .pro h3', { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }, 33.4);
+      tl.fromTo('#plans .pro li', { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.34, stagger: 0.26, ease: 'power3.out' }, 33.6);
+      tl.fromTo('#plans .note', { opacity: 0 },
+        { opacity: 1, duration: 0.4, ease: 'power2.out' }, 35.3);
+
+      tl.fromTo('#end', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 38.42);
       tl.fromTo('#end .mark', { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.8)' }, 30.58);
+        { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.8)' }, 38.47);
       tl.fromTo('#end .wordmark', { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 30.73);
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 38.62);
       tl.fromTo('#end .claims span', { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 30.93);
-      tl.fromTo('#end .url', { opacity: 0 }, { opacity: 1, duration: 0.45 }, 31.4);
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 38.82);
+      tl.fromTo('#end .url', { opacity: 0 }, { opacity: 1, duration: 0.45 }, 39.3);
 
       window.__timelines['story'] = tl;
       tl.seek(0);
