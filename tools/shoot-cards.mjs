@@ -5,7 +5,7 @@ const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-119
 // claiming "three levels deep" over footage of a one-level drill.
 const C = new URL('cards/', import.meta.url).pathname;
 const S = '/tmp/claude-0/-home-user/11d9748f-98a9-5e1b-bd66-b55a5ed28106/scratchpad/';
-for (const [f, alpha] of [['card_title',0], ['card_end',0], ['cap1',1], ['cap2',1], ['cap3',1], ['cap4',1]]) {
+for (const [f, alpha] of [['card_title',0], ['card_end',0], ['cap1',1], ['cap2',1], ['cap3',1], ['cap4',1], ['cap5',1]]) {
   const p = await b.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
   await p.goto('file://' + C + f + '.html', { waitUntil: 'load' });
   await p.waitForTimeout(600);

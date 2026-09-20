@@ -40,7 +40,11 @@ const tab = await sw.evaluate(async () => (await chrome.tabs.query({}))
 const pop = await ctx.newPage();
 await sw.evaluate((id) => chrome.tabs.update(id, { active: true }), tab);
 await pop.goto(`chrome-extension://${extId}/popup.html`, { waitUntil: 'load' });
-await pop.addStyleTag({ content: `
+/* Re-applied after every reload. addStyleTag does not survive one, and a
+   reload part-way through cost the last nine seconds of the video its
+   backdrop and its scale -- the popup rendered plain in the top-left corner
+   on white, under a caption about the feature it was supposed to be showing. */
+const STAGE = `
   html { background:#0e0d14; }
   html::before { content:""; position:fixed; inset:0; z-index:-2;
     background-image:url("data:image/png;base64,${shot}");
@@ -56,7 +60,9 @@ await pop.addStyleTag({ content: `
          transform:translateY(-50%) scale(1.42); transform-origin:right center;
          border-radius:14px; overflow:hidden;
          box-shadow:0 50px 110px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.12); }
-` });
+`;
+const dress = () => pop.addStyleTag({ content: STAGE });
+await dress();
 
 const mark = {};
 const beat = (n) => { mark[n] = Date.now() - t0; console.log(n, '@', (mark[n]/1000).toFixed(2) + 's'); };
@@ -124,6 +130,119 @@ await pop.waitForTimeout(2600); beat('scrolled');
 
 await pop.click('#exportCsv');
 await pop.waitForTimeout(2200); beat('exported');
+
+/* ---- and what changed since last time ----
+ *
+ * A real comparison rather than a mocked one. Page one on its own, not the
+ * 54-row crawl: two six-page crawls would add forty seconds of counter to a
+ * forty-second video, and the feature is the same either way. Everything here
+ * is a message the popup itself sends -- reset, detect, keep -- so what ends
+ * up on camera is the extension diffing two readings it genuinely took.
+ */
+const reset = await pop.evaluate(async () => {
+  const [t] = await chrome.tabs.query({ active: true, currentWindow: true });
+  await new Promise((r) => chrome.tabs.sendMessage(t.id, { type: 'MDS_RESET' }, r));
+  await new Promise((r) => chrome.tabs.sendMessage(t.id, { type: 'MDS_DETECT' }, r));
+  return new Promise((r) => chrome.tabs.sendMessage(t.id, { type: 'MDS_SNAPSHOT_SAVE' }, r));
+});
+console.log('  kept page one:', JSON.stringify(reset).slice(0, 80));
+await pop.reload({ waitUntil: 'load' }); await dress();
+await pop.waitForTimeout(1800); beat('keptFirst');
+
+// the shop moves on, in the page that is on camera behind the popup
+const moved = await site.evaluate(() => {
+  const cards = [...document.querySelectorAll('article.product')];
+  const out = { repriced: 0, soldOut: 0, removed: 0, added: 0 };
+  cards.slice(1, 4).forEach((c) => {
+    const p = c.querySelector('.price');
+    if (!p) return;
+    p.textContent = p.textContent.replace(/([\d.]+)/, (m0) => (Number(m0) + 15).toFixed(2));
+    out.repriced++;
+  });
+  cards.slice(4, 6).forEach((c) => {
+    const st = c.querySelector('.stock');
+    if (st) { st.textContent = 'Sold out'; out.soldOut++; }
+  });
+  if (cards[7]) { cards[7].remove(); out.removed++; }
+  if (cards[0]) {
+    const clone = cards[0].cloneNode(true);
+    const sku = clone.querySelector('.sku');
+    const name = clone.querySelector('h3 a') || clone.querySelector('h3');
+    if (sku) sku.textContent = 'NW-1042';
+    if (name) name.textContent = 'Ash Serving Board, Small';
+    cards[0].parentNode.insertBefore(clone, cards[0]);
+    out.added++;
+  }
+  return out;
+});
+console.log('  the shop moved on:', JSON.stringify(moved));
+await pop.evaluate(async () => {
+  const [t] = await chrome.tabs.query({ active: true, currentWindow: true });
+  return new Promise((r) => chrome.tabs.sendMessage(t.id, { type: 'MDS_DETECT' }, r));
+});
+await pop.reload({ waitUntil: 'load' }); await dress();
+await pop.waitForTimeout(2200);
+await pop.click('.tab[data-tab="diff"]');
+await pop.waitForTimeout(1100); beat('changesUp');
+const diff = await pop.evaluate(() => ({
+  ready: !document.getElementById('diffReady').hidden,
+  summary: document.getElementById('diffText').textContent.replace(/\s+/g, ' ').trim(),
+  rows: document.querySelectorAll('#diffWrap tbody tr').length,
+}));
+console.log('  changes:', JSON.stringify(diff).slice(0, 160));
+if (!diff.ready || !diff.rows) throw new Error('no comparison to film: ' + JSON.stringify(diff));
+// slide across to the cells that moved. getBoundingClientRect reports
+// transformed pixels and the stage scales the popup by 1.42, while
+// scrollLeft is untransformed -- so every correction measured off a rect has
+// to be divided back down or it overshoots by 42%. That is why three passes
+// of the same snap that works in the screenshot tool never converged here.
+await pop.evaluate(() => {
+  const wrap = document.getElementById('diffWrap');
+  const cell = wrap.querySelector('td.moved');
+  if (!cell) return;
+  const ths = [...wrap.querySelectorAll('thead th')];
+  const i = Math.max(1, cell.cellIndex - 1);
+  const scale = wrap.getBoundingClientRect().width / wrap.offsetWidth || 1;
+  const target = wrap.scrollLeft +
+    (ths[i].getBoundingClientRect().left - ths[0].getBoundingClientRect().right) / scale;
+  let x = wrap.scrollLeft;
+  const id = setInterval(() => {
+    x = Math.min(x + 26, target);
+    wrap.scrollLeft = x;
+    if (x >= target) clearInterval(id);
+  }, 24);
+});
+await pop.waitForTimeout(1600);
+// ...then settle exactly on a column edge, in a call of its own once the
+// animation has stopped.
+const landed = await pop.evaluate(() => {
+  const wrap = document.getElementById('diffWrap');
+  const ths = [...wrap.querySelectorAll('thead th')];
+  const cell = wrap.querySelector('td.moved');
+  const i = Math.max(1, cell.cellIndex - 1);
+  const scale = wrap.getBoundingClientRect().width / wrap.offsetWidth || 1;
+  const gap = () => (ths[i].getBoundingClientRect().left - ths[0].getBoundingClientRect().right) / scale;
+  const before = gap();
+  const steps = [];
+  for (let p = 0; p < 6; p++) {
+    wrap.scrollLeft += gap();
+    steps.push(Math.round(gap() * 10) / 10);
+  }
+  return { startsAt: ths[i].textContent.trim(), i, cellIndex: cell.cellIndex,
+           scale: Math.round(scale * 100) / 100,
+           before: Math.round(before), steps,
+           scrollLeft: Math.round(wrap.scrollLeft),
+           maxScroll: Math.round(wrap.scrollWidth - wrap.clientWidth),
+           residual: Math.round(gap() * 10) / 10 };
+});
+console.log('  settled on:', JSON.stringify(landed));
+// The column it aimed at has to actually be at the sticky column's edge.
+// Checking only for a straddling cell passed happily while the scroll sat a
+// whole column short, leaving the tail of the one before on camera.
+if (Math.abs(landed.residual) > 2) {
+  throw new Error('the scroll did not land on a column edge: ' + JSON.stringify(landed));
+}
+await pop.waitForTimeout(4200); beat('changed');
 
 const path = await pop.video().path();
 await ctx.close();

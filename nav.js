@@ -67,7 +67,12 @@
     a.className = 'vtoggle';
     a.href = v.currentSrc || v.getAttribute('src');
     a.setAttribute('download', '');
-    a.textContent = 'Download the demo (36s)';
+    // Read the length off the caption rather than repeating it: a literal here
+    // went on saying 36s after the cut grew to 46, in the one place a visitor
+    // who cannot play the video is looking.
+    var len = (document.querySelector('.caption b') || {}).textContent || '';
+    a.textContent = 'Download the demo' + (/^\d?\d:\d\d$/.test(len.trim())
+      ? ' (' + String(Number(len.trim().split(':')[1])) + 's)' : '');
     btn.parentNode.replaceChild(a, btn);
     var cap = document.querySelector('.caption span');
     if (cap) {
