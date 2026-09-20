@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family:'Fraunces'; src:url('assets/fraunces-var.woff2') format('woff2-variations');
+                   font-weight:100 900; font-display:block; }
+      @font-face { font-family:'Archivo'; src:url('assets/archivo-var.woff2') format('woff2-variations');
+                   font-weight:100 900; font-display:block; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:#faf8f4; }
+      #descent {
+        width:100%; height:100%; position:relative;
+        font-family:'Archivo', system-ui, sans-serif; color:#17150f;
+      }
+
+      #dhead {
+        position:absolute; left:0; right:0; top:150px; text-align:center;
+        font-family:'Fraunces'; font-weight:600; font-size:88px; letter-spacing:-1.8px;
+      }
+      #dhead em { font-style:normal; color:#4b3bd0; }
+
+      /* The ladder. Each level indents further, so the shape of the frame is
+         the argument -- you can see the depth before you read a word of it. */
+      .lvl {
+        position:absolute; left:110px; width:880px; height:96px;
+        display:flex; align-items:center; gap:26px;
+      }
+      .lvl .n {
+        font-family:ui-monospace, monospace; font-size:26px; color:#b4491f;
+        width:44px; flex:0 0 44px;
+      }
+      .lvl .name {
+        font-family:'Fraunces'; font-weight:600;
+        font-size:62px; letter-spacing:-1px; white-space:nowrap;
+      }
+      /* The rail each new level hangs off. */
+      .lvl .tick {
+        width:16px; height:2px; background:#c9c3b6; flex:0 0 16px;
+      }
+      /* The chain, drawn as elbows that follow the indent. A straight rule
+         stopped touching the rungs by level three and read as a margin. */
+      #rail { position:absolute; left:0; top:0; width:1080px; height:1920px; }
+      #rail path { fill:none; stroke:#d8d2c5; stroke-width:2.5;
+                   stroke-linejoin:round; stroke-linecap:round; }
+    </style>
+  </head>
+  <body>
+    <div id="descent" data-composition-id="descent" data-start="0" data-duration="8"
+         data-width="1080" data-height="1920">
+
+      <div id="dhead" class="clip" data-start="0" data-duration="8" data-track-index="0">
+        It keeps <em>going</em>.
+      </div>
+
+      <svg id="rail" class="clip" data-start="0" data-duration="8" data-track-index="1" viewBox="0 0 1080 1920"><path id="railpath" d="" /></svg>
+
+      <!-- The real chain behind /demo/catalogue, in order. A row costs ten
+           page loads, which is why the sandbox has it: so the claim can be
+           walked rather than believed. -->
+      <div id="lv-01" class="lvl clip" data-start="0"    data-duration="8"    data-track-index="2"><span class="n">01</span><span class="tick"></span><span class="name">Product</span></div>
+      <div id="lv-02" class="lvl clip" data-start="0.62" data-duration="7.38" data-track-index="3"><span class="n">02</span><span class="tick"></span><span class="name">Maker</span></div>
+      <div id="lv-03" class="lvl clip" data-start="1.24" data-duration="6.76" data-track-index="4"><span class="n">03</span><span class="tick"></span><span class="name">Sourcing</span></div>
+      <div id="lv-04" class="lvl clip" data-start="1.86" data-duration="6.14" data-track-index="5"><span class="n">04</span><span class="tick"></span><span class="name">Material lot</span></div>
+      <div id="lv-05" class="lvl clip" data-start="2.48" data-duration="5.52" data-track-index="6"><span class="n">05</span><span class="tick"></span><span class="name">Supplier</span></div>
+      <div id="lv-06" class="lvl clip" data-start="3.10" data-duration="4.90" data-track-index="7"><span class="n">06</span><span class="tick"></span><span class="name">Origin site</span></div>
+      <div id="lv-07" class="lvl clip" data-start="3.72" data-duration="4.28" data-track-index="8"><span class="n">07</span><span class="tick"></span><span class="name">Certificate</span></div>
+      <div id="lv-08" class="lvl clip" data-start="4.34" data-duration="3.66" data-track-index="9"><span class="n">08</span><span class="tick"></span><span class="name">Certifying body</span></div>
+      <div id="lv-09" class="lvl clip" data-start="4.96" data-duration="3.04" data-track-index="10"><span class="n">09</span><span class="tick"></span><span class="name">Audit report</span></div>
+      <div id="lv-10" class="lvl clip" data-start="5.58" data-duration="2.42" data-track-index="11"><span class="n">10</span><span class="tick"></span><span class="name">Standard</span></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const TOP = 430;      // first rung
+      const STEP = 104;     // vertical gap
+      const INDENT = 26;    // horizontal drift per level
+      const levels = Array.from(document.querySelectorAll('.lvl'));
+
+      // Lay the rungs out statically; the timeline only reveals them.
+      levels.forEach(function (el, i) {
+        el.style.top = (TOP + i * STEP) + 'px';
+        el.style.paddingLeft = (i * INDENT) + 'px';
+      });
+
+      tl.fromTo('#dhead', { opacity: 0, y: 26 },
+        { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }, 0);
+
+      // Elbow down-then-right between consecutive rungs, so the line lands on
+      // each name instead of drifting away from the indent.
+      const X0 = 90, MID = 48;   // left of the digits (which start at 110), not through them
+      let d = '';
+      levels.forEach(function (el, i) {
+        const x = X0 + i * INDENT, y = TOP + i * STEP + MID;
+        if (i === 0) { d += 'M' + x + ',' + y; }
+        else { d += ' L' + (X0 + (i - 1) * INDENT) + ',' + y + ' L' + x + ',' + y; }
+      });
+      const path = document.getElementById('railpath');
+      path.setAttribute('d', d);
+      const len = path.getTotalLength();
+      gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
+      // Drawn in step with the rungs: the line arrives just before each name.
+      tl.to(path, { strokeDashoffset: 0, duration: 5.58 + 0.26, ease: 'none' }, 0);
+
+      levels.forEach(function (el, i) {
+        const at = parseFloat(el.dataset.start);
+        tl.fromTo(el, { opacity: 0, x: -34 },
+          { opacity: 1, x: 0, duration: 0.26, ease: 'power3.out' }, at);
+        // Recede as the next one lands, so the newest rung is always the
+        // brightest and the stack reads as distance rather than a list.
+        if (i < levels.length - 1) {
+          tl.to(el, { opacity: 0.34, duration: 0.3, ease: 'power1.out' }, at + 0.62);
+        }
+      });
+
+      window.__timelines['descent'] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: 'Fraunces';
+        src: url('assets/fraunces-var.woff2') format('woff2-variations');
+        font-weight: 100 900; font-display: block;
+      }
+      @font-face {
+        font-family: 'Archivo';
+        src: url('assets/archivo-var.woff2') format('woff2-variations');
+        font-weight: 100 900; font-display: block;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #faf8f4; }
+
+      #kin { width: 100%; height: 100%; position: relative; }
+
+      /* Every line occupies the same box, dead centre. Nothing moves between
+         lines except the words themselves -- the cut does the work. */
+      .ln {
+        position: absolute; inset: 0;
+        /* One inner .t span, not bare text nodes: a flex container turns every
+           inline child into its own anonymous item and drops the whitespace
+           between them, which silently ate the space in "Every row". */
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Fraunces'; font-weight: 600;
+        font-size: 148px; line-height: 1.0; letter-spacing: -3px;
+        text-align: center; color: #17150f;
+        padding: 0 90px;
+      }
+      .ln .t { display: block; }
+      .ln.sm { font-size: 112px; letter-spacing: -2px; }
+      .ln em { font-style: normal; color: #4b3bd0; }
+
+      /* The four "Copying." beats: same word, drifting down the frame and
+         fading, so the repetition reads as tedium rather than a stutter. */
+      .ln.grind { color: #8a8375; font-size: 104px; letter-spacing: -1px; }
+
+      .ln.stop { color: #b4491f; font-size: 190px; letter-spacing: -5px; }
+    </style>
+  </head>
+  <body>
+    <div id="kin" data-composition-id="kinetic" data-start="0" data-duration="14"
+         data-width="1080" data-height="1920">
+
+      <div id="ln-01" class="ln clip"       data-start="0"     data-duration="1"    data-track-index="0"><span class="t">A list.</span></div>
+      <div id="ln-02" class="ln clip"       data-start="1"     data-duration="1"    data-track-index="1"><span class="t">On a page.</span></div>
+      <div id="ln-03" class="ln sm clip"    data-start="2"     data-duration="1"    data-track-index="2"><span class="t">You need it in a<br />spreadsheet.</span></div>
+      <div id="ln-04" class="ln sm clip"    data-start="3"     data-duration="1"    data-track-index="3"><span class="t">So you start<br />copying.</span></div>
+
+      <div id="ln-05" class="ln grind clip" data-start="4"     data-duration="0.5"  data-track-index="4"><span class="t">Copying.</span></div>
+      <div id="ln-06" class="ln grind clip" data-start="4.5"   data-duration="0.5"  data-track-index="5"><span class="t">Copying.</span></div>
+      <div id="ln-07" class="ln grind clip" data-start="5"     data-duration="0.5"  data-track-index="6"><span class="t">Copying.</span></div>
+      <div id="ln-08" class="ln grind clip" data-start="5.5"   data-duration="0.5"  data-track-index="7"><span class="t">Copying.</span></div>
+      <div id="ln-09" class="ln grind clip" data-start="6"     data-duration="0.5"  data-track-index="8"><span class="t">Copying.</span></div>
+      <div id="ln-10" class="ln grind clip" data-start="6.5"   data-duration="0.5"  data-track-index="9"><span class="t">Copying.</span></div>
+
+      <div id="ln-11" class="ln stop clip"  data-start="7"     data-duration="1.5"  data-track-index="10"><span class="t">Stop.</span></div>
+
+      <div id="ln-12" class="ln clip"       data-start="8.5"   data-duration="1"    data-track-index="11"><span class="t">One click.</span></div>
+      <div id="ln-13" class="ln clip"       data-start="9.5"   data-duration="1"    data-track-index="12"><span class="t"><em>Every</em> row.</span></div>
+      <div id="ln-14" class="ln sm clip"    data-start="10.5"  data-duration="1.25" data-track-index="13"><span class="t">Every column,<br />already named.</span></div>
+      <div id="ln-15" class="ln sm clip"    data-start="11.75" data-duration="1"    data-track-index="14"><span class="t">Every page of<br />the pagination.</span></div>
+      <div id="ln-16" class="ln sm clip"    data-start="12.75" data-duration="1.25" data-track-index="15"><span class="t">Then the page<br />behind <em>every row</em>.</span></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const lines = document.querySelectorAll('.ln');
+
+      lines.forEach(function (el) {
+        const at = parseFloat(el.dataset.start);
+        const dur = parseFloat(el.dataset.duration);
+        const grind = el.classList.contains('grind');
+        const stop = el.classList.contains('stop');
+
+        if (grind) {
+          // Sagging repetition: each one starts a little lower and greyer.
+          tl.fromTo(el, { opacity: 0, y: -14, scale: 1.02 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: 'power2.out' }, at);
+          tl.to(el, { opacity: 0.25, y: 26, duration: dur - 0.14, ease: 'none' }, at + 0.12);
+        } else if (stop) {
+          // The turn. Lands hard, then holds dead still.
+          tl.fromTo(el, { opacity: 0, scale: 1.55 },
+            { opacity: 1, scale: 1, duration: 0.26, ease: 'power4.out' }, at);
+        } else {
+          // Snap in, hold settled. Never fast-in then gone.
+          tl.fromTo(el, { opacity: 0, y: 34, scale: 1.05 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.22, ease: 'power3.out' }, at);
+          tl.to(el, { opacity: 1, duration: dur - 0.3 }, at + 0.22);
+        }
+      });
+
+      window.__timelines['kinetic'] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

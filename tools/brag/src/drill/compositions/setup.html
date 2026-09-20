@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family:'Fraunces'; src:url('assets/fraunces-var.woff2') format('woff2-variations');
+                   font-weight:100 900; font-display:block; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:#faf8f4; }
+      #setup { width:100%; height:100%; position:relative; }
+
+      .ln {
+        position:absolute; inset:0;
+        display:flex; align-items:center; justify-content:center;
+        font-family:'Fraunces'; font-weight:600;
+        font-size:132px; line-height:1.02; letter-spacing:-2.5px;
+        text-align:center; color:#17150f; padding:0 90px;
+      }
+      /* One inner span, never bare text nodes: a flex container makes each
+         inline child its own anonymous item and eats the spaces between them. */
+      .ln .t { display:block; }
+      .ln.sm { font-size:104px; letter-spacing:-2px; }
+      .ln em { font-style:normal; color:#4b3bd0; }
+      /* The turn. Grey, because it is the sentence about everyone else. */
+      .ln.other { color:#8a8375; font-size:96px; letter-spacing:-1.5px; }
+    </style>
+  </head>
+  <body>
+    <div id="setup" data-composition-id="setup" data-start="0" data-duration="6"
+         data-width="1080" data-height="1920">
+      <div id="su-1" class="ln sm clip"    data-start="0"    data-duration="1"    data-track-index="0"><span class="t">You scraped<br />the list.</span></div>
+      <div id="su-2" class="ln sm clip"    data-start="1"    data-duration="1.5"  data-track-index="1"><span class="t">The field you need<br />isn&rsquo;t on it.</span></div>
+      <div id="su-3" class="ln sm clip"    data-start="2.5"  data-duration="1"    data-track-index="2"><span class="t">It&rsquo;s on the page<br />behind the row.</span></div>
+      <div id="su-4" class="ln sm clip"    data-start="3.5"  data-duration="1"    data-track-index="3"><span class="t">And the page<br />behind <em>that</em> one.</span></div>
+      <div id="su-5" class="ln other clip" data-start="4.5"  data-duration="1.5"  data-track-index="4"><span class="t">Most scrapers<br />stop at the first.</span></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      document.querySelectorAll('.ln').forEach(function (el) {
+        const at = parseFloat(el.dataset.start);
+        tl.fromTo(el, { opacity: 0, y: 34, scale: 1.05 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.22, ease: 'power3.out' }, at);
+      });
+      window.__timelines['setup'] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

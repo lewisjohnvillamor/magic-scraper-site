@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #faf8f4; }
+      #root { width: 100%; height: 100%; position: relative; }
+      .clip { position: absolute; inset: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Two acts on one beat grid. The music is happy-beats-business-moves
+         vol-1 (120.19 BPM), trimmed to start on its beat at 3.02s, so every
+         beat lands on a clean 0.50s multiple of video time. Its strong cue at
+         17.02s in the source is therefore t=14.0s here -- which is exactly
+         where the product arrives. -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="20.5"
+         data-width="1080" data-height="1920">
+
+      <div id="act-kinetic" class="clip" data-composition-id="kinetic"
+           data-start="0" data-duration="14" data-track-index="0"
+           data-composition-src="compositions/kinetic.html"></div>
+
+      <div id="act-reveal" class="clip" data-composition-id="reveal"
+           data-start="14" data-duration="6.5" data-track-index="1"
+           data-composition-src="compositions/reveal.html"></div>
+
+      <!-- A paper flash on each act change. White would punch a hole in a warm
+           frame, so it flashes to the page colour lifted, not to #fff. -->
+      <div id="flash" class="clip" data-start="0" data-duration="20.5" data-track-index="2"></div>
+
+      <audio id="bed" src="assets/music.mp3" data-start="0" data-duration="20.5"
+             data-volume="0.62" data-track-index="3"></audio>
+
+      <!-- Cut to the beat grid: a tick under each line, the turn on "Stop.",
+           a riser into the reveal and a land under the product. Every cue is
+           shorter than the 0.50s gap it sits in, so nothing smears. -->
+      <audio id="sfx-tick-01" src="assets/tick.wav" data-start="0" data-duration="0.06" data-volume="0.42" data-track-index="3"></audio>
+      <audio id="sfx-tick-02" src="assets/tick.wav" data-start="1" data-duration="0.06" data-volume="0.42" data-track-index="4"></audio>
+      <audio id="sfx-tick-03" src="assets/tick.wav" data-start="2" data-duration="0.06" data-volume="0.42" data-track-index="5"></audio>
+      <audio id="sfx-tick-04" src="assets/tick.wav" data-start="3" data-duration="0.06" data-volume="0.42" data-track-index="6"></audio>
+      <audio id="sfx-tick-05" src="assets/tick.wav" data-start="4" data-duration="0.06" data-volume="0.3" data-track-index="7"></audio>
+      <audio id="sfx-tick-06" src="assets/tick.wav" data-start="4.5" data-duration="0.06" data-volume="0.3" data-track-index="8"></audio>
+      <audio id="sfx-tick-07" src="assets/tick.wav" data-start="5" data-duration="0.06" data-volume="0.3" data-track-index="9"></audio>
+      <audio id="sfx-tick-08" src="assets/tick.wav" data-start="5.5" data-duration="0.06" data-volume="0.3" data-track-index="10"></audio>
+      <audio id="sfx-tick-09" src="assets/tick.wav" data-start="6" data-duration="0.06" data-volume="0.3" data-track-index="11"></audio>
+      <audio id="sfx-tick-10" src="assets/tick.wav" data-start="6.5" data-duration="0.06" data-volume="0.3" data-track-index="12"></audio>
+      <audio id="sfx-tick-11" src="assets/tick.wav" data-start="8.5" data-duration="0.06" data-volume="0.42" data-track-index="13"></audio>
+      <audio id="sfx-tick-12" src="assets/tick.wav" data-start="9.5" data-duration="0.06" data-volume="0.42" data-track-index="14"></audio>
+      <audio id="sfx-tick-13" src="assets/tick.wav" data-start="10.5" data-duration="0.06" data-volume="0.42" data-track-index="15"></audio>
+      <audio id="sfx-tick-14" src="assets/tick.wav" data-start="11.75" data-duration="0.06" data-volume="0.42" data-track-index="16"></audio>
+      <audio id="sfx-tick-15" src="assets/tick.wav" data-start="12.75" data-duration="0.06" data-volume="0.42" data-track-index="17"></audio>
+      <audio id="sfx-thud"  src="assets/thud.wav"  data-start="7"    data-duration="0.45" data-volume="0.85" data-track-index="18"></audio>
+      <audio id="sfx-riser" src="assets/riser.wav" data-start="13.1" data-duration="0.9"  data-volume="0.55" data-track-index="19"></audio>
+      <audio id="sfx-land"  src="assets/land.wav"  data-start="14"   data-duration="0.5"  data-volume="0.8"  data-track-index="20"></audio>
+      <audio id="sfx-tap"   src="assets/tap.wav"   data-start="15.3" data-duration="0.04" data-volume="0.7"  data-track-index="21"></audio>
+      <audio id="sfx-chime" src="assets/chime.wav" data-start="18.05" data-duration="1.2" data-volume="0.5"  data-track-index="22"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      // The root holds no animation of its own: each act owns its timeline and
+      // the runtime activates them as registered composition siblings.
+      const root = gsap.timeline({ paused: true });
+      // Two act changes, two flashes. Fast up, slower down: a hit, then a
+      // recovery, rather than a symmetrical blink.
+      [14, 18].forEach(function (at) {
+        root.to('#flash', { opacity: 0.85, duration: 0.07, ease: 'power2.out' }, at - 0.07);
+        root.to('#flash', { opacity: 0, duration: 0.34, ease: 'power2.in' }, at);
+      });
+      window.__timelines['main'] = root;
+      root.seek(0);
+    </script>
+  </body>
+</html>

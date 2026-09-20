@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: 'Fraunces';
+        src: url('assets/fraunces-var.woff2') format('woff2-variations');
+        font-weight: 100 900; font-display: block;
+      }
+      @font-face {
+        font-family: 'Archivo';
+        src: url('assets/archivo-var.woff2') format('woff2-variations');
+        font-weight: 100 900; font-display: block;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #faf8f4; }
+
+      #rev {
+        width: 100%; height: 100%; position: relative;
+        font-family: 'Archivo', system-ui, sans-serif; color: #17150f;
+      }
+
+      /* --- the product, held back until the strong cue at t=0 of this comp --- */
+      #shot {
+        position: absolute; left: 103px; top: 430px;
+        width: 874px; height: 1144px;
+        overflow: hidden; border-radius: 22px;
+        box-shadow: 0 50px 100px -30px rgba(23, 21, 15, .4);
+      }
+      /* The popup sits at 460x602 from (776,98) in every 1280x800 store shot.
+         Scaled 1.9x. */
+      #shot img {
+        position: absolute; width: 2432px; height: 1520px;
+        left: -1474px; top: -186px;
+      }
+
+      /* Touch point. The CSV pill centres at (841,254) in the 1280x800
+         capture; the popup starts at (776,98), so it is (65,156) into the
+         popup and (123,296) once scaled 1.9x. It lives inside #shot so it
+         tracks the slow push-in instead of sliding off the button. It marks
+         the control -- it does not claim a download happened. */
+      #touch { position:absolute; left:123px; top:296px; width:0; height:0; z-index:3; }
+      #touch .dot {
+        position:absolute; left:-21px; top:-21px; width:42px; height:42px;
+        border-radius:50%; background:rgba(75,59,208,.28); opacity:0;
+      }
+      #touch .ring {
+        position:absolute; left:-54px; top:-54px; width:108px; height:108px;
+        border:4px solid #4b3bd0; border-radius:50%; opacity:0;
+      }
+
+      #caption {
+        position: absolute; left: 0; right: 0; top: 120px;
+        text-align: center;
+        font-family: 'Fraunces'; font-weight: 600;
+        font-size: 104px; letter-spacing: -2px; line-height: 1.02;
+      }
+      #caption em { font-style: normal; color: #4b3bd0; }
+
+      /* --- end card --- */
+      #end {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        background: #faf8f4;
+      }
+      .mark {
+        width: 148px; height: 148px; border-radius: 34px; background: #4b3bd0;
+        display: flex; align-items: center; justify-content: center; margin-bottom: 44px;
+      }
+      .wordmark { font-family: 'Fraunces'; font-weight: 600; font-size: 92px; letter-spacing: -1.5px; }
+      .claims { display: flex; gap: 16px; margin-top: 50px; }
+      .claims span {
+        font-size: 32px; color: #5d574a; background: #fffefb;
+        border: 1px solid #e0dbd0; border-radius: 999px; padding: 16px 30px;
+      }
+      .url { font-family: ui-monospace, monospace; font-size: 36px; margin-top: 56px; }
+    </style>
+  </head>
+  <body>
+    <div id="rev" data-composition-id="reveal" data-start="0" data-duration="6.5"
+         data-width="1080" data-height="1920">
+
+      <div id="caption" class="clip" data-start="0" data-duration="4" data-track-index="0">
+        Your list.<br /><em>All of it.</em>
+      </div>
+      <div id="shot" class="clip" data-start="0" data-duration="4" data-track-index="1">
+        <img src="assets/s2-crawl.png" alt="" />
+        <div id="touch"><span class="dot"></span><span class="ring"></span></div>
+      </div>
+
+      <div id="end" class="clip" data-start="4" data-duration="2.5" data-track-index="2">
+        <div class="mark">
+          <svg viewBox="0 0 24 24" width="72" height="72" fill="none" stroke="#faf8f4"
+               stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+          </svg>
+        </div>
+        <div class="wordmark">Magic Scraper</div>
+        <div class="claims"><span>No server</span><span>No account</span><span>No upload</span></div>
+        <div class="url">magicscraper.app</div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // The payoff. After fourteen seconds of type, the product arrives whole
+      // and then stops moving, so there is something to actually look at.
+      tl.fromTo('#caption', { opacity: 0, y: 40, scale: 1.06 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'power4.out' }, 0);
+      tl.fromTo('#shot', { opacity: 0, y: 260, scale: 0.92 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'power3.out' }, 0.08);
+      // A slow push in over the hold, so the frame is never quite static.
+      tl.to('#shot', { scale: 1.035, duration: 3.2, ease: 'none' }, 0.78);
+
+      // The tap: press, then the ring opens and clears. 1.3s into this act is
+      // 15.3s of the cut, where the tap cue sits.
+      tl.fromTo('#touch .dot', { opacity: 0, scale: 0.4 },
+        { opacity: 1, scale: 1, duration: 0.12, ease: 'power3.out' }, 1.3);
+      tl.to('#touch .dot', { opacity: 0, duration: 0.42, ease: 'power2.in' }, 1.48);
+      tl.fromTo('#touch .ring', { opacity: 0.9, scale: 0.28 },
+        { opacity: 0, scale: 1.25, duration: 0.62, ease: 'power2.out' }, 1.32);
+
+      tl.fromTo('#end', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 4);
+      tl.fromTo('#end .mark', { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.8)' }, 4.05);
+      tl.fromTo('#end .wordmark', { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 4.2);
+      tl.fromTo('#end .claims span', { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, 4.4);
+      tl.fromTo('#end .url', { opacity: 0 }, { opacity: 1, duration: 0.45 }, 4.85);
+
+      window.__timelines['reveal'] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
