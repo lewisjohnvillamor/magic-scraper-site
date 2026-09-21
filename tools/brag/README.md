@@ -154,6 +154,34 @@ silently held, and a held comment is worse than none; the description already
 carries the link. Confirm it rendered by opening the Short signed out, because
 a filtered comment still looks published to the account that wrote it.
 
+**The store links go in a reply to the pinned comment** -- not in the pin, and
+not as a second top-level comment. A reply sits under the pin where people
+already are, and if the links get it held, the pin survives. A second top-level
+comment on a Short with no engagement sinks under *Top* and is read by nobody.
+
+> Chrome (also Brave, Opera, Vivaldi, Arc):
+> https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck
+>
+> Edge:
+> https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp
+>
+> Edge is a version behind while this build clears Microsoft's review -- the
+> crawl and the drill chain work there today, the Changes tab lands with that
+> update.
+
+**The Edge caveat is exactly one feature wide.** Read off the 1.15.3 tree
+rather than assumed: the chain builder is all there (`drillAddLevel`,
+`drillNextLink`, `drillCost`, `drillDeeper`), so the long cut's ten-level
+payoff is honest on Edge today. `tabDiff` is not -- the Changes tab arrived in
+**1.20.7** -- so that is the one payoff Edge cannot keep yet, and the one the
+caveat names. Guessing "the last two are Pro, so neither is on Edge" would have
+been wrong in the direction that talks a working feature out of a sale. Drop
+the caveat line when Edge serves 1.20.15.
+
+Strip `utm_source=item-share-cb` if the URL came out of the store's Share
+button. It labels the install as arriving from the store's own share widget,
+which is the one place it did not; `utm_source=youtube` or nothing at all.
+
 ## Sound
 
 `make-sfx.sh` synthesises all six cues with ffmpeg — tick, thud, riser, land,
