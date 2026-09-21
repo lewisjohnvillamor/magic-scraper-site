@@ -137,6 +137,23 @@ Pick a thumbnail that is **not** a Pro moment. The frame at ~11.6s of the long
 cut -- the crawl finishing -- promises something a free install actually
 delivers; the chain builder does not.
 
+**Pin a comment, and do not leave the slot empty.** On a Short the description
+is close to invisible -- mobile shows the title and little else -- so the pinned
+comment is the only place the free/Pro boundary reaches anyone who has not
+tapped through, and the only slot that earns replies. Lead with the question,
+carry the disclosure under it:
+
+> What page do you keep copy-pasting out of? Reply with it and I'll tell you
+> whether this handles it.
+>
+> (The ten-level chain and the Changes tab at the end are Pro. Everything
+> before them is free -- no account, no time limit.)
+
+**No URL in the pinned comment.** A link is the most common reason a comment is
+silently held, and a held comment is worse than none; the description already
+carries the link. Confirm it rendered by opening the Short signed out, because
+a filtered comment still looks published to the account that wrote it.
+
 ## Sound
 
 `make-sfx.sh` synthesises all six cues with ffmpeg — tick, thud, riser, land,
