@@ -46,13 +46,13 @@
 
 <div id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="sub">Last updated 24 September 2026 · applies to the Magic Scraper browser extension for Chrome and Edge</p>
+  <p class="dateline">Last updated 20 September 2026 · applies to the Magic Scraper browser extension for Chrome and Edge</p>
 
-  <p class="lead"><b>Magic Scraper keeps your data on your machine.</b> It has no servers of its
+  <div class="claim"><p><b>Magic Scraper keeps your data on your machine.</b> It has no servers of its
   own, no analytics and no telemetry. Everything it reads stays in your browser, and everything
   it produces goes only where you save it. Detecting a table, picking one by hand and exporting it make <b>no network requests at all</b>. The only requests the free extension ever makes are for further pages of the site you are already on, and only once you press Start crawling — never to a server of ours, because there isn't one.
   There is exactly one exception, described below, and it happens only if you buy Pro: your
-  licence key is sent to Gumroad, once, to confirm the purchase.</p>
+  licence key is sent to Gumroad, once, to confirm the purchase.</p></div>
 
   <h2>What it reads</h2>
   <p>When you open the popup on a page, the extension reads that page's visible content —
@@ -63,61 +63,38 @@
   and does not touch form fields, passwords or cookies.</p>
 
   <h2>What it stores, and where</h2>
-  <p>Everything is kept in your own browser. Nothing is uploaded. All of it is kept by the
-  extension itself, in storage that belongs to the extension: <b>no website can read it</b>, and
-  <b>removing the extension deletes all of it</b>.</p>
+  <p>Everything is kept in your own browser. Nothing is uploaded. It lives in three places, and
+  it is worth knowing which, because they are not all cleared the same way.</p>
   <table>
     <tr><th>What</th><th>Why</th></tr>
     <tr><td>Rows from a drill-down run</td>
         <td>So results survive the popup closing while the run continues. IndexedDB on the extension's own origin. Removing the extension deletes it.</td></tr>
     <tr><td>Your setup for a site — speed, excluded columns, renames, removed rows, the link column</td>
-        <td>So you do not reconfigure the same site every visit. Kept per site, for the 200 most recently used; the oldest is replaced after that.</td></tr>
+        <td>So you do not reconfigure the same site every visit. Kept per site, for the 20 most recent.</td></tr>
     <tr><td>A pending drill-down preview</td>
         <td>So a half-configured chain survives the popup closing.</td></tr>
     <tr><td>A crawl's rows, written as it goes</td>
-        <td>So a long run survives the tab closing, a crash, or the power going out. IndexedDB
-            on the extension's own origin. Removing the extension deletes it, and Clear in the
-            popup deletes it for the site you are on.</td></tr>
+        <td>So a long run survives the tab closing, a crash, or the power going out. Held in
+            <b>IndexedDB on the scraped site's own origin</b> rather than in the extension,
+            because that is the only storage without a 10&nbsp;MB ceiling.
+            <b>Removing the extension does not delete this</b> &mdash; clear that site's data in
+            your browser, or press Clear in the popup.</td></tr>
     <tr><td>Up to five past runs of the same list</td>
         <td>So a new run can be compared with the last one and tell you what changed. Same
-            place, and deleted the same two ways.</td></tr>
-    <tr><td>Rows from a run over a list of pages</td>
-        <td>So the lists already read survive the popup closing while the rest are read. Same
-            place; removing the extension deletes it, and the next run replaces it.</td></tr>
+            per-site IndexedDB, and the same caveat about deletion.</td></tr>
     <tr><td>Saved setups, and any schedule attached to one</td>
         <td>So the next site like this one takes seconds. Settings only &mdash; a setup never
             holds scraped rows. You can export them to a file, and that file is yours.</td></tr>
     <tr><td>An interrupted run</td>
-        <td>A crawl writes its rows to the extension's own storage as it goes &mdash; so a tab
-            that dies does not take them with it. Offered back the next
+        <td>A crawl writes its rows to your browser's own storage, on the site's origin, as it
+            goes &mdash; so a tab that dies does not take them with it. Offered back the next
             time you open the popup there, and thrown away as soon as a run finishes cleanly or
             you discard it. Nothing is downloaded for this.</td></tr>
-    <tr><td>A short log of recent problems</td>
-        <td>So that when something fails you can tell us what, by choosing <b>Copy a diagnostic
-            report</b>. The last 40 errors, with web addresses removed and no scraped data. It is
-            kept by the extension, removing the extension deletes it, and it goes nowhere unless you
-            copy it and send it yourself.</td></tr>
-    <tr><td>A file you choose to compare with</td>
-        <td>Only if you use <b>Compare with a file</b> on the Changes tab. The file is read in the
-            popup, on your computer, and compared there. It is not uploaded, not sent anywhere, and
-            not kept: close the popup and it is gone.</td></tr>
     <tr><td>A scheduled run's CSV</td>
         <td>Only if you set a schedule. Each run writes its result into your downloads folder,
-            because nobody is there to press export, named with the date and time of the run.
-            An ordinary file: it stays after the extension is removed.</td></tr>
+            because nobody is there to press export. An ordinary file: it stays after the
+            extension is removed.</td></tr>
   </table>
-
-  <h3>If you used a version before 1.21</h3>
-  <p>Earlier versions kept a crawl's rows and your past runs in storage belonging to the
-  <b>website</b> you scraped, not to the extension. That had two consequences you should know
-  about: the website's own scripts could see that the data was there and read it, and removing
-  the extension did not delete it. Clear in the popup did not delete it either, although this
-  policy said it did.</p>
-  <p>From 1.21 that data is moved into the extension and deleted from the website automatically,
-  the next time you open Magic Scraper on that site. For a site you do not open it on again,
-  clear that site's data in your browser (in Chrome: the padlock beside the address &rarr; Site
-  settings &rarr; Delete data).</p>
-
 
   <h2>What leaves your machine</h2>
   <p><strong>Your data: nothing.</strong> The only network requests the extension makes while
@@ -156,8 +133,7 @@
         <td>Requested only if you put one of your own saved setups on a schedule. It is a timer
             and nothing else: it wakes the extension when a run is due. Scheduled runs happen
             only while your browser is open &mdash; an extension cannot wake a browser that is
-            shut, and there is no server of ours to do it instead. A run that came due while it
-            was shut happens shortly after you next open it.</td></tr>
+            shut, and there is no server of ours to do it instead.</td></tr>
     <tr><td><code>api.gumroad.com</code> <em>(optional)</em></td>
         <td>Requested only when you activate a Pro licence, for the single check described above.
             Free users are never asked for it.</td></tr>
