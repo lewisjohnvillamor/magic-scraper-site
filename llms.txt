@@ -8,10 +8,14 @@ nothing about the pages a user scrapes is transmitted anywhere. The free tier in
 detection, a manual picker, export to CSV/XLSX/JSON, multi-page crawling with no page limit,
 and getting back a long run whose tab died part-way. Drill-down -- opening the page behind
 every row and merging its fields back in as extra columns -- runs free on the first 3 rows of
-a run. The paid tier ($25 one-time, $19 for the first 100 buyers) drills every row and chains
-as many levels deep as needed, saves setups under a name to reuse and export, compares a run
-with the previous one of the same list, and runs a saved setup on a schedule while the browser
-is open.
+a run, and one setup can be run over the first 2 addresses of a list of pages. The paid tier
+($25 one-time, $19 for the first 100 buyers) drills every row and chains as many levels deep as
+needed, runs one setup over a whole list of pages, saves setups under a name to reuse and
+export, compares a run with the previous one of the same list -- or with a CSV, Excel or JSON
+file such as a CRM export, marking the rows not in it as new -- and runs a saved setup on a
+schedule while the browser is open. When a site shows a human-verification check, a run stops
+and hands the user the tab; it never tries to get past the check. Stored runs live inside the
+extension, not in storage the scraped website can read.
 
 ## Product
 

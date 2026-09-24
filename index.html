@@ -62,14 +62,14 @@
           "name": "Free",
           "price": "0",
           "priceCurrency": "USD",
-          "description": "Detection, manual picking, unlimited multi-page crawling, export, and recovery of a run that died with its tab. Drill-down runs on the first 3 rows."
+          "description": "Detection, manual picking, unlimited multi-page crawling, export, and recovery of a run that died with its tab. Drill-down runs on the first 3 rows, and one setup runs over the first 2 addresses of a list."
         },
         {
           "@type": "Offer",
           "name": "Pro",
           "price": "25",
           "priceCurrency": "USD",
-          "description": "One-time purchase. Drill-down on every row, through as many levels as needed, plus named setups you can export, comparison with the previous run, and running a saved setup on a schedule while Chrome is open. No subscription, no account."
+          "description": "One-time purchase. Drill-down on every row, through as many levels as needed, plus named setups you can export, one setup run over a whole list of pages, comparison with the previous run or with a CSV, Excel or JSON file of your own, and running a saved setup on a schedule while Chrome is open. No subscription, no account."
         }
       ]
     },
@@ -82,7 +82,15 @@
           "name": "Do I need Pro?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Only if you want the page behind every row. Crawling pagination is free, however many pages, and if the tab dies partway through a long run the rows are offered back next time you open the popup \u2014 also free. Drill-down is the paid feature, and free runs it on the first three rows so you can see what comes back from your own site before deciding. Pro adds named setups, running one on a schedule, and comparing a run with the last one."
+            "text": "Only if you want the page behind every row. Crawling pagination is free, however many pages, and if the tab dies partway through a long run the rows are offered back next time you open the popup \u2014 also free. Drill-down is the paid feature, and free runs it on the first three rows so you can see what comes back from your own site before deciding. Pro adds named setups, running one on a schedule, running one setup over a whole list of pages (free does the first two), and comparing a run with the last one \u2014 or with a file of your own."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can it tell me which leads I don't have yet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, with Pro. Scrape the directory, open the Changes tab and choose Compare with a file \u2014 your CRM export, as CSV, Excel or JSON. Every row on the page that is not in your file is marked new, and Export the changes saves just those. Rows are matched on a column both have, usually the phone number or website, and a phone matches however it is written. The file is read on your computer and never uploaded."
           }
         },
         {
@@ -90,7 +98,7 @@
           "name": "Will it work on the site I have in mind?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Probably. It reads what your browser has already rendered, so what you can see, it can usually take. It cannot reach closed shadow roots, cross-origin iframes, data only a private API returns, or anything behind a bot challenge — those are limits of the browser itself. Try the free version on that exact site before paying."
+            "text": "Probably. It reads what your browser has already rendered, so what you can see, it can usually take. It cannot reach closed shadow roots, cross-origin iframes, data only a private API returns, or anything behind a bot challenge — those are limits of the browser itself. When a site asks you to prove you are human, the run stops and hands you the tab rather than trying to get past it. Try the free version on that exact site before paying."
           }
         },
         {
@@ -114,7 +122,7 @@
           "name": "Where does my scraped data go?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nowhere. Detection, crawling and export all happen inside your browser. There is no server for your data to pass through. Detecting a table and exporting it make no network requests at all. The only requests the free version ever makes are for further pages of the site you are already on, and only once you press Start crawling — the same pages your browser would fetch if you clicked through them. Activating a Pro licence sends the key to Gumroad once to confirm the purchase, and nothing about the page you are on goes with it."
+            "text": "Nowhere. Detection, crawling and export all happen inside your browser. There is no server for your data to pass through. Detecting a table and exporting it make no network requests at all. The only requests the free version ever makes are for further pages of the site you are already on, and only once you press Start crawling — the same pages your browser would fetch if you clicked through them. Activating a Pro licence sends the key to Gumroad once to confirm the purchase, and nothing about the page you are on goes with it. What it keeps \u2014 a run in progress, past runs to compare against \u2014 is stored inside the extension, where the website cannot read it, and a file you compare against is read on your computer and never uploaded."
           }
         }
       ]
@@ -160,7 +168,7 @@
       <a class="btn" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
       <a class="btn btn-quiet" href="https://magicscraper.gumroad.com/l/magicscraper/founding">Get Pro &mdash; $19</a>
       <p class="aside notyet">Free, with no time limit and no account. Edge has its own listing
-        and is a version behind right now &mdash; <b>v1.20.15 on Chrome, v1.15.3 on Edge</b>
+        and is a version behind right now &mdash; <b>v1.22.0 on Chrome, v1.15.3 on Edge</b>
         while the same build clears Microsoft's review. The Chrome listing also installs on
         <b>Brave, Opera, Vivaldi and Arc</b> &mdash; any Chromium&nbsp;browser. New work
         reaches you as a <b>store update</b> your browser installs on its own, once each batch
@@ -185,7 +193,7 @@
 
   <section id="what">
     <h2>How a scrape actually goes</h2>
-    <p class="deck">Four steps, in the order you'd hit them. Most pages stop at the first one.</p>
+    <p class="deck">Five steps, in the order you'd hit them. Most pages stop at the first one.</p>
 
     <div class="steps">
       <div class="step">
@@ -207,7 +215,8 @@
         <h3>It walks the pagination</h3>
         <p>Finds the Next control, follows URL or click pagination, handles infinite scroll, and
           when a site answers with a <code>429</code> it waits and retries instead of hammering.
-          You can stop mid-run and keep what it has.</p>
+          If a site asks you to prove you're human, the run stops and hands you the tab &mdash;
+          it never tries to get past the check. You can stop mid-run and keep what it has.</p>
       </div>
       <div class="step">
         <span class="n">04</span>
@@ -215,6 +224,13 @@
         <p>Confirm what to take from one detail page and it repeats that for every row, merging
           the fields back in as extra columns. Chain several levels deep if the data is buried
           &mdash; <a href="/drill-down">how drill-down works</a>.</p>
+      </div>
+      <div class="step">
+        <span class="n">05</span>
+        <h3>Then does it for a whole list of pages</h3>
+        <p>Paste the addresses &mdash; every category, every town &mdash; and the same setup
+          runs on each one in its own background tab, so the tab you're on never moves. The rows
+          come back as one sheet, with a <b>List</b> column saying where each came from.</p>
       </div>
     </div>
   </section>
@@ -236,6 +252,7 @@
           <li>Crawl pagination — <b>unlimited</b> pages</li>
           <li><b>Brings back a run that died with its tab</b></li>
           <li><b>3</b> rows per drill-down</li>
+          <li>One setup over a list of pages &mdash; the first <b>2</b> addresses</li>
         </ul>
         <a class="btn btn-quiet" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install free</a>
         <span class="aside">Chrome, Brave, Opera, Vivaldi, Arc.
@@ -256,7 +273,10 @@
           <li>Multi-level drill chains run on <b>every</b> row, not three</li>
           <li>Drill-down results kept between sessions</li>
           <li>Name a setup, reuse it, export it</li>
+          <li>One setup over a list of pages &mdash; <b>every</b> address</li>
           <li>Compare a run with the last one</li>
+          <li><b>Compare with a file</b> &mdash; your CRM export or last month's list; the rows
+            marked <i>new</i> are the ones you don't have yet</li>
           <li>Put a setup on a schedule &mdash; <span class="q">while your browser is open</span>, and
             a run missed while it was closed happens when you next open it</li>
           <li>Works on every browser you use</li>
@@ -282,6 +302,9 @@
         version ever makes are for further pages of <i>the site you are already on</i>, and only
         once you press Start crawling: the same pages your browser would fetch if you clicked
         through them yourself.</p>
+      <p>What it keeps &mdash; a run in progress, past runs to compare against &mdash; is stored
+        <b>inside the extension</b>, where the website you scraped cannot read it. A file you
+        compare against is read on your computer and never uploaded.</p>
       <p>If you buy Pro, activating your licence sends the key to Gumroad <b>once</b> to confirm
         the purchase. Nothing about the page you're on goes with it, and nothing is sent
         afterwards.</p>
@@ -385,10 +408,28 @@
 
     <div class="cols2">
       <div class="panel">
-        <h3>In Chrome now <span class="ver">v1.20.15</span></h3>
-        <p class="panel-note">Thirty-three releases in one upload, approved 21 September 2026.
-          <b>Edge is still serving v1.15.3</b> &mdash; the same build is in Microsoft's review
-          queue and arrives as an automatic update when it clears.</p>
+        <h3>In Chrome now <span class="ver">v1.22.0</span></h3>
+        <p class="panel-note">The biggest update since launch, arriving as an automatic store
+          update. <b>Edge is still serving v1.15.3</b> &mdash; the same build is in Microsoft's
+          review queue and arrives as an automatic update when it clears.</p>
+        <p class="panel-note"><b>New in this update</b></p>
+        <ul class="ticks">
+          <li><b>One setup over a list of pages</b> &mdash; each read in its own background tab,
+            merged into one sheet with a List column. Free for two addresses, Pro for the lot</li>
+          <li><b>Compare with a file</b> &mdash; a CSV, Excel or JSON file: your CRM export, last
+            month's list, a colleague's. Phone numbers match however they're written</li>
+          <li>A <b>&ldquo;verify you're human&rdquo; check stops the run</b> and hands you the
+            tab, instead of failing quietly</li>
+          <li>Past runs are kept <b>inside the extension</b>, no longer where the website could
+            read them &mdash; moved and deleted from the site automatically</li>
+          <li>A list you <b>picked by hand</b> now crawls every page, saves into a setup and runs
+            on a schedule</li>
+          <li>Scheduled CSVs are <b>named with the date</b>, and a run missed while Chrome was
+            closed happens when you next open it</li>
+          <li><b>Copy a diagnostic report</b> from the menu when something goes wrong &mdash;
+            errors only, web addresses removed</li>
+        </ul>
+        <p class="panel-note"><b>Already there</b></p>
         <ul class="ticks">
           <li>Finds the table and <b>names the columns</b> from the markup</li>
           <li><b>Pick the rows by hand</b> when it picks the wrong thing</li>
@@ -439,8 +480,17 @@
           the rows are offered back the next time you open the popup, which is also free.
           Drill-down is the paid feature, and free runs it on the first three rows so you can see
           exactly what comes back from your own site before deciding. Pro adds saved setups you
-          can name and reuse, running one on a schedule, and comparing a run with the last one of
-          the same list.</p>
+          can name and reuse, running one on a schedule, running one setup over a whole list of
+          pages (free does the first two), and comparing a run with the last one of the same list
+          &mdash; or with a file of your own.</p>
+      </details>
+      <details>
+        <summary>Can it tell me which leads I don't have yet?</summary>
+        <p>Yes, with Pro. Scrape the directory, open the Changes tab, and choose <b>Compare with a
+          file</b> &mdash; your CRM export, as CSV, Excel or JSON. Every row on the page that isn't
+          in your file is marked <i>new</i>, and <b>Export the changes</b> saves just those. Rows
+          are matched on a column both have, usually the phone number or website, and a phone
+          matches however it's written. The file is read on your computer and never uploaded.</p>
       </details>
       <details>
         <summary>Can it run on a schedule while I'm not there?</summary>
@@ -458,8 +508,9 @@
         <p>Probably. It reads what your browser has already rendered, so what you can see, it can
           usually take. It can't reach closed shadow roots, cross-origin iframes, data only a
           private API returns, or anything behind a bot challenge — those are limits of the
-          browser itself, not of this extension. Try the free version on that exact site before
-          paying.</p>
+          browser itself, not of this extension. When a site does ask you to prove you're human,
+          the run stops and hands you the tab rather than trying to get past it. Try the free
+          version on that exact site before paying.</p>
       </details>
       <details>
         <summary>Am I allowed to scrape a site?</summary>
