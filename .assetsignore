@@ -7,3 +7,9 @@ README.md
 NOTICE
 tools
 docs
+# The Worker's own source is bundled by wrangler; it is not a page.
+src
+# Local-only: never part of the site, even when deploying from a working copy.
+node_modules
+brag-output
+.wrangler

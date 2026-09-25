@@ -15,3 +15,6 @@ tools/tiktok/*.webm
 # video that the site actually uses belongs in assets/ alongside the other
 # three, deliberately placed rather than swept in by a directory add.
 brag-output/
+
+# wrangler dev's local state
+.wrangler/
