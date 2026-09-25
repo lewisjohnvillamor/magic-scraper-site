@@ -21,6 +21,9 @@ is open.
 - [Home](https://magicscraper.app): what the extension does, pricing, and where the data goes
 - [Drill-down guide](https://magicscraper.app/drill-down): how to collect a list and the page
   behind every row in one pass, with a worked example on the practice site
+- [Business directory scraper](https://magicscraper.app/business-directory-scraper): turning
+  every page of a business directory's results into one lead list (name, phone, email,
+  address) exported to Excel or CSV; crawling and export are free
 - [Instant Data Scraper alternative](https://magicscraper.app/instant-data-scraper-alternative):
   an honest feature comparison. Both tools auto-detect tables and crawl pagination; the
   difference is per-row detail-page collection.

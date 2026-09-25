@@ -2,6 +2,8 @@
 /index.html / 301
 /demo /demo/ 301
 /demo/index.html /demo/ 301
+/business-directory-scraper.html /business-directory-scraper 301
+/business-directory-scraper/ /business-directory-scraper 301
 /drill-down.html /drill-down 301
 /drill-down/ /drill-down 301
 /instant-data-scraper-alternative.html /instant-data-scraper-alternative 301
