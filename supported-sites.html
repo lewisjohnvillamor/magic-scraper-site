@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scrape Reddit, Amazon, PubMed and arXiv to a spreadsheet</title>
+<meta name="description" content="Magic Scraper reads Reddit, Amazon search results, Hacker News, PubMed and arXiv by name: scores, authors, prices, ratings, DOIs and abstracts in clean columns, page after page." />
+<link rel="canonical" href="https://magicscraper.app/supported-sites" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/supported-sites" />
+<meta property="og:title" content="Scrape Reddit, Amazon, PubMed and arXiv to a spreadsheet" />
+<meta property="og:description" content="Magic Scraper reads Reddit, Amazon search results, Hacker News, PubMed and arXiv by name: scores, authors, prices, ratings, DOIs and abstracts in clean columns, page after page." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Arriving in v1.22.0</p>
+    <h1>Some sites are read <i>by name</i>.</h1>
+    <p class="standfirst">Most pages are read by finding the list on them. A few popular ones are
+      worth more care than that: Magic Scraper knows how they are built, and gives you each post,
+      product or paper with its facts in their own columns &mdash; the score, the author, the
+      price, the DOI &mdash; and keeps going page after page.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck">Add to Chrome &mdash; free</a>
+      <span class="aside">These arrive with the next update, v1.22.0, as an automatic store update.
+        Everything else on this site is in the version the store serves today.</span>
+    </div>
+  </div>
+</div>
+
+<div id="main" class="wrap">
+
+  <section id="what">
+    <h2>What "read by name" means</h2>
+    <div class="claim">
+      <p>On these sites the extension does not guess which block is the list or what to call its
+        columns. It recognises the site from its markup &mdash; not its address, so every Amazon
+        country site and both Reddit designs work &mdash; and fills a fixed set of columns from
+        the site's own fields.</p>
+      <p>Nothing else changes: open the page, click the icon, export. No account, no API key, and
+        nothing leaves your browser. If a site changes its markup, the extension falls back to
+        reading the page the ordinary way.</p>
+    </div>
+  </section>
+
+  <section id="sites">
+    <h2>What each one gives</h2>
+    <div class="steps">
+      <div class="step" id="reddit">
+        <span class="n">01</span>
+        <h3>Reddit</h3>
+        <p><b>Posts:</b> title, subreddit, author, score, comments, time, flair, post type, link,
+          permalink, promoted. <b>Comments:</b> author, text, score, time, reply depth and parent,
+          so a thread can be rebuilt. A thread opens on its comments, with the post one
+          <b>Another table</b> away. Works on the current design and on old.reddit.com; old
+          Reddit pages through <i>next</i>, the current feed by infinite scroll.</p>
+      </div>
+      <div class="step" id="amazon">
+        <span class="n">02</span>
+        <h3>Amazon search results</h3>
+        <p>Title, price, list price, coupon, rating, review count, &ldquo;bought in past
+          month&rdquo;, sponsored, Prime, delivery, ASIN, the product's own link without the
+          search tracking, and the largest image. Sponsored results are kept and marked. Pages
+          through Amazon's own pager.</p>
+      </div>
+      <div class="step" id="hacker-news">
+        <span class="n">03</span>
+        <h3>Hacker News</h3>
+        <p>Rank, title, link, site, points, author, age, the exact time posted, comment count and
+          the discussion link &mdash; the line under each title included. Pages through
+          <i>More</i>.</p>
+      </div>
+      <div class="step" id="pubmed">
+        <span class="n">04</span>
+        <h3>PubMed</h3>
+        <p>PMID, title, authors, journal, year, DOI, publication type, the snippet, whether there
+          is free full text, and the paper's page. Pages through <i>Show more results</i>.</p>
+      </div>
+      <div class="step" id="arxiv">
+        <span class="n">05</span>
+        <h3>arXiv</h3>
+        <p>Listings and search results: arXiv ID, title, every author in one cell, abstract,
+          subjects, comments, submission date, and the abstract and PDF links. Highlighted search
+          words no longer split a title in pieces.</p>
+      </div>
+    </div>
+    <p class="aside">Wikipedia tables, Goodreads lists and most shops need no special reading:
+      the ordinary detection already names their columns. <a href="/support">Want another site
+      read by name? Say which.</a></p>
+  </section>
+
+  <section id="research">
+    <h2>Using it for research</h2>
+    <div class="claim">
+      <p>It is built for the size of sample a person collects while looking: a few subreddits'
+        threads, a few hundred papers, a category of products. For a dataset of millions, use
+        the site's own data access &mdash; Reddit's Data API, NCBI's E-utilities for PubMed,
+        arXiv's API &mdash; which exist for exactly that.</p>
+      <p>Usernames and comments are personal data. Ethics boards generally expect usernames to be
+        replaced and quotations paraphrased, since a quoted comment can be searched back to its
+        author. Whether you may collect from a site at all is between you and that site: its
+        terms, its <code>robots.txt</code>, and data-protection law. The pacing setting is gentle
+        by default, and a &ldquo;verify you're human&rdquo; check stops the run and hands you the
+        tab rather than pressing on.</p>
+    </div>
+  </section>
+
+  <section id="ss-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Is it free?</summary>
+        <p>Yes. Reading these sites, crawling their pages and exporting are free with no limit.
+          Drill-down &mdash; opening each row's own page, such as every paper's abstract page or
+          every product page &mdash; is the paid feature, and free runs it on the first three
+          rows.</p>
+      </details>
+      <details>
+        <summary>Do I need an account or an API key?</summary>
+        <p>No. It reads the page you are looking at, in your own browser, signed in or not as you
+          already are. Nothing is sent to us; there is no server to send it to.</p>
+      </details>
+      <details>
+        <summary>Does it work on amazon.co.uk, amazon.de and the rest?</summary>
+        <p>Yes. The site is recognised by how its results are built, which is the same in every
+          country.</p>
+      </details>
+      <details>
+        <summary>What happens when one of these sites changes its design?</summary>
+        <p>The extension falls back to reading the page the ordinary way, which usually still
+          finds the list. Tell us and the site reading is updated in the next release.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/drill-down">Drill-down</a>
+    <a href="/business-directory-scraper">Scrape a business directory</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>
