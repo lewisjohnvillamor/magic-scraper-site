@@ -135,6 +135,22 @@
         <td>Only in a crawl-and-drill run. Pass the check, then press Stop and Resume.</td></tr>
     <tr><th>The popup keeps spinning after a start it couldn't make</th>
         <td>Usually because another run is going. Close and reopen the popup.</td></tr>
+    <tr><th>Columns come out as <i>Column 1, Column 2</i> on Wikipedia-style tables</th>
+        <td>The table keeps its header row inside the body. Double-click each header to name it.</td></tr>
+    <tr><th>A table with a two-row header puts the names over the wrong columns</th>
+        <td>Headers like <i>Home</i> over <i>Won</i> and <i>Lost</i>. Rename the columns by double-clicking them.</td></tr>
+    <tr><th>Columns are named after page styling, like <i>Backdrop Blur Sm</i></th>
+        <td>Common on sites built with Tailwind. Double-click the header to rename it; the name is remembered for the site.</td></tr>
+    <tr><th>Image addresses start with <code>/_next/image?url=</code></th>
+        <td>Sites built with Next.js. The real image address is the part after <code>url=</code>, URL-decoded.</td></tr>
+    <tr><th>On Hacker News-style pages it picks the page layout instead of the list</th>
+        <td>Press <b>Another table</b> until the stories appear.</td></tr>
+    <tr><th>Cards laid out three to a row come out three at a time</th>
+        <td>No good workaround; the update reads the whole grid as one list.</td></tr>
+    <tr><th>Labels like <i>Phone</i> and <i>Email</i> come out as values</th>
+        <td>Pages that list details as label and value. Click those columns' headers to leave them out.</td></tr>
+    <tr><th>Nothing is found on sites built from web components</th>
+        <td>No workaround yet; the update reads inside them.</td></tr>
   </table>
   <p>Hit something not on this list? <a href="mailto:support@magicscraper.app?subject=Magic%20Scraper%20bug">Email it</a>
   with the URL, and it goes on here until it is fixed.</p>
