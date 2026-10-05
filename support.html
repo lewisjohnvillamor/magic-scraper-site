@@ -93,68 +93,6 @@
         site, that is worth an email — send the URL.</td></tr>
   </table>
 
-  <h2 id="known-issues">Known issues in v1.21.7</h2>
-  <p class="dateline">Updated 1 October 2026 · all fixed, arriving in the next update</p>
-  <p>These were found in a review of the current version, and every one is already fixed. The
-  fixes come as an automatic store update once review clears, so there is nothing to
-  reinstall. Until then, here is what each looks like and how to get around it.</p>
-
-  <table class="symptoms">
-    <tr><th>A crawl stops on page 2 when the Next button is only an arrow icon</th>
-        <td>Pick Next by clicking the edge of the button rather than the arrow itself.</td></tr>
-    <tr><th>A crawl with no page limit keeps going round and round</th>
-        <td>Happens when the last page's Next link leads back to page one. Set <b>Max pages</b> in
-        step 2, Pacing, on the Crawl tab.</td></tr>
-    <tr><th>An address with a comma in it is split in two in step 4</th>
-        <td>Write the comma as <code>%2C</code>, e.g. <code>?brand=nike%2Cadidas</code>.</td></tr>
-    <tr><th>A table with two columns of the same name loses the first one</th>
-        <td>Headers like <i>Name, Name</i>. Use <b>Pick manually</b> and pick the cells as
-        columns.</td></tr>
-    <tr><th>Renaming a column to a name another column already has overwrites it in the export</th>
-        <td>Give it a name no other column uses.</td></tr>
-    <tr><th>Excel export turns IDs into numbers</th>
-        <td>Leading zeros are dropped and IDs over 15 digits are rounded. Export JSON, or open
-        the CSV with the column set to Text.</td></tr>
-    <tr><th>Compare with a file misses some number changes</th>
-        <td>Long numbers outside a phone column (<i>12345.67</i> vs <i>1234567</i>), and
-        barcodes over 15 digits that differ only at the end. Check those columns by eye.</td></tr>
-    <tr><th>A CSV from an old Mac app imports as one row</th>
-        <td>Lines that end in a lone carriage return. Open and re-save it in any spreadsheet,
-        then compare again.</td></tr>
-    <tr><th>Columns called <i>constructor</i> or <i>toString</i> show as switched off</th>
-        <td>Rare. Rename the column and it behaves normally.</td></tr>
-    <tr><th>Schedules don't run until the browser is restarted</th>
-        <td>Only right after you first allow schedules. Restart the browser once.</td></tr>
-    <tr><th>Stop on your own crawl can end a scheduled run that's going at the same time</th>
-        <td>Avoid starting a crawl in the minutes a schedule is due.</td></tr>
-    <tr><th>Editing the list of pages while a scheduled run is going loses the edit</th>
-        <td>The run writes back the list it started with. Edit the list after it finishes.</td></tr>
-    <tr><th>Resume after Stop during drill-down skips one row</th>
-        <td>The row that was open when you pressed Stop. Drill it on its own afterwards.</td></tr>
-    <tr><th>A &ldquo;verify you're human&rdquo; check pauses drill-down but the crawl goes on</th>
-        <td>Only in a crawl-and-drill run. Pass the check, then press Stop and Resume.</td></tr>
-    <tr><th>The popup keeps spinning after a start it couldn't make</th>
-        <td>Usually because another run is going. Close and reopen the popup.</td></tr>
-    <tr><th>Columns come out as <i>Column 1, Column 2</i> on Wikipedia-style tables</th>
-        <td>The table keeps its header row inside the body. Double-click each header to name it.</td></tr>
-    <tr><th>A table with a two-row header puts the names over the wrong columns</th>
-        <td>Headers like <i>Home</i> over <i>Won</i> and <i>Lost</i>. Rename the columns by double-clicking them.</td></tr>
-    <tr><th>Columns are named after page styling, like <i>Backdrop Blur Sm</i></th>
-        <td>Common on sites built with Tailwind. Double-click the header to rename it; the name is remembered for the site.</td></tr>
-    <tr><th>Image addresses start with <code>/_next/image?url=</code></th>
-        <td>Sites built with Next.js. The real image address is the part after <code>url=</code>, URL-decoded.</td></tr>
-    <tr><th>On Hacker News-style pages it picks the page layout instead of the list</th>
-        <td>Press <b>Another table</b> until the stories appear.</td></tr>
-    <tr><th>Cards laid out three to a row come out three at a time</th>
-        <td>No good workaround; the update reads the whole grid as one list.</td></tr>
-    <tr><th>Labels like <i>Phone</i> and <i>Email</i> come out as values</th>
-        <td>Pages that list details as label and value. Click those columns' headers to leave them out.</td></tr>
-    <tr><th>Nothing is found on sites built from web components</th>
-        <td>No workaround yet; the update reads inside them.</td></tr>
-  </table>
-  <p>Hit something not on this list? <a href="mailto:support@magicscraper.app?subject=Magic%20Scraper%20bug">Email it</a>
-  with the URL, and it goes on here until it is fixed.</p>
-
   <h2>Things no in-browser tool can reach</h2>
   <p>Closed shadow roots, cross-origin iframes, data that only a private API returns, PDFs in
   the browser's viewer, and anything behind a bot challenge. These are limits of the browser,
