@@ -31,6 +31,9 @@ extension, not in storage the scraped website can read.
 - [Instant Data Scraper alternative](https://magicscraper.app/instant-data-scraper-alternative):
   an honest feature comparison. Both tools auto-detect tables and crawl pagination; the
   difference is per-row detail-page collection.
+- [Supported sites](https://magicscraper.app/supported-sites): Reddit, Amazon search results,
+  Hacker News, PubMed and arXiv read by name into named columns (score, author, price,
+  rating, DOI, abstract), page after page; free, no account or API key
 - [Support](https://magicscraper.app/support): common problems and their fixes, licence-key
   help, refunds
 

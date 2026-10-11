@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scrape Reddit, Amazon, PubMed and arXiv to a spreadsheet</title>
-<meta name="description" content="Magic Scraper reads Reddit, Amazon search results, Hacker News, PubMed and arXiv by name: scores, authors, prices, ratings, DOIs and abstracts in clean columns, page after page." />
+<meta name="description" content="Scrape Reddit, Amazon, Hacker News, PubMed and arXiv to Excel or CSV: scores, authors, prices, ratings, DOIs and abstracts in named columns. Free extension." />
 <link rel="canonical" href="https://magicscraper.app/supported-sites" />
 <link rel="icon" href="assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
@@ -14,11 +14,72 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://magicscraper.app/supported-sites" />
 <meta property="og:title" content="Scrape Reddit, Amazon, PubMed and arXiv to a spreadsheet" />
-<meta property="og:description" content="Magic Scraper reads Reddit, Amazon search results, Hacker News, PubMed and arXiv by name: scores, authors, prices, ratings, DOIs and abstracts in clean columns, page after page." />
+<meta property="og:description" content="Scrape Reddit, Amazon, Hacker News, PubMed and arXiv to Excel or CSV: scores, authors, prices, ratings, DOIs and abstracts in named columns. Free extension." />
 <meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Magic Scraper",
+          "item": "https://magicscraper.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Supported sites",
+          "item": "https://magicscraper.app/supported-sites"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Reading these sites, crawling their pages and exporting are free with no limit. Drill-down, opening each row's own page such as every paper's abstract page or every product page, is the paid feature, and free runs it on the first three rows."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need an account or an API key?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It reads the page you are looking at, in your own browser, signed in or not as you already are. Nothing is sent to us; there is no server to send it to."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work on amazon.co.uk, amazon.de and the rest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The site is recognised by how its results are built, which is the same in every country."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when one of these sites changes its design?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The extension falls back to reading the page the ordinary way, which usually still finds the list. Tell us and the site reading is updated in the next release."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

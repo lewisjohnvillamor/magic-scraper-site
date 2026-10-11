@@ -195,6 +195,10 @@ h1 i { font-style: italic; color: var(--warm); }
 .stage { margin: 54px 0 0; }
 .stage video, .stage img {
   width: 100%; display: block; border: 1px solid var(--rule); box-shadow: var(--shadow);
+  /* Without this the height="800" attribute stays a fixed 800px while the width
+     shrinks, and the screenshot is squashed at any width under 1280. The
+     width/height attributes still reserve the space, so nothing shifts. */
+  height: auto;
 }
 /* Sits under the video: play when the poster is showing, pause once it runs.
    Present in both states, because a moving thing needs a stop. */
