@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Free web scraping practice site &mdash; 13 pages to test on</title>
-<meta name="description" content="A fictional shop built to practise scraping on: pagination, tables, infinite scroll, Load more, shadow DOM, iframes, schema.org markup, a 2,000-row list across 40 pages, a page that changes every minute, and data that is a mess." />
+<meta name="description" content="A fictional shop to practise web scraping on: pagination, tables, infinite scroll, Load more, shadow DOM, iframes, schema.org data and a 2,000-row list." />
 <link rel="canonical" href="https://magicscraper.app/demo/" />
 <link rel="icon" href="../assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/fraunces-var.woff2" crossorigin />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Magic Scraper" />
 <meta property="og:url" content="https://magicscraper.app/demo/" />
 <meta property="og:title" content="Free web scraping practice site &mdash; 13 pages to test on" />
-<meta property="og:description" content="A fictional shop built to practise scraping on: pagination, tables, infinite scroll, Load more, shadow DOM, iframes, schema.org markup, a 2,000-row list across 40 pages, a page that changes every minute, and data that is a mess." />
+<meta property="og:description" content="A fictional shop to practise web scraping on: pagination, tables, infinite scroll, Load more, shadow DOM, iframes, schema.org data and a 2,000-row list." />
 <meta property="og:image" content="https://magicscraper.app/assets/screenshot.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
@@ -33,6 +33,26 @@
      "acceptedAnswer": {"@type": "Answer", "text": "Yes, one of each. Shop the look renders twelve products inside an open shadow root, so a scraper that only queries the light DOM finds nothing on the page at all. Stock and delivery puts its table inside a same-origin iframe, which is a separate document with its own DOM. Both are the cases people most often discover their tool cannot handle, which is why they are here rather than described."}},
     {"@type": "Question", "name": "Will scraping it get me blocked?",
      "acceptedAnswer": {"@type": "Answer", "text": "No. There is no rate limiting, no bot detection and no login. It is a static site that exists to be scraped, which is exactly what makes it safe to learn on — unlike practising against a real shop, where you risk an IP ban or worse."}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Practice site",
+      "item": "https://magicscraper.app/demo/"
+    }
   ]
 }
 </script>
