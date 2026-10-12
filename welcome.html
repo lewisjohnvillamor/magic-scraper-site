@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Scraper is installed — start here</title>
+<meta name="description" content="Where the Magic Scraper icon went, and a practice page to try it on first." />
+<meta name="robots" content="noindex" />
+<link rel="canonical" href="https://magicscraper.app/welcome" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  ol.steps-n { counter-reset: s; list-style: none; margin: 0 0 26px; padding: 0; max-width: 60ch; }
+  ol.steps-n li {
+    counter-increment: s; position: relative; padding: 0 0 18px 46px; font-size: 17px;
+  }
+  ol.steps-n li::before {
+    content: counter(s); position: absolute; left: 0; top: -1px;
+    width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--paper);
+    font-family: var(--mono); font-size: 13px; display: flex; align-items: center; justify-content: center;
+  }
+  ol.steps-n b { font-variation-settings: 'wght' 600; }
+
+  .browser-note { font-size: 14.5px; color: var(--ink-2); margin: -6px 0 18px; }
+  .go { margin: 4px 0 30px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</div>
+
+<div id="main" class="wrap narrow doc">
+  <h1>Magic Scraper is installed.</h1>
+  <p class="dateline">Two minutes, three steps, and you will have your first spreadsheet.</p>
+
+  <ol class="steps-n">
+    <li><b>Pin the icon.</b> New extensions hide in the puzzle-piece menu at the top right of
+      the browser. Click the puzzle piece, then the pin beside <b>Magic Scraper</b>, and it stays
+      in the toolbar.</li>
+  </ol>
+  <p class="browser-note">On Edge the puzzle piece is the same; the pin is an eye icon,
+    <b>Show in toolbar</b>.</p>
+
+  <ol class="steps-n" start="2" style="counter-reset: s 1">
+    <li><b>Try it where it is meant to work.</b> Open the practice shop below and click the
+      icon. Nine products are found and named without you doing anything; press <b>CSV</b>
+      and that is your first file.</li>
+  </ol>
+  <div class="actions go">
+    <a class="btn" href="/demo/catalogue">Open the practice shop</a>
+  </div>
+
+  <ol class="steps-n" start="3" style="counter-reset: s 2">
+    <li><b>Then your own page.</b> Open the page with the list you want and click the icon.
+      If it picked the wrong list, press <b>Another table</b>; if it picked none, press
+      <b>Pick manually</b> and click one of the rows.</li>
+  </ol>
+
+  <h2>Three things worth knowing</h2>
+  <p><b>Every page, not just this one.</b> The Crawl tab finds the page's <b>Next</b> button
+    and collects every page of results into one sheet. Free, with no page limit.</p>
+  <p><b>The page behind each row.</b> When each row links to a page of its own, drill-down
+    opens them one by one and adds what it finds as extra columns &mdash; emails from profile
+    pages, specs from product pages. <a href="/drill-down">How drill-down works</a>.</p>
+  <p><b>Keep it open.</b> The pin at the top of the popup moves it into the side panel, where
+    it stays while you click around the page.</p>
+
+  <p>Nothing you scrape leaves your browser, and there is no account. If something does not
+    work on a site, <a href="mailto:support@magicscraper.app?subject=Magic%20Scraper%20on%20a%20site">tell me which one</a>
+    and it gets looked at.</p>
+
+  <footer><a href="/">Magic Scraper</a> <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a> <a href="/support">Support</a></footer>
+</div>
+<script src="nav.js" defer></script>
+</body>
+</html>

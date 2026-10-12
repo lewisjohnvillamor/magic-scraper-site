@@ -27,9 +27,44 @@ const json = (body, status = 200) =>
     headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
   });
 
+/*
+ * Why people removed the extension. The extension sets its uninstall page to
+ * /goodbye?v=<version>, and that page posts one answer here. Same rules as the
+ * votes: no cookies, no IP address, nothing that identifies anyone -- a reason
+ * from a fixed list, the version, and whatever the person chose to type.
+ * Shares the ROADMAP namespace under its own prefixes rather than needing a
+ * second binding.
+ */
+const REASONS = new Set(['no-data', 'confusing', 'once', 'missing', 'price', 'other-tool', 'other']);
+
+async function feedback(request, env) {
+  if (request.method !== 'POST') return json({ error: 'method not allowed' }, 405);
+  if (!env.ROADMAP) return json({ error: 'not configured' }, 503);
+  let body;
+  try { body = await request.json(); } catch (e) { return json({ error: 'bad json' }, 400); }
+  const reason = String(body.reason || '');
+  if (!REASONS.has(reason)) return json({ error: 'unknown reason' }, 400);
+  const v = String(body.v || '').slice(0, 20);
+  const answer = {
+    reason,
+    v: /^\d+(\.\d+){0,3}$/.test(v) ? v : '',
+    site: String(body.site || '').trim().slice(0, 200),
+    note: String(body.note || '').trim().slice(0, 800),
+    at: new Date().toISOString().slice(0, 10),
+  };
+  const key = 'fc:' + reason;
+  await env.ROADMAP.put(key, String((Number(await env.ROADMAP.get(key)) || 0) + 1));
+  if (answer.site || answer.note) {
+    await env.ROADMAP.put('f:' + Date.now() + ':' + Math.random().toString(36).slice(2, 8),
+      JSON.stringify(answer), { expirationTtl: 60 * 60 * 24 * 400 });
+  }
+  return json({ ok: true });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === '/api/feedback') return feedback(request, env);
     if (!url.pathname.startsWith('/api/roadmap')) {
       return env.ASSETS.fetch(request);
     }
