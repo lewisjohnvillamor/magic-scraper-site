@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Scraper removed — what went wrong?</title>
+<meta name="description" content="One question for anyone who removed Magic Scraper: what did not work?" />
+<meta name="robots" content="noindex" />
+<link rel="canonical" href="https://magicscraper.app/goodbye" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  .reasons { display: grid; gap: 8px; margin: 18px 0 20px; max-width: 560px; }
+  .reasons label {
+    display: flex; gap: 10px; align-items: flex-start; padding: 11px 14px; cursor: pointer;
+    border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); font-size: 16px;
+  }
+  .reasons label:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .reasons input { margin-top: 4px; accent-color: var(--ink); }
+  .more { display: grid; gap: 12px; max-width: 560px; margin: 0 0 18px; }
+  .more label { display: grid; gap: 5px; font-size: 14.5px; color: var(--ink-2); }
+  .more input, .more textarea {
+    font: inherit; font-size: 15px; padding: 9px 11px; color: var(--ink);
+    border: 1px solid var(--rule); border-radius: 8px; background: var(--paper);
+  }
+  .more textarea { min-height: 84px; resize: vertical; }
+  #gbDone { font-size: 17px; }
+  #gbFallback { font-size: 15px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</div>
+
+<div id="main" class="wrap narrow doc">
+  <h1>Sorry it didn't work out.</h1>
+  <p class="dateline">One question, optional, and it is the only way I find out.</p>
+
+  <p>The extension collects nothing, so when someone removes it there is no way to know why.
+    If you tell me what went wrong, it is what gets fixed next.</p>
+
+  <form id="gb" novalidate>
+    <fieldset class="reasons" style="border:0;padding:0;margin:18px 0 20px">
+      <legend class="sr-only" style="position:absolute;left:-9999px">Why did you remove it?</legend>
+      <label><input type="radio" name="reason" value="no-data" /> It didn't find the data on my site</label>
+      <label><input type="radio" name="reason" value="confusing" /> I couldn't work out how to use it</label>
+      <label><input type="radio" name="reason" value="once" /> I only needed it once</label>
+      <label><input type="radio" name="reason" value="missing" /> It was missing something I needed</label>
+      <label><input type="radio" name="reason" value="price" /> The free version wasn't enough, and Pro wasn't worth it to me</label>
+      <label><input type="radio" name="reason" value="other-tool" /> I'm using a different tool</label>
+      <label><input type="radio" name="reason" value="other" /> Something else</label>
+    </fieldset>
+
+    <div class="more">
+      <label>Which site, if it was one in particular? <span>(optional)</span>
+        <input type="text" name="site" maxlength="200" placeholder="e.g. a directory, a shop, a search page" /></label>
+      <label>Anything else? <span>(optional)</span>
+        <textarea name="note" maxlength="800"></textarea></label>
+    </div>
+
+    <div class="actions"><button class="btn" type="submit" id="gbSend">Send</button></div>
+  </form>
+
+  <p id="gbDone" hidden><b>Thank you.</b> That goes straight onto the list of things to fix.
+    If you ever want to try again, it is <a href="/">here</a>.</p>
+  <p id="gbFallback" hidden></p>
+
+  <p>No name, email or IP address is stored with an answer &mdash; only what you choose to type
+    and the version you had. <a href="/privacy">Privacy policy</a>.</p>
+
+  <footer><a href="/">Magic Scraper</a> <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a> <a href="/support">Support</a></footer>
+</div>
+<script src="nav.js" defer></script>
+<script src="goodbye.js" defer></script>
+</body>
+</html>
