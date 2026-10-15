@@ -1,10 +1,10 @@
 {
- "hook1": "Are you a business, looking for partners to reach out to?",
- "hook2": "Or a student, who needs real data for your thesis?",
- "problem": "Then you know the drill. Copy. Paste. Next page. Again. For hours.",
- "rehook": "What if it took one click?",
- "answer1": "Magic Scraper turns any website into a clean spreadsheet.",
- "answer2": "A business directory becomes your partner list.",
- "answer3": "Search results become your thesis dataset. Every page, in minutes.",
- "business": "Magic Scraper. Free for Chrome and Edge. No account, and your data stays on your computer."
+ "hook": "Looking for businesses to partner with?",
+ "problem1": "You found the perfect directory. Four hundred companies.",
+ "problem2": "Now you're copying names, phones and websites. One, by one.",
+ "rehook": "There's a faster way.",
+ "click": "One click.",
+ "answer1": "Every company, on every page, in one spreadsheet.",
+ "answer2": "Your outreach list is ready before lunch.",
+ "cta": "Magic Scraper. Free for Chrome and Edge. No account needed."
 }
