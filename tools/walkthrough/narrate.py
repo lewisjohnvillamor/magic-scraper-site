@@ -14,7 +14,7 @@ from kokoro_onnx import Kokoro
 mdir, out = sys.argv[1], sys.argv[2]
 voice = sys.argv[3] if len(sys.argv) > 3 else 'af_heart'
 speed = float(sys.argv[4]) if len(sys.argv) > 4 else 0.98
-lines = json.load(open(os.path.join(os.path.dirname(__file__), 'narration.json')))
+lines = json.load(open(os.environ.get('LINES') or os.path.join(os.path.dirname(__file__), 'narration.json')))
 k = Kokoro(os.path.join(mdir, 'kokoro-v1.0.onnx'), os.path.join(mdir, 'voices-v1.0.bin'))
 os.makedirs(out, exist_ok=True)
 for key, text in lines.items():
