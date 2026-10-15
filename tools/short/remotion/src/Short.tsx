@@ -587,3 +587,30 @@ export const Short: React.FC<{ voice: boolean }> = ({ voice }) => {
     </AbsoluteFill>
   );
 };
+
+// ------------------------------------------------------------------ thumbnail (a still)
+export const Thumb: React.FC = () => (
+  <AbsoluteFill style={{ background: INK, fontFamily: UI }}>
+    <Fonts />
+    <Backdrop />
+    <div style={{ position: 'absolute', left: 0, right: 0, top: 210, display: 'flex', justifyContent: 'center' }}>
+      <div style={{ padding: '12px 28px', borderRadius: 999, border: `2px solid ${SOFT}`, color: SOFT, fontWeight: 800, fontSize: 32, letterSpacing: 4 }}>FOR BUSINESSES</div>
+    </div>
+    <div style={{ position: 'absolute', left: 40, right: 40, top: 300, textAlign: 'center', color: '#fff', fontFamily: HEAD, fontWeight: 650,
+      fontSize: 132, lineHeight: 1.04, letterSpacing: -4 }}>
+      <div style={{ position: 'relative', display: 'inline-block', color: '#cfc9e6' }}>Copy-paste
+        <div style={{ position: 'absolute', left: -14, right: -14, top: '52%', height: 16, borderRadius: 8, background: '#ef4444', transform: 'rotate(-4deg)' }} />
+      </div>
+      <div>a directory</div>
+      <div><span style={{ position: 'relative', zIndex: 1 }}>
+        <span style={{ position: 'absolute', left: -16, right: -16, top: '16%', bottom: '2%', background: VIOLET, borderRadius: 18, zIndex: -1 }} />in 1 click</span></div>
+    </div>
+    <div style={{ position: 'absolute', left: BR.x, top: 820, transform: 'rotate(-4deg) scale(.92)', transformOrigin: '50% 50%' }}>
+      <Browser page={1} slide={0} outline={() => 1} selected={() => 0} pagerHot={0} badge={1} />
+    </div>
+    <div style={{ position: 'absolute', left: SH0.x, top: 1250, transform: 'rotate(3deg) scale(.96)' }}>
+      <Sheet w={SH0.w} h={SH0.h + 60} title="partners.xlsx" rows={[0, 1, 2, 3, 4, 5, 6]} rowIn={() => 1} scroll={0} count="412 rows" stamp={1} />
+    </div>
+    <div style={{ position: 'absolute', left: 540 - 95, top: 1150, transform: 'rotate(-8deg)' }}><Mark size={190} glow={1.3} /></div>
+  </AbsoluteFill>
+);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Composition } from 'remotion';
-import { Short, FPS, TOTAL } from './Short';
+import { Short, Thumb, FPS, TOTAL } from './Short';
 // Two cuts of the same film: captions, music and effects only, or with the voice.
 export const Root: React.FC = () => (
   <>
@@ -8,5 +8,6 @@ export const Root: React.FC = () => (
       durationInFrames={Math.round(TOTAL * FPS)} fps={FPS} width={1080} height={1920} />
     <Composition id="ShortVoice" component={Short} defaultProps={{ voice: true }}
       durationInFrames={Math.round(TOTAL * FPS)} fps={FPS} width={1080} height={1920} />
+    <Composition id="Thumb" component={Thumb} durationInFrames={1} fps={FPS} width={1080} height={1920} />
   </>
 );
