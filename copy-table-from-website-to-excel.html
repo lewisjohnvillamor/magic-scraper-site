@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Copy a table from a website to Excel (without the one-column mess)</title>
+<meta name="description" content="How to copy a table from a website into Excel with its columns intact: one click with a free extension, Excel's From Web, Wikipedia tables, Google Sheets IMPORTHTML, and tables across many pages." />
+<link rel="canonical" href="https://magicscraper.app/copy-table-from-website-to-excel" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/copy-table-from-website-to-excel" />
+<meta property="og:title" content="Copy a table from a website to Excel (without the one-column mess)" />
+<meta property="og:description" content="Web table to Excel with the columns intact, in one click. Plus Wikipedia, Google Sheets and tables across many pages." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Copy a table from a website to Excel",
+  "description": "Export a table or list from any web page into Excel with its columns intact.",
+  "totalTime": "PT5M",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Open the page",
+      "text": "Open the page with the table and let it finish loading.",
+      "url": "https://magicscraper.app/copy-table-from-website-to-excel#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Click the extension icon",
+      "text": "The table is found and shown with named columns. Press Another table to pick a different one.",
+      "url": "https://magicscraper.app/copy-table-from-website-to-excel#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Export",
+      "text": "Press XLSX for Excel or CSV for anything else.",
+      "url": "https://magicscraper.app/copy-table-from-website-to-excel#quick"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does pasting a web table into Excel put everything in one column?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The browser copies text, not a table, when the page draws its table with divs instead of a real HTML table, or when you copy more than the table. Excel then has nothing to split on. An extension that reads the page's structure exports real columns instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Excel import a table from a website by itself?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes: Data &rarr; From Web (Power Query) reads real HTML tables from a public address. It can't see tables built by JavaScript after the page loads, lists that are cards rather than tables, or pages behind a login."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I copy a Wikipedia table to Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open the article, click the Magic Scraper icon, press Another table until the outline sits on the one you want, then XLSX. Footnote markers stay in the cells if the table has them; filter or rename columns before exporting."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is IMPORTHTML not working in Google Sheets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IMPORTHTML only sees what the server sends before any JavaScript runs, only real tables and lists, and some sites refuse Google's servers. If the cell shows an error or the wrong table, export a CSV with an extension instead and import it with File &rarr; Import."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on a Mac?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The extension runs in Chrome or Edge on macOS the same way; open the exported file in Excel, Numbers or Google Sheets."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Copy a table to Excel",
+      "item": "https://magicscraper.app/copy-table-from-website-to-excel"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>A table from a website, into Excel with its <i>columns</i>.</h1>
+    <p class="standfirst">Select, copy, paste &mdash; and everything lands in column A, or the
+      numbers come out as text, or half the rows are missing. Here is the one-click way that keeps
+      the columns, and when Excel's own import, Wikipedia's tables and Google Sheets' IMPORTHTML
+      will or won't do the job.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free: finding tables and exporting to Excel, CSV or JSON.</span>
+    </div>
+  </div>
+</div>
+
+<div id="main" class="wrap">
+
+  <section id="quick">
+    <h2>The one-click way</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Open the page</h3>
+        <p>Any page with a table, a list or a grid of cards. Let it finish loading.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Click the Magic Scraper icon</h3>
+        <p>The table is already found and outlined on the page, with the columns named from its headers. More than one table? Press <b>Another table</b>.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Press XLSX</h3>
+        <p>An Excel file with real columns lands in your downloads. CSV and JSON are there too, or <b>Copy</b> to paste straight into a sheet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="one-column">
+    <h2>Why pasting puts everything in one column</h2>
+    <div class="claim">
+      <p>A copy from a browser carries text, and only sometimes the table around it. Many sites
+        draw their "tables" with boxes rather than a real HTML table, so there are no cells for
+        Excel to keep. Others load the rows with JavaScript, so what you selected isn't what the
+        page is made of. Either way Excel gets lines of text and puts them all in column A.</p>
+      <p>Reading the page's structure, rather than its text, is what fixes it: the extension sees
+        the repeating rows &mdash; a real table, a list or a grid of cards &mdash; and writes one
+        column per field.</p>
+    </div>
+  </section>
+
+  <section id="from-web">
+    <h2>Excel's own "From Web"</h2>
+    <div class="claim">
+      <p>On Windows, <b>Data &rarr; From Web</b> (Power Query) imports real HTML tables from a
+        public address, and can refresh them. It is a good choice for a simple, public table that
+        you want to update inside Excel.</p>
+      <p>It can't see rows a page adds with JavaScript after loading, lists of cards that aren't
+        tables, pages behind a login, or a table spread over many pages. Those are the cases the
+        extension is for.</p>
+    </div>
+  </section>
+
+  <section id="many-pages">
+    <h2>A table across many pages</h2>
+    <div class="claim">
+      <p>Results split over pages 1, 2, 3&hellip;? On the <b>Crawl</b> tab press
+        <b>Auto-detect "Next"</b> and <b>Start crawling</b>. Every page is added to the same table,
+        with a pause between pages, until there are no more. Free, with no page limit. Infinite
+        scroll and "Load more" buttons work the same way.</p>
+    </div>
+  </section>
+
+  <section id="wikipedia">
+    <h2>Wikipedia tables</h2>
+    <div class="claim">
+      <p>Open the article and click the icon. Articles often hold several tables; press
+        <b>Another table</b> until the outline sits on the one you want, then export. Column
+        headers come from the table's own, and each linked name keeps its link in a column beside
+        it, so you can follow it later.</p>
+      <p>Need something from each linked article &mdash; a company's revenue, a city's population?
+        <a href="/drill-down">Drill-down</a> opens each one and adds its facts box as columns.</p>
+    </div>
+  </section>
+
+  <section id="importhtml">
+    <h2>Google Sheets: when IMPORTHTML doesn't work</h2>
+    <div class="claim">
+      <p><code>=IMPORTHTML(url, "table", 1)</code> pulls a table into a sheet and is perfect when
+        it works. It fails when the table is built by JavaScript, when the page has no real
+        <code>&lt;table&gt;</code>, when the number points at the wrong table, or when the site
+        refuses Google's servers &mdash; the cell shows an error or the wrong data.</p>
+      <p>Then export a CSV with the extension &mdash; it reads the page as your browser shows
+        it &mdash; and bring it in with <b>File &rarr; Import</b>, or press <b>Copy</b> and paste
+        into the sheet.</p>
+    </div>
+  </section>
+  <section id="ct-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why does pasting a web table into Excel put everything in one column?</summary>
+        <p>The browser copies text, not a table, when the page draws its table with divs instead of a real HTML table, or when you copy more than the table. Excel then has nothing to split on. An extension that reads the page's structure exports real columns instead.</p>
+      </details>
+      <details>
+        <summary>Can Excel import a table from a website by itself?</summary>
+        <p>Yes: Data &rarr; From Web (Power Query) reads real HTML tables from a public address. It can't see tables built by JavaScript after the page loads, lists that are cards rather than tables, or pages behind a login.</p>
+      </details>
+      <details>
+        <summary>How do I copy a Wikipedia table to Excel?</summary>
+        <p>Open the article, click the Magic Scraper icon, press Another table until the outline sits on the one you want, then XLSX. Footnote markers stay in the cells if the table has them; filter or rename columns before exporting.</p>
+      </details>
+      <details>
+        <summary>Why is IMPORTHTML not working in Google Sheets?</summary>
+        <p>IMPORTHTML only sees what the server sends before any JavaScript runs, only real tables and lists, and some sites refuse Google's servers. If the cell shows an error or the wrong table, export a CSV with an extension instead and import it with File &rarr; Import.</p>
+      </details>
+      <details>
+        <summary>Does it work on a Mac?</summary>
+        <p>Yes. The extension runs in Chrome or Edge on macOS the same way; open the exported file in Excel, Numbers or Google Sheets.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

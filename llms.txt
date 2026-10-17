@@ -33,6 +33,18 @@ extension, not in storage the scraped website can read.
   each member's website and social pages added from its profile by drill-down
 - [Trade show exhibitor lists](https://magicscraper.app/trade-show-exhibitor-list): every
   exhibitor from a show's online list, with details from each exhibitor's profile, to Excel
+- [Guides](https://magicscraper.app/guides): every guide, grouped: business lists, spreadsheet
+  how-tos, comparisons and the rules
+- [Copy a table from a website to Excel](https://magicscraper.app/copy-table-from-website-to-excel):
+  keeping the columns, Excel's From Web, Wikipedia tables, Google Sheets IMPORTHTML, tables over
+  many pages
+- [A list of businesses in any area](https://magicscraper.app/list-of-businesses-in-an-area): where
+  local business lists live and how to get one into Excel
+- [Data Miner alternative](https://magicscraper.app/data-miner-alternative) and
+  [Thunderbit alternative](https://magicscraper.app/thunderbit-alternative): honest comparisons
+- [Magic Scraper Desktop](https://magicscraper.app/desktop): coming soon for Windows and Linux;
+  scheduled monitors with the app closed, saved logins, webhooks, a local API
+  ([API docs](https://magicscraper.app/docs/api))
 - [Is it legal to scrape a business directory?](https://magicscraper.app/is-it-legal-to-scrape-a-business-directory):
   plain-language guide to site terms, GDPR and the UK/EU/US marketing rules; not legal advice
 - [Instant Data Scraper alternative](https://magicscraper.app/instant-data-scraper-alternative):

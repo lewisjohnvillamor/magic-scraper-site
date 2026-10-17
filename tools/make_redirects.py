@@ -30,7 +30,7 @@ lines = [
     "/demo /demo/ 301",
     "/demo/index.html /demo/ 301",
 ]
-for base, folder in (("/", "."), ("/demo/", "demo")):
+for base, folder in (("/", "."), ("/demo/", "demo"), ("/docs/", "docs")):
     for name in pages(folder):
         if name == "index":
             continue

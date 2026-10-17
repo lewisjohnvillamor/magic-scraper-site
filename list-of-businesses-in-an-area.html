@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How to get a list of businesses in any area (free, into Excel)</title>
+<meta name="description" content="Where lists of local businesses live — directories, chambers of commerce, associations, council licence lists — and how to turn one into a spreadsheet with name, address, phone and website. Free." />
+<link rel="canonical" href="https://magicscraper.app/list-of-businesses-in-an-area" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/list-of-businesses-in-an-area" />
+<meta property="og:title" content="How to get a list of businesses in any area (free, into Excel)" />
+<meta property="og:description" content="Where local business lists live and how to get one into Excel, with names, addresses, phones and websites." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Get a list of businesses in an area into Excel",
+  "description": "Find a public directory of local businesses and export every listing to a spreadsheet.",
+  "totalTime": "PT5M",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Pick a source",
+      "text": "A business directory, chamber of commerce directory, association list or council licence list for the area.",
+      "url": "https://magicscraper.app/list-of-businesses-in-an-area#sources"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Search the trade and the town",
+      "text": "Open the first page of results and click the extension icon.",
+      "url": "https://magicscraper.app/list-of-businesses-in-an-area#steps"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Collect every page",
+      "text": "Crawl every page of results into one table.",
+      "url": "https://magicscraper.app/list-of-businesses-in-an-area#steps"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add websites and export",
+      "text": "Use drill-down for details on each business's page, then export to Excel.",
+      "url": "https://magicscraper.app/list-of-businesses-in-an-area#steps"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where can I get a free list of businesses in my area?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Public business directories (Yellow Pages and its equivalents in other countries), your local chamber of commerce's member directory, industry association member lists, and in some cities the council's published list of business licences. Each can be turned into a spreadsheet with a browser extension."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get email addresses too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only where a directory or a business's own page shows them. Drill-down collects them from each listing's page when they are there; it doesn't guess addresses or look them up elsewhere."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often, for business details used carefully, but it depends on the site's terms and on data-protection and marketing rules where you and the businesses are. See Is it legal to scrape a business directory?"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What about Google Maps?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Its terms restrict collecting its listings, so this guide sticks to directories that publish lists for people to browse."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Businesses in an area",
+      "item": "https://magicscraper.app/list-of-businesses-in-an-area"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>A list of businesses in <i>any area</i>, into Excel.</h1>
+    <p class="standfirst">Every plumber in the city, every accountant within twenty miles, every
+      restaurant in a district: the lists already exist, published by directories and local
+      organisations for people to browse. Here is where to find them and how to turn one into a
+      spreadsheet &mdash; name, address, phone and website &mdash; without paying per row.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Finding listings, crawling every page and exporting are free.</span>
+    </div>
+  </div>
+</div>
+
+<div id="main" class="wrap">
+
+  <section id="sources">
+    <h2>Where the lists are</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Business directories</h3>
+        <p>Yellow Pages and its equivalents &mdash; Superpages in the US, Yellow Pages Canada, TrueLocal and Yellow Pages in Australia, Europages for suppliers. Search a trade and a town. <a href="/business-directory-scraper">Guide</a>.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Chambers of commerce</h3>
+        <p>Most towns have one, and its member directory lists local businesses that joined to be found. <a href="/chamber-of-commerce-directory-scraper">Guide</a>.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Industry associations</h3>
+        <p>Trade bodies publish member lists &mdash; builders, accountants, manufacturers &mdash; often with the member's specialities.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Council and government lists</h3>
+        <p>Some cities publish their business licences as open data, and regulators list who holds a licence. Look for a city's "open data" portal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="steps">
+    <h2>From search results to a spreadsheet</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Search the trade and the town</h3>
+        <p>On the directory, search the way you normally would and open the first page of results. Click the Magic Scraper icon: the listings are found, with columns such as name, phone, address and rating.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Collect every page</h3>
+        <p>On the <b>Crawl</b> tab press <b>Auto-detect "Next"</b>, then <b>Start crawling</b>. Every page of results goes into one table, with a pause between pages. Free, no page limit.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Add what each listing's page says</h3>
+        <p>The website, email or opening hours are often only on each business's own page. <a href="/drill-down">Drill-down</a> opens each one and adds them as columns &mdash; free for three rows, every row with Pro.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Export and tidy</h3>
+        <p>Export to Excel. If you collected more than one search or source, remove duplicates by name and phone in Excel (<b>Data &rarr; Remove Duplicates</b>).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="care">
+    <h2>Using it well</h2>
+    <div class="claim">
+      <p>Keep to business details &mdash; the company, its address, its main phone and website.
+        Check each directory's terms, and contact businesses the way your local rules on marketing
+        calls and email allow. <a href="/is-it-legal-to-scrape-a-business-directory">The rules in
+        plain words</a>.</p>
+    </div>
+  </section>
+  <section id="la-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Where can I get a free list of businesses in my area?</summary>
+        <p>Public business directories (Yellow Pages and its equivalents in other countries), your local chamber of commerce's member directory, industry association member lists, and in some cities the council's published list of business licences. Each can be turned into a spreadsheet with a browser extension.</p>
+      </details>
+      <details>
+        <summary>Can I get email addresses too?</summary>
+        <p>Only where a directory or a business's own page shows them. Drill-down collects them from each listing's page when they are there; it doesn't guess addresses or look them up elsewhere.</p>
+      </details>
+      <details>
+        <summary>Is it legal?</summary>
+        <p>Often, for business details used carefully, but it depends on the site's terms and on data-protection and marketing rules where you and the businesses are. See <a href="/is-it-legal-to-scrape-a-business-directory">Is it legal to scrape a business directory?</a></p>
+      </details>
+      <details>
+        <summary>What about Google Maps?</summary>
+        <p>Its terms restrict collecting its listings, so this guide sticks to directories that publish lists for people to browse.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

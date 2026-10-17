@@ -6,7 +6,12 @@ wrangler.toml
 README.md
 NOTICE
 tools
-docs
+# docs/ holds the README's images; docs/api.html is a published page (the
+# desktop app links to /docs/api), so only the images are kept out.
+docs/*.png
+docs/*.jpg
+docs/*.gif
+docs/*.md
 # The Worker's own source is bundled by wrangler; it is not a page.
 src
 # Local-only: never part of the site, even when deploying from a working copy.
