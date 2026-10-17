@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Scraper for Windows and Linux: desktop web scraper</title>
+<meta name="description" content="Magic Scraper Desktop for Windows and Linux: the same detection as the extension, plus scheduled monitors that run with the app closed, detail pages on every row, saved logins, webhooks and a local API. Coming soon." />
+<link rel="canonical" href="https://magicscraper.app/desktop" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/desktop" />
+<meta property="og:title" content="Magic Scraper for Windows and Linux: desktop web scraper" />
+<meta property="og:description" content="Scheduled monitors, saved logins, webhooks and an API, with the same detection as the extension. Coming soon for Windows and Linux." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Magic Scraper Desktop",
+  "operatingSystem": "Windows 10, Windows 11, Linux",
+  "applicationCategory": "BusinessApplication",
+  "description": "No-code web data extraction for Windows and Linux: paste a link and it finds the data, with scheduled monitors, saved logins, webhooks and a local API.",
+  "url": "https://magicscraper.app/desktop"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Desktop",
+      "item": "https://magicscraper.app/desktop"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Coming soon &middot; Windows &amp; Linux</p>
+    <h1>Magic Scraper, for your <i>desktop</i>.</h1>
+    <p class="standfirst">Paste a link and it finds the data &mdash; the same detection as the
+      extension, running in an app of its own. Then it keeps going when you aren't there: it checks
+      the pages you care about on a schedule, tells you what changed, and hands the rows to the
+      tools you already use.</p>
+    <div class="actions">
+      <a class="btn" href="mailto:support@magicscraper.app?subject=Tell%20me%20when%20Magic%20Scraper%20Desktop%20is%20ready&amp;body=Windows%20or%20Linux%3F%20What%20would%20you%20use%20it%20for%3F">Tell me when it's ready</a>
+      <a class="btn btn-quiet" href="/">Use the free extension today</a>
+      <span class="aside">One email when it launches. Nothing else.</span>
+    </div>
+  </div>
+</div>
+
+<div id="main" class="wrap">
+
+  <section id="adds">
+    <h2>What it adds to the extension</h2>
+    <p class="deck">An extension lives in a browser tab. The app doesn't have to.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Runs on a schedule, with the app closed</h3>
+        <p>Save a job as a <b>monitor</b> and run it daily or every 15 minutes to 12 hours. It keeps the last runs and shows exactly what changed &mdash; new, removed and changed rows, before and after &mdash; with a notification when something moves.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>The page behind every row</h3>
+        <p>Opens each row's link and adds what it finds there &mdash; specs, SKU, availability, contact details &mdash; as extra columns.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Many start pages at once</h3>
+        <p>Paste a list of links or import them from a file. Every page is read with the same settings into one table, with a column saying where each row came from.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Sites you sign in to</h3>
+        <p>Sign in once in an ordinary browser window; the session is reused for runs and monitors &mdash; an internal dashboard, a supplier portal you have an account with.</p>
+      </div>
+      <div class="step">
+        <span class="n">05</span>
+        <h3>Sends the rows onward</h3>
+        <p>Webhooks to Zapier, Make, n8n, Slack or your own server when a run finishes or a monitor finds changes, and a local API to start runs and fetch rows as JSON or CSV. <a href="/docs/api">API documentation</a>.</p>
+      </div>
+      <div class="step">
+        <span class="n">06</span>
+        <h3>Sorts rows for you, offline</h3>
+        <p><b>Magic AI</b> labels every row with categories you choose &mdash; product type, lead type, sentiment &mdash; using a model that runs on your computer. Optional, and nothing is sent anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="which">
+    <h2>Extension or desktop?</h2>
+    <table class="compare">
+      <thead><tr><th>&nbsp;</th><th>Extension</th><th>Desktop</th></tr></thead>
+      <tbody>
+        <tr><td>Finds tables, lists and card grids</td><td class="y">Yes</td><td class="y">Yes, the same engine</td></tr>
+        <tr><td>Every page: Next, infinite scroll, Load more</td><td class="y">Yes, free</td><td class="y">Yes</td></tr>
+        <tr><td>The page behind every row</td><td class="q">3 rows free, every row with Pro</td><td class="y">Yes</td></tr>
+        <tr><td>Runs on a schedule</td><td class="q">While the browser is open (Pro)</td><td class="y">Even with the app closed</td></tr>
+        <tr><td>What changed since last time</td><td class="y">Yes (Pro)</td><td class="y">Yes, with notifications</td></tr>
+        <tr><td>Webhooks and a local API</td><td class="n">No</td><td class="y">Yes</td></tr>
+        <tr><td>Offline AI tagging</td><td class="n">No</td><td class="y">Optional</td></tr>
+        <tr><td>Where it runs</td><td class="q">Chrome, Edge and other Chromium browsers</td><td class="q">Windows 10 and 11, Linux</td></tr>
+        <tr><td>Price</td><td class="q">Free; Pro is one-time</td><td class="q">One-time licence with a year of updates; free trial with every feature</td></tr>
+      </tbody>
+    </table>
+    <p class="aside">If the extension already does what you need, keep using it &mdash; it isn't going anywhere.</p>
+  </section>
+
+  <section id="manners">
+    <h2>Polite by default</h2>
+    <div class="claim">
+      <p>Out of the box it follows a site's <code>robots.txt</code>, stays on the sites you
+        started from, pauses between pages and stops at a page limit you set. When a site asks you
+        to confirm you're human, it opens an ordinary browser window so you can do it yourself.</p>
+      <p>Your rows are saved on your computer as they arrive, so a crash or a power cut doesn't
+        lose a run. Exports are Excel, CSV or JSON.</p>
+    </div>
+  </section>
+
+  <section id="requirements">
+    <h2>System requirements</h2>
+    <table class="compare">
+      <thead><tr><th>&nbsp;</th><th>Windows</th><th>Linux</th></tr></thead>
+      <tbody>
+        <tr><td>System</td><td>Windows 10 or 11, 64-bit</td><td>x86_64, glibc 2.35+: Ubuntu 22.04, Debian 12, Fedora 39 or newer</td></tr>
+        <tr><td>Memory</td><td>4 GB (8 GB recommended)</td><td>4 GB (8 GB recommended)</td></tr>
+        <tr><td>Disk</td><td>1 GB free</td><td>1 GB free</td></tr>
+        <tr><td>Also needs</td><td>Microsoft Edge (comes with Windows)</td><td>Chrome, Chromium, Edge or Brave</td></tr>
+        <tr><td>Magic AI (optional)</td><td>4+ cores, 8 GB RAM, 3 GB disk</td><td>4+ cores, 8 GB RAM, 3 GB disk</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="desk-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>When is it available?</summary>
+        <p>Soon. <a href="mailto:support@magicscraper.app?subject=Tell%20me%20when%20Magic%20Scraper%20Desktop%20is%20ready">Email us</a> and you'll get one message when it launches.</p>
+      </details>
+      <details>
+        <summary>Will my extension licence work in the desktop app?</summary>
+        <p>They are separate products: the desktop app has its own licence, for one computer with a year of updates. The extension stays free, with its one-time Pro.</p>
+      </details>
+      <details>
+        <summary>Is there a free trial?</summary>
+        <p>Yes, with every feature switched on, limited to 100 rows per run and one scheduled monitor run a day.</p>
+      </details>
+      <details>
+        <summary>Does it send my data anywhere?</summary>
+        <p>No. Runs, results and logins stay on your computer. It only reaches out when you tell it to: the sites you scrape, the webhooks you set up, and a small check for new versions you can turn off.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/docs/api">API docs</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

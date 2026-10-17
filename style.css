@@ -352,6 +352,13 @@ footer .sep { margin-left: auto; }
           text-transform: uppercase; color: var(--ink-2); font-weight: 400; }
 .doc code { font-family: var(--mono); font-size: .86em; background: var(--card);
             border: 1px solid var(--rule); padding: 1px 5px; }
+.doc h3 { font-size: 17px; margin: 30px 0 8px; }
+.doc ul, .doc ol { max-width: 66ch; margin: 0 0 16px; padding-left: 22px; }
+.doc li { margin: 0 0 6px; }
+.doc pre { background: var(--card); border: 1px solid var(--rule); padding: 14px 16px; margin: 0 0 20px;
+           overflow-x: auto; max-width: 100%; font-size: 13px; line-height: 1.5; }
+.doc pre code { border: 0; padding: 0; background: none; font-size: inherit; }
+.doc table { display: block; overflow-x: auto; }
 
 /* ---------- the bespoke brief ---------- */
 

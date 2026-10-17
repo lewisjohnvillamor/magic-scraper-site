@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Scraper Desktop API and webhooks</title>
+<meta name="description" content="Reference for Magic Scraper Desktop\'s webhooks, local API and remote access: events, signatures, endpoints and examples." />
+<link rel="canonical" href="https://magicscraper.app/docs/api" />
+<link rel="icon" href="/assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="/style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://magicscraper.app/docs/api" />
+<meta property="og:title" content="Magic Scraper Desktop API and webhooks" />
+<meta property="og:description" content="Webhooks, local API and remote access for Magic Scraper Desktop." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</div>
+
+<div id="main" class="wrap narrow doc">
+  <h1>Magic Scraper Desktop: API and webhooks</h1>
+  <p class="sub">For <a href="/desktop">Magic Scraper Desktop</a> on Windows and Linux &middot; set it up on the app's Integrations page</p>
+  <p>MagicScraper can send results to other apps (<b>webhooks</b>) and let other apps run it (<b>local API</b>). The local API can also be reached from the internet through a <b>Cloudflare Tunnel</b>. Set all three up on the <b>Integrations</b> page.</p>
+  <p>The API and the tunnel work while MagicScraper is running. To keep them up with the window closed, turn on <b>Settings → Run in the background</b>: MagicScraper then keeps running in the tray, and can start with Windows. Webhooks are sent by every run, including scheduled monitor runs, which happen in the background even when MagicScraper is not running.</p>
+  <h2 id="webhooks">Webhooks</h2>
+  <p>When an event happens, MagicScraper sends an HTTP <code>POST</code> with a JSON body to each webhook that wants it.</p>
+  <table><thead><tr><th>Event</th><th>When</th></tr></thead><tbody><tr><td><code>run.finished</code></td><td>A run from the Scrape page, or one started through the API, finished</td></tr><tr><td><code>monitor.changed</code></td><td>A monitor run found added, removed or changed rows (not sent for the first run, which sets the baseline)</td></tr><tr><td><code>monitor.failed</code></td><td>A monitor run failed, for example because a login expired</td></tr><tr><td><code>monitor.run</code></td><td>Every monitor run, changes or not</td></tr></tbody></table>
+  <h3 id="headers">Headers</h3>
+  <table><thead><tr><th>Header</th><th>Value</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td><code>application/json</code></td></tr><tr><td><code>X-MagicScraper-Event</code></td><td>the event name</td></tr><tr><td><code>X-MagicScraper-Delivery</code></td><td>the event id (<code>evt_…</code>), the same on every retry</td></tr><tr><td><code>X-MagicScraper-Signature</code></td><td><code>t=&lt;unix time&gt;,v1=&lt;signature&gt;</code> (see below)</td></tr></tbody></table>
+  <p>A delivery succeeds when the receiver answers with a 2xx status. Failures are retried after 5 and 30 seconds. 4xx answers other than 408 and 429 are not retried. The last 200 deliveries are listed on the Integrations page.</p>
+  <h3 id="run-finished"><code>run.finished</code></h3>
+  <pre><code>{
+  &quot;id&quot;: &quot;evt_3f9c1a0b7e2d4c6a8b1e0f2d&quot;,
+  &quot;event&quot;: &quot;run.finished&quot;,
+  &quot;created_at&quot;: &quot;2026-10-11T08:30:00.123+00:00&quot;,
+  &quot;app&quot;: { &quot;name&quot;: &quot;MagicScraper&quot;, &quot;version&quot;: &quot;0.1.0&quot; },
+  &quot;run&quot;: {
+    &quot;id&quot;: &quot;run_1a2b3c4d5e6f7a8b&quot;,
+    &quot;source&quot;: &quot;app&quot;,
+    &quot;start_urls&quot;: [&quot;https://magicscraper.app/demo/catalogue.html&quot;],
+    &quot;ok&quot;: true,
+    &quot;message&quot;: &quot;Finished: 54 rows&quot;,
+    &quot;row_count&quot;: 54
+  },
+  &quot;columns&quot;: [&quot;Name&quot;, &quot;Link&quot;, &quot;Price&quot;],
+  &quot;rows&quot;: [{ &quot;Name&quot;: &quot;Cast Iron Mug Set&quot;, &quot;Link&quot;: &quot;https://…/item1.html&quot;, &quot;Price&quot;: &quot;$239.00&quot; }],
+  &quot;rows_truncated&quot;: false
+}</code></pre>
+  <p><code>source</code> is <code>app</code> (the Scrape page), <code>api</code> or <code>test</code> (the <b>Send a test</b> button). At most 10,000 rows are sent. If a run has more, <code>rows_truncated</code> is <code>true</code>; use the API or an export to get the rest.</p>
+  <h3 id="monitor-changed-monitor-failed-monitor-run"><code>monitor.changed</code>, <code>monitor.failed</code>, <code>monitor.run</code></h3>
+  <pre><code>{
+  &quot;id&quot;: &quot;evt_…&quot;,
+  &quot;event&quot;: &quot;monitor.changed&quot;,
+  &quot;created_at&quot;: &quot;…&quot;,
+  &quot;app&quot;: { &quot;name&quot;: &quot;MagicScraper&quot;, &quot;version&quot;: &quot;0.1.0&quot; },
+  &quot;monitor&quot;: { &quot;id&quot;: &quot;m1760171400000&quot;, &quot;name&quot;: &quot;Competitor prices&quot;, &quot;start_urls&quot;: [&quot;https://…&quot;] },
+  &quot;run&quot;: { &quot;id&quot;: &quot;…&quot;, &quot;started_at&quot;: 1760171400, &quot;finished_at&quot;: 1760171431, &quot;ok&quot;: true, &quot;message&quot;: &quot;&quot;,
+           &quot;rows&quot;: 54, &quot;added&quot;: 1, &quot;removed&quot;: 0, &quot;changed&quot;: 2, &quot;baseline&quot;: false },
+  &quot;changes&quot;: {
+    &quot;added&quot;:   [{ &quot;Name&quot;: &quot;New product&quot;, &quot;Price&quot;: &quot;$19.00&quot; }],
+    &quot;removed&quot;: [],
+    &quot;changed&quot;: [{ &quot;key&quot;: &quot;https://…/item3.html&quot;,
+                  &quot;before&quot;: { &quot;Price&quot;: &quot;$64.00&quot; }, &quot;after&quot;: { &quot;Price&quot;: &quot;$59.00&quot; },
+                  &quot;fields&quot;: [&quot;Price&quot;] }],
+    &quot;unchanged&quot;: 51
+  }
+}</code></pre>
+  <p>Tick <b>Include every row in monitor events</b> to also receive <code>columns</code>, <code>rows</code> and <code>rows_truncated</code>.</p>
+  <h3 id="checking-the-signature">Checking the signature</h3>
+  <p>Each webhook has a signing secret (<code>whsec_…</code>). The signature is the hex HMAC-SHA256 of <code>&lt;t&gt;.&lt;raw request body&gt;</code> with that secret. Compare it with <code>v1</code>, and reject old timestamps to stop replays.</p>
+  <pre><code>import hashlib, hmac, time
+
+def verify(secret: str, header: str, body: bytes, tolerance=300) -&gt; bool:
+    parts = dict(p.split(&quot;=&quot;, 1) for p in header.split(&quot;,&quot;))
+    if abs(time.time() - int(parts[&quot;t&quot;])) &gt; tolerance:
+        return False
+    expected = hmac.new(secret.encode(), f&quot;{parts[&#x27;t&#x27;]}.&quot;.encode() + body, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(expected, parts[&quot;v1&quot;])</code></pre>
+  <pre><code>import crypto from &quot;node:crypto&quot;;
+
+function verify(secret, header, rawBody, tolerance = 300) {
+  const parts = Object.fromEntries(header.split(&quot;,&quot;).map((p) =&gt; p.split(&quot;=&quot;)));
+  if (Math.abs(Date.now() / 1000 - Number(parts.t)) &gt; tolerance) return false;
+  const expected = crypto.createHmac(&quot;sha256&quot;, secret).update(`${parts.t}.`).update(rawBody).digest(&quot;hex&quot;);
+  return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(parts.v1));
+}</code></pre>
+  <h2 id="local-api">Local API</h2>
+  <ul><li>Base address: <code>http://127.0.0.1:8787</code>. The port is set on the Integrations page. The API only listens on this PC; use the tunnel to reach it from elsewhere.</li><li>Authentication: send the API key (<code>msk_…</code>) with every request, as <code>Authorization: Bearer &lt;key&gt;</code> or <code>X-API-Key: &lt;key&gt;</code>. Without a valid key the API answers <code>401</code>.</li><li>Answers are JSON. Errors look like <code>{"error": "…"}</code>.</li><li>Unlicensed copies stop each run at the trial row limit, as in the app.</li></ul>
+  <h3 id="get-v1-status"><code>GET /v1/status</code></h3>
+  <pre><code>{ &quot;version&quot;: &quot;0.1.0&quot;, &quot;licensed&quot;: true, &quot;row_limit&quot;: null, &quot;scrape_enabled&quot;: true, &quot;running_scrapes&quot;: 0 }</code></pre>
+  <h3 id="post-v1-scrape"><code>POST /v1/scrape</code></h3>
+  <p>Scrapes one or more pages and answers with the rows.</p>
+  <pre><code>curl -X POST http://127.0.0.1:8787/v1/scrape \
+  -H &quot;Authorization: Bearer msk_…&quot; -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;url&quot;: &quot;https://magicscraper.app/demo/catalogue.html&quot;, &quot;max_items&quot;: 100}&#x27;</code></pre>
+  <p>Body fields:</p>
+  <table><thead><tr><th>Field</th><th>Default</th><th></th></tr></thead><tbody><tr><td><code>url</code> or <code>urls</code></td><td>required</td><td>The start page(s)</td></tr><tr><td><code>mode</code></td><td><code>"auto"</code></td><td><code>"auto"</code> finds the data by itself, as in the app's Automatic mode. <code>"selectors"</code> uses <code>fields</code>, <code>item_selector</code> and <code>follow_selector</code>, as in Custom selectors mode</td></tr><tr><td><code>auto</code></td><td></td><td>Automatic-mode options: <code>paging</code> (<code>"auto"</code>, <code>"next"</code>, <code>"scroll"</code> or <code>"none"</code>), <code>candidate</code>, <code>keep</code>, <code>rename</code>, <code>drill</code> (<code>{"enabled": true, "max_rows": 20}</code>), <code>min_delay</code>, <code>max_delay</code></td></tr><tr><td><code>max_pages</code>, <code>max_items</code></td><td>10, no limit</td><td></td></tr><tr><td><code>use_proxy</code></td><td><code>true</code></td><td>Use the proxies from Settings (when they're turned on)</td></tr><tr><td><code>magic</code></td><td></td><td>Magic Tags, if Magic AI is installed: <code>{"tags": [{"name": "Category", "question": "What kind of product is this?", "labels": [{"name": "Kitchen", "hint": "cookware, mugs"}, {"name": "Furniture", "hint": "tables, chairs"}], "show_confidence": true, "columns": ["Name"]}], "min_confidence": 0}</code> adds a <code>Category</code> column (and <code>Category (confidence)</code>, 0-100) to every row. <code>columns</code> (optional) limits what the AI reads for that tag, which makes it more accurate. See MAGIC_AI.md</td></tr><tr><td><code>wait</code></td><td><code>true</code></td><td><code>false</code> answers <code>202</code> at once with the run id; get the result from <code>GET /v1/runs/{id}</code></td></tr><tr><td><code>timeout</code></td><td>300</td><td>Seconds to wait (up to 1800). If the run takes longer, the answer is <code>202</code> with <code>"status": "running"</code></td></tr><tr><td><code>format</code></td><td><code>"json"</code></td><td><code>"csv"</code> answers with a CSV file</td></tr></tbody></table>
+  <p>Any other job setting from a job file saved in the app can be given too. API runs never use saved logins. Answer:</p>
+  <pre><code>{ &quot;id&quot;: &quot;run_…&quot;, &quot;status&quot;: &quot;done&quot;, &quot;start_urls&quot;: [&quot;…&quot;], &quot;started_at&quot;: 1760171400, &quot;finished_at&quot;: 1760171409,
+  &quot;error&quot;: &quot;&quot;, &quot;row_count&quot;: 54, &quot;columns&quot;: [&quot;Name&quot;, &quot;Link&quot;, &quot;Price&quot;], &quot;rows&quot;: [ … ] }</code></pre>
+  <p><code>status</code> is <code>running</code>, <code>done</code> or <code>failed</code>. Two scrapes can run at once; a third gets <code>429</code>. The <b>Allow scraping any web address</b> switch turns this endpoint off (<code>403</code>).</p>
+  <h3 id="get-v1-runs-id"><code>GET /v1/runs/{id}</code></h3>
+  <p>The status and rows of a run started with <code>POST /v1/scrape</code> (<code>?format=csv</code> for CSV). Answers <code>202</code> while it is running. The last 20 runs are kept until the app closes.</p>
+  <h3 id="get-v1-monitors"><code>GET /v1/monitors</code></h3>
+  <p>The saved monitors with their latest run.</p>
+  <h3 id="post-v1-monitors-id-run"><code>POST /v1/monitors/{id}/run</code></h3>
+  <p>Runs a monitor now, with its own settings (including its saved login). It waits for the run (pass <code>?wait=false</code> to not wait, <code>?timeout=</code> in seconds) and answers like <code>/runs/latest</code> below. The run also sends the monitor webhooks.</p>
+  <h3 id="get-v1-monitors-id-runs-latest"><code>GET /v1/monitors/{id}/runs/latest</code></h3>
+  <pre><code>{ &quot;run&quot;: { …summary… }, &quot;changes&quot;: { &quot;added&quot;: [], &quot;removed&quot;: [], &quot;changed&quot;: [], &quot;unchanged&quot;: 54 },
+  &quot;columns&quot;: [ … ], &quot;rows&quot;: [ … ] }</code></pre>
+  <p><code>?rows=false</code> leaves out <code>rows</code>. <code>?format=csv</code> answers with the rows as CSV.</p>
+  <h2 id="remote-access-cloudflare-tunnel">Remote access (Cloudflare Tunnel)</h2>
+  <p>The tunnel connects the local API to Cloudflare's network, so it can be reached at a public https address without opening ports on the router. The app runs Cloudflare's <code>cloudflared</code>, which is shipped in the <code>tools</code> folder.</p>
+  <ul><li><b>Quick tunnel</b>: no account needed. The address (<code>https://&lt;words&gt;.trycloudflare.com</code>) changes every time the tunnel starts. Cloudflare provides quick tunnels for testing, with no uptime guarantee.</li><li><b>My Cloudflare tunnel</b>: a permanent address on your own domain.</li><li>In the Cloudflare dashboard, go to Zero Trust → Networks → Tunnels → Create a tunnel → Cloudflared.</li><li>Copy the token.</li><li>Add a public hostname (e.g. <code>scraper.example.com</code>) with service <code>http://localhost:8787</code>.</li><li>Paste the token and hostname into MagicScraper.</li></ul>
+  <p>You can add Cloudflare Access in front for extra sign-in protection.</p>
+  <p>Anyone who has the public address <b>and</b> the API key can run scrapes on the PC. Keep the key secret and make a new one if it leaks.</p>
+
+  <footer><a href="/">Magic Scraper</a> <a href="/desktop">Desktop</a> <a href="/guides">Guides</a> <a href="/privacy">Privacy</a> <a href="/support">Support</a></footer>
+</div>
+
+<script src="/nav.js" defer></script>
+</body>
+</html>
