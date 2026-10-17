@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Is it legal to scrape a business directory?</title>
+<meta name="description" content="Plain-language guide to collecting business listings from public directories: site terms, data-protection rules in the EU, UK and US, and contacting the businesses afterwards. Not legal advice." />
+<link rel="canonical" href="https://magicscraper.app/is-it-legal-to-scrape-a-business-directory" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/is-it-legal-to-scrape-a-business-directory" />
+<meta property="og:title" content="Is it legal to scrape a business directory?" />
+<meta property="og:description" content="Site terms, GDPR, the UK's rules for companies and sole traders, and US email and call rules, in plain words. Not legal advice." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it legal to scrape a business directory?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often, but it depends on three things: the directory's terms, whether the listings contain personal data, and how you contact the businesses afterwards. Company-level details used carefully carry the least risk. This is not legal advice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does GDPR apply to business contact details?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When a listing names a person -- a sole trader, or an employee's name and email -- that is personal data under GDPR, even if it is public. Company names, addresses and main phone numbers are much less likely to be."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Is it legal to scrape a business directory?",
+      "item": "https://magicscraper.app/is-it-legal-to-scrape-a-business-directory"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Plain words, not legal advice</p>
+    <h1>Is it legal to scrape a <i>business directory</i>?</h1>
+    <p class="standfirst">Often, yes &mdash; but not always, and not for every use. It comes down
+      to three questions: what the directory's own rules say, whether the listings contain
+      personal data, and how you contact the businesses afterwards. Here is each one in plain
+      words, with the sources.</p>
+    <p class="aside">This page is general information, not legal advice. Laws differ by
+      country and change; for a decision that matters, ask a lawyer where you are.</p>
+  </div>
+</div>
+
+<div id="main" class="wrap">
+
+  <section id="terms">
+    <h2>1. The directory's own rules</h2>
+    <div class="claim">
+      <p>Most directories have terms of use, and some say plainly that automated collection is
+        not allowed. Read them before you collect from a site you will use often. A site's
+        <code>robots.txt</code> file also says which parts it would rather automated tools left
+        alone.</p>
+      <p>In the US, courts have generally not treated reading pages anyone can see as
+        &ldquo;unauthorised access&rdquo; under federal anti-hacking law &mdash; but a site's
+        terms can still bind you as a contract, so breaking them is a risk of its own. Getting
+        past a login, a paywall or a &ldquo;prove you're human&rdquo; check is a different and
+        much riskier matter, which is why Magic Scraper never does it.</p>
+    </div>
+  </section>
+
+  <section id="personal">
+    <h2>2. Company details or personal data?</h2>
+    <div class="claim">
+      <p>A company's name, address, main phone and website are business information. A
+        <b>named person</b> &mdash; a sole trader, or an employee's name and email &mdash; is
+        personal data, and in the EU and UK that brings GDPR into play <b>even when the details
+        are public</b>.</p>
+      <p>France's data-protection authority, the CNIL, has said that people who publish their
+        contact details online do not expect them to be collected for sales prospecting, and
+        that scraped contact data still needs a lawful basis to be reused
+        (<a href="https://www.proskauer.com/blog/french-dpa-issues-guidance-surrounding-practice-of-web-scraping" target="_blank" rel="noopener">summary of the CNIL's guidance</a>).
+        In January 2025 it fined Kaspr, a contact-data company, &euro;240,000 for collecting
+        contact details without a valid legal basis or enough transparency
+        (<a href="https://cnil.fr/en/node/166441" target="_blank" rel="noopener">CNIL</a>).</p>
+      <p>The simplest way to stay on the right side: collect <b>company-level fields</b>, leave
+        out named people unless you have a clear reason, and keep only what you will use.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>3. Contacting the businesses afterwards</h2>
+    <div class="claim">
+      <p>Collecting a list and emailing or calling everyone on it are covered by different
+        rules, and the second is where most trouble starts.</p>
+      <p><b>UK.</b> You may send marketing emails to companies (&ldquo;corporate
+        subscribers&rdquo;) without their prior consent, if you say who you are and offer a way to
+        opt out. Sole traders and some partnerships are treated like individuals: you need their
+        consent, or an existing customer relationship
+        (<a href="https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/business-to-business-marketing/" target="_blank" rel="noopener">ICO guidance</a>).</p>
+      <p><b>EU.</b> Rules on marketing email vary by country; several require consent even for
+        business addresses. Check the country you are emailing into.</p>
+      <p><b>US.</b> Commercial email must follow the CAN-SPAM Act: no misleading subject lines,
+        a real postal address, and a working unsubscribe that you honour
+        (<a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" target="_blank" rel="noopener">FTC guide</a>).
+        Calls and texts are stricter, especially to mobile numbers.</p>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <h2>A short checklist</h2>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><h3>Read the terms</h3>
+        <p>Of the directory you collect from, especially if you'll use it regularly.</p></div>
+      <div class="step"><span class="n">02</span><h3>Keep to business details</h3>
+        <p>Company, address, main phone, website. Leave out named people unless you need them.</p></div>
+      <div class="step"><span class="n">03</span><h3>Go at a human pace</h3>
+        <p>One page at a time, with pauses. Stop if the site asks you to.</p></div>
+      <div class="step"><span class="n">04</span><h3>Contact people properly</h3>
+        <p>Say who you are, why you're writing, and honour every opt-out.</p></div>
+    </div>
+  </section>
+
+  <section id="ours">
+    <h2>What Magic Scraper does about it</h2>
+    <div class="claim">
+      <p>It reads only pages you open, in your own browser, at a human pace with a randomised
+        pause between pages. If a site answers &ldquo;slow down&rdquo;, it waits. If a site asks
+        you to prove you're human, the run stops and hands you the tab; it never tries to get
+        past a check, a login or a paywall. What you collect stays on your computer &mdash;
+        there is no server of ours for it to pass through.</p>
+      <p>How you use the list is up to you, and the rules above are yours to follow.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/business-directory-scraper">Business directories</a>
+    <a href="/chamber-of-commerce-directory-scraper">Chamber directories</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

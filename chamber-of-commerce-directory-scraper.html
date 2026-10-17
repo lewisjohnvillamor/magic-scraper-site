@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chamber of commerce member directory to Excel, free</title>
+<meta name="description" content="Turn a chamber of commerce member directory into a spreadsheet: every member's name, address, city, state, ZIP and phone, plus website and social pages from each profile. Free browser extension." />
+<link rel="canonical" href="https://magicscraper.app/chamber-of-commerce-directory-scraper" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/chamber-of-commerce-directory-scraper" />
+<meta property="og:title" content="Chamber of commerce member directory to Excel, free" />
+<meta property="og:description" content="Every member of a chamber of commerce directory, with address and phone, in one spreadsheet. Free browser extension; nothing leaves your browser." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Export a chamber of commerce member directory to a spreadsheet",
+  "description": "Collect every member listed in a chamber of commerce's online directory -- name, address, phone, website -- and export it to Excel or CSV with a browser extension.",
+  "totalTime": "PT5M",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Find the member directory",
+      "text": "Open your chamber's website and find its member or business directory, then open a category.",
+      "url": "https://magicscraper.app/chamber-of-commerce-directory-scraper#find"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Click the extension icon",
+      "text": "The members on the page are found, with their name, street address, city, state, ZIP and phone in named columns.",
+      "url": "https://magicscraper.app/chamber-of-commerce-directory-scraper#detect"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add each member's website",
+      "text": "Drill-down opens each member's profile and adds its website, fax and social pages as extra columns.",
+      "url": "https://magicscraper.app/chamber-of-commerce-directory-scraper#profiles"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Export",
+      "text": "Export to Excel (XLSX), CSV or JSON. The file is built in your browser.",
+      "url": "https://magicscraper.app/chamber-of-commerce-directory-scraper#export"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Chamber of commerce directory",
+      "item": "https://magicscraper.app/chamber-of-commerce-directory-scraper"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>A chamber's member directory, as a <i>spreadsheet</i>.</h1>
+    <p class="standfirst">Almost every town and city has a chamber of commerce, and almost every
+      chamber publishes a member directory: the local accountants, contractors, printers and
+      restaurants that joined to be found. It is a ready-made list of real, active businesses
+      that want to meet other businesses &mdash; and it has no export button. Open it, press one
+      button, and the members come back as rows.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Finding the members and exporting them are free.</span>
+    </div>
+  </div>
+</div>
+
+<div id="main" class="wrap">
+
+  <section id="what">
+    <h2>What comes out</h2>
+    <div class="claim">
+      <p>One row per member: the <b>name</b>, <b>street address</b>, <b>city</b>, <b>state</b>,
+        <b>ZIP</b> and <b>phone</b>, plus a link to the member's map location and to its own
+        profile in the directory. The columns arrive named, so the sheet reads
+        <code>City</code>, <code>State</code>, <code>Postcode</code>, <code>Phone</code> rather
+        than <code>col_7</code>.</p>
+      <p>With <a href="/drill-down">drill-down</a>, each member's profile page adds what the
+        list leaves out: the business's <b>website</b>, <b>fax</b>, and its <b>LinkedIn</b>,
+        <b>Facebook</b> and <b>X</b> pages, where the member has listed them.</p>
+      <p>We tried it on the member directories of three chambers in three states, all on the
+        directory software most chambers use. Every member on every page came through.</p>
+    </div>
+  </section>
+
+  <section id="steps">
+    <h2>Four steps</h2>
+    <p class="deck">Want to practise first? The <a href="/demo/">sandbox</a> is fictional and
+      nothing on it is rate-limited.</p>
+    <div class="steps">
+      <div class="step" id="find">
+        <span class="n">01</span>
+        <h3>Find the member directory</h3>
+        <p>On your chamber's website look for <b>Member directory</b>, <b>Business directory</b>
+          or <b>Find a business</b>. Many live at an address like
+          <code>business.yourchamber.org/list</code>, split into categories. Open one &mdash;
+          most show the whole category on a single page.</p>
+      </div>
+      <div class="step" id="detect">
+        <span class="n">02</span>
+        <h3>Click the extension icon</h3>
+        <p>The members are already found and the columns named. Leave out a column by clicking
+          its header; rename one with a double-click. Your choices are remembered for that
+          directory.</p>
+      </div>
+      <div class="step" id="profiles">
+        <span class="n">03</span>
+        <h3>Add each member's website</h3>
+        <p>Every row links to the member's profile. Turn on drill-down and it opens each
+          profile in the background and adds the website and social pages it finds. Free for
+          the first three rows, so you see exactly what comes back; Pro, a one-time purchase,
+          does every row.</p>
+      </div>
+      <div class="step" id="export">
+        <span class="n">04</span>
+        <h3>Export to Excel or CSV</h3>
+        <p>Press <b>XLSX</b> or <b>CSV</b>. Want the whole chamber, not one category? Put the
+          category pages in a list and one setup runs over all of them into a single sheet
+          (Pro; the free version runs two).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="care">
+    <h2>Using it well</h2>
+    <div class="claim">
+      <p>A chamber directory is a list of businesses, so keep to <b>business details</b>
+        &mdash; the company, its address, its main phone and website. Chambers usually hide
+        members' emails behind a &ldquo;Send email&rdquo; form, and Magic Scraper does not get
+        past that or guess addresses.</p>
+      <p>Check the chamber's terms, and contact the businesses the way your local rules on
+        marketing calls and email allow. In the UK and the EU the rules differ for companies and
+        for sole traders. <a href="/is-it-legal-to-scrape-a-business-directory">Is it legal to
+        scrape a business directory?</a> sets it out in plain words.</p>
+    </div>
+  </section>
+
+  <section id="cc-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Will it work on my chamber's directory?</summary>
+        <p>If the members are shown as cards or a table, almost certainly &mdash; it reads what
+          your browser shows you. Some chambers use other directory software; the free version
+          is the test, on that exact page.</p>
+      </details>
+      <details>
+        <summary>Can it get members' email addresses?</summary>
+        <p>Only where the directory shows them. Most chambers don't: they put a contact form
+          in its place. Magic Scraper collects what is on the page and nothing else.</p>
+      </details>
+      <details>
+        <summary>The chamber only offers a PDF member list.</summary>
+        <p>Magic Scraper reads web pages, not PDFs. Look for the online directory, which most
+          chambers keep alongside the PDF and update more often.</p>
+      </details>
+      <details>
+        <summary>Is it free?</summary>
+        <p>Finding the members, choosing columns, crawling and exporting are free, with no
+          account. Drill-down past three rows, and running one setup over many category pages,
+          are part of Pro &mdash; a one-time purchase, not a subscription.</p>
+      </details>
+      <details>
+        <summary>Does my list get sent anywhere?</summary>
+        <p>No. Everything happens in your browser; there is no server for it to pass through.
+          <a href="/privacy">The privacy policy</a> has the detail.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/business-directory-scraper">Business directories</a>
+    <a href="/drill-down">Drill-down</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>
