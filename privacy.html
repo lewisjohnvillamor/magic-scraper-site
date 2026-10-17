@@ -48,7 +48,7 @@
 
 <div id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="sub">Last updated 12 October 2026 · applies to the Magic Scraper browser extension for Chrome and Edge</p>
+  <p class="sub">Last updated 17 October 2026 · applies to the Magic Scraper browser extension for Chrome and Edge, and to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux</p>
 
   <p class="lead"><b>Magic Scraper keeps your data on your machine.</b> It has no servers of its
   own, no analytics and no telemetry. Everything it reads stays in your browser, and everything
@@ -195,6 +195,46 @@
   respecting the terms of service, <code>robots.txt</code>, rate limits and copyright of the
   sites you use it on, and for handling any personal data you collect lawfully.</p>
 
+  <h2 id="desktop">Magic Scraper Desktop (Windows and Linux)</h2>
+  <p>Everything above is about the extension. The desktop app is a separate program with its own
+  licence, and it does more on its own, so here is exactly what it keeps and what it sends.</p>
+  <p><b>What it keeps, on your computer.</b> Your jobs, monitors and their run history, the rows
+  each run collects (saved as they arrive, so a crash doesn't lose them), your settings, and your
+  licence key with the purchase details Gumroad returns for it. It lives in your user data folder:
+  <code>%APPDATA%\MagicScraper</code> on Windows (or a <code>data</code> folder beside the app in
+  the portable edition) and <code>~/.local/share/magicscraper</code> on Linux. Saved logins
+  (the cookies of a site you signed in to through the app) and any proxy passwords you enter are
+  stored there <b>unencrypted</b>, so anyone who can open your user account can read them; sign
+  out of a saved login, or delete the folder, to remove them. Nothing here is sent to us.</p>
+  <p><b>What it sends, and to whom.</b></p>
+  <table>
+    <tr><th>When</th><th>What goes where</th></tr>
+    <tr><td>You run a job or a monitor</td><td>Requests for the pages you asked for, and their
+      <code>robots.txt</code>, go from your computer to those sites, as your browser's would.</td></tr>
+    <tr><td>You activate a licence, and when the app starts</td><td>Your licence key and our
+      product id go to Gumroad's licence service to confirm the purchase. Gumroad answers with the
+      purchase details (including the email used to buy), which are kept on your computer. No
+      identifier of your computer is sent. Without a connection the app keeps working for up to 30
+      days.</td></tr>
+    <tr><td>The app starts (you can turn this off)</td><td>One request for a small file on
+      magicscraper.app saying which version is newest, with the app's version in the request.
+      Nothing else is sent; our host sees an ordinary web request.</td></tr>
+    <tr><td>You download Magic AI's model (optional)</td><td>A one-time download of the model file.
+      Tagging runs entirely on your computer; rows are never sent anywhere to be tagged.</td></tr>
+    <tr><td>You set up webhooks</td><td>The results of runs, or a monitor's changes, are sent to
+      the addresses you entered &mdash; Zapier, Make, n8n, Slack or your own server &mdash; and
+      handled under their terms.</td></tr>
+    <tr><td>You turn on the local API</td><td>It listens on your own computer only
+      (<code>127.0.0.1</code>), behind an API key you create.</td></tr>
+    <tr><td>You turn on remote access</td><td>Requests to your API from outside pass through
+      Cloudflare's tunnel service, using Cloudflare's own <code>cloudflared</code> program.</td></tr>
+    <tr><td>You add a proxy or other network service in Settings</td><td>Page requests go through
+      the server you configured, which you choose and are responsible for.</td></tr>
+  </table>
+  <p>It has <b>no analytics, no telemetry and no crash reporting</b>. We don't receive your jobs,
+  your results, the sites you visit or how you use the app. Notifications are shown by your
+  operating system and stay on your computer.</p>
+
   <h2 id="website">About this website</h2>
   <p>Everything above is about the <b>extension</b>, which has no server and never did. This
   <b>website</b> is a different thing and now has one small piece of one, so it is worth saying
@@ -215,6 +255,9 @@
   it on, for one purpose: telling you when that thing ships. It is optional, the vote is already
   counted without it, and asking to be removed at
   <a href="mailto:support@magicscraper.app">support@magicscraper.app</a> is enough.</p>
+  <p>If you email us to be told when Magic Scraper Desktop launches, your address is kept for that
+  one message and nothing else; ask at
+  <a href="mailto:support@magicscraper.app">support@magicscraper.app</a> to be removed sooner.</p>
   <p>None of this touches the extension. Beyond opening those two pages, it has no idea the
   website exists.</p>
 
