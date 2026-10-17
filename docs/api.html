@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="wrap">
+<header class="wrap">
   <div class="masthead">
     <a class="logo" href="/">
       <span class="glyph" aria-hidden="true">
@@ -44,9 +44,9 @@
       <a href="/support">Support</a>
     </nav>
   </div>
-</div>
+</header>
 
-<div id="main" class="wrap narrow doc">
+<main id="main" class="wrap narrow doc">
   <h1>Magic Scraper Desktop: API and webhooks</h1>
   <p class="sub">For <a href="/desktop">Magic Scraper Desktop</a> on Windows and Linux &middot; set it up on the app's Integrations page</p>
   <p>MagicScraper can send results to other apps (<b>webhooks</b>) and let other apps run it (<b>local API</b>). The local API can also be reached from the internet through a <b>Cloudflare Tunnel</b>. Set all three up on the <b>Integrations</b> page.</p>
@@ -58,7 +58,7 @@
   <table><thead><tr><th>Header</th><th>Value</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td><code>application/json</code></td></tr><tr><td><code>X-MagicScraper-Event</code></td><td>the event name</td></tr><tr><td><code>X-MagicScraper-Delivery</code></td><td>the event id (<code>evt_…</code>), the same on every retry</td></tr><tr><td><code>X-MagicScraper-Signature</code></td><td><code>t=&lt;unix time&gt;,v1=&lt;signature&gt;</code> (see below)</td></tr></tbody></table>
   <p>A delivery succeeds when the receiver answers with a 2xx status. Failures are retried after 5 and 30 seconds. 4xx answers other than 408 and 429 are not retried. The last 200 deliveries are listed on the Integrations page.</p>
   <h3 id="run-finished"><code>run.finished</code></h3>
-  <pre><code>{
+  <pre tabindex="0"><code>{
   &quot;id&quot;: &quot;evt_3f9c1a0b7e2d4c6a8b1e0f2d&quot;,
   &quot;event&quot;: &quot;run.finished&quot;,
   &quot;created_at&quot;: &quot;2026-10-11T08:30:00.123+00:00&quot;,
@@ -77,7 +77,7 @@
 }</code></pre>
   <p><code>source</code> is <code>app</code> (the Scrape page), <code>api</code> or <code>test</code> (the <b>Send a test</b> button). At most 10,000 rows are sent. If a run has more, <code>rows_truncated</code> is <code>true</code>; use the API or an export to get the rest.</p>
   <h3 id="monitor-changed-monitor-failed-monitor-run"><code>monitor.changed</code>, <code>monitor.failed</code>, <code>monitor.run</code></h3>
-  <pre><code>{
+  <pre tabindex="0"><code>{
   &quot;id&quot;: &quot;evt_…&quot;,
   &quot;event&quot;: &quot;monitor.changed&quot;,
   &quot;created_at&quot;: &quot;…&quot;,
@@ -97,7 +97,7 @@
   <p>Tick <b>Include every row in monitor events</b> to also receive <code>columns</code>, <code>rows</code> and <code>rows_truncated</code>.</p>
   <h3 id="checking-the-signature">Checking the signature</h3>
   <p>Each webhook has a signing secret (<code>whsec_…</code>). The signature is the hex HMAC-SHA256 of <code>&lt;t&gt;.&lt;raw request body&gt;</code> with that secret. Compare it with <code>v1</code>, and reject old timestamps to stop replays.</p>
-  <pre><code>import hashlib, hmac, time
+  <pre tabindex="0"><code>import hashlib, hmac, time
 
 def verify(secret: str, header: str, body: bytes, tolerance=300) -&gt; bool:
     parts = dict(p.split(&quot;=&quot;, 1) for p in header.split(&quot;,&quot;))
@@ -105,7 +105,7 @@ def verify(secret: str, header: str, body: bytes, tolerance=300) -&gt; bool:
         return False
     expected = hmac.new(secret.encode(), f&quot;{parts[&#x27;t&#x27;]}.&quot;.encode() + body, hashlib.sha256).hexdigest()
     return hmac.compare_digest(expected, parts[&quot;v1&quot;])</code></pre>
-  <pre><code>import crypto from &quot;node:crypto&quot;;
+  <pre tabindex="0"><code>import crypto from &quot;node:crypto&quot;;
 
 function verify(secret, header, rawBody, tolerance = 300) {
   const parts = Object.fromEntries(header.split(&quot;,&quot;).map((p) =&gt; p.split(&quot;=&quot;)));
@@ -116,16 +116,16 @@ function verify(secret, header, rawBody, tolerance = 300) {
   <h2 id="local-api">Local API</h2>
   <ul><li>Base address: <code>http://127.0.0.1:8787</code>. The port is set on the Integrations page. The API only listens on this PC; use the tunnel to reach it from elsewhere.</li><li>Authentication: send the API key (<code>msk_…</code>) with every request, as <code>Authorization: Bearer &lt;key&gt;</code> or <code>X-API-Key: &lt;key&gt;</code>. Without a valid key the API answers <code>401</code>.</li><li>Answers are JSON. Errors look like <code>{"error": "…"}</code>.</li><li>Unlicensed copies stop each run at the trial row limit, as in the app.</li></ul>
   <h3 id="get-v1-status"><code>GET /v1/status</code></h3>
-  <pre><code>{ &quot;version&quot;: &quot;0.1.0&quot;, &quot;licensed&quot;: true, &quot;row_limit&quot;: null, &quot;scrape_enabled&quot;: true, &quot;running_scrapes&quot;: 0 }</code></pre>
+  <pre tabindex="0"><code>{ &quot;version&quot;: &quot;0.1.0&quot;, &quot;licensed&quot;: true, &quot;row_limit&quot;: null, &quot;scrape_enabled&quot;: true, &quot;running_scrapes&quot;: 0 }</code></pre>
   <h3 id="post-v1-scrape"><code>POST /v1/scrape</code></h3>
   <p>Scrapes one or more pages and answers with the rows.</p>
-  <pre><code>curl -X POST http://127.0.0.1:8787/v1/scrape \
+  <pre tabindex="0"><code>curl -X POST http://127.0.0.1:8787/v1/scrape \
   -H &quot;Authorization: Bearer msk_…&quot; -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;url&quot;: &quot;https://magicscraper.app/demo/catalogue.html&quot;, &quot;max_items&quot;: 100}&#x27;</code></pre>
   <p>Body fields:</p>
-  <table><thead><tr><th>Field</th><th>Default</th><th></th></tr></thead><tbody><tr><td><code>url</code> or <code>urls</code></td><td>required</td><td>The start page(s)</td></tr><tr><td><code>mode</code></td><td><code>"auto"</code></td><td><code>"auto"</code> finds the data by itself, as in the app's Automatic mode. <code>"selectors"</code> uses <code>fields</code>, <code>item_selector</code> and <code>follow_selector</code>, as in Custom selectors mode</td></tr><tr><td><code>auto</code></td><td></td><td>Automatic-mode options: <code>paging</code> (<code>"auto"</code>, <code>"next"</code>, <code>"scroll"</code> or <code>"none"</code>), <code>candidate</code>, <code>keep</code>, <code>rename</code>, <code>drill</code> (<code>{"enabled": true, "max_rows": 20}</code>), <code>min_delay</code>, <code>max_delay</code></td></tr><tr><td><code>max_pages</code>, <code>max_items</code></td><td>10, no limit</td><td></td></tr><tr><td><code>use_proxy</code></td><td><code>true</code></td><td>Use the proxies from Settings (when they're turned on)</td></tr><tr><td><code>magic</code></td><td></td><td>Magic Tags, if Magic AI is installed: <code>{"tags": [{"name": "Category", "question": "What kind of product is this?", "labels": [{"name": "Kitchen", "hint": "cookware, mugs"}, {"name": "Furniture", "hint": "tables, chairs"}], "show_confidence": true, "columns": ["Name"]}], "min_confidence": 0}</code> adds a <code>Category</code> column (and <code>Category (confidence)</code>, 0-100) to every row. <code>columns</code> (optional) limits what the AI reads for that tag, which makes it more accurate. See MAGIC_AI.md</td></tr><tr><td><code>wait</code></td><td><code>true</code></td><td><code>false</code> answers <code>202</code> at once with the run id; get the result from <code>GET /v1/runs/{id}</code></td></tr><tr><td><code>timeout</code></td><td>300</td><td>Seconds to wait (up to 1800). If the run takes longer, the answer is <code>202</code> with <code>"status": "running"</code></td></tr><tr><td><code>format</code></td><td><code>"json"</code></td><td><code>"csv"</code> answers with a CSV file</td></tr></tbody></table>
+  <table><thead><tr><th>Field</th><th>Default</th><th>Notes</th></tr></thead><tbody><tr><td><code>url</code> or <code>urls</code></td><td>required</td><td>The start page(s)</td></tr><tr><td><code>mode</code></td><td><code>"auto"</code></td><td><code>"auto"</code> finds the data by itself, as in the app's Automatic mode. <code>"selectors"</code> uses <code>fields</code>, <code>item_selector</code> and <code>follow_selector</code>, as in Custom selectors mode</td></tr><tr><td><code>auto</code></td><td></td><td>Automatic-mode options: <code>paging</code> (<code>"auto"</code>, <code>"next"</code>, <code>"scroll"</code> or <code>"none"</code>), <code>candidate</code>, <code>keep</code>, <code>rename</code>, <code>drill</code> (<code>{"enabled": true, "max_rows": 20}</code>), <code>min_delay</code>, <code>max_delay</code></td></tr><tr><td><code>max_pages</code>, <code>max_items</code></td><td>10, no limit</td><td></td></tr><tr><td><code>use_proxy</code></td><td><code>true</code></td><td>Use the proxies from Settings (when they're turned on)</td></tr><tr><td><code>magic</code></td><td></td><td>Magic Tags, if Magic AI is installed: <code>{"tags": [{"name": "Category", "question": "What kind of product is this?", "labels": [{"name": "Kitchen", "hint": "cookware, mugs"}, {"name": "Furniture", "hint": "tables, chairs"}], "show_confidence": true, "columns": ["Name"]}], "min_confidence": 0}</code> adds a <code>Category</code> column (and <code>Category (confidence)</code>, 0-100) to every row. <code>columns</code> (optional) limits what the AI reads for that tag, which makes it more accurate. See MAGIC_AI.md</td></tr><tr><td><code>wait</code></td><td><code>true</code></td><td><code>false</code> answers <code>202</code> at once with the run id; get the result from <code>GET /v1/runs/{id}</code></td></tr><tr><td><code>timeout</code></td><td>300</td><td>Seconds to wait (up to 1800). If the run takes longer, the answer is <code>202</code> with <code>"status": "running"</code></td></tr><tr><td><code>format</code></td><td><code>"json"</code></td><td><code>"csv"</code> answers with a CSV file</td></tr></tbody></table>
   <p>Any other job setting from a job file saved in the app can be given too. API runs never use saved logins. Answer:</p>
-  <pre><code>{ &quot;id&quot;: &quot;run_…&quot;, &quot;status&quot;: &quot;done&quot;, &quot;start_urls&quot;: [&quot;…&quot;], &quot;started_at&quot;: 1760171400, &quot;finished_at&quot;: 1760171409,
+  <pre tabindex="0"><code>{ &quot;id&quot;: &quot;run_…&quot;, &quot;status&quot;: &quot;done&quot;, &quot;start_urls&quot;: [&quot;…&quot;], &quot;started_at&quot;: 1760171400, &quot;finished_at&quot;: 1760171409,
   &quot;error&quot;: &quot;&quot;, &quot;row_count&quot;: 54, &quot;columns&quot;: [&quot;Name&quot;, &quot;Link&quot;, &quot;Price&quot;], &quot;rows&quot;: [ … ] }</code></pre>
   <p><code>status</code> is <code>running</code>, <code>done</code> or <code>failed</code>. Two scrapes can run at once; a third gets <code>429</code>. The <b>Allow scraping any web address</b> switch turns this endpoint off (<code>403</code>).</p>
   <h3 id="get-v1-runs-id"><code>GET /v1/runs/{id}</code></h3>
@@ -135,7 +135,7 @@ function verify(secret, header, rawBody, tolerance = 300) {
   <h3 id="post-v1-monitors-id-run"><code>POST /v1/monitors/{id}/run</code></h3>
   <p>Runs a monitor now, with its own settings (including its saved login). It waits for the run (pass <code>?wait=false</code> to not wait, <code>?timeout=</code> in seconds) and answers like <code>/runs/latest</code> below. The run also sends the monitor webhooks.</p>
   <h3 id="get-v1-monitors-id-runs-latest"><code>GET /v1/monitors/{id}/runs/latest</code></h3>
-  <pre><code>{ &quot;run&quot;: { …summary… }, &quot;changes&quot;: { &quot;added&quot;: [], &quot;removed&quot;: [], &quot;changed&quot;: [], &quot;unchanged&quot;: 54 },
+  <pre tabindex="0"><code>{ &quot;run&quot;: { …summary… }, &quot;changes&quot;: { &quot;added&quot;: [], &quot;removed&quot;: [], &quot;changed&quot;: [], &quot;unchanged&quot;: 54 },
   &quot;columns&quot;: [ … ], &quot;rows&quot;: [ … ] }</code></pre>
   <p><code>?rows=false</code> leaves out <code>rows</code>. <code>?format=csv</code> answers with the rows as CSV.</p>
   <h2 id="remote-access-cloudflare-tunnel">Remote access (Cloudflare Tunnel)</h2>
@@ -145,7 +145,7 @@ function verify(secret, header, rawBody, tolerance = 300) {
   <p>Anyone who has the public address <b>and</b> the API key can run scrapes on the PC. Keep the key secret and make a new one if it leaks.</p>
 
   <footer><a href="/">Magic Scraper</a> <a href="/desktop">Desktop</a> <a href="/guides">Guides</a> <a href="/privacy">Privacy</a> <a href="/support">Support</a></footer>
-</div>
+</main>
 
 <script src="/nav.js" defer></script>
 </body>

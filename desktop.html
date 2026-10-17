@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Magic Scraper for Windows and Linux: desktop web scraper</title>
-<meta name="description" content="Magic Scraper Desktop for Windows and Linux: the same detection as the extension, plus scheduled monitors that run with the app closed, detail pages on every row, saved logins, webhooks and a local API. Coming soon." />
+<meta name="description" content="Magic Scraper Desktop for Windows and Linux: scheduled monitors with the app closed, detail pages, saved logins, webhooks and a local API. Coming soon." />
 <link rel="canonical" href="https://magicscraper.app/desktop" />
 <link rel="icon" href="assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
@@ -54,7 +54,7 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="wrap">
+<header class="wrap">
   <div class="masthead">
     <a class="logo" href="/">
       <span class="glyph" aria-hidden="true">
@@ -76,7 +76,10 @@
       <a href="/support">Support</a>
     </nav>
   </div>
+</header>
 
+<main id="main">
+<div class="wrap">
   <div class="hero">
     <p class="eyebrow">Coming soon &middot; Windows &amp; Linux</p>
     <h1>Magic Scraper, for your <i>desktop</i>.</h1>
@@ -92,7 +95,7 @@
   </div>
 </div>
 
-<div id="main" class="wrap">
+<div class="wrap">
 
   <section id="adds">
     <h2>What it adds to the extension</h2>
@@ -134,7 +137,7 @@
   <section id="which">
     <h2>Extension or desktop?</h2>
     <table class="compare">
-      <thead><tr><th>&nbsp;</th><th>Extension</th><th>Desktop</th></tr></thead>
+      <thead><tr><td></td><th>Extension</th><th>Desktop</th></tr></thead>
       <tbody>
         <tr><td>Finds tables, lists and card grids</td><td class="y">Yes</td><td class="y">Yes, the same engine</td></tr>
         <tr><td>Every page: Next, infinite scroll, Load more</td><td class="y">Yes, free</td><td class="y">Yes</td></tr>
@@ -164,7 +167,7 @@
   <section id="requirements">
     <h2>System requirements</h2>
     <table class="compare">
-      <thead><tr><th>&nbsp;</th><th>Windows</th><th>Linux</th></tr></thead>
+      <thead><tr><td></td><th>Windows</th><th>Linux</th></tr></thead>
       <tbody>
         <tr><td>System</td><td>Windows 10 or 11, 64-bit</td><td>x86_64, glibc 2.35+: Ubuntu 22.04, Debian 12, Fedora 39 or newer</td></tr>
         <tr><td>Memory</td><td>4 GB (8 GB recommended)</td><td>4 GB (8 GB recommended)</td></tr>
@@ -197,6 +200,8 @@
   </section>
 
 </div>
+
+</main>
 
 <div class="wrap">
   <footer>

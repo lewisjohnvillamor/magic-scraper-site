@@ -495,7 +495,7 @@ def build_reviews(items, rnd):
     body = (
         '<div style="padding-bottom:70px">'
         '<div class="toolbar"><span>%d reviews &middot; %.1f average</span>' % (len(entries), avg) +
-        '<span class="right">Sort <select><option>Most recent</option>'
+        '<span class="right">Sort <select aria-label="Sort"><option>Most recent</option>'
         '<option>Highest rated</option></select></span></div>'
         '<div id="reviews">' + first + '</div>'
         '<button class="more" id="more" type="button">Load more reviews</button>'
@@ -579,7 +579,7 @@ def build_stock(items, rnd):
     body = (
         '<div style="padding-bottom:70px">'
         '<div class="toolbar"><span>30 lines &middot; bin locations as of 06:00</span>'
-        '<span class="right">View <select><option>Grid</option><option>List</option>'
+        '<span class="right">View <select aria-label="View"><option>Grid</option><option>List</option>'
         '</select></span></div>'
         '<div class="table-scroll"><div class="agrid" role="table" '
         'aria-label="Warehouse stock by bin">'
@@ -675,7 +675,7 @@ def build_returns(items, rnd):
     body = (
         '<div style="padding-bottom:70px">'
         '<div class="toolbar"><span>%d lines &middot; September to date</span>'
-        '<span class="right">Export <select><option>CSV</option><option>XLSX</option>'
+        '<span class="right">Export <select aria-label="Export"><option>CSV</option><option>XLSX</option>'
         '</select></span></div>'
         '<div class="table-scroll"><table class="data"><thead><tr><th>Reference</th>'
         '<th>Received</th><th>Product</th><th>SKU</th><th>Reason</th><th class="num">Qty</th>'
