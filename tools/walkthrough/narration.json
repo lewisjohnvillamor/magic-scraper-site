@@ -1,0 +1,14 @@
+{
+ "intro": "This is Magic Scraper, a free extension for Chrome and Edge that turns almost any web page into a clean spreadsheet. Let me show you how it works, start to finish, on a practice shop built for exactly this.",
+ "open": "Say you need this whole catalogue in a spreadsheet. Instead of copying it row by row, click the Magic Scraper icon, and open it in the side panel, so it stays beside the page while you work.",
+ "detected": "It's already found the products. The blue outlines on the page show exactly which rows it picked up, and the columns come straight from the page: the product, the maker, the price, the rating, and the stock.",
+ "tidy": "Before you export, you can tidy it up. Click a column heading to leave that column out. Double-click a heading to rename it. And type in the filter box to keep only the rows you want.",
+ "rates": "Some pages have more than one table. Here, it picked the larger one first, the international rates. If that's not the one you meant, press Another table, and it moves to the next. Watch the outline follow on the page.",
+ "pick": "And when the data isn't laid out neatly, you can point at it yourself. Press Pick manually, then click any row of the table. To add something that sits outside the rows, like this discount, hold shift and click it. Then click Use selection, and the discount becomes a column on every row.",
+ "crawl": "Most lists don't fit on one page. On the Crawl tab, Magic Scraper has already found the Next button. Press start, and it goes through every page, pausing for a moment between each one, so it's gentle on the site. Six pages, fifty-four products, all in one sheet. And crawling is free, with no page limit.",
+ "drill": "Often, the details you want are on each product's own page, not in the list. Magic Scraper notices that every row links somewhere, and suggests drill-down. Turn it on, and it opens each product page in the background, reads it, and adds what it finds as new columns.",
+ "export": "Here they are: the stock code, availability, and material, for all fifty-four products. Drill-down is the Pro feature. The free version runs it on the first three rows, so you can see exactly what you'd get. Then, download it: as Excel, a CSV file, or JSON.",
+ "file": "And that's your file, ready to sort, filter, or drop into your own spreadsheet.",
+ "changes": "One last thing, for lists you check again and again. Run the same page later, and the Changes tab shows exactly what moved since last time. Three prices went up, two items sold out, one disappeared, and one is new.",
+ "outro": "That's Magic Scraper. Everything happens in your browser, so nothing you scrape is ever sent anywhere, and there's no account to create. Install it free from the Chrome Web Store or Edge Add-ons, and practice on the same shop, at magic scraper dot app."
+}

@@ -1,0 +1,10 @@
+{
+ "title": "This is Magic Scraper, start to finish.",
+ "s1": "Open it on any page with a list. The table is found, and every column is named for you. No setup.",
+ "s2": "Tidy it before you export. Click a column heading to drop it, double-click to rename it, and type to filter the rows.",
+ "s3": "Is the list split over several pages? On the Crawl tab, the Next button is already found. Press start, and it walks all six pages into one sheet. Crawling is free, with no page limit.",
+ "s4": "When each row leads to a page of its own, Magic Scraper points it out. Drill-down opens every one of those pages, and adds what it finds there as new columns: here, the stock code, availability and material. Drill-down is part of Pro, and the free version runs it on the first three rows.",
+ "s5": "Then download it as a spreadsheet: Excel, a CSV file, or JSON. The file goes straight to your downloads folder.",
+ "s6": "Run the same list again later, and the Changes tab shows what moved: three prices up, two sold out, one gone, and one new.",
+ "end": "Magic Scraper. Free on Chrome and Edge, and nothing you scrape ever leaves your browser. Get it at magic scraper dot app."
+}
