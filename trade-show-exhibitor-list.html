@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Download a trade show exhibitor list to Excel, free</title>
+<meta name="description" content="Turn a trade show's online exhibitor list into a spreadsheet you can work from: every exhibitor, booth and link, plus details from each exhibitor's profile. Free browser extension." />
+<link rel="canonical" href="https://magicscraper.app/trade-show-exhibitor-list" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/trade-show-exhibitor-list" />
+<meta property="og:title" content="Download a trade show exhibitor list to Excel, free" />
+<meta property="og:description" content="Every exhibitor at a trade show, in one spreadsheet, before you fly. Free browser extension; nothing leaves your browser." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Download a trade show exhibitor list to Excel",
+  "description": "Collect every exhibitor from a trade show's online exhibitor list and export it to Excel or CSV with a browser extension.",
+  "totalTime": "PT5M",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Open the exhibitor list",
+      "text": "Open the show's exhibitor list or exhibitor directory and let it load.",
+      "url": "https://magicscraper.app/trade-show-exhibitor-list#open"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Collect every exhibitor",
+      "text": "Click the extension icon, then crawl: it follows the page numbers, or keeps scrolling on a list that loads as you go.",
+      "url": "https://magicscraper.app/trade-show-exhibitor-list#crawl"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add profile details",
+      "text": "Drill-down opens each exhibitor's profile and adds its details as columns.",
+      "url": "https://magicscraper.app/trade-show-exhibitor-list#profiles"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Export",
+      "text": "Export to Excel, CSV or JSON.",
+      "url": "https://magicscraper.app/trade-show-exhibitor-list#export"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Trade show exhibitor list",
+      "item": "https://magicscraper.app/trade-show-exhibitor-list"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>A trade show's exhibitors, as a <i>call list</i>.</h1>
+    <p class="standfirst">Six hundred booths, thirty pages of exhibitor cards, and a week to book
+      the meetings that make the trip worth it. The list is public; it just isn't a
+      spreadsheet. Open it, press one button, and every exhibitor comes back as a row you can
+      sort, assign and work through.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Crawling every page and exporting are free, with no page limit.</span>
+    </div>
+  </div>
+</div>
+
+<div id="main" class="wrap">
+
+  <section id="what">
+    <h2>What comes out</h2>
+    <div class="claim">
+      <p>One row per exhibitor, with whatever the list shows: usually the <b>company</b>, its
+        <b>booth</b> or stand number, <b>country</b>, <b>category</b> and a link to its
+        <b>profile</b>. Columns arrive named from the page, and you can rename or drop any of
+        them.</p>
+      <p>The profile behind each exhibitor often holds more &mdash; the company's
+        <b>website</b>, a description, product categories, social pages. <a href="/drill-down">
+        Drill-down</a> opens every profile and adds those as columns.</p>
+    </div>
+  </section>
+
+  <section id="steps">
+    <h2>Four steps</h2>
+    <p class="deck">Exhibitor lists come in two shapes &mdash; numbered pages, or one long list
+      that loads more as you scroll &mdash; and both work the same way here.</p>
+    <div class="steps">
+      <div class="step" id="open">
+        <span class="n">01</span>
+        <h3>Open the exhibitor list</h3>
+        <p>On the show's site find <b>Exhibitors</b>, <b>Exhibitor list</b> or <b>Exhibitor
+          directory</b>, and let the list finish loading. If it shows a floor plan first, switch
+          to the list view.</p>
+      </div>
+      <div class="step" id="crawl">
+        <span class="n">02</span>
+        <h3>Collect every exhibitor</h3>
+        <p>Click the icon: the exhibitors on screen are found. On the <b>Crawl</b> tab press
+          <b>Auto-detect &ldquo;Next&rdquo;</b> and <b>Start crawling</b>. It follows the page
+          numbers, or keeps scrolling on a list that grows as you go, until there are no more.
+          Free, no page limit.</p>
+      </div>
+      <div class="step" id="profiles">
+        <span class="n">03</span>
+        <h3>Add what each profile says</h3>
+        <p>Turn on drill-down and it opens each exhibitor's profile in the background, adding
+          its website and other details. The free version does the first three rows so you can
+          see what your show's profiles give; Pro, a one-time purchase, does every row.</p>
+      </div>
+      <div class="step" id="export">
+        <span class="n">04</span>
+        <h3>Export and divide it up</h3>
+        <p>Export to <b>XLSX</b> or <b>CSV</b>, sort by category or hall, and split the list
+          between whoever is going. Next year, run the same setup again and the
+          <b>Changes</b> tab shows who is new and who dropped out.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="care">
+    <h2>Using it well</h2>
+    <div class="claim">
+      <p>Keep to company details &mdash; the exhibitor, its website, its booth. Check the
+        show's terms, and contact exhibitors the way your local rules on marketing email and
+        calls allow. <a href="/is-it-legal-to-scrape-a-business-directory">Is it legal to scrape
+        a business directory?</a> covers the rules in plain words.</p>
+    </div>
+  </section>
+
+  <section id="ts-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Will it work on my show's exhibitor list?</summary>
+        <p>If the exhibitors appear as cards or a table you can scroll through in your browser,
+          usually yes. Lists that only appear inside an interactive floor plan, or behind an
+          attendee login you don't have, can't be read. Try the free version on that exact
+          list.</p>
+      </details>
+      <details>
+        <summary>Can it get exhibitors' email addresses?</summary>
+        <p>Only where the list or the profile shows them. It doesn't guess addresses or look
+          them up elsewhere.</p>
+      </details>
+      <details>
+        <summary>The show only offers a PDF.</summary>
+        <p>Magic Scraper reads web pages, not PDFs. Most shows keep an online exhibitor
+          directory that is more up to date than the PDF.</p>
+      </details>
+      <details>
+        <summary>Is it free?</summary>
+        <p>Finding the exhibitors, crawling every page and exporting are free, with no account.
+          Drill-down past three rows is part of Pro &mdash; a one-time purchase, not a
+          subscription.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/business-directory-scraper">Business directories</a>
+    <a href="/drill-down">Drill-down</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

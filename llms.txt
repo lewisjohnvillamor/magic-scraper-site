@@ -28,6 +28,13 @@ extension, not in storage the scraped website can read.
 - [Business directory scraper](https://magicscraper.app/business-directory-scraper): turning
   every page of a business directory's results into one lead list (name, phone, email,
   address) exported to Excel or CSV; crawling and export are free
+- [Chamber of commerce directories](https://magicscraper.app/chamber-of-commerce-directory-scraper):
+  a chamber's member directory as a spreadsheet (name, address, city, state, ZIP, phone), with
+  each member's website and social pages added from its profile by drill-down
+- [Trade show exhibitor lists](https://magicscraper.app/trade-show-exhibitor-list): every
+  exhibitor from a show's online list, with details from each exhibitor's profile, to Excel
+- [Is it legal to scrape a business directory?](https://magicscraper.app/is-it-legal-to-scrape-a-business-directory):
+  plain-language guide to site terms, GDPR and the UK/EU/US marketing rules; not legal advice
 - [Instant Data Scraper alternative](https://magicscraper.app/instant-data-scraper-alternative):
   an honest feature comparison. Both tools auto-detect tables and crawl pagination; the
   difference is per-row detail-page collection.
