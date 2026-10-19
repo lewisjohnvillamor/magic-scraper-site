@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://magicscraper.app/scraper-missing-data" />
 <meta property="og:title" content="Scraper missing rows, columns or phone numbers? Why" />
 <meta property="og:description" content="Missing rows, blank columns, phone numbers gone, garbled characters in Excel: what causes each and how to fix it." />
-<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image" content="https://magicscraper.app/assets/og/scraper-missing-data.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -172,6 +172,10 @@
       <p><b>Accents and symbols turn into &Atilde;&copy;</b> when a file has no marker saying it is UTF-8. Magic Scraper's CSV includes that marker, so Excel reads caf&eacute; as caf&eacute;.</p>
       <p><b>A cell that starts with = runs as a formula</b> when the file opens, which a hostile page can abuse. CSV exports defuse those cells; XLSX cells are never evaluated.</p>
     </div>
+    <figure class="fig">
+      <svg role="img" aria-label="The same two phone numbers: a CSV opened in Excel shows 2079460123 and 4.47911E+11; the XLSX export shows 02079460123 and 447911123456" class="dg" viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg"><rect class="b-card" x="1" y="60" width="296" height="196" rx="10"/><text x="21" y="44" font-size="22" font-weight="600">CSV opened in Excel</text><text x="21" y="98" font-size="20" class="t-mute">Phone</text><line class="rule" x1="1" y1="114" x2="297" y2="114"/><text x="21" y="160" font-size="24" class="t-mono t-warm">2079460123</text><line class="rule" x1="1" y1="182" x2="297" y2="182"/><text x="21" y="222" font-size="24" class="t-mono t-warm">4.47911E+11</text><rect class="b-card" x="343" y="60" width="296" height="196" rx="10"/><text x="363" y="44" font-size="22" font-weight="600">XLSX export</text><text x="363" y="98" font-size="20" class="t-mute">Phone</text><line class="rule" x1="343" y1="114" x2="639" y2="114"/><text x="363" y="160" font-size="24" class="t-mono t-acc">02079460123</text><line class="rule" x1="343" y1="182" x2="639" y2="182"/><text x="363" y="222" font-size="24" class="t-mono t-acc">447911123456</text></svg>
+      <figcaption>The same two phone numbers. Excel reads a CSV's digits as numbers; Magic Scraper's XLSX stores every cell as text.</figcaption>
+    </figure>
   </section>
 
   <section id="maps">

@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://magicscraper.app/scraper-only-scrapes-first-page" />
 <meta property="og:title" content="Web scraper only scraping the first page? Here&#x27;s why" />
 <meta property="og:description" content="JavaScript Next buttons, Load more, infinite scroll and rate limits: why scrapers stop at page 1, and how to get every page into one sheet." />
-<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image" content="https://magicscraper.app/assets/og/scraper-only-scrapes-first-page.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -215,6 +215,25 @@
         <p>Ask for pages too fast and a site answers with "too many requests" or a check page. Many tools stop silently and call it finished.</p>
       </div>
     </div>
+    <figure class="fig">
+      <svg role="img" aria-label="Five kinds of pagination: a Next link, a Next button, Load more, infinite scroll, and numbered pages with a Last link" class="dg" viewBox="0 0 640 540" xmlns="http://www.w3.org/2000/svg"><rect class="b-card" x="1" y="2" width="638" height="96" rx="10"/>
+<text x="40" y="60" font-size="26" class="t-acc" text-decoration="underline">Next ›</text>
+<text x="262" y="44" font-size="26" font-weight="600">A Next link</text>
+<text x="262" y="76" font-size="22" class="t-mute">Has an address: most tools follow it.</text><rect class="b-card" x="1" y="110" width="638" height="96" rx="10"/>
+<rect class="b-acc" x="30" y="138" width="130" height="44" rx="8"/><text x="95" y="168" font-size="22" text-anchor="middle" class="t-acc">Next ›</text>
+<text x="262" y="152" font-size="26" font-weight="600">A Next button</text>
+<text x="262" y="184" font-size="22" class="t-mute">Runs a script, with no address.</text><rect class="b-card" x="1" y="218" width="638" height="96" rx="10"/>
+<rect class="b-fill-acc" x="30" y="246" width="190" height="44" rx="22"/><text x="125" y="276" font-size="22" text-anchor="middle" style="fill:var(--paper)">Load more</text>
+<text x="262" y="260" font-size="26" font-weight="600">Load more</text>
+<text x="262" y="292" font-size="22" class="t-mute">Same page, more rows added.</text><rect class="b-card" x="1" y="326" width="638" height="96" rx="10"/>
+<line class="rule" x1="34" y1="350" x2="200" y2="350"/><line class="rule" x1="34" y1="368" x2="180" y2="368"/><line class="rule" x1="34" y1="386" x2="196" y2="386"/><path class="l-acc" d="M224 346 v40 m-12 -12 l12 12 l12 -12"/>
+<text x="262" y="368" font-size="26" font-weight="600">Infinite scroll</text>
+<text x="262" y="400" font-size="22" class="t-mute">Rows appear as you scroll down.</text><rect class="b-card" x="1" y="434" width="638" height="96" rx="10"/>
+<text x="30" y="492" font-size="22" class="t-mute">‹ 1 2 3 …</text><text x="138" y="492" font-size="22" class="t-warm" text-decoration="line-through">Last</text><text x="196" y="492" font-size="22" class="t-acc">›</text>
+<text x="262" y="476" font-size="26" font-weight="600">Numbers, Next and Last</text>
+<text x="262" y="508" font-size="22" class="t-mute">Click Next, not Last.</text></svg>
+      <figcaption>The five patterns behind most &ldquo;it stopped at page 1&rdquo; complaints.</figcaption>
+    </figure>
   </section>
 
   <section id="how">
@@ -245,6 +264,14 @@
     <div class="claim">
       <p>Crawling is free and has no page limit. A <b>Max pages</b> box is there if you only want the first few.</p>
     </div>
+    <figure class="fig">
+      <img src="assets/guides/crawl-load-more.webp" alt="Magic Scraper&#x27;s Crawl tab beside a list of reviews, after a crawl: 48 rows across 4 pages, stopped because the Next control disappeared from the page" width="1280" height="800" loading="lazy" />
+      <figcaption><b>A real run on the sandbox.</b> A list with a Load more button, crawled to the end: 48 reviews over 4 loads, and the reason it stopped.</figcaption>
+    </figure>
+    <div class="yt" data-id="3oCmoj57Pxs" data-title="Scrape every page, every row, straight to CSV: free Chrome extension">
+      <a href="https://www.youtube.com/watch?v=3oCmoj57Pxs" aria-label="Play video: Scrape every page, every row, straight to CSV: free Chrome extension (YouTube)"><img src="assets/video/3oCmoj57Pxs.webp" alt="" width="960" height="540" loading="lazy" /></a>
+    </div>
+    <p class="yt-cap">Video: Scrape every page, every row, straight to CSV: free Chrome extension. It plays from YouTube when you press play.</p>
   </section>
 
   <section id="slow">
@@ -308,5 +335,6 @@
 </div>
 
 <script src="nav.js" defer></script>
+<script src="video.js" defer></script>
 </body>
 </html>
