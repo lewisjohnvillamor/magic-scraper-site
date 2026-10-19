@@ -49,8 +49,10 @@ extension, not in storage the scraped website can read.
 - [A web scraper with no subscription](https://magicscraper.app/web-scraper-no-subscription):
   free tier with no time limit or credits, a one-time Pro licence, and questions to ask before
   paying for any scraper.
-- [Is your scraper extension sending your data?](https://magicscraper.app/web-scraper-extension-privacy):
+- [Is your web scraper extension safe?](https://magicscraper.app/web-scraper-extension-privacy):
   a ten-minute privacy check for any extension, and the requests Magic Scraper makes.
+- [Changelog](https://magicscraper.app/changelog): every update in plain words, including anything
+  removed or moved between Free and Pro.
 - [A list of businesses in any area](https://magicscraper.app/list-of-businesses-in-an-area): where
   local business lists live and how to get one into Excel
 - [Data Miner alternative](https://magicscraper.app/data-miner-alternative) and

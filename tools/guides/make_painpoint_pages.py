@@ -36,8 +36,10 @@ def page(p):
         "@context": "https://schema.org", "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Magic Scraper", "item": "https://magicscraper.app/"},
-            {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://magicscraper.app/guides"},
-            {"@type": "ListItem", "position": 3, "name": p["crumb"], "item": url},
+            *([{"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://magicscraper.app/guides"}]
+              if p.get("eyebrow", "Guide") == "Guide" else []),
+            {"@type": "ListItem", "position": 3 if p.get("eyebrow", "Guide") == "Guide" else 2,
+             "name": p["crumb"], "item": url},
         ],
     })
     ldhtml = "\n".join('<script type="application/ld+json">\n%s\n</script>' % json.dumps(x, indent=2, ensure_ascii=False) for x in ld)
@@ -102,7 +104,7 @@ def page(p):
 <main id="main">
 <div class="wrap">
   <div class="hero">
-    <p class="eyebrow">Guide</p>
+    <p class="eyebrow">{p.get('eyebrow', 'Guide')}</p>
     <h1>{p['h1']}</h1>
     <p class="standfirst">{p['standfirst']}</p>
     <div class="actions">
@@ -181,7 +183,7 @@ PAGES.append(dict(
     slug="web-scraper-no-subscription",
     crumb="No subscription",
     title="A web scraper with no subscription, credits or free trial",
-    desc="A Chrome scraper you pay for once, or never: no credits, no trial that turns into a charge, no account. What is free, what Pro costs, and what to check first.",
+    desc="A Chrome web scraper with no credits, no account and no trial that turns into a charge. Pay $25 once, or never: nothing renews and nothing to cancel.",
     og="No credits, no trial that renews, no account. What is free, what the one-time Pro licence adds, and the questions to ask any scraper before you pay.",
     h1="A web scraper with no <i>meter</i> running.",
     standfirst="Credits that run out halfway through a list. A free trial that becomes a charge on day one. A cancel button you can't find. Those are the most common complaints in scraper reviews, and none of them is about scraping. Here is how Magic Scraper is priced instead, and what to ask any tool before you pay.",
@@ -245,7 +247,7 @@ PAGES.append(dict(
     slug="scraper-only-scrapes-first-page",
     crumb="Stops at page 1",
     title="Web scraper only scraping the first page? Here's why",
-    desc="Why a scraper stops at page 1, misses Load more, or quits after a few pages, and how to get every page into one sheet, free, with a Chrome extension.",
+    desc="Why a scraper stops at page 1: JavaScript Next buttons, Load more, infinite scroll and rate limits. How to scrape every page into one sheet, free.",
     og="JavaScript Next buttons, Load more, infinite scroll and rate limits: why scrapers stop at page 1, and how to get every page into one sheet.",
     h1="Stuck on <i>page one</i>? It's usually one of five things.",
     standfirst="The run says it finished, the sheet has 20 rows, and the site has 2,000. Stopping at the first page is the complaint people post most about scrapers. The cause is nearly always one of five page patterns, and each has a fix.",
@@ -358,7 +360,7 @@ PAGES.append(dict(
     slug="scraper-missing-data",
     crumb="Missing rows or columns",
     title="Scraper missing rows, columns or phone numbers? Why",
-    desc="Why scraped data comes back with missing rows, blank columns, lost phone numbers or garbled Excel characters, and how to check and fix each one.",
+    desc="Why scraped data has missing rows, blank columns or lost phone numbers, and how to stop Excel dropping leading zeros or garbling UTF-8 characters.",
     og="Missing rows, blank columns, phone numbers gone, garbled characters in Excel: what causes each and how to fix it.",
     h1="Rows missing, columns blank, <i>phone numbers</i> gone.",
     standfirst="A sheet that looks complete but is 20% short is worse than an error. Here is what causes missing rows, blank or wrong columns and mangled phone numbers, and how to check the result before you rely on it.",
@@ -416,10 +418,10 @@ PAGES.append(dict(
 PAGES.append(dict(
     slug="web-scraper-extension-privacy",
     crumb="Scraper extension privacy",
-    title="Is your web scraper extension sending your data?",
-    desc="How to check what a scraper extension can see and send: its permissions, its privacy disclosures, its network requests and who owns it, in about ten minutes.",
+    title="Is your web scraper extension safe? Check what it sends",
+    desc="Is a scraper extension safe? Check what it can see and send: its permissions, privacy disclosures, network requests and current owner, in ten minutes.",
     og="Permissions, privacy disclosures, network requests and ownership: a ten-minute check for any scraper extension, and Magic Scraper's own answers.",
-    h1="Is your scraper extension <i>sending</i> your data?",
+    h1="Is your scraper extension <i>safe</i>? Check what it sends.",
     standfirst="A scraper extension sees every page you point it at, and often every page you visit. Extensions change hands, and a new owner can change what one collects. You don't need to trust anyone's word: here is a ten-minute check you can run on any of them, Magic Scraper included.",
     aside="Magic Scraper: your scraped data never leaves your browser.",
     sections=[
@@ -460,6 +462,81 @@ PAGES.append(dict(
         ("How do I see what an extension sends?", "Open DevTools with F12, choose the Network tab, and use the extension. Any request to a domain other than the site you're on came from somewhere else, often the extension."),
         ("Does Magic Scraper use AI or send pages to a server?", "No. Detection runs in your browser with no AI service and no server of ours."),
         ("What happens when an extension is sold?", "The listing usually keeps its name and users, and the new owner can change what it collects in an update. Check the publisher name and the privacy disclosures after a big update."),
+    ],
+))
+
+# ---------------------------------------------------------------- 6. changelog
+def release(id_, ver, when, badge, items):
+    when = f"<b>{badge}.</b> {when}" if badge else when
+    lis = "\n".join(f"        <li>{x}</li>" for x in items)
+    return f"""  <section id="{id_}">
+    <h2>{ver}</h2>
+    <p class="deck">{when}</p>
+    <ul class="ticks">
+{lis}
+    </ul>
+  </section>
+"""
+
+PAGES.append(dict(
+    slug="changelog",
+    eyebrow="Changelog",
+    crumb="Changelog",
+    title="Magic Scraper changelog: every update, in plain words",
+    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 1.22.2.",
+    og="Every Magic Scraper update in plain words, including what was removed or moved to Pro.",
+    h1="What changed, <i>update</i> by update.",
+    standfirst="Updates arrive by themselves through the Chrome Web Store and Edge Add-ons, once each one clears store review. This page lists what each one changed, in plain words, including anything that was removed or moved to Pro, so an update never surprises you.",
+    aside="In the stores now: v1.22.2.",
+    sections=[
+        release("v1-22-3", "v1.22.3", "Built 17 October 2026, tested, not in the stores yet.", "Next update", [
+            "<b>Business directories get named columns</b>: Name, Phone, City, State, Postcode, Website and Map Link, instead of generic labels, on chamber of commerce and Yellow Pages-style directories.",
+            "<b><a href=\"/drill-down\">Drill-down</a> reads a member's profile page</b>: address, phone, fax, email, website and social pages, leaving out the directory's own header, footer and links.",
+            "<b>Research paper pages</b> (arXiv, PubMed, journals): drill-down reads the title, authors, date, journal, DOI, PDF and abstract.",
+            "Links on pages that set a different base address now point to the right pages.",
+            "A table that a page fills in later is no longer offered as rows with nothing in them.",
+            "Larger buttons and clearer text in the popup.",
+        ]),
+        release("v1-22-2", "v1.22.2", "15 October 2026.", "In the Chrome and Edge stores now", [
+            "A pick made by hand from the side panel shows its columns there straight away.",
+            "Includes 1.22.1, which never went out on its own: when the rows on screen each link to a page of their own, the Data tab says so, and <b>Show me</b> takes you to drill-down.",
+            "A first install opens a page showing where the icon went (new extensions hide in the puzzle-piece menu). Removing the extension opens one optional question on our website.",
+        ]),
+        release("v1-22-0", "v1.22.0", "1 October 2026.", None, [
+            "<b>Keep it open beside the page</b> in the browser's side panel: it stays while you click and follows the tab you're on.",
+            "<b>Reddit, Amazon search, Hacker News, PubMed and arXiv</b> read into named columns. <a href=\"/supported-sites\">What each gives</a>.",
+            "Wikipedia-style tables get their real headers, two-row headers included. Cards laid out three to a row come back as one list. Lists built from web components are found.",
+            "Image columns hold the whole address of the original image, not a resized copy. Columns are no longer named after styling classes.",
+            "Fixes from two read-throughs of the code (1.21.8 and 1.21.9): a Next button drawn as an icon no longer ends the crawl at page 2, a Next link that loops back no longer crawls forever, columns with the same header keep all their cells, and comparing with a file catches numbers that differ only in the last digit.",
+        ]),
+        release("v1-21", "v1.21", "22 to 25 September 2026.", None, [
+            "<b>One setup over a list of pages</b>: paste the addresses, and the page you're on is crawled first, then each address in a tab of its own with the same setup, drill-down included. All of it comes back as one sheet with a List column.",
+            "<b>Changed</b>: a list of pages is free for the first two addresses; Pro runs them all.",
+            "A queued run's rows survive the popup closing. Drilled rows whose page showed nothing are kept instead of thrown away. An empty pick no longer fails the run.",
+        ]),
+        release("v1-20", "v1.20.14 to 1.20.20", "20 to 22 September 2026.", None, [
+            "<b>Recovering a run whose tab closed is free</b>, no longer Pro.",
+            "<b>Removed</b>: the CSV auto-save during long runs. It could stop on a file chooser every few thousand rows; recovery keeps those rows without interrupting you.",
+            "<b>A &ldquo;verify you're human&rdquo; check stops the run</b> and hands you the tab, instead of retrying into it.",
+            "Stop responds at once, instead of finishing the pause it was pressed during. A schedule that had lapsed no longer shows as active.",
+            "Detection: menus of links, page layouts and font-size classes no longer win over the real list, or name its columns.",
+        ]),
+        sec("earlier", "Earlier", claim(
+            "<b>1.17</b> compared a run with the last one of the same list. <b>1.16.1</b> added named "
+            "setups you can reuse and export. <b>1.16.0</b> brought back runs whose tab closed. Each "
+            "of those has grown since; the entries above say how.")),
+        sec("promise", "How updates work", claim(
+            "Each update is checked by Chrome and Microsoft before it reaches you, then installs by "
+            "itself. A Pro licence keeps working across every update: there is no paid upgrade.",
+            "When an update removes something, or moves it between Free and Pro, it is listed here "
+            "under that version, in words, as the entries above show. If something you relied on "
+            "changed and isn't listed, <a href=\"/support\">tell us</a>.")),
+    ],
+    faq=[
+        ("Which version of Magic Scraper is in the stores?", "Version 1.22.2, on both the Chrome Web Store and Edge Add-ons. Version 1.22.3 is built and tested and goes to the stores next."),
+        ("How do Magic Scraper updates arrive?", "Automatically, through the Chrome Web Store or Edge Add-ons, once each update has cleared store review. You don't need to reinstall."),
+        ("Do I have to pay for updates?", "No. A Pro licence is paid once and keeps working across every update."),
+        ("Will an update remove a feature I use?", "Anything removed, or moved between Free and Pro, is listed on this page under the version that changed it."),
     ],
 ))
 
