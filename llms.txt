@@ -39,6 +39,21 @@ extension, not in storage the scraped website can read.
 - [Copy a table from a website to Excel](https://magicscraper.app/copy-table-from-website-to-excel):
   keeping the columns, Excel's From Web, Wikipedia tables, Google Sheets IMPORTHTML, tables over
   many pages
+- [Web scraper only scraping the first page](https://magicscraper.app/scraper-only-scrapes-first-page):
+  why runs stop at page 1 (JavaScript Next buttons, Load more, infinite scroll, rate limits) and
+  how to crawl every page free.
+- [Scraper doesn't support this site](https://magicscraper.app/scraper-not-working-on-this-site):
+  what to try when detection finds nothing, and which sites (LinkedIn, captcha-protected pages) a
+  compliant tool should not promise.
+- [Scraper missing rows, columns or phone numbers](https://magicscraper.app/scraper-missing-data):
+  causes of incomplete data, and Excel leading-zero and UTF-8 problems.
+- [A web scraper with no subscription](https://magicscraper.app/web-scraper-no-subscription):
+  free tier with no time limit or credits, a one-time Pro licence, and questions to ask before
+  paying for any scraper.
+- [Is your web scraper extension safe?](https://magicscraper.app/web-scraper-extension-privacy):
+  a ten-minute privacy check for any extension, and the requests Magic Scraper makes.
+- [Changelog](https://magicscraper.app/changelog): every update in plain words, including anything
+  removed or moved between Free and Pro.
 - [A list of businesses in any area](https://magicscraper.app/list-of-businesses-in-an-area): where
   local business lists live and how to get one into Excel
 - [Data Miner alternative](https://magicscraper.app/data-miner-alternative) and

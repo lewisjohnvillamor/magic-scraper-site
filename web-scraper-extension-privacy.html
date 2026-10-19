@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Is your web scraper extension safe? Check what it sends</title>
+<meta name="description" content="Is a scraper extension safe? Check what it can see and send: its permissions, privacy disclosures, network requests and current owner, in ten minutes." />
+<link rel="canonical" href="https://magicscraper.app/web-scraper-extension-privacy" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/web-scraper-extension-privacy" />
+<meta property="og:title" content="Is your web scraper extension safe? Check what it sends" />
+<meta property="og:description" content="Permissions, privacy disclosures, network requests and ownership: a ten-minute check for any scraper extension, and Magic Scraper&#x27;s own answers." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are web scraper extensions safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some are and some collect more than you'd expect. Check the permissions, the store's privacy disclosures and the network requests while you scrape, and look at who owns the extension now."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Magic Scraper send my data anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Scraped data stays in your browser until you save a file. Detection and export make no network requests. The only requests are further pages of the site you're crawling, and a one-time licence check with Gumroad if you buy Pro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a scraper extension need access to all websites?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To work on whatever site you open, and to crawl pages in the background. In Magic Scraper that wider access is optional and requested only when a feature needs it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I see what an extension sends?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open DevTools with F12, choose the Network tab, and use the extension. Any request to a domain other than the site you're on came from somewhere else, often the extension."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Magic Scraper use AI or send pages to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Detection runs in your browser with no AI service and no server of ours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when an extension is sold?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The listing usually keeps its name and users, and the new owner can change what it collects in an update. Check the publisher name and the privacy disclosures after a big update."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Scraper extension privacy",
+      "item": "https://magicscraper.app/web-scraper-extension-privacy"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>Is your scraper extension <i>safe</i>? Check what it sends.</h1>
+    <p class="standfirst">A scraper extension sees every page you point it at, and often every page you visit. Extensions change hands, and a new owner can change what one collects. You don't need to trust anyone's word: here is a ten-minute check you can run on any of them, Magic Scraper included.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Magic Scraper: your scraped data never leaves your browser.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="check">
+    <h2>A ten-minute check for any extension</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Read the permissions</h3>
+        <p>In Chrome, open <code>chrome://extensions</code>, press <b>Details</b>. "Read and change all your data on all websites" means it can see every page you open, not just the one you scrape.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Read the privacy disclosures</h3>
+        <p>On the store listing, open <b>Privacy practices</b>. Look for "Web history", "Personally identifiable information" or "Website content" being collected.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Watch its traffic</h3>
+        <p>Open the page, press <b>F12</b>, choose <b>Network</b>, then scrape. Requests to a domain that isn't the site you're on are the extension talking to someone.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Check who owns it now</h3>
+        <p>Look at the publisher on the listing and the developer's website. When a popular extension is sold, the name stays the same and the owner changes.</p>
+      </div>
+      <div class="step">
+        <span class="n">05</span>
+        <h3>Look for consent screens</h3>
+        <p>A screen asking you to "accept all" before the tool works is asking for something. Read what.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ours">
+    <h2>Magic Scraper's answers</h2>
+    <div class="claim">
+      <p><b>Your data:</b> what you scrape stays in your browser until you save a file. Finding a table, picking one by hand and exporting it make no network requests at all. There is no account and no server of ours for anything to go to.</p>
+    </div>
+    <table class="compare">
+      <thead><tr><td></td><th>When</th><th>What is requested</th></tr></thead>
+      <tbody>
+        <tr><td>Crawling or drill-down</td><td class="y">Further pages of the site you're on, after you press Start</td></tr>
+        <tr><td>Activating Pro</td><td class="y">Your licence key to Gumroad, once, to confirm the purchase</td></tr>
+        <tr><td>Install and uninstall</td><td class="y">A welcome page opens, and a page asking why on removal</td></tr>
+        <tr><td>Anything else</td><td class="y">Nothing: no analytics, no tracking, no AI service</td></tr>
+      </tbody>
+    </table>
+    <div class="claim">
+      <p><b>Permissions:</b> it asks for access to the tab you click it on, to save downloads and to open the side panel. Wider access, such as reading other tabs for a crawl or keeping a schedule, is optional and asked for only when you use the feature that needs it. Each one is explained on the <a href="/privacy">privacy page</a>.</p>
+      <p>Run the check above on it. If you ever see a request that isn't in this table, tell us.</p>
+    </div>
+  </section>
+
+  <section id="why">
+    <h2>Why it matters for scraping</h2>
+    <div class="claim">
+      <p>Scraping work is often confidential: a prospect list, a competitor's prices, research nobody has published yet. A tool that sends the pages you visit, or your results, to its own servers or an AI model is sharing that work, whatever its terms say about it.</p>
+      <p>For how the ownership of one popular scraper changed, see <a href="/instant-data-scraper-alternative#who">who makes Instant Data Scraper now</a>.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Are web scraper extensions safe?</summary>
+        <p>Some are and some collect more than you'd expect. Check the permissions, the store's privacy disclosures and the network requests while you scrape, and look at who owns the extension now.</p>
+      </details>
+      <details>
+        <summary>Does Magic Scraper send my data anywhere?</summary>
+        <p>No. Scraped data stays in your browser until you save a file. Detection and export make no network requests. The only requests are further pages of the site you're crawling, and a one-time licence check with Gumroad if you buy Pro.</p>
+      </details>
+      <details>
+        <summary>Why does a scraper extension need access to all websites?</summary>
+        <p>To work on whatever site you open, and to crawl pages in the background. In Magic Scraper that wider access is optional and requested only when a feature needs it.</p>
+      </details>
+      <details>
+        <summary>How do I see what an extension sends?</summary>
+        <p>Open DevTools with F12, choose the Network tab, and use the extension. Any request to a domain other than the site you're on came from somewhere else, often the extension.</p>
+      </details>
+      <details>
+        <summary>Does Magic Scraper use AI or send pages to a server?</summary>
+        <p>No. Detection runs in your browser with no AI service and no server of ours.</p>
+      </details>
+      <details>
+        <summary>What happens when an extension is sold?</summary>
+        <p>The listing usually keeps its name and users, and the new owner can change what it collects in an update. Check the publisher name and the privacy disclosures after a big update.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Web scraper only scraping the first page? Here's why</title>
+<meta name="description" content="Why a scraper stops at page 1: JavaScript Next buttons, Load more, infinite scroll and rate limits. How to scrape every page into one sheet, free." />
+<link rel="canonical" href="https://magicscraper.app/scraper-only-scrapes-first-page" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scraper-only-scrapes-first-page" />
+<meta property="og:title" content="Web scraper only scraping the first page? Here&#x27;s why" />
+<meta property="og:description" content="JavaScript Next buttons, Load more, infinite scroll and rate limits: why scrapers stop at page 1, and how to get every page into one sheet." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Scrape every page of a paginated list",
+  "description": "Collect every page of a paginated list, Load more list or infinite scroll into one table.",
+  "totalTime": "PT5M",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Open the first page",
+      "text": "Open the list and click the Magic Scraper icon.",
+      "url": "https://magicscraper.app/scraper-only-scrapes-first-page#how"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Find Next",
+      "text": "On the Crawl tab press Auto-detect Next, or Pick Next manually and click the button.",
+      "url": "https://magicscraper.app/scraper-only-scrapes-first-page#how"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Start crawling",
+      "text": "Press Start crawling. Every page joins the same table until there are no more.",
+      "url": "https://magicscraper.app/scraper-only-scrapes-first-page#how"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Export",
+      "text": "Press CSV or XLSX.",
+      "url": "https://magicscraper.app/scraper-only-scrapes-first-page#how"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does my web scraper only scrape the first page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually because the Next button runs JavaScript instead of linking to a page, the list uses Load more or infinite scroll, the tool picked the wrong pager control, or the site rate-limited it. A scraper that clicks buttons, scrolls and waits on 429 errors gets past all four."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I scrape a page with a Load more button?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open the page, click the Magic Scraper icon, and on the Crawl tab press Auto-detect Next, or Pick Next manually and click Load more once. Start crawling clicks it until it disappears."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I scrape infinite scroll?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The same way: Start crawling scrolls the page and collects new rows as they load, until the page stops adding them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a page limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Crawling is free with no page limit. Set Max pages if you want fewer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why did the crawl stop early?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The extension says why when it ends: no further Next link, the last page, Load more disappeared, the site asked it to slow down, a human check, or you pressed Stop. Rows collected so far are kept."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if it finds the wrong Next button?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It finds Next differently: it prefers the page's rel=next link and scores buttons by their words and position, and you can pick the control by hand if it guesses wrong."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Stops at page 1",
+      "item": "https://magicscraper.app/scraper-only-scrapes-first-page"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>Stuck on <i>page one</i>? It's usually one of five things.</h1>
+    <p class="standfirst">The run says it finished, the sheet has 20 rows, and the site has 2,000. Stopping at the first page is the complaint people post most about scrapers. The cause is nearly always one of five page patterns, and each has a fix.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Crawling every page is free, with no page limit.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="why">
+    <h2>Five reasons a scraper stops at page 1</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>The Next button isn't a link</h3>
+        <p>Many sites draw Next as a button that runs JavaScript, with no address behind it. A tool that only follows links sees nothing to follow.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>It's a Load more button</h3>
+        <p>"Load more" and "Show more results" add rows to the same page without changing the address, so a tool waiting for a new page waits forever.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>It's infinite scroll</h3>
+        <p>New rows appear only when the page is scrolled to the bottom. Nothing scrolls, nothing loads.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>The tool clicked the wrong control</h3>
+        <p>A pager has Next, numbers and Last. Pick Last by mistake and you get page 1 and the final page, and nothing between.</p>
+      </div>
+      <div class="step">
+        <span class="n">05</span>
+        <h3>The site pushed back</h3>
+        <p>Ask for pages too fast and a site answers with "too many requests" or a check page. Many tools stop silently and call it finished.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>Getting every page</h2>
+    <p class="deck">With the extension, on any paginated list.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Open the first page</h3>
+        <p>Open the list or search results and let it finish loading. Click the Magic Scraper icon: the rows are found and shown with named columns.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Press Auto-detect "Next"</h3>
+        <p>On the <b>Crawl</b> tab. It looks for the page's own <code>rel="next"</code> link first, then scores the buttons on the page by their words and position, and handles Load more buttons and infinite scroll as well as page links.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Wrong control? Pick it yourself</h3>
+        <p>Press <b>Pick &ldquo;Next&rdquo; manually</b> and click the real Next or Load more button once.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Start crawling</h3>
+        <p>Every page is added to the same table, with a pause between pages. When it ends it says why: no further Next link, the last page, Load more gone, or you stopped it.</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p>Crawling is free and has no page limit. A <b>Max pages</b> box is there if you only want the first few.</p>
+    </div>
+  </section>
+
+  <section id="slow">
+    <h2>When a site says "too many requests"</h2>
+    <div class="claim">
+      <p>A site that limits requests answers a fast scraper with a 429 error or a "slow down" page. Magic Scraper waits and retries, and tells you if it had to stop. If a site keeps pushing back, choose <b>Gentle</b> pacing: slower, and the least likely to be blocked. <b>Fast</b> is there only for sites you own or that allow it.</p>
+      <p>If the site shows a "verify you're human" check, the run stops and hands you the tab. It never tries to get past the check: you can answer it yourself and carry on, or leave the site alone.</p>
+    </div>
+  </section>
+
+  <section id="practice">
+    <h2>Practise on pages built to break scrapers</h2>
+    <div class="claim">
+      <p>The <a href="/demo/">sandbox</a> has a catalogue with numbered pages, a Load more list and an infinite-scroll feed, all fictional and none rate-limited, so you can see each pattern work before you try a real site.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why does my web scraper only scrape the first page?</summary>
+        <p>Usually because the Next button runs JavaScript instead of linking to a page, the list uses Load more or infinite scroll, the tool picked the wrong pager control, or the site rate-limited it. A scraper that clicks buttons, scrolls and waits on 429 errors gets past all four.</p>
+      </details>
+      <details>
+        <summary>How do I scrape a page with a Load more button?</summary>
+        <p>Open the page, click the Magic Scraper icon, and on the Crawl tab press Auto-detect Next, or Pick Next manually and click Load more once. Start crawling clicks it until it disappears.</p>
+      </details>
+      <details>
+        <summary>How do I scrape infinite scroll?</summary>
+        <p>The same way: Start crawling scrolls the page and collects new rows as they load, until the page stops adding them.</p>
+      </details>
+      <details>
+        <summary>Is there a page limit?</summary>
+        <p>No. Crawling is free with no page limit. Set Max pages if you want fewer.</p>
+      </details>
+      <details>
+        <summary>Why did the crawl stop early?</summary>
+        <p>The extension says why when it ends: no further Next link, the last page, Load more disappeared, the site asked it to slow down, a human check, or you pressed Stop. Rows collected so far are kept.</p>
+      </details>
+      <details>
+        <summary>What if it finds the wrong Next button?</summary>
+        <p>It finds Next differently: it prefers the page's rel=next link and scores buttons by their words and position, and you can pick the control by hand if it guesses wrong.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

@@ -84,13 +84,18 @@
         column header to rename it; the names are remembered for that site.</td></tr>
     <tr><th>The crawl stopped early</th>
         <td>The popup says why. "No further Next link" means the site ran out of pages. A
-        <code>429</code> means the site is rate-limiting you: set Speed to Gentle and try again.</td></tr>
+        <code>429</code> means the site is rate-limiting you: set Speed to Gentle and try again.
+        More in <a href="/scraper-only-scrapes-first-page">why scrapers stop at page 1</a>.</td></tr>
     <tr><th>Rows are still there after Clear</th>
         <td>Infinite scroll adds rows to the page itself, not to the extension. Use the
         <b>Reload page</b> button that appears after clearing.</td></tr>
     <tr><th>Nothing is detected at all</th>
         <td>Try the <a href="/demo/catalogue">sandbox</a>. If it works there and not on your
-        site, that is worth an email — send the URL.</td></tr>
+        site, that is worth an email — send the URL. First, the checks in
+        <a href="/scraper-not-working-on-this-site">when a scraper finds nothing</a>.</td></tr>
+    <tr><th>Something changed after an update</th>
+        <td>The <a href="/changelog">changelog</a> lists what each update changed, including
+        anything removed or moved to Pro.</td></tr>
   </table>
 
   <h2>Things no in-browser tool can reach</h2>

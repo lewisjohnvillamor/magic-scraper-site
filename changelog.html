@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Scraper changelog: every update, in plain words</title>
+<meta name="description" content="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 1.22.2." />
+<link rel="canonical" href="https://magicscraper.app/changelog" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/changelog" />
+<meta property="og:title" content="Magic Scraper changelog: every update, in plain words" />
+<meta property="og:description" content="Every Magic Scraper update in plain words, including what was removed or moved to Pro." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which version of Magic Scraper is in the stores?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Version 1.22.2, on both the Chrome Web Store and Edge Add-ons. Version 1.22.3 is built and tested and goes to the stores next."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do Magic Scraper updates arrive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Automatically, through the Chrome Web Store or Edge Add-ons, once each update has cleared store review. You don't need to reinstall."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to pay for updates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A Pro licence is paid once and keeps working across every update."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will an update remove a feature I use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anything removed, or moved between Free and Pro, is listed on this page under the version that changed it."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Changelog",
+      "item": "https://magicscraper.app/changelog"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Changelog</p>
+    <h1>What changed, <i>update</i> by update.</h1>
+    <p class="standfirst">Updates arrive by themselves through the Chrome Web Store and Edge Add-ons, once each one clears store review. This page lists what each one changed, in plain words, including anything that was removed or moved to Pro, so an update never surprises you.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">In the stores now: v1.22.2.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="v1-22-3">
+    <h2>v1.22.3</h2>
+    <p class="deck"><b>Next update.</b> Built 17 October 2026, tested, not in the stores yet.</p>
+    <ul class="ticks">
+        <li><b>Business directories get named columns</b>: Name, Phone, City, State, Postcode, Website and Map Link, instead of generic labels, on chamber of commerce and Yellow Pages-style directories.</li>
+        <li><b><a href="/drill-down">Drill-down</a> reads a member's profile page</b>: address, phone, fax, email, website and social pages, leaving out the directory's own header, footer and links.</li>
+        <li><b>Research paper pages</b> (arXiv, PubMed, journals): drill-down reads the title, authors, date, journal, DOI, PDF and abstract.</li>
+        <li>Links on pages that set a different base address now point to the right pages.</li>
+        <li>A table that a page fills in later is no longer offered as rows with nothing in them.</li>
+        <li>Larger buttons and clearer text in the popup.</li>
+    </ul>
+  </section>
+
+  <section id="v1-22-2">
+    <h2>v1.22.2</h2>
+    <p class="deck"><b>In the Chrome and Edge stores now.</b> 15 October 2026.</p>
+    <ul class="ticks">
+        <li>A pick made by hand from the side panel shows its columns there straight away.</li>
+        <li>Includes 1.22.1, which never went out on its own: when the rows on screen each link to a page of their own, the Data tab says so, and <b>Show me</b> takes you to drill-down.</li>
+        <li>A first install opens a page showing where the icon went (new extensions hide in the puzzle-piece menu). Removing the extension opens one optional question on our website.</li>
+    </ul>
+  </section>
+
+  <section id="v1-22-0">
+    <h2>v1.22.0</h2>
+    <p class="deck">1 October 2026.</p>
+    <ul class="ticks">
+        <li><b>Keep it open beside the page</b> in the browser's side panel: it stays while you click and follows the tab you're on.</li>
+        <li><b>Reddit, Amazon search, Hacker News, PubMed and arXiv</b> read into named columns. <a href="/supported-sites">What each gives</a>.</li>
+        <li>Wikipedia-style tables get their real headers, two-row headers included. Cards laid out three to a row come back as one list. Lists built from web components are found.</li>
+        <li>Image columns hold the whole address of the original image, not a resized copy. Columns are no longer named after styling classes.</li>
+        <li>Fixes from two read-throughs of the code (1.21.8 and 1.21.9): a Next button drawn as an icon no longer ends the crawl at page 2, a Next link that loops back no longer crawls forever, columns with the same header keep all their cells, and comparing with a file catches numbers that differ only in the last digit.</li>
+    </ul>
+  </section>
+
+  <section id="v1-21">
+    <h2>v1.21</h2>
+    <p class="deck">22 to 25 September 2026.</p>
+    <ul class="ticks">
+        <li><b>One setup over a list of pages</b>: paste the addresses, and the page you're on is crawled first, then each address in a tab of its own with the same setup, drill-down included. All of it comes back as one sheet with a List column.</li>
+        <li><b>Changed</b>: a list of pages is free for the first two addresses; Pro runs them all.</li>
+        <li>A queued run's rows survive the popup closing. Drilled rows whose page showed nothing are kept instead of thrown away. An empty pick no longer fails the run.</li>
+    </ul>
+  </section>
+
+  <section id="v1-20">
+    <h2>v1.20.14 to 1.20.20</h2>
+    <p class="deck">20 to 22 September 2026.</p>
+    <ul class="ticks">
+        <li><b>Recovering a run whose tab closed is free</b>, no longer Pro.</li>
+        <li><b>Removed</b>: the CSV auto-save during long runs. It could stop on a file chooser every few thousand rows; recovery keeps those rows without interrupting you.</li>
+        <li><b>A &ldquo;verify you're human&rdquo; check stops the run</b> and hands you the tab, instead of retrying into it.</li>
+        <li>Stop responds at once, instead of finishing the pause it was pressed during. A schedule that had lapsed no longer shows as active.</li>
+        <li>Detection: menus of links, page layouts and font-size classes no longer win over the real list, or name its columns.</li>
+    </ul>
+  </section>
+
+  <section id="earlier">
+    <h2>Earlier</h2>
+    <div class="claim">
+      <p><b>1.17</b> compared a run with the last one of the same list. <b>1.16.1</b> added named setups you can reuse and export. <b>1.16.0</b> brought back runs whose tab closed. Each of those has grown since; the entries above say how.</p>
+    </div>
+  </section>
+
+  <section id="promise">
+    <h2>How updates work</h2>
+    <div class="claim">
+      <p>Each update is checked by Chrome and Microsoft before it reaches you, then installs by itself. A Pro licence keeps working across every update: there is no paid upgrade.</p>
+      <p>When an update removes something, or moves it between Free and Pro, it is listed here under that version, in words, as the entries above show. If something you relied on changed and isn't listed, <a href="/support">tell us</a>.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Which version of Magic Scraper is in the stores?</summary>
+        <p>Version 1.22.2, on both the Chrome Web Store and Edge Add-ons. Version 1.22.3 is built and tested and goes to the stores next.</p>
+      </details>
+      <details>
+        <summary>How do Magic Scraper updates arrive?</summary>
+        <p>Automatically, through the Chrome Web Store or Edge Add-ons, once each update has cleared store review. You don't need to reinstall.</p>
+      </details>
+      <details>
+        <summary>Do I have to pay for updates?</summary>
+        <p>No. A Pro licence is paid once and keeps working across every update.</p>
+      </details>
+      <details>
+        <summary>Will an update remove a feature I use?</summary>
+        <p>Anything removed, or moved between Free and Pro, is listed on this page under the version that changed it.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>
