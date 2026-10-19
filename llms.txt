@@ -13,7 +13,8 @@ a run, and one setup can be run over the first 2 addresses of a list of pages. T
 needed, runs one setup over a whole list of pages, saves setups under a name to reuse and
 export, compares a run with the previous one of the same list -- or with a CSV, Excel or JSON
 file such as a CRM export, marking the rows not in it as new -- and runs a saved setup on a
-schedule while the browser is open. When a site shows a human-verification check, a run stops
+schedule (every few minutes, every few hours or once a day) while the browser is open. It can
+stay open in the browser's side panel beside the page while you click. When a site shows a human-verification check, a run stops
 and hands the user the tab; it never tries to get past the check. Stored runs live inside the
 extension, not in storage the scraped website can read.
 
