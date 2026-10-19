@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scraper missing rows, columns or phone numbers? Why</title>
+<meta name="description" content="Why scraped data comes back with missing rows, blank columns, lost phone numbers or garbled Excel characters, and how to check and fix each one." />
+<link rel="canonical" href="https://magicscraper.app/scraper-missing-data" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scraper-missing-data" />
+<meta property="og:title" content="Scraper missing rows, columns or phone numbers? Why" />
+<meta property="og:description" content="Missing rows, blank columns, phone numbers gone, garbled characters in Excel: what causes each and how to fix it." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is my scraper missing rows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The rows hadn't loaded when the page was read, the crawl stopped early, or repeated rows were collected once. Crawl scrolling pages as infinite scroll, check why the crawl ended, and use Gentle pacing on sites that push back."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are phone numbers missing from my scraped data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often the list doesn't hold them: they're on each listing's own page, or behind a show-number button. Drill-down adds fields from each listing's page; numbers hidden until a click aren't in the page at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I stop Excel removing leading zeros from phone numbers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Export XLSX instead of CSV. Every cell is written as text, so leading zeros and long numbers stay as they are."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my CSV show strange characters in Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Excel needs a marker to read a CSV as UTF-8. Magic Scraper's CSV includes it, so accented letters and symbols open correctly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I add a column the scraper missed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hold Shift and click the missing field on the page. It's added as a column for every row."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it scrape Google Maps?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It isn't built or tested for Google Maps, and Google restricts automated collection. Public business directories are the better source for local lead lists."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Missing rows or columns",
+      "item": "https://magicscraper.app/scraper-missing-data"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>Rows missing, columns blank, <i>phone numbers</i> gone.</h1>
+    <p class="standfirst">A sheet that looks complete but is 20% short is worse than an error. Here is what causes missing rows, blank or wrong columns and mangled phone numbers, and how to check the result before you rely on it.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free: detection, crawling and export to Excel, CSV or JSON.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="rows">
+    <h2>Missing rows</h2>
+    <div class="claim">
+      <p><b>They hadn't loaded.</b> On scrolling pages only the rows already shown exist. Crawl the page as infinite scroll so new rows are collected as they appear.</p>
+      <p><b>The crawl ended early.</b> Check the end-of-crawl message and the pages counter: the extension says why it stopped. If a site asked it to slow down, use Gentle pacing and run it again.</p>
+      <p><b>Duplicates were dropped.</b> When a site shows the same rows again on a later page, they are collected once. That is a smaller sheet, not a lost one.</p>
+      <p><b>The tab closed mid-run.</b> Open the extension on that site again: it offers back the rows collected so far, free.</p>
+    </div>
+  </section>
+
+  <section id="cols">
+    <h2>Blank or wrong columns</h2>
+    <div class="claim">
+      <p><b>The field isn't on the list.</b> Lists often show a name and a town, and keep the phone, website and email on each item's own page. <a href="/drill-down">Drill-down</a> opens those pages and adds their fields as columns.</p>
+      <p><b>The field is outside the row.</b> A price or badge drawn beside the row rather than in it isn't picked up automatically. Shift-click it once and it joins as a column.</p>
+      <p><b>The value appears only on click.</b> Some directories hide the phone number behind a "show number" button. It isn't in the page until someone clicks, so no scraper reads it from the list.</p>
+      <p><b>Badly named columns.</b> Double-click a header to rename it, click it to leave it out. Your choices are remembered for that site.</p>
+    </div>
+  </section>
+
+  <section id="excel">
+    <h2>When Excel mangles the export</h2>
+    <div class="claim">
+      <p><b>Phone numbers lose their leading zero</b> or turn into 4.47E+11 when a CSV is opened in Excel, because Excel guesses they are numbers. Export <b>XLSX</b> instead: every cell is written as text, so 0207&hellip; stays 0207&hellip;.</p>
+      <p><b>Accents and symbols turn into &Atilde;&copy;</b> when a file has no marker saying it is UTF-8. Magic Scraper's CSV includes that marker, so Excel reads caf&eacute; as caf&eacute;.</p>
+      <p><b>A cell that starts with = runs as a formula</b> when the file opens, which a hostile page can abuse. CSV exports defuse those cells; XLSX cells are never evaluated.</p>
+    </div>
+  </section>
+
+  <section id="maps">
+    <h2>A word on Google Maps</h2>
+    <div class="claim">
+      <p>Lead lists from Google Maps are the single most common source of "no phone numbers" complaints about scrapers: the list shows names, and the phone and website sit in each place's panel. Magic Scraper isn't built or tested for Google Maps, and Google's terms restrict automated collection. For local business lists, public directories are the better source: see <a href="/list-of-businesses-in-an-area">a list of businesses in any area</a>.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why is my scraper missing rows?</summary>
+        <p>The rows hadn't loaded when the page was read, the crawl stopped early, or repeated rows were collected once. Crawl scrolling pages as infinite scroll, check why the crawl ended, and use Gentle pacing on sites that push back.</p>
+      </details>
+      <details>
+        <summary>Why are phone numbers missing from my scraped data?</summary>
+        <p>Often the list doesn't hold them: they're on each listing's own page, or behind a show-number button. Drill-down adds fields from each listing's page; numbers hidden until a click aren't in the page at all.</p>
+      </details>
+      <details>
+        <summary>How do I stop Excel removing leading zeros from phone numbers?</summary>
+        <p>Export XLSX instead of CSV. Every cell is written as text, so leading zeros and long numbers stay as they are.</p>
+      </details>
+      <details>
+        <summary>Why does my CSV show strange characters in Excel?</summary>
+        <p>Excel needs a marker to read a CSV as UTF-8. Magic Scraper's CSV includes it, so accented letters and symbols open correctly.</p>
+      </details>
+      <details>
+        <summary>How do I add a column the scraper missed?</summary>
+        <p>Hold Shift and click the missing field on the page. It's added as a column for every row.</p>
+      </details>
+      <details>
+        <summary>Does it scrape Google Maps?</summary>
+        <p>It isn't built or tested for Google Maps, and Google restricts automated collection. Public business directories are the better source for local lead lists.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

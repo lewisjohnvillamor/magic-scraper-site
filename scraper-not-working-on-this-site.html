@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scraper says it doesn't support this site? What to try</title>
+<meta name="description" content="When a scraper finds nothing, the wrong table or an empty sheet: why it happens, what to try in a minute, and which sites no honest tool should promise." />
+<link rel="canonical" href="https://magicscraper.app/scraper-not-working-on-this-site" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scraper-not-working-on-this-site" />
+<meta property="og:title" content="Scraper says it doesn&#x27;t support this site? What to try" />
+<meta property="og:description" content="Nothing found, the wrong table, an empty sheet: why scrapers fail on some sites, what to try, and which sites no honest tool should promise." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does my scraper say it doesn't support this site?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually the rows haven't loaded yet, the data sits in a frame from another site, it's an image or PDF rather than text, the page needs a sign-in, or it's a bot check page. Wait and scroll, try another table, or pick the rows by hand."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I scrape a page where automatic detection fails?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click one row of what you want and the extension selects the rest that look the same. Shift-click extra fields to add them as columns."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it scrape pages I'm logged into?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It reads what your browser shows, including pages you're signed into, and never signs in for you. Whether you may collect from those pages depends on the site's terms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on LinkedIn?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, and it doesn't try. LinkedIn's terms forbid automated collection and it detects scraping extensions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it get past captchas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. When a site shows a human check, the run stops and hands you the tab."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my scraper return an empty CSV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The page was read before its rows appeared, or the wrong list was selected. Check the preview before exporting: if it shows the right rows, the file will too."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Not working on a site",
+      "item": "https://magicscraper.app/scraper-not-working-on-this-site"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>When a scraper finds <i>nothing</i>.</h1>
+    <p class="standfirst">It worked on the demo, then on the site you actually need it says it doesn't support it, or exports an empty sheet. Here is why that happens, what to try in the next minute, and which sites no honest tool should promise you.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free: detection, picking by hand and export.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="try">
+    <h2>Try these first</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Let it finish loading</h3>
+        <p>Many pages draw their rows a second or two after the page appears, or only as you scroll. Wait, scroll down once, then click the icon again.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Press Another table</h3>
+        <p>A page often has several lists: menus, filters, related items. If the outline is on the wrong one, cycle to the next.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Pick it by hand</h3>
+        <p>Click one row of what you want. The extension finds the rest that look the same. Then shift-click any extra field, such as a price that sits outside the row, and it joins as a column.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Open the page behind each row</h3>
+        <p>If the list only shows names, the details may live on each item's own page. <a href="/drill-down">Drill-down</a> opens them and adds their fields, free for 3 rows.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <h2>Why some pages come back empty</h2>
+    <div class="claim">
+      <p><b>The rows aren't there yet.</b> Pages that load as you scroll hold only what has been shown. Scroll first, or crawl it as <a href="/scraper-only-scrapes-first-page">infinite scroll</a>.</p>
+      <p><b>The data is in a frame from another site.</b> Maps, booking widgets and embedded tables often come from a different address inside the page. Open that address in its own tab and scrape it there.</p>
+      <p><b>It isn't text.</b> Prices drawn as images, charts drawn on a canvas and tables inside a PDF have no text for any scraper to read.</p>
+      <p><b>You're not signed in, or the session expired.</b> Magic Scraper runs in your own browser, so it sees pages you are signed into, the same as you do. It never signs in for you. Check the site's terms before collecting from pages behind a login.</p>
+      <p><b>The page is a check, not the content.</b> "Just a moment", "verify you're human" or "access denied" pages have nothing to scrape. Magic Scraper stops and hands you the tab rather than trying to get past them.</p>
+    </div>
+  </section>
+
+  <section id="honest">
+    <h2>Sites no honest tool should promise</h2>
+    <div class="claim">
+      <p>Some of the most requested sites, LinkedIn and Facebook among them, forbid automated collection in their terms and actively detect scraping extensions. A tool that promises them is promising to break those rules on your account. Magic Scraper doesn't, and won't get past captchas or bot checks.</p>
+      <p>For business lists, the same companies are usually in public directories that are made to be read: see <a href="/list-of-businesses-in-an-area">where local business lists live</a> and <a href="/business-directory-scraper">scraping a business directory</a>.</p>
+    </div>
+  </section>
+
+  <section id="tell">
+    <h2>Tell us which site</h2>
+    <div class="claim">
+      <p>If a public page should work and doesn't, send the address from <a href="/support">support</a>, or copy a diagnostic report from the extension's menu: it holds errors only, with web addresses removed. Sites that fail for many people are fixed in the next update.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why does my scraper say it doesn't support this site?</summary>
+        <p>Usually the rows haven't loaded yet, the data sits in a frame from another site, it's an image or PDF rather than text, the page needs a sign-in, or it's a bot check page. Wait and scroll, try another table, or pick the rows by hand.</p>
+      </details>
+      <details>
+        <summary>How do I scrape a page where automatic detection fails?</summary>
+        <p>Click one row of what you want and the extension selects the rest that look the same. Shift-click extra fields to add them as columns.</p>
+      </details>
+      <details>
+        <summary>Can it scrape pages I'm logged into?</summary>
+        <p>It reads what your browser shows, including pages you're signed into, and never signs in for you. Whether you may collect from those pages depends on the site's terms.</p>
+      </details>
+      <details>
+        <summary>Does it work on LinkedIn?</summary>
+        <p>No, and it doesn't try. LinkedIn's terms forbid automated collection and it detects scraping extensions.</p>
+      </details>
+      <details>
+        <summary>Can it get past captchas?</summary>
+        <p>No. When a site shows a human check, the run stops and hands you the tab.</p>
+      </details>
+      <details>
+        <summary>Why does my scraper return an empty CSV?</summary>
+        <p>The page was read before its rows appeared, or the wrong list was selected. Check the preview before exporting: if it shows the right rows, the file will too.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>
