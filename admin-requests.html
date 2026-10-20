@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Requests admin</title>
+<meta name="description" content="Moderation page for feature requests." />
+<link rel="canonical" href="https://magicscraper.app/admin-requests" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://magicscraper.app/admin-requests" />
+<meta property="og:title" content="Requests admin" />
+<meta property="og:description" content="Moderation page." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Admin</p>
+    <h1>Feature requests</h1>
+    <p class="standfirst">Approve, answer, merge and close requests, and read the goodbye-page
+      answers. Needs the ADMIN_TOKEN secret set on the Worker.</p>
+  </div>
+  <form class="adm-auth" id="admAuth">
+    <label style="flex:1">Admin token <input type="password" id="admToken" autocomplete="current-password" /></label>
+    <button type="submit">Unlock</button>
+  </form>
+  <p class="rq-msg" id="admMsg" role="status"></p>
+  <div id="admBody" hidden>
+    <div class="adm-tabs" role="group" aria-label="View">
+      <button type="button" data-tab="requests" aria-pressed="true">Requests</button>
+      <button type="button" data-tab="feedback" aria-pressed="false">Goodbye answers</button>
+    </div>
+    <div id="admRequests"></div>
+    <div id="admFeedback" hidden></div>
+  </div>
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="admin-requests.js" defer></script>
+</body>
+</html>

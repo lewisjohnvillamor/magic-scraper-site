@@ -2,6 +2,8 @@
 /index.html / 301
 /demo /demo/ 301
 /demo/index.html /demo/ 301
+/admin-requests.html /admin-requests 301
+/admin-requests/ /admin-requests 301
 /business-directory-scraper.html /business-directory-scraper 301
 /business-directory-scraper/ /business-directory-scraper 301
 /chamber-of-commerce-directory-scraper.html /chamber-of-commerce-directory-scraper 301
@@ -28,6 +30,8 @@
 /list-of-businesses-in-an-area/ /list-of-businesses-in-an-area 301
 /privacy.html /privacy 301
 /privacy/ /privacy 301
+/requests.html /requests 301
+/requests/ /requests 301
 /scraper-missing-data.html /scraper-missing-data 301
 /scraper-missing-data/ /scraper-missing-data 301
 /scraper-not-working-on-this-site.html /scraper-not-working-on-this-site 301
