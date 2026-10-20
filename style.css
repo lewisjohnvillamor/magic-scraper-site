@@ -658,3 +658,41 @@ table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
 .adm-tabs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .adm-auth { display: flex; gap: 8px; max-width: 520px; align-items: end; }
 @media (max-width: 720px) { .adm-row .grid { grid-template-columns: 1fr; } }
+/* Figures in the guides: real screenshots and small diagrams. Diagrams are
+   inline SVG coloured from the same tokens, so they follow dark mode. */
+.fig { margin: 26px 0 0; }
+.fig img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); box-shadow: var(--shadow); }
+.fig svg { width: 100%; max-width: 640px; height: auto; display: block; }
+.fig figcaption { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.fig figcaption b { color: var(--ink); font-variation-settings: 'wght' 600; }
+.dg text { font-family: inherit; fill: var(--ink); }
+.dg .t-mute { fill: var(--ink-2); }
+.dg .t-acc { fill: var(--accent); }
+.dg .t-warm { fill: var(--warm); }
+.dg .t-mono { font-family: var(--mono); }
+.dg .b-card { fill: var(--card); stroke: var(--rule); stroke-width: 2; }
+.dg .b-acc { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.dg .b-warm { fill: none; stroke: var(--warm); stroke-width: 2.5; }
+.dg .b-fill-acc { fill: var(--accent); }
+.dg .l-ink { stroke: var(--ink-2); stroke-width: 2; fill: none; }
+.dg .l-dash { stroke: var(--ink-2); stroke-width: 2; fill: none; stroke-dasharray: 6 6; }
+.dg .l-acc { stroke: var(--accent); stroke-width: 3; fill: none; }
+.dg .l-warm { stroke: var(--warm); stroke-width: 3; fill: none; }
+.dg .rule { stroke: var(--rule); stroke-width: 2; }
+
+/* A YouTube video that loads only when played: a local thumbnail until then,
+   so the page makes no request to YouTube for visitors who don't press play. */
+.yt { position: relative; margin: 26px 0 0; aspect-ratio: 16 / 9; background: #000;
+  border: 1px solid var(--rule); box-shadow: var(--shadow); }
+.yt.short { aspect-ratio: 9 / 16; max-width: 320px; }
+.yt a { position: absolute; inset: 0; display: block; }
+.yt a img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.yt a::after { content: ""; position: absolute; left: 50%; top: 50%; width: 72px; height: 50px;
+  margin: -25px 0 0 -36px; border-radius: 12px; background: rgba(23,21,15,.82); }
+.yt a::before { content: ""; position: absolute; left: 50%; top: 50%; z-index: 1;
+  margin: -11px 0 0 -7px; border-style: solid; border-width: 11px 0 11px 19px;
+  border-color: transparent transparent transparent #fff; }
+.yt a:hover::after, .yt a:focus-visible::after { background: var(--warm); }
+.yt a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.yt + .yt-cap { margin-top: 10px; font-size: 14px; color: var(--ink-2); }
