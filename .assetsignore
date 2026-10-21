@@ -18,3 +18,5 @@ src
 node_modules
 brag-output
 .wrangler
+# GitHub Actions workflows (IndexNow), never published.
+.github
