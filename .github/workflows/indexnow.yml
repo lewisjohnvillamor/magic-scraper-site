@@ -1,0 +1,40 @@
+# Tell Bing, Yandex, Seznam and Naver which pages changed, after each deploy.
+# Cloudflare Workers Builds deploys main on its own; this waits for that, then
+# submits only the pages the push changed (tools/indexnow_changed.py).
+# Run it by hand with "submit every page" ticked to send the whole sitemap.
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths: ['**.html', 'sitemap.xml']
+  workflow_dispatch:
+    inputs:
+      all:
+        description: Submit every page in the sitemap
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Give Cloudflare time to deploy this commit
+        if: github.event_name == 'push'
+        run: sleep 120
+      - name: Submit
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          ALL: ${{ inputs.all }}
+        run: |
+          if [ "$ALL" = "true" ]; then bash tools/indexnow.sh; exit 0; fi
+          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then BEFORE="$AFTER~1"; fi
+          git diff --name-only --diff-filter=AM "$BEFORE" "$AFTER" -- '*.html' | python3 tools/indexnow_changed.py
