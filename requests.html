@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Scraper feature requests: ask, vote, see what ships</title>
+<meta name="description" content="Ask for a Magic Scraper feature, vote for the ones you want, and see what is planned, being built and shipped. No account needed." />
+<link rel="canonical" href="https://magicscraper.app/requests" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://magicscraper.app/requests" />
+<meta property="og:title" content="Magic Scraper feature requests" />
+<meta property="og:description" content="Ask for a feature, vote for the ones you want, and see what is planned and shipped." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How are requests chosen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By how many people want them, how many people they would help, and whether they can be built without breaking the promises the extension makes: no account, no server for your data, nothing that gets past a site's protections."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do the statuses mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open: posted and collecting votes. Planned: we intend to build it. Building: it is being worked on now. Shipped: it is in an update, and the changelog says which. Declined: we won't build it, and the note says why."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't my request appear straight away?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every new request is read before it is shown, which keeps spam and duplicates off the board. It usually appears within a couple of days, sometimes merged with one that says the same thing, and your vote moves with it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my email address shown or shared?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It is optional, never shown, never shared, and kept for one purpose: telling you when that request ships. Ask at support@magicscraper.app and it is deleted."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I ask for a site to be supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Put the site's address in the details and say what you need from it. Sites that forbid automated collection or need a bot check passed, such as LinkedIn, can't be added, and the reply will say so."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this for the desktop app too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Choose Desktop under What is it for. The desktop app for Windows and Linux is coming, and requests for it help decide what it does first."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Feature requests",
+      "item": "https://magicscraper.app/requests"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Feature requests</p>
+    <h1>Ask for it. <i>Vote</i> for it.</h1>
+    <p class="standfirst">Tell us what Magic Scraper should do next, or press the arrow on someone
+      else's idea. The most-wanted requests are built first, and you can be told when yours ships.
+      No account, no cookies.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="board">
+    <h2>What people have asked for</h2>
+    <div class="rq-tools" id="rqTools" hidden>
+      <div class="seg" role="group" aria-label="Sort requests">
+        <button type="button" data-sort="top" aria-pressed="true">Most wanted</button>
+        <button type="button" data-sort="new" aria-pressed="false">Newest</button>
+      </div>
+      <label>Show
+        <select id="rqStatus">
+          <option value="active">Open, planned and building</option>
+          <option value="all">Everything</option>
+          <option value="planned">Planned</option>
+          <option value="building">Building</option>
+          <option value="shipped">Shipped</option>
+          <option value="declined">Declined</option>
+        </select>
+      </label>
+    </div>
+    <p class="rq-msg" id="rqLoad" role="status">Loading requests&hellip;</p>
+    <noscript><p class="rq-msg">The board needs JavaScript. You can still ask by email:
+      <a href="mailto:support@magicscraper.app?subject=Feature%20request">support@magicscraper.app</a>.</p></noscript>
+    <ul class="rq-list" id="rqList" aria-live="polite"></ul>
+  </section>
+
+  <section id="ask">
+    <h2>Ask for something</h2>
+    <p class="deck">One idea per request. Say what you are trying to get done, not only the
+      feature: &ldquo;I check 40 competitor prices every Monday&rdquo; helps more than
+      &ldquo;add monitoring&rdquo;.</p>
+    <form class="rq-form" id="rqForm" novalidate>
+      <label><b>Title</b> &mdash; a few words
+        <input name="title" maxlength="90" required placeholder="e.g. Export straight to Google Sheets" />
+      </label>
+      <label><b>Details</b> &mdash; what you'd use it for, and the site if it's about one
+        <textarea name="body" maxlength="800"></textarea>
+      </label>
+      <div class="row2">
+        <label><b>What is it for?</b>
+          <select name="product">
+            <option value="extension">The browser extension</option>
+            <option value="desktop">The desktop app</option>
+            <option value="website">This website</option>
+          </select>
+        </label>
+        <label><b>Email</b> &mdash; optional, to hear when it ships
+          <input name="email" type="email" maxlength="160" autocomplete="email" placeholder="you@work.com" />
+        </label>
+      </div>
+      <div class="hp" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+      <button class="btn" type="submit">Send the request</button>
+      <p class="rq-msg" id="rqFormMsg" role="status"></p>
+    </form>
+    <p class="aside" style="margin-top:14px">New requests are read before they appear, usually
+      within a couple of days. What is stored, and for how long, is in the
+      <a href="/privacy#website">privacy policy</a>.</p>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>How are requests chosen?</summary>
+        <p>By how many people want them, how many people they would help, and whether they can be built without breaking the promises the extension makes: no account, no server for your data, nothing that gets past a site's protections.</p>
+      </details>
+      <details>
+        <summary>What do the statuses mean?</summary>
+        <p>Open: posted and collecting votes. Planned: we intend to build it. Building: it is being worked on now. Shipped: it is in an update, and the changelog says which. Declined: we won't build it, and the note says why.</p>
+      </details>
+      <details>
+        <summary>Why doesn't my request appear straight away?</summary>
+        <p>Every new request is read before it is shown, which keeps spam and duplicates off the board. It usually appears within a couple of days, sometimes merged with one that says the same thing, and your vote moves with it.</p>
+      </details>
+      <details>
+        <summary>Is my email address shown or shared?</summary>
+        <p>No. It is optional, never shown, never shared, and kept for one purpose: telling you when that request ships. Ask at support@magicscraper.app and it is deleted.</p>
+      </details>
+      <details>
+        <summary>Can I ask for a site to be supported?</summary>
+        <p>Yes. Put the site's address in the details and say what you need from it. Sites that forbid automated collection or need a bot check passed, such as LinkedIn, can't be added, and the reply will say so.</p>
+      </details>
+      <details>
+        <summary>Is this for the desktop app too?</summary>
+        <p>Yes. Choose Desktop under What is it for. The desktop app for Windows and Linux is coming, and requests for it help decide what it does first.</p>
+      </details>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="requests.js" defer></script>
+</body>
+</html>

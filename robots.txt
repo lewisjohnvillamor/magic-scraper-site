@@ -3,6 +3,7 @@
 User-agent: *
 Allow: /
 Disallow: /thanks
+Disallow: /admin-requests
 
 # The sandbox is meant to be crawled and scraped -- that is what it is for.
 # Its 205 generated product, maker, sourcing, traceability and bulk-list pages carry

@@ -54,6 +54,8 @@ extension, not in storage the scraped website can read.
   a ten-minute privacy check for any extension, and the requests Magic Scraper makes.
 - [Changelog](https://magicscraper.app/changelog): every update in plain words, including anything
   removed or moved between Free and Pro.
+- [Feature requests](https://magicscraper.app/requests): ask for a feature and vote on others; shows what
+  is open, planned, being built, shipped or declined, with replies.
 - [A list of businesses in any area](https://magicscraper.app/list-of-businesses-in-an-area): where
   local business lists live and how to get one into Excel
 - [Data Miner alternative](https://magicscraper.app/data-miner-alternative) and

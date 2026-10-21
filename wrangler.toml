@@ -18,14 +18,22 @@ binding = "ASSETS"
 not_found_handling = "404-page"
 
 # ---------------------------------------------------------------------------
-# ONE SETUP STEP, and the vote counter is inert until it is done.
+# The API (src/index.js): the feature request board at /requests, the home
+# page's "I'd use this" votes, and the goodbye page's question. All three use
+# one D1 database. Until it is bound, /api/* answers 503 and every page falls
+# back to an email link, so the site is never broken by this being missing.
 #
-#   wrangler kv namespace create ROADMAP
+# SETUP, once:
+#   1. Cloudflare dashboard > Storage & Databases > D1 > Create database,
+#      named magic-scraper. Copy its Database ID.
+#   2. The block below, with that ID. (It is not a secret.)
+#   3. Workers & Pages > magic-scraper-site > Settings > Variables and Secrets
+#      > Add > type Secret, name ADMIN_TOKEN, value: a long random password of
+#      your own. That unlocks /admin-requests. Never commit it here.
+# The tables create themselves on the first request; there is no migration.
 #
-# That prints an id. Uncomment the two lines below, paste it in, and deploy.
-# Until then /api/roadmap returns 503 and the roadmap page quietly falls back to
-# a mailto link -- the site is never broken by this being missing.
-#
-# [[kv_namespaces]]
-# binding = "ROADMAP"
-# id = "paste-the-id-here"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "magic-scraper"
+database_id = "11f35cd1-3b94-4842-bf6c-7d99a74daa75"
