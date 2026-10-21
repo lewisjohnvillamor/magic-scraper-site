@@ -5,7 +5,9 @@ Each page follows the site's guide template (copy-table-from-website-to-excel.ht
 HowTo + FAQPage + BreadcrumbList JSON-LD, hero, sections, an FAQ, the shared
 header/footer. Run from the repo root: python3 tools/guides/make_painpoint_pages.py .
 """
-import html, json, re, sys
+import html, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from figures import shot, video, diagram, PAGER_SVG, ZEROS_SVG, PRIVACY_SVG, CREDITS_SVG
 
 ROOT = sys.argv[1]
 CWS = "https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck"
@@ -49,6 +51,8 @@ def page(p):
         <summary>%s</summary>
         <p>%s</p>
       </details>""" % (q, a) for q, a in p["faq"])
+    og_img = f"og/{p['slug']}.jpg" if os.path.exists(f"{ROOT}/assets/og/{p['slug']}.jpg") else "og.jpg"
+    vjs = '\n<script src="video.js" defer></script>' if 'data-id="' in secs else ""
     assert len(plain(p["title"])) <= 65, (p["slug"], len(plain(p["title"])))
     assert len(plain(p["desc"])) <= 160, (p["slug"], len(plain(p["desc"])))
     return f"""<!DOCTYPE html>
@@ -68,7 +72,7 @@ def page(p):
 <meta property="og:url" content="{url}" />
 <meta property="og:title" content="{e(plain(p['title']))}" />
 <meta property="og:description" content="{e(plain(p.get('og', p['desc'])))}" />
-<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image" content="https://magicscraper.app/assets/{og_img}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -140,7 +144,7 @@ def page(p):
   </footer>
 </div>
 
-<script src="nav.js" defer></script>
+<script src="nav.js" defer></script>{vjs}
 </body>
 </html>
 """
@@ -207,6 +211,9 @@ PAGES.append(dict(
             claim("The two limits on the free side are stated here, and on the drill-down and "
                   "list controls in the extension before a run starts, so nobody finds them at the "
                   "end of a job."),
+            shot("assets/guides/drill-free-rows.webp",
+                 "Magic Scraper's Crawl tab with the Drill-down step open, reading: Free opens the first 3 rows so you can see what comes back. Pro opens every row. Crawling pages is free either way.",
+                 "<b>As it appears in the extension.</b> The free limit is written on the drill-down switch, before a run starts."),
         ])),
         sec("credits", "Why credits feel like a trap", claim(
             "Credit-based scrapers charge per page loaded, per row returned or per AI action. That can be "
@@ -216,7 +223,9 @@ PAGES.append(dict(
             "hundred.",
             "Magic Scraper runs in your browser, on your computer, so there is no server time to bill "
             "for. A failed run costs nothing but the minute you spent on it, and a 10,000-row list costs "
-            "the same as a 10-row one.")),
+            "the same as a 10-row one.") + "\n" + diagram(CREDITS_SVG,
+            "Illustration: a credit plan's cost rises in steps as rows are scraped; Pro is a flat $25 once; Free is $0",
+            "An illustration of the two pricing models, not a price comparison: credit plans charge as you use them, a licence doesn't.")),
         sec("once", "What \"pay once\" means here", claim(
             "Pro is a licence key from Gumroad: <b>$25, one time</b> ($19 for the first 100 buyers). It "
             "never renews, so there is nothing to cancel. Every update since carries across, so there is "
@@ -259,7 +268,8 @@ PAGES.append(dict(
             ("It's infinite scroll", "New rows appear only when the page is scrolled to the bottom. Nothing scrolls, nothing loads."),
             ("The tool clicked the wrong control", "A pager has Next, numbers and Last. Pick Last by mistake and you get page 1 and the final page, and nothing between."),
             ("The site pushed back", "Ask for pages too fast and a site answers with \"too many requests\" or a check page. Many tools stop silently and call it finished."),
-        ])),
+        ]) + "\n" + diagram(PAGER_SVG, "Five kinds of pagination: a Next link, a Next button, Load more, infinite scroll, and numbered pages with a Last link",
+                             "The five patterns behind most &ldquo;it stopped at page 1&rdquo; complaints.")),
         sec("how", "Getting every page", "\n".join([
             steps([
                 ("Open the first page", "Open the list or search results and let it finish loading. Click the Magic Scraper icon: the rows are found and shown with named columns."),
@@ -269,6 +279,10 @@ PAGES.append(dict(
             ]),
             claim("Crawling is free and has no page limit. A <b>Max pages</b> box is there if you only want "
                   "the first few."),
+            shot("assets/guides/crawl-load-more.webp",
+                 "Magic Scraper's Crawl tab beside a list of reviews, after a crawl: 48 rows across 4 pages, stopped because the Next control disappeared from the page",
+                 "<b>A real run on the sandbox.</b> A list with a Load more button, crawled to the end: 48 reviews over 4 loads, and the reason it stopped."),
+            video("3oCmoj57Pxs", "Scrape every page, every row, straight to CSV: free Chrome extension"),
         ]), deck="With the extension, on any paginated list."),
         sec("slow", "When a site says \"too many requests\"", claim(
             "A site that limits requests answers a fast scraper with a 429 error or a \"slow down\" page. "
@@ -314,9 +328,11 @@ PAGES.append(dict(
         sec("try", "Try these first", steps([
             ("Let it finish loading", "Many pages draw their rows a second or two after the page appears, or only as you scroll. Wait, scroll down once, then click the icon again."),
             ("Press Another table", "A page often has several lists: menus, filters, related items. If the outline is on the wrong one, cycle to the next."),
-            ("Pick it by hand", "Click one row of what you want. The extension finds the rest that look the same. Then shift-click any extra field, such as a price that sits outside the row, and it joins as a column."),
+            ("Pick it by hand", "Press <b>&#9995; Pick manually</b> and click one row of what you want: the extension finds the rest that look the same. Shift-click any extra field, such as a price that sits outside the row, and it joins as a column."),
             ("Open the page behind each row", "If the list only shows names, the details may live on each item's own page. <a href=\"/drill-down\">Drill-down</a> opens them and adds their fields, free for 3 rows."),
-        ])),
+        ]) + "\n" + shot("assets/guides/pick-manually.webp",
+                 "Magic Scraper beside a product table it was picked from by hand, with a Discount column of -35% on every row, taken from a callout outside the table",
+                 "<b>A real run on the sandbox.</b> The rows were picked by hand, and the &minus;35% discount, which sits outside the table, was shift-clicked in as a column for every row.")),
         sec("why", "Why some pages come back empty", claim(
             "<b>The rows aren't there yet.</b> Pages that load as you scroll hold only what has been "
             "shown. Scroll first, or crawl it as <a href=\"/scraper-only-scrapes-first-page\">infinite "
@@ -395,6 +411,8 @@ PAGES.append(dict(
                   "UTF-8. Magic Scraper's CSV includes that marker, so Excel reads caf&eacute; as caf&eacute;.",
                   "<b>A cell that starts with = runs as a formula</b> when the file opens, which a hostile "
                   "page can abuse. CSV exports defuse those cells; XLSX cells are never evaluated."),
+            diagram(ZEROS_SVG, "The same two phone numbers: a CSV opened in Excel shows 2079460123 and 4.47911E+11; the XLSX export shows 02079460123 and 447911123456",
+                    "The same two phone numbers. Excel reads a CSV's digits as numbers; Magic Scraper's XLSX stores every cell as text."),
         ])),
         sec("maps", "A word on Google Maps", claim(
             "Lead lists from Google Maps are the single most common source of \"no phone numbers\" "
@@ -433,6 +451,8 @@ PAGES.append(dict(
             ("Look for consent screens", "A screen asking you to \"accept all\" before the tool works is asking for something. Read what."),
         ])),
         sec("ours", "Magic Scraper's answers", "\n".join([
+            diagram(PRIVACY_SVG, "Data flows from the page you're on to Magic Scraper in your browser to your file. The only other requests: more pages of the same site when you crawl, and Gumroad once for a Pro licence. Never a server of ours, analytics or an AI service.",
+                    "Where your scraped data goes, and every request the extension makes. Check it yourself with the steps above."),
             claim("<b>Your data:</b> what you scrape stays in your browser until you save a file. Finding a "
                   "table, picking one by hand and exporting it make no network requests at all. There is "
                   "no account and no server of ours for anything to go to."),
