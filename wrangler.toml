@@ -26,13 +26,14 @@ not_found_handling = "404-page"
 # SETUP, once:
 #   1. Cloudflare dashboard > Storage & Databases > D1 > Create database,
 #      named magic-scraper. Copy its Database ID.
-#   2. Uncomment the four lines below and paste the ID. (It is not a secret.)
+#   2. The block below, with that ID. (It is not a secret.)
 #   3. Workers & Pages > magic-scraper-site > Settings > Variables and Secrets
 #      > Add > type Secret, name ADMIN_TOKEN, value: a long random password of
 #      your own. That unlocks /admin-requests. Never commit it here.
 # The tables create themselves on the first request; there is no migration.
 #
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "magic-scraper"
-# database_id = "paste-the-id-here"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "magic-scraper"
+database_id = "11f35cd1-3b94-4842-bf6c-7d99a74daa75"
