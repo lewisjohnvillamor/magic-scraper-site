@@ -53,13 +53,14 @@
   <p class="lead"><b>Magic Scraper is built for privacy.</b> It has no servers of its own, no
   account, no analytics and no telemetry. What it reads stays in your browser, and what it
   produces goes <b>only where you send it</b>: a file you save, or &mdash; with Pro, if you choose
-  &mdash; a Google Sheet in your own Google account. Detecting a table, picking one by hand and
+  &mdash; a Google Sheet in your own Google account or a webhook address you give. Detecting a table, picking one by hand and
   exporting it make <b>no network requests at all</b>. The only requests the free extension ever
   makes are for further pages of the site you are already on, and only once you press Start
   crawling &mdash; never to a server of ours, because there isn't one.
-  Two things go further, both only with Pro and both only when you start them: activating your
-  licence sends the key to Gumroad, once; and <a href="#google-sheets">Send to Google Sheets</a>
-  (from version 1.23) sends the rows you choose straight to your own sheet at Google.</p>
+  Three things go further, all only with Pro and all only when you start them: activating your
+  licence sends the key to Gumroad, once; <a href="#google-sheets">Send to Google Sheets</a>
+  (from version 1.23) sends the rows you choose straight to your own sheet at Google; and
+  <a href="#webhook">Send to webhook</a> (from version 1.23) sends them to the address you set.</p>
 
   <h2>What it reads</h2>
   <p>When you open the popup on a page, the extension reads that page's visible content —
@@ -131,8 +132,8 @@
   makes while scraping are to the site you are already on: when a site paginates by URL, it
   fetches the next page of that same site directly, exactly as your browser would if you clicked
   the link. Your rows, your columns, the pages you visit and the files you export never leave your
-  machine &mdash; unless you press <b>Send to Google Sheets</b> (Pro), and then only the rows you
-  send, to your own sheet, as described below. Nothing ever goes to us.</p>
+  machine &mdash; unless you press <b>Send to Google Sheets</b> or <b>Send to webhook</b> (Pro), and then
+  only the rows you send, to the place you chose, as described below. Nothing ever goes to us.</p>
 
   <p><strong>One exception, and only if you buy Pro: activating your licence.</strong> When you
   paste a licence key and press Activate, the extension sends <em>that key and the product ID</em>
@@ -175,6 +176,28 @@
   never sold, never used for advertising, and never read by a person. Google&rsquo;s own privacy
   policy applies to what is in your Google account.</p>
 
+  <h2 id="webhook">Send to webhook (Pro, from version 1.23)</h2>
+  <p><strong>Off until you set it up.</strong> <b>Send to webhook</b> posts the rows you are
+  looking at, as JSON, to an address you type in: your own server, or a &ldquo;catch
+  hook&rdquo; at a service such as Zapier, Make or n8n that passes them on to wherever you
+  point it. Nothing is sent anywhere until you save an address, and a free installation never
+  sends.</p>
+  <ul>
+    <li><b>What is sent:</b> the rows you send, with the columns you kept, plus the address and
+      title of the page they came from, the time, and the extension&rsquo;s version number. If
+      you tick it for a scheduled run, each run sends its rows the same way. Nothing passes
+      through a server of ours.</li>
+    <li><b>Where it goes:</b> only to the address you saved, and only over an encrypted
+      (https) connection. Your browser asks your permission for that one site when you save
+      it; the extension cannot post anywhere else. What happens to the rows after that is up
+      to the service you chose, under its own privacy policy.</li>
+    <li><b>What is kept, and where:</b> the address, and the optional secret you give it so
+      your receiver can check the posts are yours, in the extension&rsquo;s own storage on your
+      computer. They are not synced and not sent to us.</li>
+    <li><b>Turning it off:</b> <i>Settings &rarr; Saving and exporting &rarr; Remove</i>
+      forgets the address and secret and gives back the permission for that site.</li>
+  </ul>
+
   <p>Files you export (CSV, XLSX, JSON) are written to your own downloads folder. Where they go
   after that is up to you.</p>
 
@@ -213,6 +236,10 @@
         <td>Requested only the first time you use Send to Google Sheets (Pro): <code>identity</code>
             opens Google&rsquo;s own sign-in window, and the two Google addresses are where the rows
             are written and where signing out revokes access. Never asked for otherwise.</td></tr>
+    <tr><td>Your webhook&rsquo;s site <em>(optional, from 1.23)</em></td>
+        <td>Requested only when you save an address for Send to webhook (Pro): access to that
+            one site, so the extension can post your rows to it. Remove the address and the
+            permission goes with it.</td></tr>
   </table>
 
   <h2>Scheduled runs</h2>
@@ -227,8 +254,11 @@
     <li>If you ticked <i>Also add each run&rsquo;s rows to a Google Sheet</i> (Pro), it also sends
       that run&rsquo;s rows to that sheet, as described under
       <a href="#google-sheets">Google Sheets</a>.</li>
+    <li>If you ticked <i>Also send each run&rsquo;s rows to your webhook</i> (Pro), it also posts
+      that run&rsquo;s rows to your webhook address, as described under
+      <a href="#webhook">Send to webhook</a>.</li>
   </ul>
-  <p>Nothing about those runs is sent anywhere. The rows, the files and the schedule itself stay
+  <p>Apart from what you ticked, nothing about those runs is sent anywhere. The rows, the files and the schedule itself stay
   on your machine, and a schedule stops the moment you switch it off or remove the extension.</p>
 
 
