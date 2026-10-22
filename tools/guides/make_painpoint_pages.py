@@ -454,13 +454,14 @@ PAGES.append(dict(
             diagram(PRIVACY_SVG, "Data flows from the page you're on to Magic Scraper in your browser to your file. The only other requests: more pages of the same site when you crawl, Gumroad once for a Pro licence, and your own Google Sheet if you send to it with Pro. Never a server of ours, analytics or an AI service.",
                     "Where your scraped data goes, and every request the extension makes. Check it yourself with the steps above."),
             claim("<b>Your data:</b> what you scrape stays in your browser until you save a file or, with "
-                  "Pro, send it to a Google Sheet in your own account. Finding a table, picking one by hand "
+                  "Pro, send it to a Google Sheet in your own account or to a webhook address you set. Finding a table, picking one by hand "
                   "and exporting it make no network requests at all. There is no account and no server of "
                   "ours for anything to go to."),
             table(["When", "What is requested"], [
                 ["Crawling or drill-down", ("y", "Further pages of the site you're on, after you press Start")],
                 ["Activating Pro", ("y", "Your licence key to Gumroad, once, to confirm the purchase")],
                 ["Send to Google Sheets (Pro, from 1.23)", ("y", "The rows you send, straight to your own sheet at Google")],
+                ["Send to webhook (Pro, from 1.23)", ("y", "The rows you send, to the https address you saved, and nowhere else")],
                 ["Install and uninstall", ("y", "A welcome page opens, and a page asking why on removal")],
                 ["Anything else", ("y", "Nothing: no analytics, no tracking, no AI service")],
             ]),
@@ -515,6 +516,7 @@ PAGES.append(dict(
             "<b>Open in Google Sheets</b> (free): copies the table and opens a new sheet, ready to paste into.",
             "<b>Send to Google Sheets</b> (Pro): writes the rows into a sheet in your own Google account, and the next send adds under the last. It can open only the sheets it created, and nothing passes through a server of ours. <a href=\"/privacy#google-sheets\">What it sends and keeps</a>.",
             "A scheduled setup can add each run's rows to its sheet. If Google needs you to sign in again, the run still saves its CSV and says so.",
+            "<b>Send to webhook</b> (Pro): posts the rows as JSON to your own server, or to Zapier, Make or n8n and on to a CRM or database. You set the address once; the extension asks for that one site only, and a scheduled setup can send each run too. <a href=\"/privacy#webhook\">What it sends and keeps</a>.",
         ]),
         release("v1-22-3", "v1.22.3", "Built 17 October 2026, tested, not in the stores yet.", "Next update", [
             "<b>Business directories get named columns</b>: Name, Phone, City, State, Postcode, Website and Map Link, instead of generic labels, on chamber of commerce and Yellow Pages-style directories.",
