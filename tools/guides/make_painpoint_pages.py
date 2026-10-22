@@ -441,7 +441,7 @@ PAGES.append(dict(
     og="Permissions, privacy disclosures, network requests and ownership: a ten-minute check for any scraper extension, and Magic Scraper's own answers.",
     h1="Is your scraper extension <i>safe</i>? Check what it sends.",
     standfirst="A scraper extension sees every page you point it at, and often every page you visit. Extensions change hands, and a new owner can change what one collects. You don't need to trust anyone's word: here is a ten-minute check you can run on any of them, Magic Scraper included.",
-    aside="Magic Scraper: your scraped data never leaves your browser.",
+    aside="Magic Scraper: no account, no tracking, no server of ours.",
     sections=[
         sec("check", "A ten-minute check for any extension", steps([
             ("Read the permissions", "In Chrome, open <code>chrome://extensions</code>, press <b>Details</b>. \"Read and change all your data on all websites\" means it can see every page you open, not just the one you scrape."),
@@ -451,14 +451,16 @@ PAGES.append(dict(
             ("Look for consent screens", "A screen asking you to \"accept all\" before the tool works is asking for something. Read what."),
         ])),
         sec("ours", "Magic Scraper's answers", "\n".join([
-            diagram(PRIVACY_SVG, "Data flows from the page you're on to Magic Scraper in your browser to your file. The only other requests: more pages of the same site when you crawl, and Gumroad once for a Pro licence. Never a server of ours, analytics or an AI service.",
+            diagram(PRIVACY_SVG, "Data flows from the page you're on to Magic Scraper in your browser to your file. The only other requests: more pages of the same site when you crawl, Gumroad once for a Pro licence, and your own Google Sheet if you send to it with Pro. Never a server of ours, analytics or an AI service.",
                     "Where your scraped data goes, and every request the extension makes. Check it yourself with the steps above."),
-            claim("<b>Your data:</b> what you scrape stays in your browser until you save a file. Finding a "
-                  "table, picking one by hand and exporting it make no network requests at all. There is "
-                  "no account and no server of ours for anything to go to."),
+            claim("<b>Your data:</b> what you scrape stays in your browser until you save a file or, with "
+                  "Pro, send it to a Google Sheet in your own account. Finding a table, picking one by hand "
+                  "and exporting it make no network requests at all. There is no account and no server of "
+                  "ours for anything to go to."),
             table(["When", "What is requested"], [
                 ["Crawling or drill-down", ("y", "Further pages of the site you're on, after you press Start")],
                 ["Activating Pro", ("y", "Your licence key to Gumroad, once, to confirm the purchase")],
+                ["Send to Google Sheets (Pro, from 1.23)", ("y", "The rows you send, straight to your own sheet at Google")],
                 ["Install and uninstall", ("y", "A welcome page opens, and a page asking why on removal")],
                 ["Anything else", ("y", "Nothing: no analytics, no tracking, no AI service")],
             ]),
@@ -477,7 +479,7 @@ PAGES.append(dict(
     ],
     faq=[
         ("Are web scraper extensions safe?", "Some are and some collect more than you'd expect. Check the permissions, the store's privacy disclosures and the network requests while you scrape, and look at who owns the extension now."),
-        ("Does Magic Scraper send my data anywhere?", "No. Scraped data stays in your browser until you save a file. Detection and export make no network requests. The only requests are further pages of the site you're crawling, and a one-time licence check with Gumroad if you buy Pro."),
+        ("Does Magic Scraper send my data anywhere?", "Only where you send it. Scraped data stays in your browser until you save a file or, with Pro, send it to a Google Sheet in your own account. Detection and export make no network requests; otherwise the only requests are further pages of the site you're crawling and a one-time licence check with Gumroad if you buy Pro. Nothing ever goes to us."),
         ("Why does a scraper extension need access to all websites?", "To work on whatever site you open, and to crawl pages in the background. In Magic Scraper that wider access is optional and requested only when a feature needs it."),
         ("How do I see what an extension sends?", "Open DevTools with F12, choose the Network tab, and use the extension. Any request to a domain other than the site you're on came from somewhere else, often the extension."),
         ("Does Magic Scraper use AI or send pages to a server?", "No. Detection runs in your browser with no AI service and no server of ours."),
@@ -509,6 +511,11 @@ PAGES.append(dict(
     standfirst="Updates arrive by themselves through the Chrome Web Store and Edge Add-ons, once each one clears store review. This page lists what each one changed, in plain words, including anything that was removed or moved to Pro, so an update never surprises you.",
     aside="In the stores now: v1.22.2.",
     sections=[
+        release("v1-23", "v1.23", "Built and tested; it goes to the stores once Google has reviewed the sign-in.", "In progress", [
+            "<b>Open in Google Sheets</b> (free): copies the table and opens a new sheet, ready to paste into.",
+            "<b>Send to Google Sheets</b> (Pro): writes the rows into a sheet in your own Google account, and the next send adds under the last. It can open only the sheets it created, and nothing passes through a server of ours. <a href=\"/privacy#google-sheets\">What it sends and keeps</a>.",
+            "A scheduled setup can add each run's rows to its sheet. If Google needs you to sign in again, the run still saves its CSV and says so.",
+        ]),
         release("v1-22-3", "v1.22.3", "Built 17 October 2026, tested, not in the stores yet.", "Next update", [
             "<b>Business directories get named columns</b>: Name, Phone, City, State, Postcode, Website and Map Link, instead of generic labels, on chamber of commerce and Yellow Pages-style directories.",
             "<b><a href=\"/drill-down\">Drill-down</a> reads a member's profile page</b>: address, phone, fax, email, website and social pages, leaving out the directory's own header, footer and links.",

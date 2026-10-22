@@ -70,9 +70,10 @@ PRIVACY_SVG = ('<svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg">'
     + _box(230, 10, 180, 96, ["Magic Scraper,", "in your browser"], "b-acc", "")
     + _box(459, 10, 180, 96, ["Your CSV or", "Excel file"])
     + '<path class="l-acc" d="M184 58 h40 m-10 -9 l10 9 l-10 9"/><path class="l-acc" d="M413 58 h40 m-10 -9 l10 9 l-10 9"/>'
-    + '<text x="1" y="160" font-size="21" class="t-mute">The only other requests it makes:</text>'
-    + _box(1, 180, 310, 86, ["More pages of the same site,", "when you start a crawl"])
-    + _box(329, 180, 310, 86, ["Gumroad, once,", "to check a Pro licence"])
+    + '<text x="1" y="160" font-size="21" class="t-mute">The only other requests, each one started by you:</text>'
+    + _box(1, 180, 200, 100, ["More pages of", "the same site,", "when you crawl"])
+    + _box(220, 180, 200, 100, ["Gumroad, once,", "to check a", "Pro licence"])
+    + _box(439, 180, 200, 100, ["Your own Google", "Sheet, if you", "send to it (Pro)"])
     + '<text x="1" y="320" font-size="21" class="t-mute">Never:</text>'
     + _box(1, 344, 200, 92, ["A server of ours", "(there isn't one)"], tcls="t-mute")
     + _box(220, 344, 200, 92, ["Analytics or", "tracking"], tcls="t-mute")

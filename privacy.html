@@ -48,13 +48,18 @@
 
 <main id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="sub">Last updated 20 October 2026 · applies to the Magic Scraper browser extension for Chrome and Edge, and to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux</p>
+  <p class="sub">Last updated 22 October 2026 · applies to the Magic Scraper browser extension for Chrome and Edge, and to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux</p>
 
-  <p class="lead"><b>Magic Scraper keeps your data on your machine.</b> It has no servers of its
-  own, no analytics and no telemetry. Everything it reads stays in your browser, and everything
-  it produces goes only where you save it. Detecting a table, picking one by hand and exporting it make <b>no network requests at all</b>. The only requests the free extension ever makes are for further pages of the site you are already on, and only once you press Start crawling — never to a server of ours, because there isn't one.
-  There is exactly one exception, described below, and it happens only if you buy Pro: your
-  licence key is sent to Gumroad, once, to confirm the purchase.</p>
+  <p class="lead"><b>Magic Scraper is built for privacy.</b> It has no servers of its own, no
+  account, no analytics and no telemetry. What it reads stays in your browser, and what it
+  produces goes <b>only where you send it</b>: a file you save, or &mdash; with Pro, if you choose
+  &mdash; a Google Sheet in your own Google account. Detecting a table, picking one by hand and
+  exporting it make <b>no network requests at all</b>. The only requests the free extension ever
+  makes are for further pages of the site you are already on, and only once you press Start
+  crawling &mdash; never to a server of ours, because there isn't one.
+  Two things go further, both only with Pro and both only when you start them: activating your
+  licence sends the key to Gumroad, once; and <a href="#google-sheets">Send to Google Sheets</a>
+  (from version 1.23) sends the rows you choose straight to your own sheet at Google.</p>
 
   <h2>What it reads</h2>
   <p>When you open the popup on a page, the extension reads that page's visible content —
@@ -122,10 +127,12 @@
 
 
   <h2>What leaves your machine</h2>
-  <p><strong>Your data: nothing.</strong> The only network requests the extension makes while
-  scraping are to the site you are already on: when a site paginates by URL, it fetches the next
-  page of that same site directly, exactly as your browser would if you clicked the link. Your
-  rows, your columns, the pages you visit and the files you export never leave your machine.</p>
+  <p><strong>Your data: only what you send.</strong> The only network requests the extension
+  makes while scraping are to the site you are already on: when a site paginates by URL, it
+  fetches the next page of that same site directly, exactly as your browser would if you clicked
+  the link. Your rows, your columns, the pages you visit and the files you export never leave your
+  machine &mdash; unless you press <b>Send to Google Sheets</b> (Pro), and then only the rows you
+  send, to your own sheet, as described below. Nothing ever goes to us.</p>
 
   <p><strong>One exception, and only if you buy Pro: activating your licence.</strong> When you
   paste a licence key and press Activate, the extension sends <em>that key and the product ID</em>
@@ -136,6 +143,37 @@
   request at all, and never asks for permission to.</p>
 
   <p>We do not store your name or email address, even though Gumroad's reply contains them.</p>
+
+  <h2 id="google-sheets">Google Sheets (Pro, from version 1.23)</h2>
+  <p><strong>Off until you use it.</strong> <b>Send to Google Sheets</b> puts the rows you are
+  looking at into a spreadsheet in your own Google account. The first time you press it, your
+  browser asks for permission and Google asks you to sign in and agree. Nothing is sent to Google
+  before that, and a free installation never asks.</p>
+  <ul>
+    <li><b>What is sent:</b> the rows you send &mdash; the table as you see it, with the columns
+      you kept &mdash; from your browser straight to Google&rsquo;s Sheets API. If you link a
+      scheduled run to a sheet, each run sends its rows the same way. Nothing passes through a
+      server of ours.</li>
+    <li><b>What it can open:</b> only spreadsheets it created itself. It asks Google for the
+      narrowest access there is (&ldquo;only the specific Google Drive files you use with this
+      app&rdquo;), so it cannot see the rest of your Drive, your email, your contacts or your
+      profile, and it does not ask for your name or email address.</li>
+    <li><b>What is kept, and where:</b> Google&rsquo;s sign-in is kept in your browser&rsquo;s
+      memory for about an hour and is never written to disk. The extension remembers, in its own
+      storage on your machine, the address and title of each sheet it made and that sheet&rsquo;s
+      column headings, so a later run lines up under the earlier ones. None of it is sent to us.</li>
+    <li><b>Turning it off:</b> <i>Settings &rarr; Saving and exporting &rarr; Sign out of Google
+      Sheets</i> revokes the access at Google. You can also remove it at
+      <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
+      Your sheets stay in your Google Drive; removing the extension deletes what it remembered
+      about them.</li>
+  </ul>
+  <p>Magic Scraper&rsquo;s use and transfer of information received from Google APIs will adhere
+  to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API
+  Services User Data Policy</a>, including the Limited Use requirements. Data from your Google
+  account is used only to write the rows you send into your own sheets: it is never sent to us,
+  never sold, never used for advertising, and never read by a person. Google&rsquo;s own privacy
+  policy applies to what is in your Google account.</p>
 
   <p>Files you export (CSV, XLSX, JSON) are written to your own downloads folder. Where they go
   after that is up to you.</p>
@@ -170,6 +208,11 @@
     <tr><td><code>api.gumroad.com</code> <em>(optional)</em></td>
         <td>Requested only when you activate a Pro licence, for the single check described above.
             Free users are never asked for it.</td></tr>
+    <tr><td><code>identity</code>, <code>sheets.googleapis.com</code>,
+            <code>oauth2.googleapis.com</code> <em>(optional, from 1.23)</em></td>
+        <td>Requested only the first time you use Send to Google Sheets (Pro): <code>identity</code>
+            opens Google&rsquo;s own sign-in window, and the two Google addresses are where the rows
+            are written and where signing out revokes access. Never asked for otherwise.</td></tr>
   </table>
 
   <h2>Scheduled runs</h2>
@@ -181,6 +224,9 @@
     <li>It visits that site in your browser, as you, on a timer. If you are signed in to the
       site, the run is signed in too, exactly as it would be if you opened the page yourself.</li>
     <li>It writes files to your downloads folder while you are doing something else.</li>
+    <li>If you ticked <i>Also add each run&rsquo;s rows to a Google Sheet</i> (Pro), it also sends
+      that run&rsquo;s rows to that sheet, as described under
+      <a href="#google-sheets">Google Sheets</a>.</li>
   </ul>
   <p>Nothing about those runs is sent anywhere. The rows, the files and the schedule itself stay
   on your machine, and a schedule stops the moment you switch it off or remove the extension.</p>
