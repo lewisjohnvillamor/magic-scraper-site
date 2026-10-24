@@ -506,19 +506,20 @@ PAGES.append(dict(
     eyebrow="Changelog",
     crumb="Changelog",
     title="Magic Scraper changelog: every update, in plain words",
-    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 1.22.2.",
+    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 1.23.",
     og="Every Magic Scraper update in plain words, including what was removed or moved to Pro.",
     h1="What changed, <i>update</i> by update.",
     standfirst="Updates arrive by themselves through the Chrome Web Store and Edge Add-ons, once each one clears store review. This page lists what each one changed, in plain words, including anything that was removed or moved to Pro, so an update never surprises you.",
-    aside="In the stores now: v1.22.2.",
+    aside="In the stores now: v1.23.",
     sections=[
-        release("v1-23", "v1.23", "Built and tested; it goes to the stores once Google has reviewed the sign-in.", "In progress", [
+        release("v1-23", "v1.23", "23 October 2026.", "In the Chrome and Edge stores now", [
             "<b>Open in Google Sheets</b> (free): copies the table and opens a new sheet, ready to paste into.",
             "<b>Send to Google Sheets</b> (Pro): writes the rows into a sheet in your own Google account, and the next send adds under the last. It can open only the sheets it created, and nothing passes through a server of ours. <a href=\"/privacy#google-sheets\">What it sends and keeps</a>.",
             "A scheduled setup can add each run's rows to its sheet. If Google needs you to sign in again, the run still saves its CSV and says so.",
+            "Includes 1.22.3, which never went out on its own: <b>business directories get named columns</b> (Name, Phone, City, State, Postcode, Website), <a href=\"/drill-down\">drill-down</a> reads a member's profile page and a research paper's page, and the popup has larger buttons and clearer text.",
             "<b>Send to webhook</b> (Pro): posts the rows as JSON to your own server, or to Zapier, Make or n8n and on to a CRM or database. You set the address once; the extension asks for that one site only, and a scheduled setup can send each run too. <a href=\"/privacy#webhook\">What it sends and keeps</a>.",
         ]),
-        release("v1-22-3", "v1.22.3", "Built 17 October 2026, tested, not in the stores yet.", "Next update", [
+        release("v1-22-3", "v1.22.3", "17 October 2026. Went out as part of 1.23.", None, [
             "<b>Business directories get named columns</b>: Name, Phone, City, State, Postcode, Website and Map Link, instead of generic labels, on chamber of commerce and Yellow Pages-style directories.",
             "<b><a href=\"/drill-down\">Drill-down</a> reads a member's profile page</b>: address, phone, fax, email, website and social pages, leaving out the directory's own header, footer and links.",
             "<b>Research paper pages</b> (arXiv, PubMed, journals): drill-down reads the title, authors, date, journal, DOI, PDF and abstract.",
@@ -526,7 +527,7 @@ PAGES.append(dict(
             "A table that a page fills in later is no longer offered as rows with nothing in them.",
             "Larger buttons and clearer text in the popup.",
         ]),
-        release("v1-22-2", "v1.22.2", "15 October 2026.", "In the Chrome and Edge stores now", [
+        release("v1-22-2", "v1.22.2", "15 October 2026.", None, [
             "A pick made by hand from the side panel shows its columns there straight away.",
             "Includes 1.22.1, which never went out on its own: when the rows on screen each link to a page of their own, the Data tab says so, and <b>Show me</b> takes you to drill-down.",
             "A first install opens a page showing where the icon went (new extensions hide in the puzzle-piece menu). Removing the extension opens one optional question on our website.",
@@ -562,7 +563,7 @@ PAGES.append(dict(
             "changed and isn't listed, <a href=\"/support\">tell us</a>.")),
     ],
     faq=[
-        ("Which version of Magic Scraper is in the stores?", "Version 1.22.2, on both the Chrome Web Store and Edge Add-ons. Version 1.22.3 is built and tested and goes to the stores next."),
+        ("Which version of Magic Scraper is in the stores?", "Version 1.23, on both the Chrome Web Store and Edge Add-ons. A Firefox version is built and on its way to Firefox Add-ons."),
         ("How do Magic Scraper updates arrive?", "Automatically, through the Chrome Web Store or Edge Add-ons, once each update has cleared store review. You don't need to reinstall."),
         ("Do I have to pay for updates?", "No. A Pro licence is paid once and keeps working across every update."),
         ("Will an update remove a feature I use?", "Anything removed, or moved between Free and Pro, is listed on this page under the version that changed it."),
