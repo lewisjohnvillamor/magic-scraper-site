@@ -9,6 +9,7 @@ const BG = {
   pick: 'data:image/webp;base64,' + b64(SITE + '/assets/guides/pick-manually.webp'),
   drill: 'data:image/webp;base64,' + b64(SITE + '/assets/guides/drill-free-rows.webp'),
   dir: 'data:image/webp;base64,' + b64(SITE + '/assets/directory.webp'),
+  hook: 'data:image/webp;base64,' + b64(SITE + '/assets/guides/webhook-frame.webp'),
 };
 const cards = [
   ['scraper-only-scrapes-first-page', 'crawl', 'Stuck on page one?', 'Get every page.', 'Why scrapers stop at page 1, and the fix for Next buttons, Load more and infinite scroll.', ['Free', 'No page limit', 'Says why it stopped']],
@@ -16,7 +17,8 @@ const cards = [
   ['scraper-missing-data', 'dir', 'Rows missing?', 'Phones gone?', 'Why a scraped sheet comes back short, and why Excel drops leading zeros.', ['XLSX keeps zeros', 'UTF-8 safe CSV', 'Free']],
   ['web-scraper-no-subscription', 'drill', 'No credits. No trial.', 'Pay once, or never.', 'What the free version does, what $25 once adds, and five questions to ask any scraper first.', ['No account', 'Nothing renews', '7-day refund']],
   ['web-scraper-extension-privacy', 'crawl', 'Is your scraper safe?', 'Check what it sends.', 'A ten-minute check for any extension: permissions, disclosures, network requests, owner.', ['No analytics', 'No AI service', 'Data stays local']],
-  ['changelog', 'drill', 'Every update,', 'in plain words.', 'What each Magic Scraper release changed, including anything removed or moved to Pro.', ['v1.22.2 in the stores', 'Updates included']],
+  ['changelog', 'drill', 'Every update,', 'in plain words.', 'What each Magic Scraper release changed, including anything removed or moved to Pro.', ['v1.23 in the stores', 'Updates included']],
+  ['scraped-data-webhook-node-php', 'hook', 'Scraped rows,', 'to your server.', 'Webhook receivers in Node.js and PHP, about 40 lines each, and the safe way to hand rows to a shell script.', ['Node.js', 'PHP', 'No packages']],
 ];
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
 const pg = await b.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
