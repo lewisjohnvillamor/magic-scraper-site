@@ -705,3 +705,8 @@ pre.code code { font-family: inherit; }
 pre.code:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .claim code, .compare code { font-family: var(--mono); font-size: .86em; background: var(--card);
            border: 1px solid var(--rule); padding: 1px 5px; }
+
+/* The free plan's two install buttons, side by side, with the browser note
+   on its own line under them instead of wrapping round the button. */
+.plan-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.plan-note { margin: 12px 0 0; }
