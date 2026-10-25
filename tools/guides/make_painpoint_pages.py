@@ -5,6 +5,7 @@ Each page follows the site's guide template (copy-table-from-website-to-excel.ht
 HowTo + FAQPage + BreadcrumbList JSON-LD, hero, sections, an FAQ, the shared
 header/footer. Run from the repo root: python3 tools/guides/make_painpoint_pages.py .
 """
+
 import html, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from figures import shot, video, diagram, PAGER_SVG, ZEROS_SVG, PRIVACY_SVG, CREDITS_SVG
@@ -501,6 +502,115 @@ def release(id_, ver, when, badge, items):
   </section>
 """
 
+# ---------------------------------------------------------------- 6. webhook receivers
+def _code(path, lang):
+    src = open(f"{ROOT}/{path}", encoding="utf-8").read().rstrip("\n")
+    return f'    <pre class="code" tabindex="0"><code class="language-{lang}">{html.escape(src)}</code></pre>'
+
+_PAYLOAD = """{
+  "source": "magic-scraper",
+  "version": "1.23.0",
+  "event": "rows",
+  "trigger": "manual",
+  "page": { "url": "https://example.com/members", "title": "Members" },
+  "sent_at": "2026-10-25T09:30:00.000Z",
+  "batch": { "index": 1, "count": 1 },
+  "total_rows": 2,
+  "columns": ["Name", "Phone", "City"],
+  "rows": [
+    { "Name": "Acme Roofing", "Phone": "0207946001", "City": "Leeds" },
+    { "Name": "Bolt Electric", "Phone": "0207946002", "City": "York" }
+  ]
+}"""
+
+PAGES.append(dict(
+    slug="scraped-data-webhook-node-php",
+    crumb="Webhook receivers",
+    title="Send scraped data to your server: Node.js and PHP webhooks",
+    desc="Receive scraped rows on your own server in about 40 lines of Node.js or PHP, no packages: the payload, the secret check, and piping rows to a script safely.",
+    og="About 40 lines of Node.js or PHP, no packages: what Magic Scraper's webhook sends, how to check it, and how to pass rows to a shell script without running what a page wrote.",
+    h1="Scraped rows, straight to <i>your</i> server.",
+    standfirst="Magic Scraper's Pro webhook posts the rows you scrape, as JSON, to an address you choose. Point it at Zapier and you need no code at all. Point it at your own server and you need very little: here is a complete receiver in Node.js and another in PHP, about 40 lines each with no packages, plus the safe way to hand the rows to a shell script.",
+    aside="Both receivers were tested against the extension itself, including scraped text that tries to run a command.",
+    sections=[
+        sec("payload", "What arrives", "\n".join([
+            claim("Each <b>Send to webhook</b>, and each scheduled run you tick it for, makes a <code>POST</code> "
+                  "with a JSON body. By default rows come in batches of 1,000, each batch saying which page it came "
+                  "from and which part of the whole it is. Every value is the text as it was scraped, so a phone "
+                  "number keeps its leading zero."),
+            f'    <pre class="code" tabindex="0"><code class="language-json">{html.escape(_PAYLOAD)}</code></pre>',
+            table(["What it means"], [
+                ["<code>X-Magic-Scraper-Secret</code>", ("y", "The secret you typed, sent as a header so your receiver can refuse anyone else")],
+                ["<code>event</code>", ("y", "<code>rows</code>, or <code>test</code> for the one made-up row that <b>Save and test</b> sends")],
+                ["<code>trigger</code>", ("y", "<code>manual</code> for the button, <code>schedule</code> for a scheduled run")],
+                ["Send as: one item per row", ("y", "The body is just the list of rows. Zapier runs a Zap once for each")],
+                ["Addresses", ("y", "https only, so rows are encrypted on the way. Plain http is allowed for localhost")],
+                ["Errors", ("y", "429 and 5xx are retried twice. Anything else is shown to you, and a scheduled run still saves its CSV")],
+            ]),
+        ])),
+        sec("node", "A receiver in Node.js", "\n".join([
+            claim("Node 18 or later, nothing to install. It checks the secret in constant time, appends each row "
+                  "to <code>rows.jsonl</code> as one line of JSON, answers 200, and logs where the rows came from. "
+                  "<a href=\"/examples/webhook/receiver.mjs\">Download receiver.mjs</a>."),
+            _code("examples/webhook/receiver.mjs", "javascript"),
+            claim("Run it with <code>MS_SECRET=your-secret node receiver.mjs</code>. JSON Lines is used rather than "
+                  "CSV because the columns can differ from one site to the next; one object per line never breaks, "
+                  "and every tool reads it."),
+        ])),
+        sec("php", "A receiver in PHP", "\n".join([
+            claim("PHP 8.1 or later, nothing to install, and it runs on ordinary shared hosting. Same behaviour: "
+                  "secret checked with <code>hash_equals</code>, one row per line, the file locked while it is written. "
+                  "<a href=\"/examples/webhook/hook.php\">Download hook.php</a>."),
+            _code("examples/webhook/hook.php", "php"),
+            claim("On a server, upload it to your web root and keep the rows file <b>outside</b> it (the default is one "
+                  "folder up), or anyone could download your rows. To try it on your own computer: "
+                  "<code>MS_SECRET=your-secret php -S localhost:8787 hook.php</code>."),
+        ])),
+        sec("shell", "Handing the rows to a shell script, safely", "\n".join([
+            claim("Both receivers can start a script of yours for every batch: set <code>ON_ROWS=./on-rows.sh</code>. "
+                  "The script gets the new rows on <b>standard input</b>, one JSON object per line. This one keeps a "
+                  "CSV of names and phone numbers. <a href=\"/examples/webhook/on-rows.sh\">Download on-rows.sh</a>."),
+            _code("examples/webhook/on-rows.sh", "bash"),
+            claim("<b>Never put a scraped value on a command line.</b> Everything you scrape was written by whoever "
+                  "made the page. A receiver that builds a command such as <code>\"notify \" + row.Name</code> and "
+                  "runs it through a shell will run any <code>$(&hellip;)</code> or <code>;</code> that page "
+                  "contains. That is why the receivers above pass rows on stdin and start the script without a "
+                  "shell (<code>spawn</code> with no <code>shell</code> option in Node, an array command in "
+                  "<code>proc_open</code> in PHP), and why <code>jq</code> handles every value as data. We tested it with "
+                  "rows whose names were <code>$(touch PWNED)</code> and <code>; touch PWNED3 #</code>: both were "
+                  "stored as text and nothing ran."),
+            claim("The same goes for a sheet. A cell that starts with <code>=</code> is a formula to Excel and "
+                  "Google Sheets, so if you turn the rows into a spreadsheet, treat leading <code>=</code>, "
+                  "<code>+</code>, <code>-</code> and <code>@</code> as text. Magic Scraper's own exports already do."),
+        ])),
+        sec("try", "Try it on your own computer first", "\n".join([
+            steps([
+                ("Start a receiver", "Run either one: <code>node receiver.mjs</code> or <code>php -S localhost:8787 hook.php</code>. Both listen on port 8787."),
+                ("Give Magic Scraper the address", "In the popup: gear &rarr; Saving and exporting &rarr; Webhook. Address <code>http://localhost:8787/hook</code>, and the same secret if you set one."),
+                ("Press Save and test", "One made-up row is sent. It is saved only if your receiver answers 200, so a typo shows up now, not at 3am on a schedule."),
+                ("Send some rows", "Open any list, press <b>Send to webhook</b>, and watch them arrive in <code>rows.jsonl</code>."),
+            ]),
+            shot("assets/guides/webhook-settings.webp", "The Saving and exporting dialog with the Webhook section: address http://localhost:8787/hook, an optional secret, Send as Batches of rows, and Save and test",
+                 "The webhook settings, pointed at a receiver on the same computer.", 575, 940),
+        ])),
+        sec("online", "Putting it online", "\n".join([
+            claim("For a receiver on another machine, the address must start with <code>https://</code>. The usual "
+                  "ways: the PHP file on hosting you already have, which almost always has a certificate; the Node "
+                  "receiver behind the web server you already run; or, while you build, a tunnel such as Cloudflare "
+                  "Tunnel or ngrok that gives your computer an https address. Use a long random secret either way."),
+            claim("No server at all? Make a <b>Catch Hook</b> in Zapier, a <b>Custom webhook</b> in Make, or a "
+                  "<b>Webhook</b> node in n8n, and paste its address instead. Pick <i>One item per row</i> for Zapier."),
+        ])),
+    ],
+    faq=[
+        ("Is the webhook free?", "It is part of Pro, a one-time payment with no subscription. Exporting CSV, Excel and JSON, and opening a table in Google Sheets, are free."),
+        ("Do my rows pass through Magic Scraper's servers?", "No. The browser posts them straight to the address you set. There is no server of ours in between, and nothing is sent until you press Send to webhook or tick it for a schedule."),
+        ("Can a scheduled run send to my webhook?", "Yes. Tick Also send each run's rows to your webhook when you schedule a saved setup. Each run still saves its CSV, and if your receiver is down the run says so instead of losing the rows."),
+        ("Why does my receiver get a row called Test row?", "That is Save and test. It sends one made-up row with event set to test, so you can check the address before real rows arrive. The receivers above skip it."),
+        ("What if a list has more than 1,000 rows?", "It arrives in batches of 1,000, numbered with batch.index and batch.count, so your receiver can tell when it has the whole list."),
+    ],
+))
+
 PAGES.append(dict(
     slug="changelog",
     eyebrow="Changelog",
@@ -517,7 +627,7 @@ PAGES.append(dict(
             "<b>Send to Google Sheets</b> (Pro): writes the rows into a sheet in your own Google account, and the next send adds under the last. It can open only the sheets it created, and nothing passes through a server of ours. <a href=\"/privacy#google-sheets\">What it sends and keeps</a>.",
             "A scheduled setup can add each run's rows to its sheet. If Google needs you to sign in again, the run still saves its CSV and says so.",
             "Includes 1.22.3, which never went out on its own: <b>business directories get named columns</b> (Name, Phone, City, State, Postcode, Website), <a href=\"/drill-down\">drill-down</a> reads a member's profile page and a research paper's page, and the popup has larger buttons and clearer text.",
-            "<b>Send to webhook</b> (Pro): posts the rows as JSON to your own server, or to Zapier, Make or n8n and on to a CRM or database. You set the address once; the extension asks for that one site only, and a scheduled setup can send each run too. <a href=\"/privacy#webhook\">What it sends and keeps</a>.",
+            "<b>Send to webhook</b> (Pro): posts the rows as JSON to your own server, or to Zapier, Make or n8n and on to a CRM or database. You set the address once; the extension asks for that one site only, and a scheduled setup can send each run too. <a href=\"/privacy#webhook\">What it sends and keeps</a>, and <a href=\"/scraped-data-webhook-node-php\">receivers in Node.js and PHP</a>.",
         ]),
         release("v1-22-3", "v1.22.3", "17 October 2026. Went out as part of 1.23.", None, [
             "<b>Business directories get named columns</b>: Name, Phone, City, State, Postcode, Website and Map Link, instead of generic labels, on chamber of commerce and Yellow Pages-style directories.",

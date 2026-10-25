@@ -47,6 +47,9 @@ extension, not in storage the scraped website can read.
   compliant tool should not promise.
 - [Scraper missing rows, columns or phone numbers](https://magicscraper.app/scraper-missing-data):
   causes of incomplete data, and Excel leading-zero and UTF-8 problems.
+- [Send scraped data to your server: Node.js and PHP webhooks](https://magicscraper.app/scraped-data-webhook-node-php):
+  the Pro webhook's JSON payload and secret header, complete receivers in Node.js and PHP with no
+  packages, and passing rows to a shell script on stdin rather than a command line.
 - [A web scraper with no subscription](https://magicscraper.app/web-scraper-no-subscription):
   free tier with no time limit or credits, a one-time Pro licence, and questions to ask before
   paying for any scraper.
