@@ -27,7 +27,7 @@
   --ink-2:   #5d574a;
   --rule:    #e0dbd0;
   --card:    #fffefb;
-  --accent:  #4b3bd0;   /* the extension's violet, used sparingly */
+  --accent:  #17150f;   /* links, focus and states: ink, like the extension now */
   --warm:    #b4491f;   /* one warm note, for price and emphasis */
   --shadow:  24px 24px 0 -12px rgba(23,21,15,.06);
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
@@ -36,7 +36,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --paper: #14130f; --ink: #f2efe6; --ink-2: #a8a091; --rule: #302c24;
-    --card: #1b1914; --accent: #a695ff; --warm: #e08355;
+    --card: #1b1914; --accent: #f2efe6; --warm: #e08355;
     --shadow: 24px 24px 0 -12px rgba(0,0,0,.3);
   }
 }
@@ -55,7 +55,8 @@ body {
   font-synthesis-weight: none;
 }
 
-a { color: var(--accent); text-underline-offset: 3px; }
+a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--warm); }
 
 .wrap { max-width: 1000px; margin: 0 auto; padding: 0 28px; }
 .narrow { max-width: 680px; }
@@ -667,16 +668,16 @@ table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
 .fig figcaption b { color: var(--ink); font-variation-settings: 'wght' 600; }
 .dg text { font-family: inherit; fill: var(--ink); }
 .dg .t-mute { fill: var(--ink-2); }
-.dg .t-acc { fill: var(--accent); }
+.dg .t-acc { fill: var(--warm); }
 .dg .t-warm { fill: var(--warm); }
 .dg .t-mono { font-family: var(--mono); }
 .dg .b-card { fill: var(--card); stroke: var(--rule); stroke-width: 2; }
-.dg .b-acc { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.dg .b-acc { fill: none; stroke: var(--warm); stroke-width: 2.5; }
 .dg .b-warm { fill: none; stroke: var(--warm); stroke-width: 2.5; }
-.dg .b-fill-acc { fill: var(--accent); }
+.dg .b-fill-acc { fill: var(--warm); }
 .dg .l-ink { stroke: var(--ink-2); stroke-width: 2; fill: none; }
 .dg .l-dash { stroke: var(--ink-2); stroke-width: 2; fill: none; stroke-dasharray: 6 6; }
-.dg .l-acc { stroke: var(--accent); stroke-width: 3; fill: none; }
+.dg .l-acc { stroke: var(--warm); stroke-width: 3; fill: none; }
 .dg .l-warm { stroke: var(--warm); stroke-width: 3; fill: none; }
 .dg .rule { stroke: var(--rule); stroke-width: 2; }
 

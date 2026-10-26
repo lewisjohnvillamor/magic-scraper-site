@@ -591,7 +591,7 @@ PAGES.append(dict(
                 ("Send some rows", "Open any list, press <b>Send to webhook</b>, and watch them arrive in <code>rows.jsonl</code>."),
             ]),
             shot("assets/guides/webhook-settings.webp", "The Saving and exporting dialog with the Webhook section: address http://localhost:8787/hook, an optional secret, Send as Batches of rows, and Save and test",
-                 "The webhook settings, pointed at a receiver on the same computer.", 575, 940),
+                 "The webhook settings, pointed at a receiver on the same computer.", 460, 600),
         ])),
         sec("online", "Putting it online", "\n".join([
             claim("For a receiver on another machine, the address must start with <code>https://</code>. The usual "
