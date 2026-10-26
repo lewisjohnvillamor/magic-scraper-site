@@ -1,0 +1,25 @@
+<!doctype html><meta charset="utf-8"><style>
+  /* YouTube thumbnail, 1280x720, in the website's identity: paper, ink, one
+     rust note. The popup picture is docs/screenshot.png from the extension
+     repo (written by tools/make_store_shots.mjs), so it shows the real UI. */
+  @font-face { font-family:'Fraunces'; src:url('../../assets/fonts/fraunces-var.woff2') format('woff2-variations'); font-weight:100 900; }
+  @font-face { font-family:'Archivo'; src:url('../../assets/fonts/archivo-var.woff2') format('woff2-variations'); font-weight:100 900; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1280px;height:720px;overflow:hidden;background:#faf8f4;color:#17150f;font-family:'Archivo',sans-serif}
+  .pop{position:absolute;right:58px;top:50px;height:620px;border:2px solid #17150f;border-radius:14px;
+       box-shadow:26px 26px 0 -10px rgba(23,21,15,.10)}
+  .txt{position:absolute;left:64px;top:0;bottom:0;width:660px;display:flex;flex-direction:column;justify-content:center}
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:30px;font-family:'Fraunces';font-weight:600;font-size:30px;letter-spacing:-.4px}
+  .mark{width:58px;height:58px;border-radius:14px;background:#17150f;display:flex;align-items:center;justify-content:center}
+  h1{font-family:'Fraunces';font-weight:650;font-size:100px;line-height:.96;letter-spacing:-3px;font-variation-settings:'SOFT' 0,'WONK' 1,'opsz' 144}
+  h1 i{color:#b4491f}
+  .sub{margin-top:30px;font-weight:700;font-size:32px;color:#faf8f4;background:#17150f;display:inline-block;align-self:flex-start;padding:10px 20px;border-radius:10px}
+  .free{margin-top:18px;font-size:27px;color:#5d574a}
+</style>
+<img class="pop" src="POPUP">
+<div class="txt">
+  <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#faf8f4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 L14 10"/><path d="M18 3 v5 M15.5 5.5 h5"/></svg></span>Magic Scraper</div>
+  <h1>Every feature,<br><i>Free</i> &amp; Pro.</h1>
+  <div class="sub">Full walkthrough · 3½ minutes</div>
+  <p class="free">Chrome · Edge · Firefox</p>
+</div>
