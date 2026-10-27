@@ -314,8 +314,8 @@
   <h2 id="snippers">Magic Snippers (Chrome extension)</h2>
   <p>Magic Snippers is a separate extension, with its own licence: it scrapes tables and lists,
   takes whole-page screenshots, and opens every link in a list to screenshot each page. It works
-  differently from Magic Scraper in two ways worth knowing &mdash; it asks for access to all sites
-  up front, and it re-checks a Pro licence every few days &mdash; so here is exactly what it does.</p>
+  differently from Magic Scraper in two ways worth knowing &mdash; a drill-down can open pages on
+  many sites, and it re-checks a Pro licence every few days &mdash; so here is exactly what it does.</p>
   <p><b>What it reads.</b> The page you are on, when you press Find data, Take snapshot or Scan
   this page; and, during a drill-down you start, each page the chosen links lead to. Reading
   happens inside your browser. It never reads a page you haven't asked it to.</p>
@@ -343,9 +343,15 @@
   <p><b>Permissions, and why each one exists.</b></p>
   <table>
     <tr><th>Permission</th><th>Why</th></tr>
-    <tr><td>All-sites access</td><td>So you can use it on whatever site you choose, including ones
-      you are signed in to, and so a drill-down can open and capture the pages your links lead to.
-      It acts on a page only when you press one of its buttons.</td></tr>
+    <tr><td><code>activeTab</code></td><td>Clicking its toolbar icon lets it read the tab you
+      clicked it on, and only that tab. It has no access to any site when you install it.</td></tr>
+    <tr><td>Access to a site, asked one site at a time</td><td>When you use it on a tab you
+      didn&rsquo;t click the icon on, or a drill-down opens links on a site, your browser first asks
+      whether to allow those sites. It keeps only the sites you allow; you can remove them in
+      Chrome&rsquo;s extension settings (Site access). It acts on a page only when you press one of
+      its buttons.</td></tr>
+    <tr><td><code>tabs</code></td><td>Show the name of the page the panel will work on, and follow
+      a drill-down&rsquo;s tab as each page loads.</td></tr>
     <tr><td><code>scripting</code></td><td>Run its own detection, waiting and measuring code in the
       page, and click a tab you asked for inside each link (a &ldquo;Details&rdquo; tab, say).</td></tr>
     <tr><td><code>debugger</code></td><td>Whole-page screenshots. It attaches to the tab being
