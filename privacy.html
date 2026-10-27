@@ -48,7 +48,7 @@
 
 <main id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="sub">Last updated 22 October 2026 · applies to the Magic Scraper browser extension for Chrome and Edge, and to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux</p>
+  <p class="sub">Last updated 27 October 2026 · applies to the Magic Scraper browser extension for Chrome and Edge, to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux, and to the <a href="#snippers">Magic Snippers</a> extension</p>
 
   <p class="lead"><b>Magic Scraper is built for privacy.</b> It has no servers of its own, no
   account, no analytics and no telemetry. What it reads stays in your browser, and what it
@@ -311,8 +311,58 @@
   your results, the sites you visit or how you use the app. Notifications are shown by your
   operating system and stay on your computer.</p>
 
+  <h2 id="snippers">Magic Snippers (Chrome extension)</h2>
+  <p>Magic Snippers is a separate extension, with its own licence: it scrapes tables and lists,
+  takes whole-page screenshots, and opens every link in a list to screenshot each page. It works
+  differently from Magic Scraper in two ways worth knowing &mdash; it asks for access to all sites
+  up front, and it re-checks a Pro licence every few days &mdash; so here is exactly what it does.</p>
+  <p><b>What it reads.</b> The page you are on, when you press Find data, Take snapshot or Scan
+  this page; and, during a drill-down you start, each page the chosen links lead to. Reading
+  happens inside your browser. It never reads a page you haven't asked it to.</p>
+  <p><b>What it keeps, and where.</b> What you capture &mdash; CSV and JSON exports, PNG
+  screenshots and the <code>_index.csv</code> of a drill-down &mdash; is saved as files in your
+  Downloads folder. Your settings (folder and file names, wait times, extra pages) and, with Pro,
+  your licence key, the email address Gumroad returns for it and the date it was last checked are
+  kept in the extension's own storage (<code>chrome.storage.local</code>) in your browser. Nothing
+  here is sent to us.</p>
+  <p><b>What it sends, and to whom.</b></p>
+  <table>
+    <tr><th>When</th><th>What goes where</th></tr>
+    <tr><td>You drill down</td><td>The pages behind the links you chose are opened in a tab, as
+      your browser would open them if you clicked each one.</td></tr>
+    <tr><td>You activate a Pro licence</td><td>Your licence key and our product id go to
+      Gumroad&rsquo;s licence service (<code>api.gumroad.com</code>) to confirm the purchase.
+      Gumroad answers with the purchase details, including the email used to buy, which are kept in
+      your browser as described above.</td></tr>
+    <tr><td>Every 3 days, when the panel opens (Pro only)</td><td>The same key and product id are
+      sent to Gumroad again, so a refunded or cancelled purchase stops unlocking Pro. If Gumroad
+      can&rsquo;t be reached, Pro keeps working for 14 days after the last successful check.</td></tr>
+  </table>
+  <p>It has <b>no analytics, no telemetry and no crash reporting</b>, and loads no code from
+  anywhere but itself. A free installation never contacts Gumroad or anyone else.</p>
+  <p><b>Permissions, and why each one exists.</b></p>
+  <table>
+    <tr><th>Permission</th><th>Why</th></tr>
+    <tr><td>All-sites access</td><td>So you can use it on whatever site you choose, including ones
+      you are signed in to, and so a drill-down can open and capture the pages your links lead to.
+      It acts on a page only when you press one of its buttons.</td></tr>
+    <tr><td><code>scripting</code></td><td>Run its own detection, waiting and measuring code in the
+      page, and click a tab you asked for inside each link (a &ldquo;Details&rdquo; tab, say).</td></tr>
+    <tr><td><code>debugger</code></td><td>Whole-page screenshots. It attaches to the tab being
+      captured only while a snapshot or drill-down runs, makes the tab tall enough to fit the whole
+      page, takes the picture and detaches. Chrome shows a &ldquo;started debugging this
+      browser&rdquo; bar while it does.</td></tr>
+    <tr><td><code>downloads</code></td><td>Save your exports and screenshots, and open the folder
+      when you press Open folder.</td></tr>
+    <tr><td><code>storage</code></td><td>Remember your settings and, with Pro, your licence.</td></tr>
+    <tr><td><code>sidePanel</code></td><td>Its interface is a side panel beside the page.</td></tr>
+  </table>
+  <p>Remove the licence (Upgrade &rarr; <b>Remove license from this browser</b>) or uninstall the
+  extension to delete everything it stored. Files you saved stay in your Downloads folder until
+  you delete them.</p>
+
   <h2 id="website">About this website</h2>
-  <p>Everything above is about the <b>extension</b>, which has no server and never did. This
+  <p>Everything above is about the <b>extensions</b>, which have no server and never did. This
   <b>website</b> is a different thing and now has one small piece of one, so it is worth saying
   plainly rather than leaving you to find it.</p>
   <p>The <a href="/requests">feature request board</a>, and the <b>I&rsquo;d use this</b>
@@ -337,11 +387,11 @@
   is never shown on the board, it is deleted once we have told you, and asking to be removed at
   <a href="mailto:support@magicscraper.app">support@magicscraper.app</a> is enough to delete it
   sooner.</p>
-  <p>If you email us to be told when Magic Scraper Desktop launches, your address is kept for that
-  one message and nothing else; ask at
+  <p>If you email us to be told when Magic Scraper Desktop launches, or when Magic Snippers is in
+  the Chrome Web Store, your address is kept for that one message and nothing else; ask at
   <a href="mailto:support@magicscraper.app">support@magicscraper.app</a> to be removed sooner.</p>
-  <p>None of this touches the extension. Beyond opening those two pages, it has no idea the
-  website exists.</p>
+  <p>None of this touches the extensions. Beyond Magic Scraper opening those two pages, they have
+  no idea the website exists.</p>
 
   <h2>Changes</h2>
   <p>If this policy changes, the updated version will be published at this address with a new
