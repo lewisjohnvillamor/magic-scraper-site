@@ -67,6 +67,9 @@ extension, not in storage the scraped website can read.
   captchas or uses proxies.
 - [Scraper popup keeps closing](https://magicscraper.app/scraper-popup-keeps-closing):
   why extension popups close when the page is clicked, and the side panel and own-window modes.
+- [Scraped data full of duplicate rows](https://magicscraper.app/scraper-duplicate-rows):
+  why crawls collect the same rows repeatedly, how Magic Scraper adds only new rows, and why an
+  export can differ from the preview.
 - [Send scraped data to your server: Node.js and PHP webhooks](https://magicscraper.app/scraped-data-webhook-node-php):
   the Pro webhook's JSON payload and secret header, complete receivers in Node.js and PHP with no
   packages, and passing rows to a shell script on stdin rather than a command line.

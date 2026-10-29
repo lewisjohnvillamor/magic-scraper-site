@@ -193,4 +193,48 @@ def painpoint_pages_2(sec, claim, steps, table):
         ],
     ))
 
+    # ------------------------------------------------------------ duplicates
+    pages.append(dict(
+        slug="scraper-duplicate-rows",
+        crumb="Duplicate rows",
+        title="Scraped data full of duplicate rows? Why, and how to stop it",
+        desc="Why a scrape of 261 links comes back with 16,000 rows, why the export does not match the preview, and how to get each row once.",
+        og="Why a scrape of 261 links comes back with 16,000 rows, why the export differs from the preview, and how to get each row once.",
+        h1="Asked for 261 rows, got <i>16,000</i>?",
+        standfirst="One user on a scraper forum asked for 261 links and got more than 16,000 rows, the same links over and over. Others find the export has rows the preview did not, or is missing ones it did. Duplicates are rarely the site's doing: they come from how the tool walks the pages.",
+        aside="Every row once, and the export is the table you see. Free.",
+        sections=[
+            sec("why", "Where duplicates come from", steps([
+                ("The last page is read again and again", "Past the end of a list, many sites send the last page, or page one, again. A tool that only stops when Next disappears reads it until something gives."),
+                ("Infinite scroll is read whole each time", "A scrolling list keeps every row on the page, so each pass reads the earlier rows again. Unless the tool remembers what it has, they are added every time."),
+                ("A selector matches more than one thing", "Each record holds several elements that match, so each record turns into several rows."),
+                ("One row opens many pages", "Following every link on a detail page multiplies rows on purpose. A tool that repeats the parent row when it runs out of pages makes copies that look like data."),
+            ])),
+            sec("how", "How Magic Scraper keeps each row once", "\n".join([
+                steps([
+                    ("Rows already collected are not added again", "Each new page's rows are checked against the ones already held, column by column, so a page read twice, or the top of a scrolling list read again, adds nothing."),
+                    ("Repeating pages end the crawl", "Two pages in a row with nothing new, or a Next link that leads back to a page already read, end it, and it says so."),
+                    ("A record is one row", "Rows are found as repeated blocks on the page, the way you see them, and each block is read once, whatever it holds."),
+                    ("Drill-down out of pages says so once" + soon, "When a row\u2019s page budget runs out, one row says it stopped, instead of a copy of the parent for every link left over."),
+                ]),
+                claim("Drop a row you do not want with the &times; beside it. Rows that are identical in every "
+                      "column are treated as one, so dropping it drops its copies too."),
+            ]), deck="Without setting anything up."),
+            sec("export", "When the export does not match the preview", claim(
+                "The preview draws the first 100 rows of a large run, and says so: &ldquo;Showing the first "
+                "100 of 2,000 rows. Exports include all of them.&rdquo; Every export, CSV, Excel, JSON or "
+                "copy, writes the same table you see, with your dropped columns, renamed columns and "
+                "filter applied, and the status line says how many rows went into the file.",
+                "If the page behind the popup has been closed or reloaded, it no longer holds the rows. The "
+                "next update refuses to export the 100-row preview as if it were the run" + soon + ", and "
+                "the rows of a crawl that stopped can be brought back with Recover run.")),
+        ],
+        faq=[
+            ("Why does my scraper export duplicate rows?", "Usually because it read the last page, or the top of an infinite-scroll list, again and again without remembering what it already had. Magic Scraper checks each page's rows against the ones it holds and adds only new ones."),
+            ("Why is my export different from the preview?", "Large runs show only the first 100 rows in the preview; the export has all of them. Magic Scraper says this under the table, and the export applies exactly the columns, renames and filter you see."),
+            ("Can I remove duplicates in Excel instead?", "Yes: Data, Remove Duplicates. But it is better not to collect them, because a crawl reading the same page again is also a crawl that has stopped making progress."),
+            ("Does it remove rows that only look alike?", "No. Only rows identical in every column are treated as the same. Two products with the same name and different prices stay two rows."),
+        ],
+    ))
+
     return pages

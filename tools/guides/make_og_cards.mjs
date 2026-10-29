@@ -22,6 +22,7 @@ const cards = [
   ['scraper-column-names-object-object', 'dir', 'Columns named x193iq5w?', 'Get Price and Date.', 'Where meaningless column names and [object Object] come from, and readable names instead.', ['Named columns', 'Rename & drop', 'Free']],
   ['web-scraper-blocked-captcha', 'crawl', 'Blocked again?', 'Slow down, politely.', 'Why sites block scrapers, and collecting a list without being blocked.', ['Runs in your browser', 'No proxies', 'Never solves captchas']],
   ['scraper-popup-keeps-closing', 'pick', 'Popup keeps closing?', 'Keep it open.', 'Why extension popups close when you click the page, and two ways to keep the scraper open.', ['Side panel', 'Free']],
+  ['scraper-duplicate-rows', 'dir', '261 links,', 'not 16,000 rows.', 'Why scrapes fill up with duplicates, and how to get each row once.', ['Each row once', 'Export = what you see', 'Free']],
   ['scraped-data-webhook-node-php', 'hook', 'Scraped rows,', 'to your server.', 'Webhook receivers in Node.js and PHP, about 40 lines each, and the safe way to hand rows to a shell script.', ['Node.js', 'PHP', 'No packages']],
 ];
 // Pages for sites in other languages. A card has no room for "next update",
