@@ -60,7 +60,7 @@ extension, not in storage the scraped website can read.
   the Pro webhook's JSON payload and secret header, complete receivers in Node.js and PHP with no
   packages, and passing rows to a shell script on stdin rather than a command line.
 - [Scraping websites in other languages](https://magicscraper.app/scrape-websites-in-other-languages):
-  Next and Load more buttons in about 40 languages, why Excel garbles accents and kanji in a CSV,
+  Next and Load more buttons in more than 80 languages, why Excel garbles accents and kanji in a CSV,
   and European number formats (1.234,56) in the Excel export. The same in
   [Japanese](https://magicscraper.app/scraper-japanese-websites),
   [German](https://magicscraper.app/web-scraper-deutsche-websites),
