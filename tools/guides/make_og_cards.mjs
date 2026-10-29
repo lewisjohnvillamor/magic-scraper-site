@@ -18,6 +18,11 @@ const cards = [
   ['web-scraper-no-subscription', 'drill', 'No credits. No trial.', 'Pay once, or never.', 'What the free version does, what $25 once adds, and five questions to ask any scraper first.', ['No account', 'Nothing renews', '7-day refund']],
   ['web-scraper-extension-privacy', 'crawl', 'Is your scraper safe?', 'Check what it sends.', 'A ten-minute check for any extension: permissions, disclosures, network requests, owner.', ['No analytics', 'No AI service', 'Data stays local']],
   ['changelog', 'drill', 'Every update,', 'in plain words.', 'What each Magic Scraper release changed, including anything removed or moved to Pro.', ['v1.23 in the stores', 'Updates included']],
+  ['scraper-stops-after-a-few-pages', 'crawl', 'Stopped at page 12?', 'Carry on from there.', 'Why crawls stop partway, and how to finish one instead of starting over.', ['Says why it stopped', 'Recovers closed tabs', 'Free']],
+  ['scraper-column-names-object-object', 'dir', 'Columns named x193iq5w?', 'Get Price and Date.', 'Where meaningless column names and [object Object] come from, and readable names instead.', ['Named columns', 'Rename & drop', 'Free']],
+  ['web-scraper-blocked-captcha', 'crawl', 'Blocked again?', 'Slow down, politely.', 'Why sites block scrapers, and collecting a list without being blocked.', ['Runs in your browser', 'No proxies', 'Never solves captchas']],
+  ['scraper-popup-keeps-closing', 'pick', 'Popup keeps closing?', 'Keep it open.', 'Why extension popups close when you click the page, and two ways to keep the scraper open.', ['Side panel', 'Free']],
+  ['scraper-duplicate-rows', 'dir', '261 links,', 'not 16,000 rows.', 'Why scrapes fill up with duplicates, and how to get each row once.', ['Each row once', 'Export = what you see', 'Free']],
   ['scraped-data-webhook-node-php', 'hook', 'Scraped rows,', 'to your server.', 'Webhook receivers in Node.js and PHP, about 40 lines each, and the safe way to hand rows to a shell script.', ['Node.js', 'PHP', 'No packages']],
 ];
 // Pages for sites in other languages. A card has no room for "next update",

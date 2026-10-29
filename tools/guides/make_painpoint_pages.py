@@ -693,6 +693,8 @@ PAGES.append(dict(
 
 from language_pages import language_pages
 PAGES.extend(language_pages(sec, claim, table))
+from painpoint_pages_2 import painpoint_pages_2
+PAGES.extend(painpoint_pages_2(sec, claim, steps, table))
 
 for p in PAGES:
     path = f"{ROOT}/{p['slug']}.html"
