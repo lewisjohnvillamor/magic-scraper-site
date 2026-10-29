@@ -59,6 +59,13 @@ extension, not in storage the scraped website can read.
 - [Send scraped data to your server: Node.js and PHP webhooks](https://magicscraper.app/scraped-data-webhook-node-php):
   the Pro webhook's JSON payload and secret header, complete receivers in Node.js and PHP with no
   packages, and passing rows to a shell script on stdin rather than a command line.
+- [Scraping websites in other languages](https://magicscraper.app/scrape-websites-in-other-languages):
+  Next and Load more buttons in about 40 languages, why Excel garbles accents and kanji in a CSV,
+  and European number formats (1.234,56) in the Excel export. The same in
+  [Japanese](https://magicscraper.app/scraper-japanese-websites),
+  [German](https://magicscraper.app/web-scraper-deutsche-websites),
+  [Spanish](https://magicscraper.app/web-scraper-sitios-en-espanol) and
+  [French](https://magicscraper.app/web-scraper-sites-francais).
 - [A web scraper with no subscription](https://magicscraper.app/web-scraper-no-subscription):
   free tier with no time limit or credits, a one-time Pro licence, and questions to ask before
   paying for any scraper.

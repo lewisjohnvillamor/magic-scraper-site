@@ -20,6 +20,15 @@ const cards = [
   ['changelog', 'drill', 'Every update,', 'in plain words.', 'What each Magic Scraper release changed, including anything removed or moved to Pro.', ['v1.23 in the stores', 'Updates included']],
   ['scraped-data-webhook-node-php', 'hook', 'Scraped rows,', 'to your server.', 'Webhook receivers in Node.js and PHP, about 40 lines each, and the safe way to hand rows to a shell script.', ['Node.js', 'PHP', 'No packages']],
 ];
+// Pages for sites in other languages. A card has no room for "next update",
+// so it says only what the version in the stores does.
+cards.push(
+  ['scrape-websites-in-other-languages', 'crawl', 'Next, Weiter,', '次へ, Siguiente.', 'Pagers, Load more buttons and Excel exports, for the sites that are not in English.', ['Many languages', 'UTF-8 safe CSV', 'Free']],
+  ['scraper-japanese-websites', 'crawl', '日本語サイトも、', '最後のページまで。', '「次へ」「次のページ」を読み取り、CSVは文字化けしないUTF-8で保存します。', ['無料', 'アカウント不要', 'Chrome・Edge']],
+  ['web-scraper-deutsche-websites', 'crawl', 'Deutsche Seiten,', 'bis zur letzten.', '„Weiter“ und „Nächste“ werden erkannt, und Umlaute kommen heil in Excel an.', ['Kostenlos', 'Ohne Konto', 'Chrome & Edge']],
+  ['web-scraper-sitios-en-espanol', 'crawl', 'Sitios en español,', 'hasta el final.', 'Reconoce «Siguiente», y el CSV conserva tildes y eñes al abrirlo en Excel.', ['Gratis', 'Sin cuenta', 'Chrome y Edge']],
+  ['web-scraper-sites-francais', 'crawl', 'Les sites français,', 'jusqu’au bout.', 'Reconnaît « Suivant », et le CSV garde les accents intacts dans Excel.', ['Gratuit', 'Sans compte', 'Chrome et Edge']],
+);
 const fraunces = readFileSync(SITE + '/assets/fonts/fraunces-var.woff2').toString('base64');
 // The default share picture for every page without its own card.
 cards.push(['og', 'crawl', 'Any web list,', 'into a spreadsheet.', 'Find the table, follow every page, open the page behind each row, and export it. No account, no tracking, no server of ours.', ['Free', 'Chrome & Edge', 'Runs in your browser']]);
