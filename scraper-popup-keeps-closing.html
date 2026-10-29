@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scraper popup closes when you click the page? Keep it open</title>
+<meta name="description" content="Why an extension&#x27;s popup closes the moment you click the page, and two ways to keep a scraper open while you work: the side panel and its own window." />
+<link rel="canonical" href="https://magicscraper.app/scraper-popup-keeps-closing" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scraper-popup-keeps-closing" />
+<meta property="og:title" content="Scraper popup closes when you click the page? Keep it open" />
+<meta property="og:description" content="Why an extension&#x27;s popup closes when you click the page, and two ways to keep a scraper open: the side panel and its own window." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/scraper-popup-keeps-closing.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does my scraper extension close when I click the page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Browsers close an extension's toolbar popup whenever focus leaves it. No extension can stop that, but Magic Scraper can move into the side panel, or open in its own window, which stay open."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I lose my data when the popup closes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The rows are kept in the page; open the popup again and the table is still there."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I open Magic Scraper in its own window?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the next update, press the window button in the popup's header, next to the pin. It opens as a separate window that you can move, resize and pin to the taskbar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the side panel work in Firefox?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes: Firefox calls it the sidebar, and the same pin button opens it."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Popup keeps closing",
+      "item": "https://magicscraper.app/scraper-popup-keeps-closing"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>The popup closed <i>again</i>. It doesn't have to.</h1>
+    <p class="standfirst">You open the scraper, click the page to pick a field, and the popup is gone, taking the table with it. Every browser extension popup does this: the browser closes it the moment focus leaves it, and nothing an extension does can change that. What it can do is not live in a popup.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Both ways are free.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="why">
+    <h2>Why the popup closes</h2>
+    <div class="claim">
+      <p>A toolbar popup belongs to the browser, not to the page. Chrome, Edge and Firefox close it whenever you click anywhere else, switch tabs or press Escape. That is fine for a quick export and frustrating for anything longer: picking fields by hand, watching a crawl, copying rows across.</p>
+      <p>Magic Scraper's rows live in the page, not in the popup, so closing it loses nothing; open it again and the table is still there. But not having to reopen it is better.</p>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>Two ways to keep it open</h2>
+    <p class="deck">Pick the one that suits your screen.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Beside the page: the side panel</h3>
+        <p>Press the pin button in the popup's header. Magic Scraper moves into the browser's side panel (the sidebar in Firefox), stays there while you click, scroll and pick, and follows the tab in front.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>A window of its own <span class="soon">next update</span></h3>
+        <p>Press the window button next to the pin. Magic Scraper opens as a window with its own place in the taskbar: move it, resize it, put it on another screen, pin it. It reads the tab it was opened from.</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p>In either, picking by hand works without anything closing: click the block your rows come from, shift-click extra fields, and the table updates as you go.</p>
+    </div>
+  </section>
+
+  <section id="which">
+    <h2>Side panel or window?</h2>
+    <table class="compare">
+      <thead><tr><td></td><th>Side panel</th><th>Own window</th></tr></thead>
+      <tbody>
+        <tr><td>Where</td><td class="yes">Beside the page, in the same window</td><td class="yes">Anywhere, its own window</td></tr>
+        <tr><td>Which tab it reads</td><td class="yes">Whichever tab is in front</td><td class="yes">The tab it was opened from</td></tr>
+        <tr><td>Taskbar</td><td class="partial">Part of the browser window</td><td class="yes">Its own entry, can be pinned</td></tr>
+        <tr><td>Best for</td><td class="yes">Working through several tabs</td><td class="yes">A big table on a second screen</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why does my scraper extension close when I click the page?</summary>
+        <p>Browsers close an extension's toolbar popup whenever focus leaves it. No extension can stop that, but Magic Scraper can move into the side panel, or open in its own window, which stay open.</p>
+      </details>
+      <details>
+        <summary>Do I lose my data when the popup closes?</summary>
+        <p>No. The rows are kept in the page; open the popup again and the table is still there.</p>
+      </details>
+      <details>
+        <summary>How do I open Magic Scraper in its own window?</summary>
+        <p>In the next update, press the window button in the popup's header, next to the pin. It opens as a separate window that you can move, resize and pin to the taskbar.</p>
+      </details>
+      <details>
+        <summary>Does the side panel work in Firefox?</summary>
+        <p>Yes: Firefox calls it the sidebar, and the same pin button opens it.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

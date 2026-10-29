@@ -276,4 +276,28 @@
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://magicscraper.app/scraper-stops-after-a-few-pages</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://magicscraper.app/scraper-column-names-object-object</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://magicscraper.app/web-scraper-blocked-captcha</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://magicscraper.app/scraper-popup-keeps-closing</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

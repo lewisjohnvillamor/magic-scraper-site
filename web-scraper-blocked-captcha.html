@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scraper blocked, rate-limited or shown a captcha? What to do</title>
+<meta name="description" content="Why sites block scrapers with 429 errors, access denied pages and captchas, and how to collect a list politely without being blocked." />
+<link rel="canonical" href="https://magicscraper.app/web-scraper-blocked-captcha" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/web-scraper-blocked-captcha" />
+<meta property="og:title" content="Scraper blocked, rate-limited or shown a captcha? What to do" />
+<meta property="og:description" content="Why sites block scrapers with 429 errors, access denied pages and captchas, and how to collect a list politely." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/web-scraper-blocked-captcha.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does my scraper get a 429 too many requests error?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The site limits how fast it answers one visitor, and the scraper went over. Slowing down, and waiting as long as the site's Retry-After asks before trying again, fixes most of them. Magic Scraper does both."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will Magic Scraper solve captchas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It stops at a human check and shows you the page; you can answer it yourself and carry on, or leave the site alone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it use proxies or rotate IP addresses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It runs in your own browser from your own connection, which is also why sites block it far less than server-based scrapers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which pacing should I choose?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Normal for most sites, Gentle for any site that has pushed back, and Fast only for sites you own or that allow it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is scraping a site that blocks me legal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the site's terms and your country's law. If a site keeps blocking automated access, treat that as an answer. The guide to scraping business directories goes into more detail."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Blocked or captcha",
+      "item": "https://magicscraper.app/web-scraper-blocked-captcha"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>Blocked? The site is telling you <i>something</i>.</h1>
+    <p class="standfirst">"Too many requests". "Access denied". "Just a moment...". A captcha in place of page eight. Being blocked is one of the most common scraping complaints, and most of the time it is the site saying the requests came too fast, or from somewhere it does not trust.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">It never solves captchas and uses no proxies. It slows down.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="why">
+    <h2>Why sites block scrapers</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Too fast</h3>
+        <p>Dozens of pages a minute, at even intervals, look like a machine because they are one. Rate limits answer with 429 "too many requests".</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>From a server, not a person</h3>
+        <p>Cloud scrapers run from data-centre addresses that many sites refuse outright, or meet with a check page on every visit.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Without your session</h3>
+        <p>A server-side tool is not signed in and has none of your cookies, so the site treats it as a stranger.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>On a site that forbids it</h3>
+        <p>Some sites do not allow automated collection at all, whatever the speed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How Magic Scraper avoids it</h2>
+    <p class="deck">By not looking like a robot hammering the site.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>It runs in your own browser</h3>
+        <p>Pages are read in your browser, from your connection, with your session, the way you would read them by hand. There is no server of ours in between and no data-centre address.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>It paces itself</h3>
+        <p>A random pause between pages, longer for detail pages. <b>Gentle</b> is the slowest and the least likely to be blocked, <b>Normal</b> suits most sites, and <b>Fast</b> is for sites you own.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>It backs off</h3>
+        <p>A 429 or 503 answer makes it wait, as long as the site's Retry-After asks, up to four minutes, and try again, saying so on screen.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>It stops at a human check</h3>
+        <p>A "verify you are human" page stops the run and is put in front of you. It never tries to get past one.</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p>It uses no proxies, rotates nothing and solves no captchas. If a site keeps refusing, the honest answer is that it does not want to be collected this way.</p>
+    </div>
+  </section>
+
+  <section id="when">
+    <h2>If you are still blocked</h2>
+    <div class="claim">
+      <p>Choose Gentle pacing, crawl fewer pages at a time, and avoid running the same list over and over. Check the site's terms: many offer an export, an API or a data feed that is quicker and allowed.</p>
+      <p>Some sites, LinkedIn among them, do not allow automated collection, and no tool you can trust should promise to get round that. The <a href="/scraper-not-working-on-this-site">guide to sites that don't work</a> has more.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why does my scraper get a 429 too many requests error?</summary>
+        <p>The site limits how fast it answers one visitor, and the scraper went over. Slowing down, and waiting as long as the site's Retry-After asks before trying again, fixes most of them. Magic Scraper does both.</p>
+      </details>
+      <details>
+        <summary>Will Magic Scraper solve captchas?</summary>
+        <p>No. It stops at a human check and shows you the page; you can answer it yourself and carry on, or leave the site alone.</p>
+      </details>
+      <details>
+        <summary>Does it use proxies or rotate IP addresses?</summary>
+        <p>No. It runs in your own browser from your own connection, which is also why sites block it far less than server-based scrapers.</p>
+      </details>
+      <details>
+        <summary>Which pacing should I choose?</summary>
+        <p>Normal for most sites, Gentle for any site that has pushed back, and Fast only for sites you own or that allow it.</p>
+      </details>
+      <details>
+        <summary>Is scraping a site that blocks me legal?</summary>
+        <p>It depends on the site's terms and your country's law. If a site keeps blocking automated access, treat that as an answer. The guide to scraping business directories goes into more detail.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

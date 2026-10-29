@@ -56,6 +56,17 @@ extension, not in storage the scraped website can read.
   compliant tool should not promise.
 - [Scraper missing rows, columns or phone numbers](https://magicscraper.app/scraper-missing-data):
   causes of incomplete data, and Excel leading-zero and UTF-8 problems.
+- [Web scraper stops after a few pages](https://magicscraper.app/scraper-stops-after-a-few-pages):
+  rate limits, human checks, repeating pages and closed tabs; carrying a crawl on from where it
+  stopped, and recovering a run after the tab closed.
+- [Scraper columns named x193iq5w or [object Object]](https://magicscraper.app/scraper-column-names-object-object):
+  why columns are named after CSS classes, and how Magic Scraper names them from headers, labels
+  and value types instead.
+- [Scraper blocked, rate-limited or shown a captcha](https://magicscraper.app/web-scraper-blocked-captcha):
+  why sites block scrapers, pacing and Retry-After backoff, and why Magic Scraper never solves
+  captchas or uses proxies.
+- [Scraper popup keeps closing](https://magicscraper.app/scraper-popup-keeps-closing):
+  why extension popups close when the page is clicked, and the side panel and own-window modes.
 - [Send scraped data to your server: Node.js and PHP webhooks](https://magicscraper.app/scraped-data-webhook-node-php):
   the Pro webhook's JSON payload and secret header, complete receivers in Node.js and PHP with no
   packages, and passing rows to a shell script on stdin rather than a command line.
