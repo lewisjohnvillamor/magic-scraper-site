@@ -14,6 +14,8 @@ ROOT = sys.argv[1]
 CWS = "https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck"
 EDGE = "https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp"
 
+HURRY = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "hurry.html"), encoding="utf-8").read()
+
 def plain(s):
     s = re.sub(r"<[^>]+>", "", s)
     return html.unescape(s)
@@ -58,6 +60,9 @@ def page(p):
     })
     ldhtml = "\n".join('<script type="application/ld+json">\n%s\n</script>' % json.dumps(x, indent=2, ensure_ascii=False) for x in ld)
     e = lambda s: html.escape(s, quote=True)
+    # The done-for-you offer, for English guides where someone may just want the list.
+    hurry = ("\n" + HURRY) if ui["lang"] == "en" and p.get("hurry", True) else ""
+    hurry = hurry.rstrip("\n")
     secs = "\n".join(p["sections"])
     faq = "\n".join("""      <details>
         <summary>%s</summary>
@@ -133,7 +138,7 @@ def page(p):
 
 <div class="wrap">
 
-{secs}
+{secs}{hurry}
   <section id="faq">
     <h2>{ui['faq']}</h2>
     <div class="qa">
@@ -447,6 +452,7 @@ PAGES.append(dict(
 # ---------------------------------------------------------------- 5. privacy
 PAGES.append(dict(
     slug="web-scraper-extension-privacy",
+    hurry=False,                      # a safety check is no place for a pitch
     crumb="Scraper extension privacy",
     title="Is your web scraper extension safe? Check what it sends",
     desc="Is a scraper extension safe? Check what it can see and send: its permissions, privacy disclosures, network requests and current owner, in ten minutes.",
@@ -624,6 +630,7 @@ PAGES.append(dict(
 
 PAGES.append(dict(
     slug="changelog",
+    hurry=False,
     eyebrow="Changelog",
     crumb="Changelog",
     title="Magic Scraper changelog: every update, in plain words",
