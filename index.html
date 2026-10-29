@@ -235,7 +235,7 @@
           "name": "Will it work on the site I have in mind?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Probably. It reads what your browser has already rendered, so what you can see, it can usually take. It cannot reach closed shadow roots, cross-origin iframes, data only a private API returns, or anything behind a bot challenge — those are limits of the browser itself. When a site asks you to prove you are human, the run stops and hands you the tab rather than trying to get past it. Try the free version on that exact site before paying."
+            "text": "Probably. It reads what your browser has already rendered, so what you can see, it can usually take, pages you are signed in to included. It cannot reach closed shadow roots, cross-origin iframes, data only a private API returns, or anything behind a bot challenge — those are limits of the browser itself. When a site asks you to prove you are human, the run stops and hands you the tab rather than trying to get past it. Try the free version on that exact site before paying."
           }
         },
         {
@@ -378,6 +378,63 @@
       <a href="https://www.youtube.com/watch?v=iMDFZn4j0mY" aria-label="Play video: Magic Scraper: every feature, Free and Pro (full walkthrough) (YouTube)"><img src="assets/video/iMDFZn4j0mY.webp" alt="" width="960" height="540" loading="lazy" /></a>
     </div>
     <p class="yt-cap">Video: every feature, Free and Pro, in 3&frac12; minutes, with subtitles. It plays from YouTube when you press play.</p>
+  </section>
+
+  <section id="scrapes">
+    <h2>What it can scrape</h2>
+    <p class="deck">Anything your browser shows as a repeating list or a table. Below is what
+      that covers, each line tried on real sites &mdash; and the short list of things no
+      browser extension can reach.</p>
+
+    <div class="cols2">
+      <div class="panel">
+        <h3>Works on</h3>
+        <ul class="ticks">
+          <li><b>Shops and catalogues</b> &mdash; product grids with prices, ratings and stock:
+            Steam, IKEA, Shopify stores</li>
+          <li><b>Tables and data</b> &mdash; Wikipedia lists, sports stats, exchange rates,
+            market prices: Worldometer, Basketball-Reference, Yahoo Finance, CoinMarketCap</li>
+          <li><b>Spreadsheet-style grids</b> built without a table &mdash; the AG Grid and
+            dashboard kind &mdash; with their real column names <span class="soon">next update</span></li>
+          <li><b>Job boards</b> &mdash; Greenhouse and Lever boards, RemoteOK, We Work Remotely,
+            USAJOBS</li>
+          <li><b>Business directories</b> &mdash; Yellow Pages, BBB, chamber member lists,
+            and member pages laid out as label and value <span class="soon">next update</span></li>
+          <li><b>News, forums and Q&amp;A</b> &mdash; Hacker News, Lobsters, Reddit, TechCrunch,
+            dev.to</li>
+          <li><b>Research</b> &mdash; arXiv, PubMed, Google Scholar results, Open Library,
+            ClinicalTrials.gov</li>
+          <li><b>Events, listings and reviews</b> &mdash; Eventbrite, Meetup, Craigslist,
+            Goodreads, Metacritic, Rotten Tomatoes</li>
+          <li><b>Open data</b> &mdash; the data.gov catalogue and other government listings</li>
+          <li><b>Pages you're signed in to</b> &mdash; your own dashboards, CRM views and admin
+            panels. It reads what your browser shows, so a login you have is a page it can read</li>
+          <li><b>Lists in their own scrolling panel</b>, and <b>virtual lists</b> that only
+            draw the rows on screen <span class="soon">next update</span></li>
+          <li><b>Next buttons in about 40 languages</b>, from <i>Suivant</i> and
+            <i>N&auml;chste</i> to <i>&#1057;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1072;&#1103;</i>,
+            <i>&#1575;&#1604;&#1578;&#1575;&#1604;&#1610;</i> and <i>&#27425;&#12408;</i> &mdash; and it
+            no longer mistakes a photo carousel's arrow for one <span class="soon">next update</span></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Can't, and won't pretend to</h3>
+        <ul class="dots">
+          <li><b>Anything behind a bot check.</b> When a site asks you to prove you're human, the
+            run stops and hands you the tab. It never tries to get past the check</li>
+          <li><b>Content drawn as a picture</b> &mdash; maps, charts drawn on a canvas, text
+            inside images</li>
+          <li><b>Files</b> &mdash; PDFs and downloads. It reads web pages</li>
+          <li><b>Frames from another site</b> and closed shadow roots, which the browser keeps
+            out of reach</li>
+          <li><b>Data a page never shows</b> &mdash; a private API, or what's behind a login you
+            don't have</li>
+        </ul>
+        <p class="panel-note" style="margin-top:16px">Whether a site allows scraping is between
+          you and the site &mdash; check its terms. The free version is the real test: try it on
+          the exact page before paying.</p>
+      </div>
+    </div>
   </section>
 
   <section id="price">
@@ -524,9 +581,9 @@
       </div>
       <div class="step">
         <span class="n">02</span>
-        <h3>The same scrape, on a schedule</h3>
-        <p>Every morning, every Monday, every hour &mdash; delivered to a spreadsheet, a
-          database, an API or your inbox.</p>
+        <h3>The same scrape, on a server</h3>
+        <p>Pro runs a setup on a schedule while your browser is open. Every hour with the
+          computer off, delivered to a database, an API or your inbox, is a project.</p>
       </div>
       <div class="step">
         <span class="n">03</span>
@@ -536,11 +593,10 @@
       </div>
       <div class="step">
         <span class="n">04</span>
-        <h3>Into Google Sheets, or wherever you work</h3>
-        <p>A Sheet that refreshes itself, rows appended to your database, a webhook into Slack,
-          a JSON endpoint. The extension can't do this and won't pretend to: writing into your
-          Google account needs an OAuth token and a server to hold it, which is exactly what it
-          promises not to have.</p>
+        <h3>Into your own systems</h3>
+        <p>Pro sends rows to a Google Sheet or a webhook. Rows reconciled into your database, a
+          JSON endpoint others can call, or a feed that keeps running with no browser open, are
+          projects.</p>
       </div>
     </div>
 
@@ -684,7 +740,8 @@
       <details>
         <summary>Will it work on the site I have in mind?</summary>
         <p>Probably. It reads what your browser has already rendered, so what you can see, it can
-          usually take. It can't reach closed shadow roots, cross-origin iframes, data only a
+          usually take &mdash; pages you're signed in to included. <a href="#scrapes">The kinds of
+          page it handles</a> are listed above. It can't reach closed shadow roots, cross-origin iframes, data only a
           private API returns, or anything behind a bot challenge — those are limits of the
           browser itself, not of this extension. When a site does ask you to prove you're human,
           the run stops and hands you the tab rather than trying to get past it. Try the free
