@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Web scraper pour sites en français : Suivant, Voir plus, Excel</title>
+<meta name="description" content="Pourquoi un scraper s’arrête à la page 1 d’un site français, pourquoi Excel abîme les accents, et comment Magic Scraper trouve Page suivante et Voir plus." />
+<link rel="canonical" href="https://magicscraper.app/web-scraper-sites-francais" />
+<link rel="alternate" hreflang="en" href="https://magicscraper.app/scrape-websites-in-other-languages" />
+<link rel="alternate" hreflang="ja" href="https://magicscraper.app/scraper-japanese-websites" />
+<link rel="alternate" hreflang="de" href="https://magicscraper.app/web-scraper-deutsche-websites" />
+<link rel="alternate" hreflang="es" href="https://magicscraper.app/web-scraper-sitios-en-espanol" />
+<link rel="alternate" hreflang="fr" href="https://magicscraper.app/web-scraper-sites-francais" />
+<link rel="alternate" hreflang="x-default" href="https://magicscraper.app/scrape-websites-in-other-languages" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:url" content="https://magicscraper.app/web-scraper-sites-francais" />
+<meta property="og:title" content="Web scraper pour sites en français : Suivant, Voir plus, Excel" />
+<meta property="og:description" content="Pourquoi un scraper s’arrête à la page 1 d’un site français, pourquoi Excel abîme les accents, et comment Magic Scraper trouve Page suivante et Voir plus." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/web-scraper-sites-francais.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Pourquoi mon scraper s’arrête-t-il à la page 1 d’un site français ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Beaucoup d’outils cherchent la page suivante grâce au mot anglais Next. Magic Scraper lit aussi rel=\"next\", les flèches, les aria-labels et les pages numérotées, ainsi que Suivant et, à partir de la prochaine mise à jour, Page suivante et Voir plus."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment éviter que les accents soient abîmés dans Excel ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le CSV de Magic Scraper contient la marque BOM qui indique à Excel qu’il s’agit d’UTF-8. L’export Excel (.xlsx) n’a pas ce problème."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi les nombres sont-ils faux dans Excel ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Parce que 1.234 a été lu comme un nombre décimal. À partir de la prochaine mise à jour, l’export Excel de Magic Scraper lit une colonne au format européen comme telle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Magic Scraper existe-t-il en français ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les boutons de l’extension sont en anglais. Les données restent dans la langue de la page."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Sites en français",
+      "item": "https://magicscraper.app/web-scraper-sites-francais"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>Les sites français, <i>jusqu’à la dernière page</i>.</h1>
+    <p class="standfirst">Un outil qui cherche le bouton de pagination grâce au mot anglais &laquo;&nbsp;Next&nbsp;&raquo; s’arrête à la page 1 d’un site qui écrit &laquo;&nbsp;Page suivante&nbsp;&raquo; ou &laquo;&nbsp;Voir plus&nbsp;&raquo;. Et dans Excel, &laquo;&nbsp;Café&nbsp;&raquo; peut devenir &laquo;&nbsp;CafÃ©&nbsp;&raquo;. Voici ce qui coince sur les sites francophones, et ce que fait Magic Scraper à chaque fois.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Installer pour Chrome, gratuit</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Installer pour Edge</a>
+      <span class="aside">Gratuit, sans compte.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="pager">
+    <h2>La page 2, la 3, jusqu’au bout</h2>
+    <div class="claim">
+      <p>Les grands sites marquent le plus souvent leur pagination d’une façon qui ne dépend pas de la langue&nbsp;: <code>rel="next"</code>, une flèche, un <code>aria-label</code>, des pages numérotées. Magic Scraper lit tout cela&nbsp;; c’est pourquoi il parcourt LDLC, Marmiton ou Allociné comme une boutique anglaise. Quand le bouton n’a que du texte, il lit le mot&nbsp;:</p>
+    </div>
+    <table class="compare">
+      <thead><tr><td></td><th>Texte reconnu</th></tr></thead>
+      <tbody>
+        <tr><td>Page suivante</td><td class="">Suivant &middot; Page suivante&dagger;</td></tr>
+        <tr><td>Charger la suite</td><td class="">Voir plus&dagger; &middot; Charger plus&dagger; &middot; Afficher plus&dagger; &middot; Plus de résultats&dagger;</td></tr>
+        <tr><td>Précédent (jamais pris pour Suivant)</td><td class="">Précédent</td></tr>
+        <tr><td>Pas une pagination</td><td class="">Flèches des galeries photo&dagger; &middot; Numéros de notes&dagger;</td></tr>
+      </tbody>
+    </table>
+    <div class="claim">
+      <p>&dagger; Avec la prochaine mise à jour, 1.23.3 <span class="soon">prochaine mise à jour</span>. Le reste est déjà dans la version que distribuent les boutiques d’extensions.</p>
+    </div>
+  </section>
+
+  <section id="excel">
+    <h2>Les accents qu’Excel abîme</h2>
+    <div class="claim">
+      <p>Excel devine l’encodage d’un fichier CSV, et sans indice il se trompe&nbsp;: &laquo;&nbsp;Café&nbsp;&raquo; devient &laquo;&nbsp;CafÃ©&nbsp;&raquo;. Le CSV de Magic Scraper commence par la marque d’ordre des octets (BOM) qui indique à Excel qu’il s’agit d’UTF-8&nbsp;: les accents arrivent tels qu’ils sont sur la page. L’export Excel (.xlsx) n’a pas ce problème, et Google Sheets lit les deux.</p>
+      <p>Un CSV déjà abîmé par un autre outil se récupère dans Excel avec <b>Données &rarr; À partir d’un fichier texte/CSV</b>, en choisissant l’origine <b>65001&nbsp;: Unicode (UTF-8)</b>.</p>
+    </div>
+  </section>
+
+  <section id="numbers">
+    <h2>1 234,56, pas 1.23456</h2>
+    <div class="claim">
+      <p>En France on écrit 1 234,56, en Belgique et en Allemagne souvent 1.234,56, et en anglais 1,234.56. Un tableur qui prend le point pour la virgule décimale transforme 1.234 (mille deux cent trente-quatre) en un virgule deux trois quatre, sans prévenir.</p>
+      <p>À partir de la prochaine mise à jour <span class="soon">prochaine mise à jour</span>, l’export Excel regarde la colonne entière. Les milliers séparés par une espace, à la française, sont lus partout&nbsp;; une colonne écrite 1.234,56 ou 12,50 est lue à l’européenne, et elle s’additionne. Une colonne faite uniquement de valeurs comme 1.234 pourrait être l’un ou l’autre&nbsp;: elle reste du texte, jamais fausse, seulement pas additionnable. Le CSV garde chaque valeur exactement comme la page l’écrit.</p>
+    </div>
+  </section>
+
+  <section id="columns">
+    <h2>Noms de colonnes</h2>
+    <div class="claim">
+      <p>Si le tableau a des en-têtes, ils sont repris tels quels&nbsp;: Prix, Ville, Téléphone. Sans en-têtes, Magic Scraper nomme les colonnes d’après la structure de la page, et ces noms sont en anglais (Price, Link, Image). Double-cliquez sur l’en-tête dans la fenêtre de l’extension, ou appuyez sur F2, pour le renommer&nbsp;; le nom est retenu pour ce site.</p>
+      <p>Les boutons de l’extension sont en anglais. Les données restent en français.</p>
+    </div>
+  </section>
+
+  <section id="tried">
+    <h2>Essayé sur</h2>
+    <div class="claim">
+      <p>Avant d’écrire cette page, nous l’avons fait tourner sur Allociné, Marmiton, LDLC et Wikipédia en français. Certains sites affichent une vérification &laquo;&nbsp;êtes-vous humain&nbsp;?&nbsp;&raquo;&nbsp;: l’extension s’arrête alors et vous rend l’onglet, sans jamais chercher à la contourner. Les conditions d’utilisation du site disent si la collecte est permise, et le RGPD s’applique aux données personnelles.</p>
+      <p>Autres langues&nbsp;: <a href="/scraper-japanese-websites" hreflang="ja" lang="ja">日本語</a> &middot; <a href="/web-scraper-deutsche-websites" hreflang="de" lang="de">Deutsch</a> &middot; <a href="/web-scraper-sitios-en-espanol" hreflang="es" lang="es">Español</a> &middot; <a href="/web-scraper-sites-francais" hreflang="fr" lang="fr">Français</a> &middot; <a href="/scrape-websites-in-other-languages" hreflang="en" lang="en">English</a></p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Questions fréquentes</h2>
+    <div class="qa">
+      <details>
+        <summary>Pourquoi mon scraper s’arrête-t-il à la page 1 d’un site français ?</summary>
+        <p>Beaucoup d’outils cherchent la page suivante grâce au mot anglais Next. Magic Scraper lit aussi rel="next", les flèches, les aria-labels et les pages numérotées, ainsi que Suivant et, à partir de la prochaine mise à jour, Page suivante et Voir plus.</p>
+      </details>
+      <details>
+        <summary>Comment éviter que les accents soient abîmés dans Excel ?</summary>
+        <p>Le CSV de Magic Scraper contient la marque BOM qui indique à Excel qu’il s’agit d’UTF-8. L’export Excel (.xlsx) n’a pas ce problème.</p>
+      </details>
+      <details>
+        <summary>Pourquoi les nombres sont-ils faux dans Excel ?</summary>
+        <p>Parce que 1.234 a été lu comme un nombre décimal. À partir de la prochaine mise à jour, l’export Excel de Magic Scraper lit une colonne au format européen comme telle.</p>
+      </details>
+      <details>
+        <summary>Magic Scraper existe-t-il en français ?</summary>
+        <p>Les boutons de l’extension sont en anglais. Les données restent dans la langue de la page.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

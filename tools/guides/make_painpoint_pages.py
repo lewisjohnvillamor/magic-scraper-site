@@ -18,8 +18,19 @@ def plain(s):
     s = re.sub(r"<[^>]+>", "", s)
     return html.unescape(s)
 
+# The words a page in another language needs in its own language; the site's
+# navigation stays English, since that is where its links go.
+UI_EN = dict(lang="en", locale="", skip="Skip to content", install="Install for Chrome &mdash; free",
+             edge="Install for Edge", faq="Reasonable questions")
+
 def page(p):
     url = "https://magicscraper.app/" + p["slug"]
+    ui = dict(UI_EN, **p.get("ui", {}))
+    alts = "".join(f'\n<link rel="alternate" hreflang="{h}" href="https://magicscraper.app/{sl}" />'
+                   for h, sl in p.get("alternates", []))
+    if alts:
+        alts += f'\n<link rel="alternate" hreflang="x-default" href="https://magicscraper.app/{p["alternates"][0][1]}" />'
+    locale = f'\n<meta property="og:locale" content="{ui["locale"]}" />' if ui["locale"] else ""
     ld = []
     if p.get("howto"):
         ld.append({
@@ -57,19 +68,19 @@ def page(p):
     assert len(plain(p["title"])) <= 65, (p["slug"], len(plain(p["title"])))
     assert len(plain(p["desc"])) <= 160, (p["slug"], len(plain(p["desc"])))
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="{ui['lang']}">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{p['title']}</title>
 <meta name="description" content="{e(plain(p['desc']))}" />
-<link rel="canonical" href="{url}" />
+<link rel="canonical" href="{url}" />{alts}
 <link rel="icon" href="assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
 <link rel="stylesheet" href="style.css" />
 <script>document.documentElement.classList.add('js');</script>
-<meta property="og:type" content="article" />
+<meta property="og:type" content="article" />{locale}
 <meta property="og:url" content="{url}" />
 <meta property="og:title" content="{e(plain(p['title']))}" />
 <meta property="og:description" content="{e(plain(p.get('og', p['desc'])))}" />
@@ -80,7 +91,7 @@ def page(p):
 {ldhtml}
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">{ui['skip']}</a>
 
 <header class="wrap">
   <div class="masthead">
@@ -113,8 +124,8 @@ def page(p):
     <h1>{p['h1']}</h1>
     <p class="standfirst">{p['standfirst']}</p>
     <div class="actions">
-      <a class="btn" href="{CWS}" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
-      <a class="btn btn-quiet" href="{EDGE}" target="_blank" rel="noopener">Install for Edge</a>
+      <a class="btn" href="{CWS}" target="_blank" rel="noopener">{ui['install']}</a>
+      <a class="btn btn-quiet" href="{EDGE}" target="_blank" rel="noopener">{ui['edge']}</a>
       <span class="aside">{p['aside']}</span>
     </div>
   </div>
@@ -124,7 +135,7 @@ def page(p):
 
 {secs}
   <section id="faq">
-    <h2>Reasonable questions</h2>
+    <h2>{ui['faq']}</h2>
     <div class="qa">
 {faq}
     </div>
@@ -679,6 +690,9 @@ PAGES.append(dict(
         ("Will an update remove a feature I use?", "Anything removed, or moved between Free and Pro, is listed on this page under the version that changed it."),
     ],
 ))
+
+from language_pages import language_pages
+PAGES.extend(language_pages(sec, claim, table))
 
 for p in PAGES:
     path = f"{ROOT}/{p['slug']}.html"
