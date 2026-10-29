@@ -718,6 +718,5 @@ pre.code:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; 
   padding: 28px 30px; margin: 0 0 72px; }
 .hurry h2 { margin: 0 0 12px; }
 .hurry p { margin: 0 0 20px; max-width: 62ch; }
-.hurry .actions { margin: 0 0 14px; }
-.hurry p.aside { margin: 0; }
+.hurry .actions { margin: 0; }
 @media (max-width: 560px) { .hurry { padding: 22px 18px; } .hurry .btn { width: 100%; text-align: center; } }
