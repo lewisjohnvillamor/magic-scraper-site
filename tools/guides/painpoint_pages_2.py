@@ -172,8 +172,8 @@ def painpoint_pages_2(sec, claim, steps, table):
                 "it again and the table is still there. But not having to reopen it is better.")),
             sec("how", "Two ways to keep it open", "\n".join([
                 steps([
-                    ("Beside the page: the side panel", "Press the pin button in the popup's header. Magic Scraper moves into the browser's side panel (the sidebar in Firefox), stays there while you click, scroll and pick, and follows the tab in front."),
-                    ("A window of its own" + soon, "Press the window button next to the pin. Magic Scraper opens as a window with its own place in the taskbar: move it, resize it, put it on another screen, pin it. It reads the tab it was opened from."),
+                    ("Beside the page: the side panel", "Press the pin button in the popup's header (from the next update: open the &#9881; menu and choose <b>Keep open beside the page</b>). Magic Scraper moves into the browser's side panel (the sidebar in Firefox), stays there while you click, scroll and pick, and follows the tab in front."),
+                    ("A window of its own" + soon, "Open the &#9881; menu and choose <b>Open in its own window</b>. Magic Scraper opens as a window with its own place in the taskbar: move it, resize it, put it on another screen, pin it. It reads the tab it was opened from."),
                 ]),
                 claim("In either, picking by hand works without anything closing: click the block your rows "
                       "come from, shift-click extra fields, and the table updates as you go."),
@@ -188,8 +188,8 @@ def painpoint_pages_2(sec, claim, steps, table):
         faq=[
             ("Why does my scraper extension close when I click the page?", "Browsers close an extension's toolbar popup whenever focus leaves it. No extension can stop that, but Magic Scraper can move into the side panel, or open in its own window, which stay open."),
             ("Do I lose my data when the popup closes?", "No. The rows are kept in the page; open the popup again and the table is still there."),
-            ("How do I open Magic Scraper in its own window?", "In the next update, press the window button in the popup's header, next to the pin. It opens as a separate window that you can move, resize and pin to the taskbar."),
-            ("Does the side panel work in Firefox?", "Yes: Firefox calls it the sidebar, and the same pin button opens it."),
+            ("How do I open Magic Scraper in its own window?", "In the next update, open the \u2699 menu and choose Open in its own window. It opens as a separate window that you can move, resize and pin to the taskbar."),
+            ("Does the side panel work in Firefox?", "Yes: Firefox calls it the sidebar, and the same control opens it: the pin in the popup's header, or from the next update the \u2699 menu."),
         ],
     ))
 
@@ -218,7 +218,8 @@ def painpoint_pages_2(sec, claim, steps, table):
                     ("Drill-down out of pages says so once" + soon, "When a row\u2019s page budget runs out, one row says it stopped, instead of a copy of the parent for every link left over."),
                 ]),
                 claim("Drop a row you do not want with the &times; beside it. Rows that are identical in every "
-                      "column are treated as one, so dropping it drops its copies too."),
+                      "column are treated as one, so dropping it drops its copies too. From the next update, the &times; "
+                      "removes just the one you clicked."),
             ]), deck="Without setting anything up."),
             sec("export", "When the export does not match the preview", claim(
                 "The preview draws the first 100 rows of a large run, and says so: &ldquo;Showing the first "

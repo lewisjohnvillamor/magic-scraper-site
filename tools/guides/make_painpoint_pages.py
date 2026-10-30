@@ -204,23 +204,23 @@ PAGES.append(dict(
     slug="web-scraper-no-subscription",
     crumb="No subscription",
     title="A web scraper with no subscription, credits or free trial",
-    desc="A Chrome web scraper with no credits, no account and no trial that turns into a charge. Pay $25 once, or never: nothing renews and nothing to cancel.",
+    desc="A web scraper with no credits, no account and no trial that turns into a charge. Pay once ($19 founding price) or never. Nothing renews.",
     og="No credits, no trial that renews, no account. What is free, what the one-time Pro licence adds, and the questions to ask any scraper before you pay.",
     h1="A web scraper with no <i>meter</i> running.",
     standfirst="Credits that run out halfway through a list. A free trial that becomes a charge on day one. A cancel button you can't find. Those are the most common complaints in scraper reviews, and none of them is about scraping. Here is how Magic Scraper is priced instead, and what to ask any tool before you pay.",
-    aside="Free with no time limit. Pro is $25, once.",
+    aside="Free with no time limit. Pro is paid once: $19 for the first 100 buyers, then $25.",
     sections=[
         sec("free", "What you get without paying", "\n".join([
             claim("Install it and it works: no account, no email, no card. The free version has no clock "
                   "on it and no monthly allowance. It finds tables, lists and card grids, lets you pick "
                   "rows by hand, crawls <b>every page</b> of a paginated list, and exports CSV, Excel or "
                   "JSON as often as you like. Nothing is counted, so nothing runs out."),
-            table(["Free", "Pro, $25 once"], [
+            table(["Free", "Pro, paid once"], [
                 ["Find tables and lists, pick by hand", ("y", "Yes"), ("y", "Yes")],
                 ["Crawl every page: Next, page numbers, infinite scroll, Load more", ("y", "Unlimited"), ("y", "Unlimited")],
                 ["Export CSV, XLSX, JSON or copy", ("y", "Unlimited"), ("y", "Unlimited")],
                 ["Recover a run whose tab closed", ("y", "Yes"), ("y", "Yes")],
-                ["<a href=\"/drill-down\">Open the page behind each row</a>", ("q", "First 3 rows of a run"), ("y", "Every row, up to 10 levels")],
+                ["<a href=\"/drill-down\">Open the page behind each row</a>", ("q", "First 3 rows of a run"), ("y", "Every row, as many levels as you set up")],
                 ["One setup over a list of addresses", ("q", "First 2 addresses"), ("y", "Every address")],
                 ["Named setups, compare runs, compare with a file, schedules", ("n", "No"), ("y", "Yes")],
                 ["Account, credits or monthly fee", ("y", "None"), ("y", "None")],
@@ -241,7 +241,7 @@ PAGES.append(dict(
             "Magic Scraper runs in your browser, on your computer, so there is no server time to bill "
             "for. A failed run costs nothing but the minute you spent on it, and a 10,000-row list costs "
             "the same as a 10-row one.") + "\n" + diagram(CREDITS_SVG,
-            "Illustration: a credit plan's cost rises in steps as rows are scraped; Pro is a flat $25 once; Free is $0",
+            "Illustration: a credit plan's cost rises in steps as rows are scraped; Pro is one flat payment; Free is $0",
             "An illustration of the two pricing models, not a price comparison: credit plans charge as you use them, a licence doesn't.")),
         sec("once", "What \"pay once\" means here", claim(
             "Pro is a licence key from Gumroad: <b>$25, one time</b> ($19 for the first 100 buyers). It "
@@ -259,7 +259,7 @@ PAGES.append(dict(
         ])),
     ],
     faq=[
-        ("Is there a web scraper with no subscription?", "Yes. Magic Scraper's free version has no time limit and no account, and its Pro licence is a one-time $25 payment that never renews. There are no credits on either."),
+        ("Is there a web scraper with no subscription?", "Yes. Magic Scraper's free version has no time limit and no account, and its Pro licence is a one-time payment ($19 founding price for the first 100 buyers, then $25) that never renews. There are no credits on either."),
         ("Is the free version a trial?", "No. It has no clock and no monthly allowance. Detection, unlimited pagination and export stay free. Pro adds drill-down on every row, lists of addresses beyond two, saved setups, comparisons and schedules."),
         ("Do I need a credit card or an account?", "No. Install it from the Chrome Web Store or Edge Add-ons and use it. A card is only involved if you choose to buy Pro on Gumroad."),
         ("What happens if a run fails?", "Nothing is charged, because nothing is metered. If the tab closes during a crawl, the rows collected so far can be brought back the next time you open the extension on that site, free."),
@@ -469,14 +469,15 @@ PAGES.append(dict(
             ("Look for consent screens", "A screen asking you to \"accept all\" before the tool works is asking for something. Read what."),
         ])),
         sec("ours", "Magic Scraper's answers", "\n".join([
-            diagram(PRIVACY_SVG, "Data flows from the page you're on to Magic Scraper in your browser to your file. The only other requests: more pages of the same site when you crawl, Gumroad once for a Pro licence, and your own Google Sheet if you send to it with Pro. Never a server of ours, analytics or an AI service.",
+            diagram(PRIVACY_SVG, "Data flows from the page you're on to Magic Scraper in your browser to your file. The only other requests, each started by you: pages you ask for (more of a list when you crawl, the pages rows link to when you drill down), Gumroad once for a Pro licence, and your own Google Sheet or webhook if you send to it with Pro. Never a server of ours, analytics or an AI service.",
                     "Where your scraped data goes, and every request the extension makes. Check it yourself with the steps above."),
             claim("<b>Your data:</b> what you scrape stays in your browser until you save a file or, with "
                   "Pro, send it to a Google Sheet in your own account or to a webhook address you set. Finding a table, picking one by hand "
                   "and exporting it make no network requests at all. There is no account and no server of "
                   "ours for anything to go to."),
             table(["When", "What is requested"], [
-                ["Crawling or drill-down", ("y", "Further pages of the site you're on, after you press Start")],
+                ["Crawling", ("y", "Further pages of the list you're on, after you press Start")],
+                ["Drill-down, or a list of pages", ("y", "The pages your rows link to, and the addresses you added, after you start it")],
                 ["Activating Pro", ("y", "Your licence key to Gumroad, once, to confirm the purchase")],
                 ["Send to Google Sheets (Pro, from 1.23)", ("y", "The rows you send, straight to your own sheet at Google")],
                 ["Send to webhook (Pro, from 1.23)", ("y", "The rows you send, to the https address you saved, and nowhere else")],
@@ -498,7 +499,7 @@ PAGES.append(dict(
     ],
     faq=[
         ("Are web scraper extensions safe?", "Some are and some collect more than you'd expect. Check the permissions, the store's privacy disclosures and the network requests while you scrape, and look at who owns the extension now."),
-        ("Does Magic Scraper send my data anywhere?", "Only where you send it. Scraped data stays in your browser until you save a file or, with Pro, send it to a Google Sheet in your own account. Detection and export make no network requests; otherwise the only requests are further pages of the site you're crawling and a one-time licence check with Gumroad if you buy Pro. Nothing ever goes to us."),
+        ("Does Magic Scraper send my data anywhere?", "Only where you send it. Scraped data stays in your browser until you save a file or, with Pro, send it to a Google Sheet in your own account. Detection and export make no network requests. Otherwise it requests only what you start: further pages of a list you crawl, the pages your rows link to when you drill down, a one-time licence check with Gumroad if you buy Pro, and, with Pro, the rows you send to your own sheet or webhook. Nothing ever goes to us."),
         ("Why does a scraper extension need access to all websites?", "To work on whatever site you open, and to crawl pages in the background. In Magic Scraper that wider access is optional and requested only when a feature needs it."),
         ("How do I see what an extension sends?", "Open DevTools with F12, choose the Network tab, and use the extension. Any request to a domain other than the site you're on came from somewhere else, often the extension."),
         ("Does Magic Scraper use AI or send pages to a server?", "No. Detection runs in your browser with no AI service and no server of ours."),

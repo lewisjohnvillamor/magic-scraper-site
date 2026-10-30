@@ -204,9 +204,9 @@
         {
           "@type": "Offer",
           "name": "Pro",
-          "price": "25",
+          "price": "19",
           "priceCurrency": "USD",
-          "description": "One-time purchase. Drill-down on every row, through as many levels as needed, plus named setups you can export, one setup run over a whole list of pages, comparison with the previous run or with a CSV, Excel or JSON file of your own, and running a saved setup on a schedule while Chrome is open. No subscription, no account."
+          "description": "One-time purchase: $19 founding price for the first 100 buyers, $25 after. Drill-down on every row, through as many levels as needed, plus named setups you can export, one setup run over a whole list of pages, comparison with the previous run or with a CSV, Excel or JSON file of your own, running a saved setup on a schedule while the browser is open, and sending rows to your own Google Sheet or webhook. No subscription, no account."
         }
       ]
     },
@@ -259,7 +259,7 @@
           "name": "Where does my scraped data go?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nowhere. Detection, crawling and export all happen inside your browser. There is no server for your data to pass through. Detecting a table and exporting it make no network requests at all. The only requests the free version ever makes are for further pages of the site you are already on, and only once you press Start crawling — the same pages your browser would fetch if you clicked through them. Activating a Pro licence sends the key to Gumroad once to confirm the purchase, and nothing about the page you are on goes with it. What it keeps \u2014 a run in progress, past runs to compare against \u2014 is stored inside the extension, where the website cannot read it, and a file you compare against is read on your computer and never uploaded."
+            "text": "Only where you send it. Detection, crawling and export all happen inside your browser. There is no server of ours for your data to pass through. Detecting a table and exporting it make no network requests at all. Otherwise it requests only the pages you start it on: further pages of a list when you press Start crawling, the pages your rows link to when you drill down, and the addresses in a list of pages. With Pro, rows go to your own Google Sheet or webhook address when you send them, and nowhere else. Activating a Pro licence sends the key to Gumroad once to confirm the purchase, and nothing about the page you are on goes with it. What it keeps \u2014 a run in progress, past runs to compare against \u2014 is stored inside the extension, where the website cannot read it, and a file you compare against is read on your computer and never uploaded."
           }
         }
       ]
@@ -411,7 +411,7 @@
             panels. It reads what your browser shows, so a login you have is a page it can read</li>
           <li><b>Lists in their own scrolling panel</b>, and <b>virtual lists</b> that only
             draw the rows on screen <span class="soon">next update</span></li>
-          <li><b><a href="/scrape-websites-in-other-languages">Next and Load more buttons in more than 80 languages</a></b>, from <i>Suivant</i> and
+          <li><b><a href="/scrape-websites-in-other-languages">Next buttons in more than 80 languages, and Load more in most of them</a></b>, from <i>Suivant</i> and
             <i>N&auml;chste</i> to <i>&#1057;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1072;&#1103;</i>,
             <i>&#1575;&#1604;&#1578;&#1575;&#1604;&#1610;</i> and <i>&#27425;&#12408;</i> &mdash; and it
             no longer mistakes a photo carousel's arrow for one <span class="soon">next update</span></li>
@@ -457,7 +457,7 @@
       <div class="plan">
         <p class="kind">Free</p>
         <p class="amount">$0</p>
-        <p class="terms">Everything except drill-down and the run tooling, no clock on it.</p>
+        <p class="terms">Everything to find, crawl and export, with no clock on it. Drill-down and lists of pages run on a sample.</p>
         <ul>
           <li>Detect, pick by hand, export <b>CSV · XLSX · JSON</b></li>
           <li>Open it in <b>Google Sheets</b> in one click</li>
@@ -514,10 +514,11 @@
       <p>Detection, crawling and export all happen <b>inside your browser</b>. There is no server
         of ours for your data to pass through, because there is no server of ours.</p>
       <p>Detecting a table, picking one by hand and exporting it make <b>no network requests at
-        all</b> — not analytics, not a version check, not a ping. The only requests the free
-        version ever makes are for further pages of <i>the site you are already on</i>, and only
-        once you press Start crawling: the same pages your browser would fetch if you clicked
-        through them yourself.</p>
+        all</b> — not analytics, not a version check, not a ping. Otherwise it requests only the
+        pages you start it on: further pages of a list once you press Start crawling, the pages
+        your rows link to when you drill down, and the addresses in a list of pages &mdash; the same
+        pages your browser would fetch if you clicked through them yourself. With Pro, rows go to
+        your own Google Sheet or webhook address when you send them, and nowhere else.</p>
       <p>What it keeps &mdash; a run in progress, past runs to compare against &mdash; is stored
         <b>inside the extension</b>, where the website you scraped cannot read it. A file you
         compare against is read on your computer and never uploaded.</p>
@@ -681,7 +682,7 @@
           <li>Finds the table and <b>names the columns</b> from the markup</li>
           <li><b>Pick the rows by hand</b> when it picks the wrong thing</li>
           <li>Crawl <b>pagination or infinite scroll</b>, with no page limit</li>
-          <li>Open the page behind each row, up to <b>ten levels</b> deep</li>
+          <li>Open the page behind each row, through <b>as many levels</b> as you set up</li>
           <li>Export <b>CSV &middot; XLSX &middot; JSON</b>, or copy</li>
           <li>Rename and drop columns, filter rows &mdash; remembered per site</li>
           <li><b>Bring back a run that died with its tab</b> &mdash; and it is
