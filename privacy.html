@@ -48,7 +48,7 @@
 
 <main id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="sub">Last updated 27 October 2026 · applies to the Magic Scraper browser extension for Chrome and Edge, to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux, and to the <a href="#snippers">Magic Snippers</a> extension</p>
+  <p class="sub">Last updated 30 October 2026 · applies to the Magic Scraper browser extension for Chrome, Edge and Firefox, to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux, and to the <a href="#snippers">Magic Snippers</a> extension</p>
 
   <p class="lead"><b>Magic Scraper is built for privacy.</b> It has no servers of its own, no
   account, no analytics and no telemetry. What it reads stays in your browser, and what it
@@ -248,6 +248,16 @@
             one site, so the extension can post your rows to it. Remove the address and the
             permission goes with it.</td></tr>
   </table>
+
+  <h3 id="firefox">In Firefox</h3>
+  <p>The Firefox version works the same way, with three differences. Firefox grants
+    <code>storage</code> and <code>alarms</code> at install, without a prompt, because it cannot
+    ask for them later; they still do nothing until you use the features above.
+    <b>Send to Google Sheets is not available in Firefox yet</b> (Open in Google Sheets is). And
+    Firefox asks for your consent before data leaves the browser: the add-on declares that it
+    collects nothing by default, and asks for <i>website content</i> when you save a webhook
+    address and for <i>authentication information</i> when you activate a Pro licence key with
+    Gumroad. You can withdraw either in Firefox&rsquo;s add-on settings.</p>
 
   <h2>Scheduled runs</h2>
   <p>If you schedule a saved setup, the extension opens that page in a background tab at the
