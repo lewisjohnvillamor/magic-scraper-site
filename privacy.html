@@ -225,8 +225,9 @@
     <tr><td><code>tabs</code>, <code>storage</code>, all-sites access <em>(optional)</em></td>
         <td>Requested only when you switch on drill-down, run one setup over a list of pages, or
             set a schedule: each has to open pages in a background tab and keep the results while it
-            works. <code>storage</code> alone is also asked for when you save a setup, activate Pro,
-            or use Send to Google Sheets or the webhook, to keep that on your machine. Decline any of
+            works. <code>storage</code> alone is also asked for the first time you change your setup
+            for a site (leave out a column, rename one, remove a row), and when you save a setup,
+            activate Pro, or use Send to Google Sheets or the webhook, to keep that on your machine. Decline any of
             them and the rest of the extension still works.</td></tr>
     <tr><td><code>alarms</code> <em>(optional)</em></td>
         <td>Requested only if you put one of your own saved setups on a schedule. It is a timer
