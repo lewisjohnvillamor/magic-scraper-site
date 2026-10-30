@@ -15,6 +15,13 @@ docs/*.md
 # The Worker's own source is bundled by wrangler; it is not a page.
 src
 # Local-only: never part of the site, even when deploying from a working copy.
+# Secrets kept for `wrangler dev` above all: a deploy from a working copy that
+# has one would otherwise publish it at the site's root.
+.dev.vars*
+.env*
+*.local
+__pycache__
+*.pyc
 node_modules
 brag-output
 .wrangler
