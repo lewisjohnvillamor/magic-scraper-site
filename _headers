@@ -1,0 +1,13 @@
+# Response headers for the static pages (Cloudflare Workers static assets).
+# The Worker's own /api/ answers set theirs in src/index.js.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# The admin page holds the admin token while it is open: nothing may frame it,
+# and it runs only its own scripts (the one inline line is allowed by hash).
+/admin-requests*
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'none'
