@@ -10,9 +10,17 @@
  * broken by the database being missing. The tables are created on first use;
  * there is no migration step to remember.
  *
- * Privacy, the same rules as before: no cookies, no IP addresses, nothing that
- * identifies anyone. A vote is a random id the visitor's browser made up for
- * itself, which stops the honest double-click and nothing more. An email
+ * Privacy, the same rules as before: no cookies, no IP addresses stored, nothing
+ * that identifies anyone. A vote is a random id the visitor's browser made up
+ * for itself, which stops the honest double-click and nothing more.
+ *
+ * Abuse: that id is the visitor's own, so it cannot be what limits anyone --
+ * a new one per request made the three-a-day cap and every other write
+ * unlimited. Writes are limited instead by Cloudflare's rate limiter
+ * (WRITE_LIMIT in wrangler.toml), keyed on the connecting address, which it
+ * counts for a minute in memory and we never see or store; and each table has
+ * a ceiling, so a flood that gets past that still cannot bury the moderation
+ * queue or grow the database without end. An email
  * address is optional, never shown, and kept only to say a request shipped.
  *
  * Moderation: a new request is stored as "pending" and is not shown until it
@@ -24,6 +32,9 @@ const PUBLIC = ['open', 'planned', 'building', 'shipped', 'declined'];
 const PRODUCTS = ['extension', 'desktop', 'website'];
 const REASONS = new Set(['no-data', 'confusing', 'once', 'missing', 'price', 'other-tool', 'other']);
 const SUBMITS_PER_DAY = 3;
+const MAX_PENDING = 200;          // unmoderated requests held at once
+const MAX_EMAILS = 5000;          // addresses kept for one request
+const MAX_FEEDBACK_DAY = 1000;    // goodbye answers kept in one day
 
 // The home page's roadmap list. Each item is a request with a fixed slug, so
 // its "I'd use this" button and the board share one count.
@@ -69,6 +80,8 @@ function schema(db) {
       db.prepare(`CREATE TABLE IF NOT EXISTS submits (
         voter TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (voter, day))`),
       db.prepare(`CREATE INDEX IF NOT EXISTS requests_status ON requests (status, votes)`),
+      // the goodbye answers are counted per day and blanked by age
+      db.prepare(`CREATE INDEX IF NOT EXISTS feedback_at ON feedback (at)`),
       ...SEED.map(([slug, title, body, status]) => db.prepare(
         `INSERT OR IGNORE INTO requests (slug, title, body, product, status, created, updated)
          VALUES (?, ?, ?, 'extension', ?, ?, ?)`).bind(slug, title, body, status, t, t)),
@@ -93,6 +106,8 @@ async function vote(db, id, voter) {
 }
 
 async function saveEmail(db, id, email) {
+  const has = await db.prepare('SELECT COUNT(*) AS n FROM emails WHERE request_id = ?').bind(id).first();
+  if (has && has.n >= MAX_EMAILS) return false;
   await db.prepare('INSERT OR IGNORE INTO emails (request_id, email, at) VALUES (?, ?, ?)').bind(id, email, now()).run();
 }
 
@@ -127,6 +142,10 @@ async function requests(request, env, parts) {
     const day = now().slice(0, 10);
     const used = await db.prepare('SELECT n FROM submits WHERE voter = ? AND day = ?').bind(voter, day).first();
     if (used && used.n >= SUBMITS_PER_DAY) return json({ error: 'That is plenty for one day, thank you. Try again tomorrow.' }, 429);
+    const queued = await db.prepare(`SELECT COUNT(*) AS n FROM requests WHERE status = 'pending'`).first();
+    if (queued && queued.n >= MAX_PENDING) {
+      return json({ error: 'The queue is full while we catch up. Please try again in a day or two, or email us.' }, 429);
+    }
     const t = now();
     const res = await db.batch([
       db.prepare(`INSERT INTO requests (title, body, product, status, created, updated) VALUES (?, ?, ?, 'pending', ?, ?)`)
@@ -155,7 +174,7 @@ async function requests(request, env, parts) {
   if (parts[1] === 'notify') {
     const email = clip(body.email, 160);
     if (!okEmail(email)) return json({ error: 'That email address does not look right.' }, 400);
-    await saveEmail(db, id, email);
+    if (!(await saveEmail(db, id, email))) return json({ error: 'This list is full for now.' }, 429);
     return json({ ok: true });
   }
   return json({ error: 'not found' }, 404);
@@ -173,9 +192,11 @@ async function roadmap(request, env) {
   if (request.method !== 'POST') return json({ error: 'method not allowed' }, 405);
   let body;
   try { body = await request.json(); } catch (e) { return json({ error: 'bad json' }, 400); }
-  const row = await db.prepare('SELECT id FROM requests WHERE slug = ?').bind(String(body.item || '')).first();
-  if (!row) return json({ error: 'unknown item' }, 400);
+  const row = await db.prepare('SELECT id, status, merged_into FROM requests WHERE slug = ?').bind(String(body.item || '')).first();
+  if (!row || row.merged_into != null || !PUBLIC.includes(row.status)) return json({ error: 'unknown item' }, 400);
   if (!okVoter(body.voter)) return json({ error: 'bad voter' }, 400);
+  // the same rule as the board: a shipped or declined item takes no votes
+  if (row.status === 'shipped' || row.status === 'declined') return json({ error: 'This one is closed.' }, 409);
   const out = await vote(db, row.id, body.voter);
   const email = clip(body.email, 160);
   if (email && okEmail(email)) await saveEmail(db, row.id, email);
@@ -190,9 +211,14 @@ async function feedback(request, env) {
   const reason = String(body.reason || '');
   if (!REASONS.has(reason)) return json({ error: 'unknown reason' }, 400);
   const v = String(body.v || '').slice(0, 20);
+  const day = now().slice(0, 10);
+  const today = await env.DB.prepare('SELECT COUNT(*) AS n FROM feedback WHERE at = ?').bind(day).first();
+  // Past the day's ceiling the answer is thanked and not kept: the page has
+  // nothing else to say to the person leaving, and a flood stops counting.
+  if (today && today.n >= MAX_FEEDBACK_DAY) return json({ ok: true });
   await env.DB.batch([
     env.DB.prepare('INSERT INTO feedback (reason, v, site, note, at) VALUES (?, ?, ?, ?, ?)')
-      .bind(reason, /^\d+(\.\d+){0,3}$/.test(v) ? v : '', clip(body.site, 200), clipText(body.note, 800), now().slice(0, 10)),
+      .bind(reason, /^\d+(\.\d+){0,3}$/.test(v) ? v : '', clip(body.site, 200), clipText(body.note, 800), day),
     // A typed answer is kept for about a year; the reason itself stays as a count.
     env.DB.prepare(`UPDATE feedback SET site = '', note = '' WHERE at < date('now', '-400 days') AND (site != '' OR note != '')`),
   ]);
@@ -271,6 +297,19 @@ async function admin(request, env, parts) {
   return json({ error: 'not found' }, 404);
 }
 
+// Cloudflare's rate limiter, when it is bound. The address is its key, held in
+// its own counter for the period and not passed to us or stored.
+async function allowed(request, env) {
+  if (!env.WRITE_LIMIT) return true;
+  try {
+    const key = request.headers.get('cf-connecting-ip') || 'unknown';
+    const { success } = await env.WRITE_LIMIT.limit({ key });
+    return success;
+  } catch (e) {
+    return true;                   // a limiter that fails does not take the board down with it
+  }
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -279,6 +318,9 @@ export default {
     try {
       await schema(env.DB);
       const parts = url.pathname.replace(/^\/api\//, '').split('/').filter(Boolean);
+      if (request.method === 'POST' && parts[0] !== 'admin' && !(await allowed(request, env))) {
+        return json({ error: 'That is a lot at once. Please wait a minute and try again.' }, 429);
+      }
       if (parts[0] === 'requests') return await requests(request, env, parts.slice(1));
       if (parts[0] === 'roadmap') return await roadmap(request, env);
       if (parts[0] === 'feedback') return await feedback(request, env);

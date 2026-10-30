@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Web Scraper für deutsche Websites: Weiter, Mehr laden, Excel</title>
+<meta name="description" content="Warum Scraper auf deutschen Seiten nach Seite 1 aufhören, warum Umlaute in Excel kaputtgehen und warum 1.234 nicht 1,234 ist, und wie Magic Scraper das löst." />
+<link rel="canonical" href="https://magicscraper.app/web-scraper-deutsche-websites" />
+<link rel="alternate" hreflang="en" href="https://magicscraper.app/scrape-websites-in-other-languages" />
+<link rel="alternate" hreflang="ja" href="https://magicscraper.app/scraper-japanese-websites" />
+<link rel="alternate" hreflang="de" href="https://magicscraper.app/web-scraper-deutsche-websites" />
+<link rel="alternate" hreflang="es" href="https://magicscraper.app/web-scraper-sitios-en-espanol" />
+<link rel="alternate" hreflang="fr" href="https://magicscraper.app/web-scraper-sites-francais" />
+<link rel="alternate" hreflang="x-default" href="https://magicscraper.app/scrape-websites-in-other-languages" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:url" content="https://magicscraper.app/web-scraper-deutsche-websites" />
+<meta property="og:title" content="Web Scraper für deutsche Websites: Weiter, Mehr laden, Excel" />
+<meta property="og:description" content="Warum Scraper auf deutschen Seiten nach Seite 1 aufhören, warum Umlaute in Excel kaputtgehen und warum 1.234 nicht 1,234 ist, und wie Magic Scraper das löst." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/web-scraper-deutsche-websites.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Warum hört mein Scraper auf deutschen Seiten nach Seite 1 auf?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Viele Scraper suchen die nächste Seite am englischen Wort Next. Magic Scraper liest außerdem rel=\"next\", Pfeile, aria-labels und nummerierte Seiten, und Weiter, Nächste und, ab dem nächsten Update, Nächste Seite und Mehr laden."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie verhindere ich kaputte Umlaute in Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die CSV von Magic Scraper trägt die Byte-Order-Mark, an der Excel UTF-8 erkennt. Der Excel-Export (.xlsx) hat das Problem gar nicht."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Warum stimmen die Zahlen in Excel nicht?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Weil 1.234 als Dezimalzahl gelesen wurde. Ab dem nächsten Update liest der Excel-Export von Magic Scraper eine Spalte in deutscher Schreibweise auch so."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ist das DSGVO-konform?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Magic Scraper schickt die Daten nur dorthin, wohin Sie sie schicken: Erkennung, Blättern und Export laufen in Ihrem Browser, es gibt keinen Server von uns, und mit Pro gehen Zeilen nur auf Knopfdruck an Ihre eigene Google-Tabelle oder Webhook-Adresse. Ob Sie personenbezogene Daten erheben und verwenden dürfen, hängt davon ab, was Sie damit tun, und bleibt Ihre Verantwortung."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Gibt es Magic Scraper auf Deutsch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Oberfläche ist englisch. Die gesammelten Daten bleiben in der Sprache der Seite."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Deutsche Websites",
+      "item": "https://magicscraper.app/web-scraper-deutsche-websites"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Ratgeber</p>
+    <h1>Deutsche Seiten, <i>bis zur letzten</i>.</h1>
+    <p class="standfirst">Ein Scraper, der den Weiter-Link am englischen Wort &bdquo;Next&ldquo; erkennt, bleibt auf einer Seite mit &bdquo;Nächste Seite&ldquo; oder &bdquo;Mehr laden&ldquo; hängen. In Excel wird aus Müller schnell MÃ¼ller, und aus 1.234 die Zahl eins Komma zwei drei vier. Was auf deutschsprachigen Seiten schiefgeht, und was Magic Scraper dagegen tut.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Für Chrome installieren &ndash; kostenlos</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Für Edge installieren</a>
+      <span class="aside">Kostenlos, ohne Konto.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="pager">
+    <h2>Seite 2, Seite 3, bis zum Ende</h2>
+    <div class="claim">
+      <p>Große Seiten kennzeichnen ihre Blätter-Links meist so, dass die Sprache keine Rolle spielt: <code>rel="next"</code>, ein Pfeil, ein <code>aria-label</code>, nummerierte Seiten. Magic Scraper liest all das, deshalb blättert es bei Kleinanzeigen und Chefkoch genauso wie in einem englischen Shop. Wo nur das Wort dasteht, liest es das Wort:</p>
+    </div>
+    <table class="compare">
+      <thead><tr><td></td><th>Erkannte Beschriftung</th></tr></thead>
+      <tbody>
+        <tr><td>Nächste Seite</td><td class="">Weiter &middot; Nächste &middot; Nächste Seite&dagger;</td></tr>
+        <tr><td>Nachladen</td><td class="">Mehr laden&dagger; &middot; Mehr anzeigen&dagger; &middot; Weitere anzeigen&dagger; &middot; Weitere Ergebnisse&dagger;</td></tr>
+        <tr><td>Zurück (nie für Weiter gehalten)</td><td class="">Zurück &middot; Vorherige</td></tr>
+        <tr><td>Kein Blättern</td><td class="">Pfeile von Bildergalerien&dagger; &middot; Fußnotennummern&dagger;</td></tr>
+      </tbody>
+    </table>
+    <div class="claim">
+      <p>&dagger; Ab dem nächsten Update, 2.1.0 <span class="soon">nächstes Update</span>. Alles andere steckt schon in der Version, die die Stores gerade ausliefern. Insgesamt erkennt es Blätter-Links in mehr als 80 Sprachen&dagger;.</p>
+    </div>
+  </section>
+
+  <section id="excel">
+    <h2>Umlaute, die in Excel kaputtgehen</h2>
+    <div class="claim">
+      <p>Excel rät die Kodierung einer CSV-Datei, und ohne Hinweis rät es falsch: aus Müller wird MÃ¼ller, aus Straße StraÃŸe. Die CSV von Magic Scraper beginnt mit der Byte-Order-Mark, an der Excel UTF-8 erkennt; Umlaute und ß kommen an, wie sie auf der Seite stehen. Der Excel-Export (.xlsx) kennt das Problem gar nicht, und Google Tabellen liest beides.</p>
+      <p>Eine schon verdorbene CSV aus einem anderen Tool öffnen Sie über <b>Daten &rarr; Aus Text/CSV</b> mit dem Dateiursprung <b>65001: Unicode (UTF-8)</b>.</p>
+    </div>
+  </section>
+
+  <section id="numbers">
+    <h2>1.234 ist nicht 1,234</h2>
+    <div class="claim">
+      <p>Im Deutschen trennt der Punkt die Tausender und das Komma die Dezimalstellen. Wer 1.234 als Dezimalzahl liest, macht aus eintausendzweihundertvierunddreißig eins Komma zwei drei vier, ohne jede Warnung.</p>
+      <p>Ab dem nächsten Update <span class="soon">nächstes Update</span> schaut der Excel-Export auf die ganze Spalte. Zeigt sie deutsche Schreibweise (83.200.000, 12,50, 1.234,56), wird jeder Wert so gelesen, und die Spalte lässt sich summieren. Eine Spalte nur aus Werten wie 1.234 könnte beides sein; sie bleibt Text: nie falsch, nur nicht summierbar. Die CSV behält jeden Wert genau so, wie die Seite ihn schreibt.</p>
+    </div>
+  </section>
+
+  <section id="columns">
+    <h2>Spaltennamen</h2>
+    <div class="claim">
+      <p>Hat eine Tabelle Überschriften, werden sie übernommen: Preis, Ort, Telefon. Ohne Überschriften benennt Magic Scraper die Spalten nach dem Seitenaufbau, und diese Namen sind englisch (Price, Link, Image). Ein Doppelklick auf die Überschrift im Popup, oder F2, benennt sie um; der Name wird für die Website gespeichert.</p>
+      <p>Die Oberfläche der Erweiterung ist englisch. Die Daten bleiben deutsch.</p>
+    </div>
+  </section>
+
+  <section id="tried">
+    <h2>Ausprobiert</h2>
+    <div class="claim">
+      <p>Bevor diese Seite entstand, lief die Erweiterung auf Kleinanzeigen, Chefkoch, dem Newsticker von heise online, Gelbe Seiten und der deutschen Wikipedia.</p>
+      <p>Fragt eine Seite, ob Sie ein Mensch sind, hält der Lauf an und gibt Ihnen den Tab; er versucht nie, die Prüfung zu umgehen. Ob eine Seite das Auslesen erlaubt, regeln ihre Nutzungsbedingungen, und bei personenbezogenen Daten gilt die DSGVO.</p>
+      <p>Andere Sprachen: <a href="/scraper-japanese-websites" hreflang="ja" lang="ja">日本語</a> &middot; <a href="/web-scraper-deutsche-websites" hreflang="de" lang="de">Deutsch</a> &middot; <a href="/web-scraper-sitios-en-espanol" hreflang="es" lang="es">Español</a> &middot; <a href="/web-scraper-sites-francais" hreflang="fr" lang="fr">Français</a> &middot; <a href="/scrape-websites-in-other-languages" hreflang="en" lang="en">English</a></p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Häufige Fragen</h2>
+    <div class="qa">
+      <details>
+        <summary>Warum hört mein Scraper auf deutschen Seiten nach Seite 1 auf?</summary>
+        <p>Viele Scraper suchen die nächste Seite am englischen Wort Next. Magic Scraper liest außerdem rel="next", Pfeile, aria-labels und nummerierte Seiten, und Weiter, Nächste und, ab dem nächsten Update, Nächste Seite und Mehr laden.</p>
+      </details>
+      <details>
+        <summary>Wie verhindere ich kaputte Umlaute in Excel?</summary>
+        <p>Die CSV von Magic Scraper trägt die Byte-Order-Mark, an der Excel UTF-8 erkennt. Der Excel-Export (.xlsx) hat das Problem gar nicht.</p>
+      </details>
+      <details>
+        <summary>Warum stimmen die Zahlen in Excel nicht?</summary>
+        <p>Weil 1.234 als Dezimalzahl gelesen wurde. Ab dem nächsten Update liest der Excel-Export von Magic Scraper eine Spalte in deutscher Schreibweise auch so.</p>
+      </details>
+      <details>
+        <summary>Ist das DSGVO-konform?</summary>
+        <p>Magic Scraper schickt die Daten nur dorthin, wohin Sie sie schicken: Erkennung, Blättern und Export laufen in Ihrem Browser, es gibt keinen Server von uns, und mit Pro gehen Zeilen nur auf Knopfdruck an Ihre eigene Google-Tabelle oder Webhook-Adresse. Ob Sie personenbezogene Daten erheben und verwenden dürfen, hängt davon ab, was Sie damit tun, und bleibt Ihre Verantwortung.</p>
+      </details>
+      <details>
+        <summary>Gibt es Magic Scraper auf Deutsch?</summary>
+        <p>Die Oberfläche ist englisch. Die gesammelten Daten bleiben in der Sprache der Seite.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

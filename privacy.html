@@ -48,15 +48,16 @@
 
 <main id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="sub">Last updated 23 October 2026 · applies to the Magic Scraper browser extension for Chrome, Edge and Firefox, and to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux</p>
+  <p class="sub">Last updated 30 October 2026 · applies to the Magic Scraper browser extension for Chrome, Edge and Firefox, to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux, and to the <a href="#snippers">Magic Snippers</a> extension</p>
 
   <p class="lead"><b>Magic Scraper is built for privacy.</b> It has no servers of its own, no
   account, no analytics and no telemetry. What it reads stays in your browser, and what it
   produces goes <b>only where you send it</b>: a file you save, or &mdash; with Pro, if you choose
   &mdash; a Google Sheet in your own Google account or a webhook address you give. Detecting a table, picking one by hand and
-  exporting it make <b>no network requests at all</b>. The only requests the free extension ever
-  makes are for further pages of the site you are already on, and only once you press Start
-  crawling &mdash; never to a server of ours, because there isn't one.
+  exporting it make <b>no network requests at all</b>. Otherwise it requests only the pages you
+  start it on &mdash; further pages of a list once you press Start crawling, the pages your rows link
+  to when you drill down, and the addresses in a list of pages &mdash; and never a server of ours,
+  because there isn't one.
   Three things go further, all only with Pro and all only when you start them: activating your
   licence sends the key to Gumroad, once; <a href="#google-sheets">Send to Google Sheets</a>
   (from version 1.23) sends the rows you choose straight to your own sheet at Google; and
@@ -67,8 +68,8 @@
   the text, links and image URLs already rendered in your browser — in order to find the
   repeating rows and turn them into a table. If you turn on drill-down, it also opens the
   pages your rows link to and reads them the same way.</p>
-  <p>It does not read pages you have not opened the popup on, does not run in the background,
-  and does not touch form fields, passwords or cookies.</p>
+  <p>It does not read pages you have not pointed it at, does nothing in the background unless
+  you start a run or set a schedule, and does not touch form fields, passwords or cookies.</p>
 
   <h2>What it stores, and where</h2>
   <p>Everything is kept in your own browser. Nothing is uploaded. All of it is kept by the
@@ -128,10 +129,10 @@
 
 
   <h2>What leaves your machine</h2>
-  <p><strong>Your data: only what you send.</strong> The only network requests the extension
-  makes while scraping are to the site you are already on: when a site paginates by URL, it
-  fetches the next page of that same site directly, exactly as your browser would if you clicked
-  the link. Your rows, your columns, the pages you visit and the files you export never leave your
+  <p><strong>Your data: only what you send.</strong> While scraping, the extension requests
+  only the pages you start it on: when a site paginates by URL, it fetches the next page of that
+  same site directly, exactly as your browser would if you clicked the link, and drill-down or a
+  list of pages opens the pages your rows link to and the addresses you added. Your rows, your columns, the pages you visit and the files you export never leave your
   machine &mdash; unless you press <b>Send to Google Sheets</b> or <b>Send to webhook</b> (Pro), and then
   only the rows you send, to the place you chose, as described below. Nothing ever goes to us.</p>
 
@@ -215,13 +216,19 @@
         <td>Read the page you are looking at, only when you open the popup on it.</td></tr>
     <tr><td><code>scripting</code></td>
         <td>Run the detection and extraction code inside that page.</td></tr>
+    <tr><td><code>sidePanel</code></td>
+        <td>Keep the extension open beside the page, in the browser&rsquo;s side panel, when you ask
+            it to. It reads nothing by itself.</td></tr>
     <tr><td><code>downloads</code></td>
         <td>Save your CSV / XLSX / JSON file &mdash; and, if you set a schedule, the CSV each
             run produces while you are not there.</td></tr>
     <tr><td><code>tabs</code>, <code>storage</code>, all-sites access <em>(optional)</em></td>
-        <td>Requested only if you switch on drill-down, which has to open each row's page in a
-            background tab and keep the results while it works. Decline it and the rest of the
-            extension still works.</td></tr>
+        <td>Requested only when you switch on drill-down, run one setup over a list of pages, or
+            set a schedule: each has to open pages in a background tab and keep the results while it
+            works. <code>storage</code> alone is also asked for the first time you change your setup
+            for a site (leave out a column, rename one, remove a row), and when you save a setup,
+            activate Pro, or use Send to Google Sheets or the webhook, to keep that on your machine. Decline any of
+            them and the rest of the extension still works.</td></tr>
     <tr><td><code>alarms</code> <em>(optional)</em></td>
         <td>Requested only if you put one of your own saved setups on a schedule. It is a timer
             and nothing else: it wakes the extension when a run is due. Scheduled runs happen
@@ -321,8 +328,64 @@
   your results, the sites you visit or how you use the app. Notifications are shown by your
   operating system and stay on your computer.</p>
 
+  <h2 id="snippers">Magic Snippers (Chrome extension)</h2>
+  <p>Magic Snippers is a separate extension, with its own licence: it scrapes tables and lists,
+  takes whole-page screenshots, and opens every link in a list to screenshot each page. It works
+  differently from Magic Scraper in two ways worth knowing &mdash; a drill-down can open pages on
+  many sites, and it re-checks a Pro licence every few days &mdash; so here is exactly what it does.</p>
+  <p><b>What it reads.</b> The page you are on, when you press Find data, Take snapshot or Scan
+  this page; and, during a drill-down you start, each page the chosen links lead to. Reading
+  happens inside your browser. It never reads a page you haven't asked it to.</p>
+  <p><b>What it keeps, and where.</b> What you capture &mdash; CSV and JSON exports, PNG
+  screenshots and the <code>_index.csv</code> of a drill-down &mdash; is saved as files in your
+  Downloads folder. Your settings (folder and file names, wait times, extra pages) and, with Pro,
+  your licence key, the email address Gumroad returns for it and the date it was last checked are
+  kept in the extension's own storage (<code>chrome.storage.local</code>) in your browser. Nothing
+  here is sent to us.</p>
+  <p><b>What it sends, and to whom.</b></p>
+  <table>
+    <tr><th>When</th><th>What goes where</th></tr>
+    <tr><td>You drill down</td><td>The pages behind the links you chose are opened in a tab, as
+      your browser would open them if you clicked each one.</td></tr>
+    <tr><td>You activate a Pro licence</td><td>Your licence key and our product id go to
+      Gumroad&rsquo;s licence service (<code>api.gumroad.com</code>) to confirm the purchase.
+      Gumroad answers with the purchase details, including the email used to buy, which are kept in
+      your browser as described above.</td></tr>
+    <tr><td>Every 3 days, when the panel opens (Pro only)</td><td>The same key and product id are
+      sent to Gumroad again, so a refunded or cancelled purchase stops unlocking Pro. If Gumroad
+      can&rsquo;t be reached, Pro keeps working for 14 days after the last successful check.</td></tr>
+  </table>
+  <p>It has <b>no analytics, no telemetry and no crash reporting</b>, and loads no code from
+  anywhere but itself. A free installation never contacts Gumroad or anyone else.</p>
+  <p><b>Permissions, and why each one exists.</b></p>
+  <table>
+    <tr><th>Permission</th><th>Why</th></tr>
+    <tr><td><code>activeTab</code></td><td>Clicking its toolbar icon lets it read the tab you
+      clicked it on, and only that tab. It has no access to any site when you install it.</td></tr>
+    <tr><td>Access to a site, asked one site at a time</td><td>When you use it on a tab you
+      didn&rsquo;t click the icon on, or a drill-down opens links on a site, your browser first asks
+      whether to allow those sites. It keeps only the sites you allow; you can remove them in
+      Chrome&rsquo;s extension settings (Site access). It acts on a page only when you press one of
+      its buttons.</td></tr>
+    <tr><td><code>tabs</code></td><td>Show the name of the page the panel will work on, and follow
+      a drill-down&rsquo;s tab as each page loads.</td></tr>
+    <tr><td><code>scripting</code></td><td>Run its own detection, waiting and measuring code in the
+      page, and click a tab you asked for inside each link (a &ldquo;Details&rdquo; tab, say).</td></tr>
+    <tr><td><code>debugger</code></td><td>Whole-page screenshots. It attaches to the tab being
+      captured only while a snapshot or drill-down runs, makes the tab tall enough to fit the whole
+      page, takes the picture and detaches. Chrome shows a &ldquo;started debugging this
+      browser&rdquo; bar while it does.</td></tr>
+    <tr><td><code>downloads</code></td><td>Save your exports and screenshots, and open the folder
+      when you press Open folder.</td></tr>
+    <tr><td><code>storage</code></td><td>Remember your settings and, with Pro, your licence.</td></tr>
+    <tr><td><code>sidePanel</code></td><td>Its interface is a side panel beside the page.</td></tr>
+  </table>
+  <p>Remove the licence (Upgrade &rarr; <b>Remove license from this browser</b>) or uninstall the
+  extension to delete everything it stored. Files you saved stay in your Downloads folder until
+  you delete them.</p>
+
   <h2 id="website">About this website</h2>
-  <p>Everything above is about the <b>extension</b>, which has no server and never did. This
+  <p>Everything above is about the <b>extensions</b>, which have no server and never did. This
   <b>website</b> is a different thing and now has one small piece of one, so it is worth saying
   plainly rather than leaving you to find it.</p>
   <p>The <a href="/requests">feature request board</a>, and the <b>I&rsquo;d use this</b>
@@ -347,11 +410,11 @@
   is never shown on the board, it is deleted once we have told you, and asking to be removed at
   <a href="mailto:support@magicscraper.app">support@magicscraper.app</a> is enough to delete it
   sooner.</p>
-  <p>If you email us to be told when Magic Scraper Desktop launches, your address is kept for that
-  one message and nothing else; ask at
+  <p>If you email us to be told when Magic Scraper Desktop launches, or when Magic Snippers is in
+  the Chrome Web Store, your address is kept for that one message and nothing else; ask at
   <a href="mailto:support@magicscraper.app">support@magicscraper.app</a> to be removed sooner.</p>
-  <p>None of this touches the extension. Beyond opening those two pages, it has no idea the
-  website exists.</p>
+  <p>None of this touches the extensions. Beyond Magic Scraper opening those two pages, they have
+  no idea the website exists.</p>
 
   <h2>Changes</h2>
   <p>If this policy changes, the updated version will be published at this address with a new

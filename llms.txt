@@ -3,8 +3,9 @@
 > A browser extension for Chrome, Edge and other Chromium browsers that turns the table or list on the page you are viewing into a
 > spreadsheet, and a bespoke service for the scrapes that do not fit in a browser.
 
-Everything the extension does happens inside the browser. There is no server, no account, and
-nothing about the pages a user scrapes is transmitted anywhere. The free tier includes
+Everything the extension does happens inside the browser. There is no server of ours and no
+account. Scraped rows go only where the user sends them: a file, or with Pro their own Google
+Sheet or webhook address. The free tier includes
 detection, a manual picker, export to CSV/XLSX/JSON, multi-page crawling with no page limit,
 and getting back a long run whose tab died part-way. Drill-down -- opening the page behind
 every row and merging its fields back in as extra columns -- runs free on the first 3 rows of
@@ -17,6 +18,15 @@ schedule (every few minutes, every few hours or once a day) while the browser is
 stay open in the browser's side panel beside the page while you click. When a site shows a human-verification check, a run stops
 and hands the user the tab; it never tries to get past the check. Stored runs live inside the
 extension, not in storage the scraped website can read.
+
+## Magic Snippers
+
+- [Magic Snippers](https://magicscraper.app/magic-snippers): a separate Chrome extension from the
+  same maker. It scrapes tables and lists to CSV or JSON, takes whole-page screenshots, and opens
+  every link in a list to save a named full-page screenshot of each page, with an index
+  spreadsheet. Free, with drill-down on the first 3 links of a run; Pro ($19 one-time, sold on
+  Gumroad) drills every link. Everything stays in the browser; the only request it makes is a Pro
+  licence check with Gumroad. Privacy: https://magicscraper.app/privacy#snippers
 
 ## Product
 
@@ -47,6 +57,30 @@ extension, not in storage the scraped website can read.
   compliant tool should not promise.
 - [Scraper missing rows, columns or phone numbers](https://magicscraper.app/scraper-missing-data):
   causes of incomplete data, and Excel leading-zero and UTF-8 problems.
+- [Web scraper stops after a few pages](https://magicscraper.app/scraper-stops-after-a-few-pages):
+  rate limits, human checks, repeating pages and closed tabs; carrying a crawl on from where it
+  stopped, and recovering a run after the tab closed.
+- [Scraper columns named x193iq5w or [object Object]](https://magicscraper.app/scraper-column-names-object-object):
+  why columns are named after CSS classes, and how Magic Scraper names them from headers, labels
+  and value types instead.
+- [Scraper blocked, rate-limited or shown a captcha](https://magicscraper.app/web-scraper-blocked-captcha):
+  why sites block scrapers, pacing and Retry-After backoff, and why Magic Scraper never solves
+  captchas or uses proxies.
+- [Scraper popup keeps closing](https://magicscraper.app/scraper-popup-keeps-closing):
+  why extension popups close when the page is clicked, and the side panel and (from the next update) own-window modes.
+- [Scraped data full of duplicate rows](https://magicscraper.app/scraper-duplicate-rows):
+  why crawls collect the same rows repeatedly, how Magic Scraper adds only new rows, and why an
+  export can differ from the preview.
+- [Send scraped data to your server: Node.js and PHP webhooks](https://magicscraper.app/scraped-data-webhook-node-php):
+  the Pro webhook's JSON payload and secret header, complete receivers in Node.js and PHP with no
+  packages, and passing rows to a shell script on stdin rather than a command line.
+- [Scraping websites in other languages](https://magicscraper.app/scrape-websites-in-other-languages):
+  Next buttons in more than 80 languages (from the next update), why Excel garbles accents and kanji
+  in a CSV, and European number formats (1.234,56) in the Excel export (next update). The same in
+  [Japanese](https://magicscraper.app/scraper-japanese-websites),
+  [German](https://magicscraper.app/web-scraper-deutsche-websites),
+  [Spanish](https://magicscraper.app/web-scraper-sitios-en-espanol) and
+  [French](https://magicscraper.app/web-scraper-sites-francais).
 - [A web scraper with no subscription](https://magicscraper.app/web-scraper-no-subscription):
   free tier with no time limit or credits, a one-time Pro licence, and questions to ask before
   paying for any scraper.
@@ -126,6 +160,8 @@ extension, not in storage the scraped website can read.
 - What the extension cannot reach: closed shadow roots, cross-origin iframes, data that only a
   private API returns, PDFs in the browser viewer, and content behind a bot challenge. These
   are limits of the browser, not of the extension.
-- The single outbound request: activating a paid licence posts the key to api.gumroad.com once to
-  confirm the purchase. Detection and export make no network requests at all. The only requests the free version
-  makes are for further pages of the site you are already on, and only during a crawl.
+- Outbound requests: activating a paid licence posts the key to api.gumroad.com once to
+  confirm the purchase; with Pro, Send to Google Sheets and Send to webhook send the rows the user
+  chose to their own sheet or address. Detection and export make no network requests at all.
+  Otherwise the extension requests only the pages the user starts it on: further pages of a list
+  during a crawl, the pages rows link to during drill-down, and the addresses in a list of pages.

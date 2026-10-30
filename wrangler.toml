@@ -37,3 +37,15 @@ not_found_handling = "404-page"
 binding = "DB"
 database_name = "magic-scraper"
 database_id = "11f35cd1-3b94-4842-bf6c-7d99a74daa75"
+
+# Writes to the API (new requests, votes, notify-me addresses, goodbye answers)
+# are limited per visitor by Cloudflare's rate limiter: 20 a minute, which no
+# person clicking through the board reaches. The visitor id the pages send is
+# made up by the browser, so it cannot do this. The limiter counts by the
+# connecting address in memory for the period; the Worker never sees a stored
+# address and keeps none. Without this block the Worker still runs, with only
+# the per-table ceilings in src/index.js.
+[[ratelimits]]
+name = "WRITE_LIMIT"
+namespace_id = "1001"
+simple = { limit = 20, period = 60 }

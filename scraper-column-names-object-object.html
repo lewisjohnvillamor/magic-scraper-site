@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scraper columns named x193iq5w or [object Object]? Why</title>
+<meta name="description" content="Why scraped columns come out as CSS class names like x193iq5w, or cells read [object Object], and how to get columns named Price, Date and Link instead." />
+<link rel="canonical" href="https://magicscraper.app/scraper-column-names-object-object" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scraper-column-names-object-object" />
+<meta property="og:title" content="Scraper columns named x193iq5w or [object Object]? Why" />
+<meta property="og:description" content="Why scraped columns come out named x193iq5w, or cells read [object Object], and how to get columns named Price, Date and Link." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/scraper-column-names-object-object.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why are my scraped column names random letters?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are the page's CSS class names, which modern sites generate automatically. A scraper that falls back on them gives you names like x193iq5w. Magic Scraper names columns from the page's headers and labels, or from the values, instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does [object Object] mean in a scraped spreadsheet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool copied a programming structure where it should have copied its text. The value was on the page but never read out. Magic Scraper writes the text you see, or the link or image address."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I rename columns?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Double-click a column header in the preview to rename it, click it to drop it. Your choices are remembered for that site."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do I get Tag 2, Tag 3 ... Tag 14?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each record has a different number of tags and the tool made a column per position. Magic Scraper merges them into one Tag column, the tags separated by commas."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Messy column names",
+      "item": "https://magicscraper.app/scraper-column-names-object-object"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>Columns called <i>x193iq5w</i> are not your data's fault.</h1>
+    <p class="standfirst">You export a list and the headers read x193iq5w, x1i10hfl href, css-1x2y3z. Some cells say [object Object]. Half the columns are empty, and tags are spread over Tag 2 to Tag 14. It is a common sight with one-click scrapers, and it comes from how they name what they find.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Named columns, rename and drop: all free.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="why">
+    <h2>Where names like x193iq5w come from</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>The column is named after a CSS class</h3>
+        <p>A scraper that does not know what a value is names its column after the element's class. Modern sites generate those classes when they are built: x193iq5w, css-1x2y3z, sc-bdVaJa. They mean nothing to a person and change whenever the site is rebuilt.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>[object Object] is a value that was never turned into text</h3>
+        <p>A tool that copies a structure where it should copy its text writes the programming language's placeholder into the cell. The data was there; the tool did not read it out.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Tags become Tag 2 to Tag 14</h3>
+        <p>A record with a varying number of the same thing &mdash; tags, categories, thumbnails &mdash; comes out as one column per position, each mostly empty.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>The same link appears five times</h3>
+        <p>A card wrapped in a link, with the title, picture and button all linking to the same page, gives the same address in several columns.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How Magic Scraper names its columns</h2>
+    <p class="deck">Readable names, without setting anything up.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>From the page's own headers and labels first</h3>
+        <p>A table's header row, two-row headers included; a definition list's terms; "Phone:" and "Address:" labels beside their values; the page's structured data.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Then from what the values are</h3>
+        <p>A column of prices is <b>Price</b>, dates are <b>Date</b>, addresses <b>Link</b>, pictures <b>Image</b>, and a class name is used only when it is a real word like <code>product-title</code>, never a build hash.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Values are always text</h3>
+        <p>Every cell is the text you see, the address a link goes to, or the picture's address. There is no [object Object].</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Repeats are tidied</h3>
+        <p>A column identical to another is dropped, an image's alt text that repeats the name is folded in, and tags of varying number are merged into one Tag column.</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p>Still not right? Click a column header to drop it, double-click it to rename it, and the names you choose are remembered for that site and used in every export.</p>
+    </div>
+  </section>
+
+  <section id="compare">
+    <h2>Side by side</h2>
+    <table class="compare">
+      <thead><tr><td></td><th>Some one-click scrapers</th><th>Magic Scraper</th></tr></thead>
+      <tbody>
+        <tr><td>Column names</td><td class="no">CSS classes: x193iq5w, x1i10hfl href</td><td class="yes">Price, Date, Link, Image, the page's own headers</td></tr>
+        <tr><td>Objects in cells</td><td class="no">[object Object]</td><td class="yes">Always the visible text, or the link or image address</td></tr>
+        <tr><td>Tags and categories</td><td class="no">Tag 2 &hellip; Tag 14, mostly empty</td><td class="yes">One Tag column</td></tr>
+        <tr><td>Rename and drop</td><td class="partial">Varies</td><td class="yes">Click to drop, double-click to rename, remembered per site</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <aside class="hurry" aria-labelledby="hurry-h">
+    <h2 id="hurry-h">In a hurry? Just need the leads?</h2>
+    <p>Send us the site and the fields you need, and we&rsquo;ll collect the list for you: cleaned,
+      de-duplicated and in a spreadsheet. You&rsquo;ll have a price before any work starts, usually
+      within a day or two.</p>
+    <div class="actions">
+      <a class="btn" href="mailto:support@magicscraper.app?subject=Leads%20needed%20fast&amp;body=The%20site%3A%20%0AThe%20fields%20I%20need%3A%20%0AAbout%20how%20many%20rows%3A%20%0AWhen%20I%20need%20it%20by%3A%20">Email support@magicscraper.app</a>
+      <a class="btn btn-quiet" href="/services">What we take on</a>
+    </div>
+  </aside>
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why are my scraped column names random letters?</summary>
+        <p>They are the page's CSS class names, which modern sites generate automatically. A scraper that falls back on them gives you names like x193iq5w. Magic Scraper names columns from the page's headers and labels, or from the values, instead.</p>
+      </details>
+      <details>
+        <summary>What does [object Object] mean in a scraped spreadsheet?</summary>
+        <p>The tool copied a programming structure where it should have copied its text. The value was on the page but never read out. Magic Scraper writes the text you see, or the link or image address.</p>
+      </details>
+      <details>
+        <summary>Can I rename columns?</summary>
+        <p>Yes. Double-click a column header in the preview to rename it, click it to drop it. Your choices are remembered for that site.</p>
+      </details>
+      <details>
+        <summary>Why do I get Tag 2, Tag 3 ... Tag 14?</summary>
+        <p>Each record has a different number of tags and the tool made a column per position. Magic Scraper merges them into one Tag column, the tags separated by commas.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Snippers: full-page screenshots of every link in a list</title>
+<meta name="description" content="Magic Snippers is a Chrome extension that scrapes tables and lists, takes full-page snapshots, and opens every link in a list to save a named screenshot of each page. Free; Pro is one-time." />
+<link rel="canonical" href="https://magicscraper.app/magic-snippers" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/magic-snippers" />
+<meta property="og:title" content="Magic Snippers: full-page screenshots of every link in a list" />
+<meta property="og:description" content="Scrape tables and lists, snapshot whole pages, and screenshot every page a list of links leads to. A Chrome extension from the makers of Magic Scraper." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/magic-snippers.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Magic Snippers",
+  "operatingSystem": "Chrome, Edge and other Chromium browsers",
+  "applicationCategory": "BrowserApplication",
+  "description": "A Chrome extension that scrapes tables and lists to CSV, takes full-page snapshots, and opens every link in a list to save a named full-page screenshot of each page.",
+  "url": "https://magicscraper.app/magic-snippers",
+  "offers": [
+    { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Pro", "price": "19", "priceCurrency": "USD", "url": "https://magicscraper.gumroad.com/l/magic-snippers" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Magic Snippers",
+      "item": "https://magicscraper.app/magic-snippers"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Chrome extension<span class="sep" aria-hidden="true">/</span> From the makers of Magic Scraper</p>
+    <h1>Every page in the list, <i>photographed</i>.</h1>
+    <p class="standfirst">Magic Snippers opens each link in a list and saves a full-page
+      screenshot of the page it leads to &mdash; named, numbered and filed by site and date, with a
+      spreadsheet listing every one. It also turns the table or list in front of you into a CSV,
+      and snapshots any page whole, including the parts you'd have to scroll to.</p>
+    <div class="actions">
+      <!-- When the Chrome Web Store listing is live, make this the install link:
+           <a class="btn" href="https://chromewebstore.google.com/detail/..." target="_blank" rel="noopener">Install free for Chrome</a> -->
+      <a class="btn" href="mailto:support@magicscraper.app?subject=Tell%20me%20when%20Magic%20Snippers%20is%20in%20the%20Chrome%20Web%20Store">Tell me when it's in the store</a>
+      <a class="btn btn-quiet" href="https://magicscraper.gumroad.com/l/magic-snippers">Get Pro &mdash; $19</a>
+      <span class="aside">In review at the Chrome Web Store. One email when it's there.</span>
+    </div>
+  </div>
+
+  <figure class="stage">
+    <img src="assets/snippers/scrape-data.webp" width="1600" height="750" loading="eager"
+         alt="A bookshop's product grid with the Magic Snippers side panel beside it, showing the 20 books it found as rows with title and price" />
+    <figcaption class="caption"><span>Scrape data: the books on the page, found and ready to export.</span></figcaption>
+  </figure>
+</div>
+
+<div class="wrap">
+
+  <section id="what">
+    <h2>Three tools in one side panel</h2>
+    <p class="deck">It stays open beside the page while you work, and everything it makes lands in
+      your Downloads folder.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Scrape data <span class="aside">free</span></h3>
+        <p>Finds the tables and repeating items on the page &mdash; search results, product
+          grids, listings, directories &mdash; and puts the best match first. Leave out the
+          columns you don't need, then download a <b>CSV</b>, save <b>JSON</b>, or copy the table
+          straight into Excel or Google Sheets. It scrolls to load more rows and can follow a
+          <b>Next</b> button to collect page after page.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Snapshot <span class="aside">free</span></h3>
+        <p>The whole page as one image, not just what fits on screen &mdash; including scrolling
+          panels inside web apps, which ordinary full-page tools cut off.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Drill down <span class="aside">3 links per run free &middot; every link with Pro</span></h3>
+        <p>Scans the page, picks the main list of links for you &mdash; not the menu or the
+          sidebar &mdash; and opens each one in turn, saving a named full-page screenshot of every
+          page. Add extra pages inside each one if you want them too, a <b>Details</b> or
+          <b>Reviews</b> tab for example. Progress, time left, pause, stop, retry for anything that
+          failed, and an <code>_index.csv</code> of every page and file.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="stage">
+    <img src="assets/snippers/drill-down.webp" width="1600" height="900" loading="lazy"
+         alt="A book's product page captured in full, beside the Magic Snippers panel listing the 20 links it will open" />
+    <figcaption class="caption"><span>Drill down: one full-page screenshot per link, numbered in list order.</span></figcaption>
+  </figure>
+
+  <section id="uses">
+    <h2>What it's for</h2>
+    <div class="claim">
+      <p>A record of hundreds of pages <b>before a migration, a redesign or an account
+        closure</b> &mdash; the job it was first built for was keeping a copy of every device page
+        in a network dashboard before moving to a new one.</p>
+      <p>Audits and compliance evidence, price and product research, competitor archives, and
+        pages behind your login: it runs in your own browser, with your own session.</p>
+    </div>
+  </section>
+
+  <section id="which">
+    <h2>Magic Scraper or Magic Snippers?</h2>
+    <p class="deck">They are separate extensions, and work well side by side.</p>
+    <table class="compare">
+      <thead><tr><td></td><th>Magic Scraper</th><th>Magic Snippers</th></tr></thead>
+      <tbody>
+        <tr><td>What you come away with</td><td class="q">Rows and columns</td><td class="q">Pictures of pages, plus simple CSV export</td></tr>
+        <tr><td>The page behind every row</td><td class="y">Opened, and its fields added as extra columns</td><td class="y">Opened, and saved as a full-page screenshot</td></tr>
+        <tr><td>Whole-page screenshots</td><td class="n">No</td><td class="y">Yes, free</td></tr>
+        <tr><td>Multi-page crawling</td><td class="y">Next, infinite scroll, Load more</td><td class="q">Next buttons, and scrolling to load</td></tr>
+        <tr><td>Exports</td><td class="q">CSV, XLSX, JSON, Google Sheets</td><td class="q">CSV, JSON, copy for Excel; PNG screenshots</td></tr>
+        <tr><td>Price</td><td class="q">Free; Pro is one-time</td><td class="q">Free; Pro is one-time</td></tr>
+      </tbody>
+    </table>
+    <p class="aside">If what you need is the data, <a href="/">Magic Scraper</a> is the better
+      tool. If you need to show what the pages looked like, this is.</p>
+  </section>
+
+  <section id="price">
+    <h2>Free, and Pro once</h2>
+    <p class="deck">The free version isn't a trial. Pro removes the one limit, and it's yours
+      permanently.</p>
+    <div class="plans">
+      <div class="plan">
+        <p class="kind">Free</p>
+        <p class="amount">$0</p>
+        <p class="terms">No clock on it.</p>
+        <ul>
+          <li>Scrape data: tables and lists to <b>CSV · JSON</b>, or copy for Excel</li>
+          <li>Follows <b>Next</b> pages, scrolls to load more</li>
+          <li>Snapshot: <b>whole-page</b> screenshots</li>
+          <li>Drill down: <b>3</b> links per run</li>
+          <li>Extra pages inside each link, retry, resume</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <p class="kind">Pro</p>
+        <p class="amount">$19</p>
+        <p class="terms">Paid once, through Gumroad. A licence key, for the free extension.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Drill down on <b>every</b> link, in one run</li>
+          <li>Updates to version 2 carry across</li>
+          <li>7-day refund, no questions asked</li>
+        </ul>
+        <div class="plan-actions">
+          <a class="btn" href="https://magicscraper.gumroad.com/l/magic-snippers">Get Pro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="snippers-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Does it send my data anywhere?</summary>
+        <p>No. What it reads and saves stays in your browser and your Downloads folder. The only
+          thing that leaves your computer is a Pro licence key, which is checked with Gumroad.
+          <a href="/privacy#snippers">Everything it does, in full</a>.</p>
+      </details>
+      <details>
+        <summary>Why does Chrome say it &ldquo;started debugging this browser&rdquo;?</summary>
+        <p>That bar appears while a whole-page snapshot or a drill-down runs. Chrome's debugging
+          interface is how an extension can make a tab tall enough to photograph the whole page at
+          once. It's attached to that one tab only while it's capturing; don't press Cancel on it,
+          or the capture stops.</p>
+      </details>
+      <details>
+        <summary>Does it work on sites I'm signed in to?</summary>
+        <p>Yes. It runs in your own browser, so it sees exactly what you see. It can't open
+          Chrome's own pages, the Chrome Web Store or a new tab &mdash; Chrome blocks every
+          extension there.</p>
+      </details>
+      <details>
+        <summary>Is my Magic Scraper licence valid here?</summary>
+        <p>No &mdash; they are separate products with separate licences. Each has a free version
+          that does most of the job, so you can find out which one you need before paying.</p>
+      </details>
+      <details>
+        <summary>How do I activate Pro?</summary>
+        <p>Open the Magic Snippers panel, click <b>Upgrade</b>, paste the licence key from your
+          Gumroad receipt and click <b>Activate</b>. It works on any browser you personally use.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Snippers</span>
+    <a href="/">Magic Scraper</a>
+    <a href="/privacy#snippers">Privacy</a>
+    <a href="/terms#snippers">Terms</a>
+    <a href="https://magicscraper.gumroad.com/l/magic-snippers">Buy Pro</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

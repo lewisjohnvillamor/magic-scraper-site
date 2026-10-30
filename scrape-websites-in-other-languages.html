@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scraping websites in other languages: Next, Load more, Excel</title>
+<meta name="description" content="Why a scraper stops on page one of a Japanese, German or Spanish site, why Excel garbles the accents, and how Magic Scraper reads pagers in many languages." />
+<link rel="canonical" href="https://magicscraper.app/scrape-websites-in-other-languages" />
+<link rel="alternate" hreflang="en" href="https://magicscraper.app/scrape-websites-in-other-languages" />
+<link rel="alternate" hreflang="ja" href="https://magicscraper.app/scraper-japanese-websites" />
+<link rel="alternate" hreflang="de" href="https://magicscraper.app/web-scraper-deutsche-websites" />
+<link rel="alternate" hreflang="es" href="https://magicscraper.app/web-scraper-sitios-en-espanol" />
+<link rel="alternate" hreflang="fr" href="https://magicscraper.app/web-scraper-sites-francais" />
+<link rel="alternate" hreflang="x-default" href="https://magicscraper.app/scrape-websites-in-other-languages" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scrape-websites-in-other-languages" />
+<meta property="og:title" content="Scraping websites in other languages: Next, Load more, Excel" />
+<meta property="og:description" content="Why a scraper stops on page one of a Japanese, German or Spanish site, why Excel garbles the accents, and how Magic Scraper reads pagers in many languages." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/scrape-websites-in-other-languages.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does my scraper stop at page one on a Japanese or German site?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many scrapers find the next page by looking for the English word Next. Magic Scraper also reads rel=\"next\" links, arrows, aria-labels and numbered pagers, and the word for Next in many languages (more than 80 from the next update)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are the accents wrong when I open the CSV in Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Excel guessed the wrong encoding. Magic Scraper's CSV carries the byte-order mark that tells Excel it is UTF-8, and its .xlsx export avoids the problem altogether."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on right-to-left sites in Arabic or Hebrew?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It reads the page's structure, not its direction, and from the next update it reads التالي and הבא as Next."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Magic Scraper available in my language?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The extension's buttons are in English. The data it collects stays in the language of the page."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Other languages",
+      "item": "https://magicscraper.app/scrape-websites-in-other-languages"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>Scraping a site that isn't in <i>English</i>.</h1>
+    <p class="standfirst">A scraper that finds the Next button by looking for the word &ldquo;Next&rdquo; stops at page one of a site that says 次へ, Weiter or Siguiente. A CSV opened in Excel can turn ü and 日本語 into gibberish, and a German 1.234 can arrive as one point two three four. Here is what goes wrong on sites in other languages, and what Magic Scraper does about each.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free, with no account. In your language: <a href="/scraper-japanese-websites" hreflang="ja" lang="ja">日本語</a> &middot; <a href="/web-scraper-deutsche-websites" hreflang="de" lang="de">Deutsch</a> &middot; <a href="/web-scraper-sitios-en-espanol" hreflang="es" lang="es">Español</a> &middot; <a href="/web-scraper-sites-francais" hreflang="fr" lang="fr">Français</a> &middot; <a href="/scrape-websites-in-other-languages" hreflang="en" lang="en">English</a></span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="pager">
+    <h2>Page two, in any language</h2>
+    <div class="claim">
+      <p>Most big sites mark their Next button in ways that do not depend on the language: a <code>rel="next"</code> link, an arrow, an <code>aria-label</code>, a numbered pager. Magic Scraper reads all of those, which is why Amazon.co.jp, Kleinanzeigen and LDLC crawl the same as an English shop. The word only matters on sites that write nothing else, and there it reads the word, in more than 80 languages&dagger;, and the Load more button too.</p>
+    </div>
+    <table class="compare">
+      <thead><tr><td></td><th>Next</th><th>Load more</th></tr></thead>
+      <tbody>
+        <tr><td>Japanese</td><td class="">次へ &middot; 次のページ &middot; 次の20件 &middot; 次&dagger;</td><td class="">もっと見る&dagger; &middot; さらに表示&dagger;</td></tr>
+        <tr><td>Chinese</td><td class="">下一页 &middot; 下一頁 &middot; 后页&dagger;</td><td class="">加载更多&dagger; &middot; 查看更多&dagger;</td></tr>
+        <tr><td>Korean</td><td class="">다음</td><td class="">더보기&dagger;</td></tr>
+        <tr><td>German</td><td class="">Weiter &middot; Nächste &middot; Nächste Seite&dagger;</td><td class="">Mehr laden&dagger; &middot; Weitere anzeigen&dagger;</td></tr>
+        <tr><td>Spanish</td><td class="">Siguiente &middot; Página siguiente&dagger;</td><td class="">Cargar más&dagger; &middot; Ver más&dagger;</td></tr>
+        <tr><td>French</td><td class="">Suivant &middot; Page suivante&dagger;</td><td class="">Voir plus&dagger; &middot; Charger plus&dagger;</td></tr>
+        <tr><td>Portuguese</td><td class="">Próxima &middot; Seguinte</td><td class="">Carregar mais&dagger; &middot; Ver mais&dagger;</td></tr>
+        <tr><td>Italian</td><td class="">Prossima &middot; Successiva&dagger; &middot; Avanti&dagger;</td><td class="">Mostra altri&dagger; &middot; Carica altri&dagger;</td></tr>
+        <tr><td>Dutch</td><td class="">Volgende</td><td class="">Meer laden&dagger;</td></tr>
+        <tr><td>Polish</td><td class="">Następna &middot; Dalej</td><td class="">Pokaż więcej&dagger;</td></tr>
+        <tr><td>Russian</td><td class="">Следующая&dagger; &middot; Далее&dagger;</td><td class="">Показать ещё&dagger;</td></tr>
+        <tr><td>Turkish</td><td class="">Sonraki &middot; Sonraki sayfa&dagger;</td><td class="">Daha fazla göster&dagger;</td></tr>
+        <tr><td>Swedish</td><td class="">Nästa&dagger; &middot; Nästa sida&dagger;</td><td class="">Visa fler&dagger;</td></tr>
+        <tr><td>Indonesian</td><td class="">Berikutnya &middot; Halaman berikutnya&dagger;</td><td class="">Muat lebih banyak&dagger;</td></tr>
+        <tr><td>Vietnamese</td><td class="">Tiếp &middot; Sau &middot; Trang sau&dagger;</td><td class="">Xem thêm&dagger;</td></tr>
+        <tr><td>Thai</td><td class="">ถัดไป &middot; หน้าถัดไป</td><td class="">โหลดเพิ่มเติม&dagger;</td></tr>
+        <tr><td>Arabic</td><td class="">التالي&dagger; &middot; الصفحة التالية&dagger;</td><td class="">تحميل المزيد&dagger;</td></tr>
+        <tr><td>Hebrew</td><td class="">הבא&dagger; &middot; העמוד הבא&dagger;</td><td class="">טען עוד&dagger;</td></tr>
+        <tr><td>Hindi</td><td class="">अगला&dagger; &middot; अगला पेज&dagger;</td><td class="">और देखें&dagger;</td></tr>
+      </tbody>
+    </table>
+    <div class="claim">
+      <p>&dagger; With the next update, 2.1.0 <span class="soon">next update</span>. The rest is in the stores now. In all, Next and Previous are read in 87 languages and Load more in about 68: every major European language, and Turkish, Azerbaijani, Indonesian, Malay, Filipino, Vietnamese, Swahili, Arabic, Persian, Urdu, Hebrew, the languages of India from Hindi and Bengali to Tamil and Malayalam, Sinhala, Thai, Lao, Khmer, Burmese, Georgian, Armenian and Amharic. Previous-page words are read too, so Zurück, Anterior or 前へ is never taken for Next. And outside Latin script the word has to come first, so 目次 (&ldquo;contents&rdquo;), Читать далее (&ldquo;read more&rdquo;) and आगे पढ़ें (&ldquo;read on&rdquo;) are never taken for it either.</p>
+    </div>
+  </section>
+
+  <section id="excel">
+    <h2>Accents and kanji that turn to gibberish in Excel</h2>
+    <div class="claim">
+      <p>Excel guesses a CSV file's encoding, and without a hint it guesses wrong: Müller becomes MÃ¼ller and 東京 becomes æ±äº¬. Magic Scraper's CSV starts with the byte-order mark that tells Excel the file is UTF-8, so the letters arrive as the page wrote them. The Excel (.xlsx) export avoids the question altogether, and Google Sheets reads either.</p>
+      <p>A CSV from another tool that is already garbled can be rescued: in Excel, use <b>Data &rarr; From Text/CSV</b> and set File origin to <b>65001: Unicode (UTF-8)</b>.</p>
+    </div>
+  </section>
+
+  <section id="numbers">
+    <h2>1.234 is not one point two three four</h2>
+    <div class="claim">
+      <p>Most of Europe writes 1.234,56 where English writes 1,234.56, and France writes 1 234,56. A spreadsheet that reads the dot as a decimal point turns a German table's 1.234 (one thousand two hundred and thirty-four) into 1.234, a thousand times too small, with nothing to say so.</p>
+      <p>From the next update <span class="soon">next update</span>, the Excel export looks at the whole column. When it shows European signs (83.200.000, 12,50, 1.234,56) every value is read that way, so the column sums. Thousands written apart with a space, the French way, are read in any column. A column of nothing but 1.234-style values could be either, so it stays text: never wrong, only not summable. The CSV keeps every value exactly as the page wrote it.</p>
+    </div>
+  </section>
+
+  <section id="columns">
+    <h2>Column names stay in the page's language</h2>
+    <div class="claim">
+      <p>A table's own headers come through as written: 価格, Preis, Precio. Where a page has no headers, columns are named from the markup, and those names are English: Price, Link, Image. Double-click a header in the popup, or press F2, to rename it; the name is remembered for that site.</p>
+      <p>The extension's own buttons and messages are in English. The data never is.</p>
+    </div>
+  </section>
+
+  <section id="tried">
+    <h2>Tried on</h2>
+    <div class="claim">
+      <p>Before this page was written, the extension ran on Amazon.co.jp search, 価格.com, Yahoo!ニュース and はてなブックマーク; Kleinanzeigen, Chefkoch, heise online and Gelbe Seiten; Allociné, Marmiton and LDLC; and the German, Spanish and French Wikipedias. Some sites showed a &ldquo;prove you're human&rdquo; check instead. On those it stops and hands you the tab, and never tries to get past the check.</p>
+      <p>In your language: <a href="/scraper-japanese-websites" hreflang="ja" lang="ja">日本語</a> &middot; <a href="/web-scraper-deutsche-websites" hreflang="de" lang="de">Deutsch</a> &middot; <a href="/web-scraper-sitios-en-espanol" hreflang="es" lang="es">Español</a> &middot; <a href="/web-scraper-sites-francais" hreflang="fr" lang="fr">Français</a> &middot; <a href="/scrape-websites-in-other-languages" hreflang="en" lang="en">English</a>.</p>
+    </div>
+  </section>
+
+  <aside class="hurry" aria-labelledby="hurry-h">
+    <h2 id="hurry-h">In a hurry? Just need the leads?</h2>
+    <p>Send us the site and the fields you need, and we&rsquo;ll collect the list for you: cleaned,
+      de-duplicated and in a spreadsheet. You&rsquo;ll have a price before any work starts, usually
+      within a day or two.</p>
+    <div class="actions">
+      <a class="btn" href="mailto:support@magicscraper.app?subject=Leads%20needed%20fast&amp;body=The%20site%3A%20%0AThe%20fields%20I%20need%3A%20%0AAbout%20how%20many%20rows%3A%20%0AWhen%20I%20need%20it%20by%3A%20">Email support@magicscraper.app</a>
+      <a class="btn btn-quiet" href="/services">What we take on</a>
+    </div>
+  </aside>
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why does my scraper stop at page one on a Japanese or German site?</summary>
+        <p>Many scrapers find the next page by looking for the English word Next. Magic Scraper also reads rel="next" links, arrows, aria-labels and numbered pagers, and the word for Next in many languages (more than 80 from the next update).</p>
+      </details>
+      <details>
+        <summary>Why are the accents wrong when I open the CSV in Excel?</summary>
+        <p>Excel guessed the wrong encoding. Magic Scraper's CSV carries the byte-order mark that tells Excel it is UTF-8, and its .xlsx export avoids the problem altogether.</p>
+      </details>
+      <details>
+        <summary>Does it work on right-to-left sites in Arabic or Hebrew?</summary>
+        <p>Yes. It reads the page's structure, not its direction, and from the next update it reads التالي and הבא as Next.</p>
+      </details>
+      <details>
+        <summary>Is Magic Scraper available in my language?</summary>
+        <p>The extension's buttons are in English. The data it collects stays in the language of the page.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

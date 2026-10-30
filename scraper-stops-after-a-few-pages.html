@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Web scraper stops after a few pages? Why, and how to finish</title>
+<meta name="description" content="Why a crawl stops at page 10 or 20, skips rows or closes without a word, and how to carry on from where it stopped instead of starting over." />
+<link rel="canonical" href="https://magicscraper.app/scraper-stops-after-a-few-pages" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scraper-stops-after-a-few-pages" />
+<meta property="og:title" content="Web scraper stops after a few pages? Why, and how to finish" />
+<meta property="og:description" content="Why a crawl stops at page 10 or 20, skips rows or closes without a word, and how to carry on from where it stopped." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/scraper-stops-after-a-few-pages.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Finish a crawl that stopped partway",
+  "description": "Carry on a web scraping crawl from the page it stopped on.",
+  "totalTime": "PT5M",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Read why it stopped",
+      "text": "The status line says why the crawl ended.",
+      "url": "https://magicscraper.app/scraper-stops-after-a-few-pages#how"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Fix the cause",
+      "text": "Clear a human check in the tab that opened, choose Gentle pacing for a site that rate-limits, or raise Max pages.",
+      "url": "https://magicscraper.app/scraper-stops-after-a-few-pages#how"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Press Start again",
+      "text": "The crawl carries on from the first page it has not read.",
+      "url": "https://magicscraper.app/scraper-stops-after-a-few-pages#how"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Export",
+      "text": "Press CSV or XLSX: every page is in one table.",
+      "url": "https://magicscraper.app/scraper-stops-after-a-few-pages#how"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does my scraper stop after a few pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most often the site started rate-limiting it, showed a human check, began repeating pages past the end, or the tab closed. A scraper that says why it stopped tells you which, and Magic Scraper does on every run."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I continue a crawl instead of starting over?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. After a human check or the max-pages limit, pressing Start carries on from the page it never read. The same goes for Stop and for a site that stopped answering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I closed the tab during a crawl. Are the rows gone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. They are kept as the crawl goes. Open Magic Scraper on the same site and it offers to recover the run."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it get past a captcha for me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, and no honest tool should. It stops, puts the page in front of you, and carries on once you have answered it yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a limit on pages or rows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Crawling is free, with no page or row limit."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Stops partway",
+      "item": "https://magicscraper.app/scraper-stops-after-a-few-pages"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>It got to <i>page twelve</i>, then stopped. Now what?</h1>
+    <p class="standfirst">Not the first page: the run got going, collected a few hundred rows, and then stopped, or closed with no message, or came back with gaps. In forum threads about every scraper this comes up again and again. There are a handful of causes, and a crawl that says which one it hit is most of the fix.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Crawling is free, with no page limit. A stopped crawl keeps its rows.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="why">
+    <h2>Why a crawl stops partway</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>The site asked it to slow down</h3>
+        <p>A 429 "too many requests" or 503 answer means the site is rate-limiting you. Retrying straight away makes it worse; waiting, for as long as the site asks, usually works.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>A "verify you are human" page appeared</h3>
+        <p>A check page in place of page 13 has no rows on it. A tool that reads it as data stops with "nothing found", or worse, carries on and saves the check page's text as a row.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>The pages started repeating</h3>
+        <p>Some sites send page one again, or the same last page, once you go past the end. A crawl that cannot tell keeps going for ever, or adds the same rows twice.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>The tab closed, crashed or navigated away</h3>
+        <p>The rows of most extension crawls live in the page. Close the tab at row 4,000 and they are gone.</p>
+      </div>
+      <div class="step">
+        <span class="n">05</span>
+        <h3>You pressed Stop, then Start</h3>
+        <p>Many tools start again from page one, find nothing new on the pages they already have, and decide the list is finished.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>What Magic Scraper does about each</h2>
+    <p class="deck">And what you can do.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>It says why it stopped</h3>
+        <p>Every crawl ends with its reason on screen: no further Next link, the last page, Load more gone, the site stopped answering, a human check, or Stop. A run that stopped short never says it finished.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>It waits when a site pushes back</h3>
+        <p>On a 429 or 503 it waits and retries, honouring the site's own Retry-After up to four minutes, and says so while it waits. Choose <b>Gentle</b> pacing for sites that keep pushing back.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>It hands you a human check</h3>
+        <p>The run stops and the page with the check is opened in front of you. It never tries to get past it. Clear it yourself and press Start: the crawl carries on from the page it never read.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>It notices repeats</h3>
+        <p>Two pages in a row that add no new rows end the crawl, with that reason, instead of looping.</p>
+      </div>
+      <div class="step">
+        <span class="n">05</span>
+        <h3>It keeps the rows if the tab dies</h3>
+        <p>Rows are kept as the crawl goes. Open the extension on the same site again and it offers to recover the run, on the page it reached.</p>
+      </div>
+      <div class="step">
+        <span class="n">06</span>
+        <h3>Start after Stop carries on</h3>
+        <p>Stop, then Start, picks up at the page after the last one read, and so does Start after the max-pages limit you set.</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p>Rows collected before a stop are kept either way. Nothing is charged per page or per row, so a run that stopped costs nothing to finish.</p>
+    </div>
+  </section>
+
+  <section id="gaps">
+    <h2>Rows missing from the middle</h2>
+    <div class="claim">
+      <p>When a sheet has the first pages and the last ones but gaps between, the usual cause is a page that loaded slowly: the tool read it before its new rows had appeared. Magic Scraper waits for new rows after each click or scroll before reading them, and a page that fails to load is retried, never silently skipped.</p>
+      <p>If rows are still missing, compare the row count with what the site says it has. The <a href="/scraper-missing-data">missing data guide</a> covers the other causes.</p>
+    </div>
+  </section>
+
+  <aside class="hurry" aria-labelledby="hurry-h">
+    <h2 id="hurry-h">In a hurry? Just need the leads?</h2>
+    <p>Send us the site and the fields you need, and we&rsquo;ll collect the list for you: cleaned,
+      de-duplicated and in a spreadsheet. You&rsquo;ll have a price before any work starts, usually
+      within a day or two.</p>
+    <div class="actions">
+      <a class="btn" href="mailto:support@magicscraper.app?subject=Leads%20needed%20fast&amp;body=The%20site%3A%20%0AThe%20fields%20I%20need%3A%20%0AAbout%20how%20many%20rows%3A%20%0AWhen%20I%20need%20it%20by%3A%20">Email support@magicscraper.app</a>
+      <a class="btn btn-quiet" href="/services">What we take on</a>
+    </div>
+  </aside>
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why does my scraper stop after a few pages?</summary>
+        <p>Most often the site started rate-limiting it, showed a human check, began repeating pages past the end, or the tab closed. A scraper that says why it stopped tells you which, and Magic Scraper does on every run.</p>
+      </details>
+      <details>
+        <summary>Can I continue a crawl instead of starting over?</summary>
+        <p>Yes. After a human check or the max-pages limit, pressing Start carries on from the page it never read. The same goes for Stop and for a site that stopped answering.</p>
+      </details>
+      <details>
+        <summary>I closed the tab during a crawl. Are the rows gone?</summary>
+        <p>No. They are kept as the crawl goes. Open Magic Scraper on the same site and it offers to recover the run.</p>
+      </details>
+      <details>
+        <summary>Will it get past a captcha for me?</summary>
+        <p>No, and no honest tool should. It stops, puts the page in front of you, and carries on once you have answered it yourself.</p>
+      </details>
+      <details>
+        <summary>Is there a limit on pages or rows?</summary>
+        <p>No. Crawling is free, with no page or row limit.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

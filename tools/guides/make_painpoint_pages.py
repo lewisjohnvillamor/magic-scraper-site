@@ -5,6 +5,7 @@ Each page follows the site's guide template (copy-table-from-website-to-excel.ht
 HowTo + FAQPage + BreadcrumbList JSON-LD, hero, sections, an FAQ, the shared
 header/footer. Run from the repo root: python3 tools/guides/make_painpoint_pages.py .
 """
+
 import html, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from figures import shot, video, diagram, PAGER_SVG, ZEROS_SVG, PRIVACY_SVG, CREDITS_SVG
@@ -13,12 +14,25 @@ ROOT = sys.argv[1]
 CWS = "https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck"
 EDGE = "https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp"
 
+HURRY = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "hurry.html"), encoding="utf-8").read()
+
 def plain(s):
     s = re.sub(r"<[^>]+>", "", s)
     return html.unescape(s)
 
+# The words a page in another language needs in its own language; the site's
+# navigation stays English, since that is where its links go.
+UI_EN = dict(lang="en", locale="", skip="Skip to content", install="Install for Chrome &mdash; free",
+             edge="Install for Edge", faq="Reasonable questions")
+
 def page(p):
     url = "https://magicscraper.app/" + p["slug"]
+    ui = dict(UI_EN, **p.get("ui", {}))
+    alts = "".join(f'\n<link rel="alternate" hreflang="{h}" href="https://magicscraper.app/{sl}" />'
+                   for h, sl in p.get("alternates", []))
+    if alts:
+        alts += f'\n<link rel="alternate" hreflang="x-default" href="https://magicscraper.app/{p["alternates"][0][1]}" />'
+    locale = f'\n<meta property="og:locale" content="{ui["locale"]}" />' if ui["locale"] else ""
     ld = []
     if p.get("howto"):
         ld.append({
@@ -46,6 +60,9 @@ def page(p):
     })
     ldhtml = "\n".join('<script type="application/ld+json">\n%s\n</script>' % json.dumps(x, indent=2, ensure_ascii=False) for x in ld)
     e = lambda s: html.escape(s, quote=True)
+    # The done-for-you offer, for English guides where someone may just want the list.
+    hurry = ("\n" + HURRY) if ui["lang"] == "en" and p.get("hurry", True) else ""
+    hurry = hurry.rstrip("\n")
     secs = "\n".join(p["sections"])
     faq = "\n".join("""      <details>
         <summary>%s</summary>
@@ -56,19 +73,19 @@ def page(p):
     assert len(plain(p["title"])) <= 65, (p["slug"], len(plain(p["title"])))
     assert len(plain(p["desc"])) <= 160, (p["slug"], len(plain(p["desc"])))
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="{ui['lang']}">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{p['title']}</title>
 <meta name="description" content="{e(plain(p['desc']))}" />
-<link rel="canonical" href="{url}" />
+<link rel="canonical" href="{url}" />{alts}
 <link rel="icon" href="assets/icon.png" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
 <link rel="stylesheet" href="style.css" />
 <script>document.documentElement.classList.add('js');</script>
-<meta property="og:type" content="article" />
+<meta property="og:type" content="article" />{locale}
 <meta property="og:url" content="{url}" />
 <meta property="og:title" content="{e(plain(p['title']))}" />
 <meta property="og:description" content="{e(plain(p.get('og', p['desc'])))}" />
@@ -79,7 +96,7 @@ def page(p):
 {ldhtml}
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">{ui['skip']}</a>
 
 <header class="wrap">
   <div class="masthead">
@@ -112,8 +129,8 @@ def page(p):
     <h1>{p['h1']}</h1>
     <p class="standfirst">{p['standfirst']}</p>
     <div class="actions">
-      <a class="btn" href="{CWS}" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
-      <a class="btn btn-quiet" href="{EDGE}" target="_blank" rel="noopener">Install for Edge</a>
+      <a class="btn" href="{CWS}" target="_blank" rel="noopener">{ui['install']}</a>
+      <a class="btn btn-quiet" href="{EDGE}" target="_blank" rel="noopener">{ui['edge']}</a>
       <span class="aside">{p['aside']}</span>
     </div>
   </div>
@@ -121,9 +138,9 @@ def page(p):
 
 <div class="wrap">
 
-{secs}
+{secs}{hurry}
   <section id="faq">
-    <h2>Reasonable questions</h2>
+    <h2>{ui['faq']}</h2>
     <div class="qa">
 {faq}
     </div>
@@ -187,23 +204,23 @@ PAGES.append(dict(
     slug="web-scraper-no-subscription",
     crumb="No subscription",
     title="A web scraper with no subscription, credits or free trial",
-    desc="A Chrome web scraper with no credits, no account and no trial that turns into a charge. Pay $25 once, or never: nothing renews and nothing to cancel.",
+    desc="A web scraper with no credits, no account and no trial that turns into a charge. Pay once ($19 founding price) or never. Nothing renews.",
     og="No credits, no trial that renews, no account. What is free, what the one-time Pro licence adds, and the questions to ask any scraper before you pay.",
     h1="A web scraper with no <i>meter</i> running.",
     standfirst="Credits that run out halfway through a list. A free trial that becomes a charge on day one. A cancel button you can't find. Those are the most common complaints in scraper reviews, and none of them is about scraping. Here is how Magic Scraper is priced instead, and what to ask any tool before you pay.",
-    aside="Free with no time limit. Pro is $25, once.",
+    aside="Free with no time limit. Pro is paid once: $19 for the first 100 buyers, then $25.",
     sections=[
         sec("free", "What you get without paying", "\n".join([
             claim("Install it and it works: no account, no email, no card. The free version has no clock "
                   "on it and no monthly allowance. It finds tables, lists and card grids, lets you pick "
                   "rows by hand, crawls <b>every page</b> of a paginated list, and exports CSV, Excel or "
                   "JSON as often as you like. Nothing is counted, so nothing runs out."),
-            table(["Free", "Pro, $25 once"], [
+            table(["Free", "Pro, paid once"], [
                 ["Find tables and lists, pick by hand", ("y", "Yes"), ("y", "Yes")],
                 ["Crawl every page: Next, page numbers, infinite scroll, Load more", ("y", "Unlimited"), ("y", "Unlimited")],
                 ["Export CSV, XLSX, JSON or copy", ("y", "Unlimited"), ("y", "Unlimited")],
                 ["Recover a run whose tab closed", ("y", "Yes"), ("y", "Yes")],
-                ["<a href=\"/drill-down\">Open the page behind each row</a>", ("q", "First 3 rows of a run"), ("y", "Every row, up to 10 levels")],
+                ["<a href=\"/drill-down\">Open the page behind each row</a>", ("q", "First 3 rows of a run"), ("y", "Every row, as many levels as you set up")],
                 ["One setup over a list of addresses", ("q", "First 2 addresses"), ("y", "Every address")],
                 ["Named setups, compare runs, compare with a file, schedules", ("n", "No"), ("y", "Yes")],
                 ["Account, credits or monthly fee", ("y", "None"), ("y", "None")],
@@ -224,7 +241,7 @@ PAGES.append(dict(
             "Magic Scraper runs in your browser, on your computer, so there is no server time to bill "
             "for. A failed run costs nothing but the minute you spent on it, and a 10,000-row list costs "
             "the same as a 10-row one.") + "\n" + diagram(CREDITS_SVG,
-            "Illustration: a credit plan's cost rises in steps as rows are scraped; Pro is a flat $25 once; Free is $0",
+            "Illustration: a credit plan's cost rises in steps as rows are scraped; Pro is one flat payment; Free is $0",
             "An illustration of the two pricing models, not a price comparison: credit plans charge as you use them, a licence doesn't.")),
         sec("once", "What \"pay once\" means here", claim(
             "Pro is a licence key from Gumroad: <b>$25, one time</b> ($19 for the first 100 buyers). It "
@@ -242,7 +259,7 @@ PAGES.append(dict(
         ])),
     ],
     faq=[
-        ("Is there a web scraper with no subscription?", "Yes. Magic Scraper's free version has no time limit and no account, and its Pro licence is a one-time $25 payment that never renews. There are no credits on either."),
+        ("Is there a web scraper with no subscription?", "Yes. Magic Scraper's free version has no time limit and no account, and its Pro licence is a one-time payment ($19 founding price for the first 100 buyers, then $25) that never renews. There are no credits on either."),
         ("Is the free version a trial?", "No. It has no clock and no monthly allowance. Detection, unlimited pagination and export stay free. Pro adds drill-down on every row, lists of addresses beyond two, saved setups, comparisons and schedules."),
         ("Do I need a credit card or an account?", "No. Install it from the Chrome Web Store or Edge Add-ons and use it. A card is only involved if you choose to buy Pro on Gumroad."),
         ("What happens if a run fails?", "Nothing is charged, because nothing is metered. If the tab closes during a crawl, the rows collected so far can be brought back the next time you open the extension on that site, free."),
@@ -327,8 +344,8 @@ PAGES.append(dict(
     sections=[
         sec("try", "Try these first", steps([
             ("Let it finish loading", "Many pages draw their rows a second or two after the page appears, or only as you scroll. Wait, scroll down once, then click the icon again."),
-            ("Press Another table", "A page often has several lists: menus, filters, related items. If the outline is on the wrong one, cycle to the next."),
-            ("Pick it by hand", "Press <b>&#9995; Pick manually</b> and click one row of what you want: the extension finds the rest that look the same. Shift-click any extra field, such as a price that sits outside the row, and it joins as a column."),
+            ("Press Wrong list? &rarr; Another table", "A page often has several lists: menus, filters, related items. If the outline is on the wrong one, open <b>Wrong list?</b> and cycle to the next with <b>Another table</b>."),
+            ("Pick it by hand", "Under <b>Wrong list?</b>, choose <b>&#9995; Pick manually</b> and click one row of what you want: the extension finds the rest that look the same. Shift-click any extra field, such as a price that sits outside the row, and it joins as a column."),
             ("Open the page behind each row", "If the list only shows names, the details may live on each item's own page. <a href=\"/drill-down\">Drill-down</a> opens them and adds their fields, free for 3 rows."),
         ]) + "\n" + shot("assets/guides/pick-manually.webp",
                  "Magic Scraper beside a product table it was picked from by hand, with a Discount column of -35% on every row, taken from a callout outside the table",
@@ -405,7 +422,7 @@ PAGES.append(dict(
             "Your choices are remembered for that site.")),
         sec("excel", "When Excel mangles the export", "\n".join([
             claim("<b>Phone numbers lose their leading zero</b> or turn into 4.47E+11 when a CSV is opened in "
-                  "Excel, because Excel guesses they are numbers. Export <b>XLSX</b> instead: every cell is "
+                  "Excel, because Excel guesses they are numbers. Export to <b>Excel</b> (the arrow beside Export CSV) instead: every cell is "
                   "written as text, so 0207&hellip; stays 0207&hellip;.",
                   "<b>Accents and symbols turn into &Atilde;&copy;</b> when a file has no marker saying it is "
                   "UTF-8. Magic Scraper's CSV includes that marker, so Excel reads caf&eacute; as caf&eacute;.",
@@ -435,6 +452,7 @@ PAGES.append(dict(
 # ---------------------------------------------------------------- 5. privacy
 PAGES.append(dict(
     slug="web-scraper-extension-privacy",
+    hurry=False,                      # a safety check is no place for a pitch
     crumb="Scraper extension privacy",
     title="Is your web scraper extension safe? Check what it sends",
     desc="Is a scraper extension safe? Check what it can see and send: its permissions, privacy disclosures, network requests and current owner, in ten minutes.",
@@ -451,14 +469,15 @@ PAGES.append(dict(
             ("Look for consent screens", "A screen asking you to \"accept all\" before the tool works is asking for something. Read what."),
         ])),
         sec("ours", "Magic Scraper's answers", "\n".join([
-            diagram(PRIVACY_SVG, "Data flows from the page you're on to Magic Scraper in your browser to your file. The only other requests: more pages of the same site when you crawl, Gumroad once for a Pro licence, and your own Google Sheet if you send to it with Pro. Never a server of ours, analytics or an AI service.",
+            diagram(PRIVACY_SVG, "Data flows from the page you're on to Magic Scraper in your browser to your file. The only other requests, each started by you: pages you ask for (more of a list when you crawl, the pages rows link to when you drill down), Gumroad once for a Pro licence, and your own Google Sheet or webhook if you send to it with Pro. Never a server of ours, analytics or an AI service.",
                     "Where your scraped data goes, and every request the extension makes. Check it yourself with the steps above."),
             claim("<b>Your data:</b> what you scrape stays in your browser until you save a file or, with "
                   "Pro, send it to a Google Sheet in your own account or to a webhook address you set. Finding a table, picking one by hand "
                   "and exporting it make no network requests at all. There is no account and no server of "
                   "ours for anything to go to."),
             table(["When", "What is requested"], [
-                ["Crawling or drill-down", ("y", "Further pages of the site you're on, after you press Start")],
+                ["Crawling", ("y", "Further pages of the list you're on, after you press Start")],
+                ["Drill-down, or a list of pages", ("y", "The pages your rows link to, and the addresses you added, after you start it")],
                 ["Activating Pro", ("y", "Your licence key to Gumroad, once, to confirm the purchase")],
                 ["Send to Google Sheets (Pro, from 1.23)", ("y", "The rows you send, straight to your own sheet at Google")],
                 ["Send to webhook (Pro, from 1.23)", ("y", "The rows you send, to the https address you saved, and nowhere else")],
@@ -480,7 +499,7 @@ PAGES.append(dict(
     ],
     faq=[
         ("Are web scraper extensions safe?", "Some are and some collect more than you'd expect. Check the permissions, the store's privacy disclosures and the network requests while you scrape, and look at who owns the extension now."),
-        ("Does Magic Scraper send my data anywhere?", "Only where you send it. Scraped data stays in your browser until you save a file or, with Pro, send it to a Google Sheet in your own account. Detection and export make no network requests; otherwise the only requests are further pages of the site you're crawling and a one-time licence check with Gumroad if you buy Pro. Nothing ever goes to us."),
+        ("Does Magic Scraper send my data anywhere?", "Only where you send it. Scraped data stays in your browser until you save a file or, with Pro, send it to a Google Sheet in your own account. Detection and export make no network requests. Otherwise it requests only what you start: further pages of a list you crawl, the pages your rows link to when you drill down, a one-time licence check with Gumroad if you buy Pro, and, with Pro, the rows you send to your own sheet or webhook. Nothing ever goes to us."),
         ("Why does a scraper extension need access to all websites?", "To work on whatever site you open, and to crawl pages in the background. In Magic Scraper that wider access is optional and requested only when a feature needs it."),
         ("How do I see what an extension sends?", "Open DevTools with F12, choose the Network tab, and use the extension. Any request to a domain other than the site you're on came from somewhere else, often the extension."),
         ("Does Magic Scraper use AI or send pages to a server?", "No. Detection runs in your browser with no AI service and no server of ours."),
@@ -501,24 +520,135 @@ def release(id_, ver, when, badge, items):
   </section>
 """
 
+# ---------------------------------------------------------------- 6. webhook receivers
+def _code(path, lang):
+    src = open(f"{ROOT}/{path}", encoding="utf-8").read().rstrip("\n")
+    return f'    <pre class="code" tabindex="0"><code class="language-{lang}">{html.escape(src)}</code></pre>'
+
+_PAYLOAD = """{
+  "source": "magic-scraper",
+  "version": "1.23.0",
+  "event": "rows",
+  "trigger": "manual",
+  "page": { "url": "https://example.com/members", "title": "Members" },
+  "sent_at": "2026-10-25T09:30:00.000Z",
+  "batch": { "index": 1, "count": 1 },
+  "total_rows": 2,
+  "columns": ["Name", "Phone", "City"],
+  "rows": [
+    { "Name": "Acme Roofing", "Phone": "0207946001", "City": "Leeds" },
+    { "Name": "Bolt Electric", "Phone": "0207946002", "City": "York" }
+  ]
+}"""
+
+PAGES.append(dict(
+    slug="scraped-data-webhook-node-php",
+    crumb="Webhook receivers",
+    title="Send scraped data to your server: Node.js and PHP webhooks",
+    desc="Receive scraped rows on your own server in about 40 lines of Node.js or PHP, no packages: the payload, the secret check, and piping rows to a script safely.",
+    og="About 40 lines of Node.js or PHP, no packages: what Magic Scraper's webhook sends, how to check it, and how to pass rows to a shell script without running what a page wrote.",
+    h1="Scraped rows, straight to <i>your</i> server.",
+    standfirst="Magic Scraper's Pro webhook posts the rows you scrape, as JSON, to an address you choose. Point it at Zapier and you need no code at all. Point it at your own server and you need very little: here is a complete receiver in Node.js and another in PHP, about 40 lines each with no packages, plus the safe way to hand the rows to a shell script.",
+    aside="Both receivers were tested against the extension itself, including scraped text that tries to run a command.",
+    sections=[
+        sec("payload", "What arrives", "\n".join([
+            claim("Each <b>Send to webhook</b>, and each scheduled run you tick it for, makes a <code>POST</code> "
+                  "with a JSON body. By default rows come in batches of 1,000, each batch saying which page it came "
+                  "from and which part of the whole it is. Every value is the text as it was scraped, so a phone "
+                  "number keeps its leading zero."),
+            f'    <pre class="code" tabindex="0"><code class="language-json">{html.escape(_PAYLOAD)}</code></pre>',
+            table(["What it means"], [
+                ["<code>X-Magic-Scraper-Secret</code>", ("y", "The secret you typed, sent as a header so your receiver can refuse anyone else")],
+                ["<code>event</code>", ("y", "<code>rows</code>, or <code>test</code> for the one made-up row that <b>Save and test</b> sends")],
+                ["<code>trigger</code>", ("y", "<code>manual</code> for the button, <code>schedule</code> for a scheduled run")],
+                ["Send as: one item per row", ("y", "The body is just the list of rows. Zapier runs a Zap once for each")],
+                ["Addresses", ("y", "https only, so rows are encrypted on the way. Plain http is allowed for localhost")],
+                ["Errors", ("y", "429 and 5xx are retried twice. Anything else is shown to you, and a scheduled run still saves its CSV")],
+            ]),
+        ])),
+        sec("node", "A receiver in Node.js", "\n".join([
+            claim("Node 18 or later, nothing to install. It checks the secret in constant time, appends each row "
+                  "to <code>rows.jsonl</code> as one line of JSON, answers 200, and logs where the rows came from. "
+                  "<a href=\"/examples/webhook/receiver.mjs\">Download receiver.mjs</a>."),
+            _code("examples/webhook/receiver.mjs", "javascript"),
+            claim("Run it with <code>MS_SECRET=your-secret node receiver.mjs</code>. JSON Lines is used rather than "
+                  "CSV because the columns can differ from one site to the next; one object per line never breaks, "
+                  "and every tool reads it."),
+        ])),
+        sec("php", "A receiver in PHP", "\n".join([
+            claim("PHP 8.1 or later, nothing to install, and it runs on ordinary shared hosting. Same behaviour: "
+                  "secret checked with <code>hash_equals</code>, one row per line, the file locked while it is written. "
+                  "<a href=\"/examples/webhook/hook.php\">Download hook.php</a>."),
+            _code("examples/webhook/hook.php", "php"),
+            claim("On a server, upload it to your web root and keep the rows file <b>outside</b> it (the default is one "
+                  "folder up), or anyone could download your rows. To try it on your own computer: "
+                  "<code>MS_SECRET=your-secret php -S localhost:8787 hook.php</code>."),
+        ])),
+        sec("shell", "Handing the rows to a shell script, safely", "\n".join([
+            claim("Both receivers can start a script of yours for every batch: set <code>ON_ROWS=./on-rows.sh</code>. "
+                  "The script gets the new rows on <b>standard input</b>, one JSON object per line. This one keeps a "
+                  "CSV of names and phone numbers. <a href=\"/examples/webhook/on-rows.sh\">Download on-rows.sh</a>."),
+            _code("examples/webhook/on-rows.sh", "bash"),
+            claim("<b>Never put a scraped value on a command line.</b> Everything you scrape was written by whoever "
+                  "made the page. A receiver that builds a command such as <code>\"notify \" + row.Name</code> and "
+                  "runs it through a shell will run any <code>$(&hellip;)</code> or <code>;</code> that page "
+                  "contains. That is why the receivers above pass rows on stdin and start the script without a "
+                  "shell (<code>spawn</code> with no <code>shell</code> option in Node, an array command in "
+                  "<code>proc_open</code> in PHP), and why <code>jq</code> handles every value as data. We tested it with "
+                  "rows whose names were <code>$(touch PWNED)</code> and <code>; touch PWNED3 #</code>: both were "
+                  "stored as text and nothing ran."),
+            claim("The same goes for a sheet. A cell that starts with <code>=</code> is a formula to Excel and "
+                  "Google Sheets, so if you turn the rows into a spreadsheet, treat leading <code>=</code>, "
+                  "<code>+</code>, <code>-</code> and <code>@</code> as text. Magic Scraper's own exports already do."),
+        ])),
+        sec("try", "Try it on your own computer first", "\n".join([
+            steps([
+                ("Start a receiver", "Run either one: <code>node receiver.mjs</code> or <code>php -S localhost:8787 hook.php</code>. Both listen on port 8787."),
+                ("Give Magic Scraper the address", "In the popup: gear &rarr; Saving and exporting &rarr; Webhook. Address <code>http://localhost:8787/hook</code>, and the same secret if you set one."),
+                ("Press Save and test", "One made-up row is sent. It is saved only if your receiver answers 200, so a typo shows up now, not at 3am on a schedule."),
+                ("Send some rows", "Open any list, choose <b>Send to webhook</b> from the arrow beside Export CSV, and watch them arrive in <code>rows.jsonl</code>."),
+            ]),
+            shot("assets/guides/webhook-settings.webp", "The Saving and exporting dialog with the Webhook section: address http://localhost:8787/hook, an optional secret, Send as Batches of rows, and Save and test",
+                 "The webhook settings, pointed at a receiver on the same computer.", 460, 600),
+        ])),
+        sec("online", "Putting it online", "\n".join([
+            claim("For a receiver on another machine, the address must start with <code>https://</code>. The usual "
+                  "ways: the PHP file on hosting you already have, which almost always has a certificate; the Node "
+                  "receiver behind the web server you already run; or, while you build, a tunnel such as Cloudflare "
+                  "Tunnel or ngrok that gives your computer an https address. Use a long random secret either way."),
+            claim("No server at all? Make a <b>Catch Hook</b> in Zapier, a <b>Custom webhook</b> in Make, or a "
+                  "<b>Webhook</b> node in n8n, and paste its address instead. Pick <i>One item per row</i> for Zapier."),
+        ])),
+    ],
+    faq=[
+        ("Is the webhook free?", "It is part of Pro, a one-time payment with no subscription. Exporting CSV, Excel and JSON, and opening a table in Google Sheets, are free."),
+        ("Do my rows pass through Magic Scraper's servers?", "No. The browser posts them straight to the address you set. There is no server of ours in between, and nothing is sent until you press Send to webhook or tick it for a schedule."),
+        ("Can a scheduled run send to my webhook?", "Yes. Tick Also send each run's rows to your webhook when you schedule a saved setup. Each run still saves its CSV, and if your receiver is down the run says so instead of losing the rows."),
+        ("Why does my receiver get a row called Test row?", "That is Save and test. It sends one made-up row with event set to test, so you can check the address before real rows arrive. The receivers above skip it."),
+        ("What if a list has more than 1,000 rows?", "It arrives in batches of 1,000, numbered with batch.index and batch.count, so your receiver can tell when it has the whole list."),
+    ],
+))
+
 PAGES.append(dict(
     slug="changelog",
+    hurry=False,
     eyebrow="Changelog",
     crumb="Changelog",
     title="Magic Scraper changelog: every update, in plain words",
-    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 1.22.2.",
+    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 1.23.",
     og="Every Magic Scraper update in plain words, including what was removed or moved to Pro.",
     h1="What changed, <i>update</i> by update.",
     standfirst="Updates arrive by themselves through the Chrome Web Store and Edge Add-ons, once each one clears store review. This page lists what each one changed, in plain words, including anything that was removed or moved to Pro, so an update never surprises you.",
-    aside="In the stores now: v1.22.2.",
+    aside="In the stores now: v1.23.",
     sections=[
-        release("v1-23", "v1.23", "Built and tested; it goes to the stores once Google has reviewed the sign-in.", "In progress", [
+        release("v1-23", "v1.23", "23 October 2026.", "In the Chrome and Edge stores now", [
             "<b>Open in Google Sheets</b> (free): copies the table and opens a new sheet, ready to paste into.",
             "<b>Send to Google Sheets</b> (Pro): writes the rows into a sheet in your own Google account, and the next send adds under the last. It can open only the sheets it created, and nothing passes through a server of ours. <a href=\"/privacy#google-sheets\">What it sends and keeps</a>.",
             "A scheduled setup can add each run's rows to its sheet. If Google needs you to sign in again, the run still saves its CSV and says so.",
-            "<b>Send to webhook</b> (Pro): posts the rows as JSON to your own server, or to Zapier, Make or n8n and on to a CRM or database. You set the address once; the extension asks for that one site only, and a scheduled setup can send each run too. <a href=\"/privacy#webhook\">What it sends and keeps</a>.",
+            "Includes 1.22.3, which never went out on its own: <b>business directories get named columns</b> (Name, Phone, City, State, Postcode, Website), <a href=\"/drill-down\">drill-down</a> reads a member's profile page and a research paper's page, and the popup has larger buttons and clearer text.",
+            "<b>Send to webhook</b> (Pro): posts the rows as JSON to your own server, or to Zapier, Make or n8n and on to a CRM or database. You set the address once; the extension asks for that one site only, and a scheduled setup can send each run too. <a href=\"/privacy#webhook\">What it sends and keeps</a>, and <a href=\"/scraped-data-webhook-node-php\">receivers in Node.js and PHP</a>.",
         ]),
-        release("v1-22-3", "v1.22.3", "Built 17 October 2026, tested, not in the stores yet.", "Next update", [
+        release("v1-22-3", "v1.22.3", "17 October 2026. Went out as part of 1.23.", None, [
             "<b>Business directories get named columns</b>: Name, Phone, City, State, Postcode, Website and Map Link, instead of generic labels, on chamber of commerce and Yellow Pages-style directories.",
             "<b><a href=\"/drill-down\">Drill-down</a> reads a member's profile page</b>: address, phone, fax, email, website and social pages, leaving out the directory's own header, footer and links.",
             "<b>Research paper pages</b> (arXiv, PubMed, journals): drill-down reads the title, authors, date, journal, DOI, PDF and abstract.",
@@ -526,7 +656,7 @@ PAGES.append(dict(
             "A table that a page fills in later is no longer offered as rows with nothing in them.",
             "Larger buttons and clearer text in the popup.",
         ]),
-        release("v1-22-2", "v1.22.2", "15 October 2026.", "In the Chrome and Edge stores now", [
+        release("v1-22-2", "v1.22.2", "15 October 2026.", None, [
             "A pick made by hand from the side panel shows its columns there straight away.",
             "Includes 1.22.1, which never went out on its own: when the rows on screen each link to a page of their own, the Data tab says so, and <b>Show me</b> takes you to drill-down.",
             "A first install opens a page showing where the icon went (new extensions hide in the puzzle-piece menu). Removing the extension opens one optional question on our website.",
@@ -562,12 +692,17 @@ PAGES.append(dict(
             "changed and isn't listed, <a href=\"/support\">tell us</a>.")),
     ],
     faq=[
-        ("Which version of Magic Scraper is in the stores?", "Version 1.22.2, on both the Chrome Web Store and Edge Add-ons. Version 1.22.3 is built and tested and goes to the stores next."),
+        ("Which version of Magic Scraper is in the stores?", "Version 1.23, on both the Chrome Web Store and Edge Add-ons. A Firefox version is built and on its way to Firefox Add-ons."),
         ("How do Magic Scraper updates arrive?", "Automatically, through the Chrome Web Store or Edge Add-ons, once each update has cleared store review. You don't need to reinstall."),
         ("Do I have to pay for updates?", "No. A Pro licence is paid once and keeps working across every update."),
         ("Will an update remove a feature I use?", "Anything removed, or moved between Free and Pro, is listed on this page under the version that changed it."),
     ],
 ))
+
+from language_pages import language_pages
+PAGES.extend(language_pages(sec, claim, table))
+from painpoint_pages_2 import painpoint_pages_2
+PAGES.extend(painpoint_pages_2(sec, claim, steps, table))
 
 for p in PAGES:
     path = f"{ROOT}/{p['slug']}.html"

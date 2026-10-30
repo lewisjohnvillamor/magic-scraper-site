@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Send scraped data to your server: Node.js and PHP webhooks</title>
+<meta name="description" content="Receive scraped rows on your own server in about 40 lines of Node.js or PHP, no packages: the payload, the secret check, and piping rows to a script safely." />
+<link rel="canonical" href="https://magicscraper.app/scraped-data-webhook-node-php" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scraped-data-webhook-node-php" />
+<meta property="og:title" content="Send scraped data to your server: Node.js and PHP webhooks" />
+<meta property="og:description" content="About 40 lines of Node.js or PHP, no packages: what Magic Scraper&#x27;s webhook sends, how to check it, and how to pass rows to a shell script without running what a page wrote." />
+<meta property="og:image" content="https://magicscraper.app/assets/og/scraped-data-webhook-node-php.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the webhook free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is part of Pro, a one-time payment with no subscription. Exporting CSV, Excel and JSON, and opening a table in Google Sheets, are free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do my rows pass through Magic Scraper's servers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The browser posts them straight to the address you set. There is no server of ours in between, and nothing is sent until you press Send to webhook or tick it for a schedule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a scheduled run send to my webhook?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Tick Also send each run's rows to your webhook when you schedule a saved setup. Each run still saves its CSV, and if your receiver is down the run says so instead of losing the rows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my receiver get a row called Test row?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That is Save and test. It sends one made-up row with event set to test, so you can check the address before real rows arrive. The receivers above skip it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if a list has more than 1,000 rows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It arrives in batches of 1,000, numbered with batch.index and batch.count, so your receiver can tell when it has the whole list."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://magicscraper.app/guides"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Webhook receivers",
+      "item": "https://magicscraper.app/scraped-data-webhook-node-php"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>Scraped rows, straight to <i>your</i> server.</h1>
+    <p class="standfirst">Magic Scraper's Pro webhook posts the rows you scrape, as JSON, to an address you choose. Point it at Zapier and you need no code at all. Point it at your own server and you need very little: here is a complete receiver in Node.js and another in PHP, about 40 lines each with no packages, plus the safe way to hand the rows to a shell script.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Both receivers were tested against the extension itself, including scraped text that tries to run a command.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="payload">
+    <h2>What arrives</h2>
+    <div class="claim">
+      <p>Each <b>Send to webhook</b>, and each scheduled run you tick it for, makes a <code>POST</code> with a JSON body. By default rows come in batches of 1,000, each batch saying which page it came from and which part of the whole it is. Every value is the text as it was scraped, so a phone number keeps its leading zero.</p>
+    </div>
+    <pre class="code" tabindex="0"><code class="language-json">{
+  &quot;source&quot;: &quot;magic-scraper&quot;,
+  &quot;version&quot;: &quot;1.23.0&quot;,
+  &quot;event&quot;: &quot;rows&quot;,
+  &quot;trigger&quot;: &quot;manual&quot;,
+  &quot;page&quot;: { &quot;url&quot;: &quot;https://example.com/members&quot;, &quot;title&quot;: &quot;Members&quot; },
+  &quot;sent_at&quot;: &quot;2026-10-25T09:30:00.000Z&quot;,
+  &quot;batch&quot;: { &quot;index&quot;: 1, &quot;count&quot;: 1 },
+  &quot;total_rows&quot;: 2,
+  &quot;columns&quot;: [&quot;Name&quot;, &quot;Phone&quot;, &quot;City&quot;],
+  &quot;rows&quot;: [
+    { &quot;Name&quot;: &quot;Acme Roofing&quot;, &quot;Phone&quot;: &quot;0207946001&quot;, &quot;City&quot;: &quot;Leeds&quot; },
+    { &quot;Name&quot;: &quot;Bolt Electric&quot;, &quot;Phone&quot;: &quot;0207946002&quot;, &quot;City&quot;: &quot;York&quot; }
+  ]
+}</code></pre>
+    <table class="compare">
+      <thead><tr><td></td><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td><code>X-Magic-Scraper-Secret</code></td><td class="y">The secret you typed, sent as a header so your receiver can refuse anyone else</td></tr>
+        <tr><td><code>event</code></td><td class="y"><code>rows</code>, or <code>test</code> for the one made-up row that <b>Save and test</b> sends</td></tr>
+        <tr><td><code>trigger</code></td><td class="y"><code>manual</code> for the button, <code>schedule</code> for a scheduled run</td></tr>
+        <tr><td>Send as: one item per row</td><td class="y">The body is just the list of rows. Zapier runs a Zap once for each</td></tr>
+        <tr><td>Addresses</td><td class="y">https only, so rows are encrypted on the way. Plain http is allowed for localhost</td></tr>
+        <tr><td>Errors</td><td class="y">429 and 5xx are retried twice. Anything else is shown to you, and a scheduled run still saves its CSV</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="node">
+    <h2>A receiver in Node.js</h2>
+    <div class="claim">
+      <p>Node 18 or later, nothing to install. It checks the secret in constant time, appends each row to <code>rows.jsonl</code> as one line of JSON, answers 200, and logs where the rows came from. <a href="/examples/webhook/receiver.mjs">Download receiver.mjs</a>.</p>
+    </div>
+    <pre class="code" tabindex="0"><code class="language-javascript">// Receive rows from Magic Scraper&#x27;s &quot;Send to webhook&quot; and append them to
+// rows.jsonl, one JSON object per line. Node 18 or later, no packages.
+//
+//   MS_SECRET=your-secret node receiver.mjs
+//   ON_ROWS=./on-rows.sh MS_SECRET=your-secret node receiver.mjs   (optional script)
+import { createServer } from &#x27;node:http&#x27;;
+import { appendFileSync } from &#x27;node:fs&#x27;;
+import { timingSafeEqual } from &#x27;node:crypto&#x27;;
+import { spawn } from &#x27;node:child_process&#x27;;
+
+const PORT = Number(process.env.PORT) || 8787;
+const SECRET = process.env.MS_SECRET || &#x27;&#x27;;  // the Secret typed in Magic Scraper, if any
+const ON_ROWS = process.env.ON_ROWS || &#x27;&#x27;;   // a script to run with the new rows on stdin
+const FILE = process.env.MS_FILE || &#x27;rows.jsonl&#x27;;
+
+function secretOk(got) {
+  if (!SECRET) return true;
+  const a = Buffer.from(String(got || &#x27;&#x27;)), b = Buffer.from(SECRET);
+  return a.length === b.length &amp;&amp; timingSafeEqual(a, b);
+}
+
+createServer((req, res) =&gt; {
+  if (req.method !== &#x27;POST&#x27; || req.url !== &#x27;/hook&#x27;) return res.writeHead(404).end();
+  if (!secretOk(req.headers[&#x27;x-magic-scraper-secret&#x27;])) return res.writeHead(401).end();
+  const chunks = [];
+  let size = 0;
+  req.on(&#x27;data&#x27;, (c) =&gt; { size += c.length; if (size &gt; 25e6) req.destroy(); else chunks.push(c); });
+  req.on(&#x27;end&#x27;, () =&gt; {
+    let msg;
+    try { msg = JSON.parse(Buffer.concat(chunks).toString(&#x27;utf8&#x27;)); } catch { return res.writeHead(400).end(); }
+    // &quot;Batches of rows&quot; (the default) sends an object; &quot;One item per row&quot; a bare list.
+    const rows = Array.isArray(msg) ? msg : msg.rows || [];
+    if (!Array.isArray(msg) &amp;&amp; msg.event === &#x27;test&#x27;) {
+      console.log(&#x27;Test row from Magic Scraper&#x27;, msg.version, &#x27;- saved settings work.&#x27;);
+      return res.writeHead(200, { &#x27;content-type&#x27;: &#x27;application/json&#x27; }).end(&#x27;{&quot;ok&quot;:true}&#x27;);
+    }
+    const lines = rows.map((r) =&gt; JSON.stringify(r)).join(&#x27;\n&#x27;) + &#x27;\n&#x27;;
+    appendFileSync(FILE, lines);
+    const where = Array.isArray(msg) ? &#x27;&#x27; : ` from ${msg.page.url} (batch ${msg.batch.index}/${msg.batch.count})`;
+    console.log(`${rows.length} rows${where}`);
+    res.writeHead(200, { &#x27;content-type&#x27;: &#x27;application/json&#x27; }).end(JSON.stringify({ ok: true, rows: rows.length }));
+    // The rows go to the script on stdin, never on its command line: scraped
+    // text is written by whoever made the page, and a shell would run it.
+    if (ON_ROWS &amp;&amp; rows.length) {
+      const p = spawn(ON_ROWS, [], { stdio: [&#x27;pipe&#x27;, &#x27;inherit&#x27;, &#x27;inherit&#x27;] });
+      p.on(&#x27;error&#x27;, (e) =&gt; console.error(&#x27;ON_ROWS failed:&#x27;, e.message));
+      p.stdin.end(lines);
+    }
+  });
+}).listen(PORT, () =&gt; console.log(`Waiting for Magic Scraper on http://localhost:${PORT}/hook`));</code></pre>
+    <div class="claim">
+      <p>Run it with <code>MS_SECRET=your-secret node receiver.mjs</code>. JSON Lines is used rather than CSV because the columns can differ from one site to the next; one object per line never breaks, and every tool reads it.</p>
+    </div>
+  </section>
+
+  <section id="php">
+    <h2>A receiver in PHP</h2>
+    <div class="claim">
+      <p>PHP 8.1 or later, nothing to install, and it runs on ordinary shared hosting. Same behaviour: secret checked with <code>hash_equals</code>, one row per line, the file locked while it is written. <a href="/examples/webhook/hook.php">Download hook.php</a>.</p>
+    </div>
+    <pre class="code" tabindex="0"><code class="language-php">&lt;?php
+// Receive rows from Magic Scraper&#x27;s &quot;Send to webhook&quot; and append them to a
+// JSON Lines file, one row per line. PHP 8.1 or later, no packages.
+//
+// Test on your own computer:   MS_SECRET=your-secret php -S localhost:8787 hook.php
+// On a server: put this file in your web root and keep MS_FILE outside it.
+
+$secret = getenv(&#x27;MS_SECRET&#x27;) ?: &#x27;&#x27;;                                    // the Secret typed in Magic Scraper, if any
+$file   = getenv(&#x27;MS_FILE&#x27;) ?: dirname(__DIR__) . &#x27;/magic-scraper-rows.jsonl&#x27;; // outside the web root
+$onRows = getenv(&#x27;ON_ROWS&#x27;) ?: &#x27;&#x27;;                                      // a script to run with the new rows on stdin
+
+if ($_SERVER[&#x27;REQUEST_METHOD&#x27;] !== &#x27;POST&#x27;) { http_response_code(405); exit; }
+$got = $_SERVER[&#x27;HTTP_X_MAGIC_SCRAPER_SECRET&#x27;] ?? &#x27;&#x27;;
+if ($secret !== &#x27;&#x27; &amp;&amp; !hash_equals($secret, $got)) { http_response_code(401); exit; }
+
+$msg = json_decode(file_get_contents(&#x27;php://input&#x27;), true);
+if (!is_array($msg)) { http_response_code(400); exit; }
+
+// &quot;Batches of rows&quot; (the default) sends an object; &quot;One item per row&quot; a bare list.
+$rows = array_is_list($msg) ? $msg : ($msg[&#x27;rows&#x27;] ?? []);
+header(&#x27;Content-Type: application/json&#x27;);
+if (!array_is_list($msg) &amp;&amp; ($msg[&#x27;event&#x27;] ?? &#x27;&#x27;) === &#x27;test&#x27;) { echo &#x27;{&quot;ok&quot;:true}&#x27;; exit; }
+
+$lines = &#x27;&#x27;;
+foreach ($rows as $row) $lines .= json_encode($row, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . &quot;\n&quot;;
+file_put_contents($file, $lines, FILE_APPEND | LOCK_EX);
+echo json_encode([&#x27;ok&#x27; =&gt; true, &#x27;rows&#x27; =&gt; count($rows)]);
+
+// The rows go to the script on stdin, never on its command line: scraped text
+// is written by whoever made the page, and a shell would run it. An array
+// command (PHP 7.4+) starts the script without a shell at all.
+if ($onRows !== &#x27;&#x27; &amp;&amp; $rows) {
+    $p = proc_open([$onRows], [0 =&gt; [&#x27;pipe&#x27;, &#x27;r&#x27;], 1 =&gt; [&#x27;file&#x27;, &#x27;/dev/null&#x27;, &#x27;w&#x27;], 2 =&gt; [&#x27;file&#x27;, &#x27;/dev/null&#x27;, &#x27;w&#x27;]], $pipes);
+    if (is_resource($p)) { fwrite($pipes[0], $lines); fclose($pipes[0]); proc_close($p); }
+}</code></pre>
+    <div class="claim">
+      <p>On a server, upload it to your web root and keep the rows file <b>outside</b> it (the default is one folder up), or anyone could download your rows. To try it on your own computer: <code>MS_SECRET=your-secret php -S localhost:8787 hook.php</code>.</p>
+    </div>
+  </section>
+
+  <section id="shell">
+    <h2>Handing the rows to a shell script, safely</h2>
+    <div class="claim">
+      <p>Both receivers can start a script of yours for every batch: set <code>ON_ROWS=./on-rows.sh</code>. The script gets the new rows on <b>standard input</b>, one JSON object per line. This one keeps a CSV of names and phone numbers. <a href="/examples/webhook/on-rows.sh">Download on-rows.sh</a>.</p>
+    </div>
+    <pre class="code" tabindex="0"><code class="language-bash">#!/bin/sh
+# Called with the new rows on stdin, one JSON object per line.
+# Example: keep a CSV of name and phone. jq treats every value as data.
+jq -r &#x27;[.&quot;Name&quot;, .&quot;Phone&quot;] | @csv&#x27; &gt;&gt; leads.csv</code></pre>
+    <div class="claim">
+      <p><b>Never put a scraped value on a command line.</b> Everything you scrape was written by whoever made the page. A receiver that builds a command such as <code>"notify " + row.Name</code> and runs it through a shell will run any <code>$(&hellip;)</code> or <code>;</code> that page contains. That is why the receivers above pass rows on stdin and start the script without a shell (<code>spawn</code> with no <code>shell</code> option in Node, an array command in <code>proc_open</code> in PHP), and why <code>jq</code> handles every value as data. We tested it with rows whose names were <code>$(touch PWNED)</code> and <code>; touch PWNED3 #</code>: both were stored as text and nothing ran.</p>
+    </div>
+    <div class="claim">
+      <p>The same goes for a sheet. A cell that starts with <code>=</code> is a formula to Excel and Google Sheets, so if you turn the rows into a spreadsheet, treat leading <code>=</code>, <code>+</code>, <code>-</code> and <code>@</code> as text. Magic Scraper's own exports already do.</p>
+    </div>
+  </section>
+
+  <section id="try">
+    <h2>Try it on your own computer first</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Start a receiver</h3>
+        <p>Run either one: <code>node receiver.mjs</code> or <code>php -S localhost:8787 hook.php</code>. Both listen on port 8787.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Give Magic Scraper the address</h3>
+        <p>In the popup: gear &rarr; Saving and exporting &rarr; Webhook. Address <code>http://localhost:8787/hook</code>, and the same secret if you set one.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Press Save and test</h3>
+        <p>One made-up row is sent. It is saved only if your receiver answers 200, so a typo shows up now, not at 3am on a schedule.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Send some rows</h3>
+        <p>Open any list, choose <b>Send to webhook</b> from the arrow beside Export CSV, and watch them arrive in <code>rows.jsonl</code>.</p>
+      </div>
+    </div>
+    <figure class="fig">
+      <img src="assets/guides/webhook-settings.webp" alt="The Saving and exporting dialog with the Webhook section: address http://localhost:8787/hook, an optional secret, Send as Batches of rows, and Save and test" width="460" height="600" loading="lazy" />
+      <figcaption>The webhook settings, pointed at a receiver on the same computer.</figcaption>
+    </figure>
+  </section>
+
+  <section id="online">
+    <h2>Putting it online</h2>
+    <div class="claim">
+      <p>For a receiver on another machine, the address must start with <code>https://</code>. The usual ways: the PHP file on hosting you already have, which almost always has a certificate; the Node receiver behind the web server you already run; or, while you build, a tunnel such as Cloudflare Tunnel or ngrok that gives your computer an https address. Use a long random secret either way.</p>
+    </div>
+    <div class="claim">
+      <p>No server at all? Make a <b>Catch Hook</b> in Zapier, a <b>Custom webhook</b> in Make, or a <b>Webhook</b> node in n8n, and paste its address instead. Pick <i>One item per row</i> for Zapier.</p>
+    </div>
+  </section>
+
+  <aside class="hurry" aria-labelledby="hurry-h">
+    <h2 id="hurry-h">In a hurry? Just need the leads?</h2>
+    <p>Send us the site and the fields you need, and we&rsquo;ll collect the list for you: cleaned,
+      de-duplicated and in a spreadsheet. You&rsquo;ll have a price before any work starts, usually
+      within a day or two.</p>
+    <div class="actions">
+      <a class="btn" href="mailto:support@magicscraper.app?subject=Leads%20needed%20fast&amp;body=The%20site%3A%20%0AThe%20fields%20I%20need%3A%20%0AAbout%20how%20many%20rows%3A%20%0AWhen%20I%20need%20it%20by%3A%20">Email support@magicscraper.app</a>
+      <a class="btn btn-quiet" href="/services">What we take on</a>
+    </div>
+  </aside>
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Is the webhook free?</summary>
+        <p>It is part of Pro, a one-time payment with no subscription. Exporting CSV, Excel and JSON, and opening a table in Google Sheets, are free.</p>
+      </details>
+      <details>
+        <summary>Do my rows pass through Magic Scraper's servers?</summary>
+        <p>No. The browser posts them straight to the address you set. There is no server of ours in between, and nothing is sent until you press Send to webhook or tick it for a schedule.</p>
+      </details>
+      <details>
+        <summary>Can a scheduled run send to my webhook?</summary>
+        <p>Yes. Tick Also send each run's rows to your webhook when you schedule a saved setup. Each run still saves its CSV, and if your receiver is down the run says so instead of losing the rows.</p>
+      </details>
+      <details>
+        <summary>Why does my receiver get a row called Test row?</summary>
+        <p>That is Save and test. It sends one made-up row with event set to test, so you can check the address before real rows arrive. The receivers above skip it.</p>
+      </details>
+      <details>
+        <summary>What if a list has more than 1,000 rows?</summary>
+        <p>It arrives in batches of 1,000, numbered with batch.index and batch.count, so your receiver can tell when it has the whole list.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

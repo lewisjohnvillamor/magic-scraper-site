@@ -14,7 +14,7 @@ const only = process.argv[2];
 const EXT = mkdtempSync(join(tmpdir(), 'mds-shot-ext-'));
 cpSync('/home/user/Magic-Data-Scraper-', EXT, { recursive: true, filter: (p) => !/node_modules|\.git($|\/)|dist/.test(p) });
 const m = JSON.parse(readFileSync(join(EXT, 'manifest.json'), 'utf8'));
-m.permissions = ['activeTab', 'scripting', 'downloads', 'tabs', 'storage', 'sidePanel'];
+m.permissions = ['activeTab', 'scripting', 'downloads', 'tabs', 'storage', 'sidePanel', 'identity'];
 m.host_permissions = ['<all_urls>'];
 delete m.optional_permissions; delete m.optional_host_permissions;
 writeFileSync(join(EXT, 'manifest.json'), JSON.stringify(m, null, 2));
