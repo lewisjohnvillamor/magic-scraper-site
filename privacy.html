@@ -54,9 +54,10 @@
   account, no analytics and no telemetry. What it reads stays in your browser, and what it
   produces goes <b>only where you send it</b>: a file you save, or &mdash; with Pro, if you choose
   &mdash; a Google Sheet in your own Google account or a webhook address you give. Detecting a table, picking one by hand and
-  exporting it make <b>no network requests at all</b>. The only requests the free extension ever
-  makes are for further pages of the site you are already on, and only once you press Start
-  crawling &mdash; never to a server of ours, because there isn't one.
+  exporting it make <b>no network requests at all</b>. Otherwise it requests only the pages you
+  start it on &mdash; further pages of a list once you press Start crawling, the pages your rows link
+  to when you drill down, and the addresses in a list of pages &mdash; and never a server of ours,
+  because there isn't one.
   Three things go further, all only with Pro and all only when you start them: activating your
   licence sends the key to Gumroad, once; <a href="#google-sheets">Send to Google Sheets</a>
   (from version 1.23) sends the rows you choose straight to your own sheet at Google; and
@@ -67,8 +68,8 @@
   the text, links and image URLs already rendered in your browser — in order to find the
   repeating rows and turn them into a table. If you turn on drill-down, it also opens the
   pages your rows link to and reads them the same way.</p>
-  <p>It does not read pages you have not opened the popup on, does not run in the background,
-  and does not touch form fields, passwords or cookies.</p>
+  <p>It does not read pages you have not pointed it at, does nothing in the background unless
+  you start a run or set a schedule, and does not touch form fields, passwords or cookies.</p>
 
   <h2>What it stores, and where</h2>
   <p>Everything is kept in your own browser. Nothing is uploaded. All of it is kept by the
@@ -128,10 +129,10 @@
 
 
   <h2>What leaves your machine</h2>
-  <p><strong>Your data: only what you send.</strong> The only network requests the extension
-  makes while scraping are to the site you are already on: when a site paginates by URL, it
-  fetches the next page of that same site directly, exactly as your browser would if you clicked
-  the link. Your rows, your columns, the pages you visit and the files you export never leave your
+  <p><strong>Your data: only what you send.</strong> While scraping, the extension requests
+  only the pages you start it on: when a site paginates by URL, it fetches the next page of that
+  same site directly, exactly as your browser would if you clicked the link, and drill-down or a
+  list of pages opens the pages your rows link to and the addresses you added. Your rows, your columns, the pages you visit and the files you export never leave your
   machine &mdash; unless you press <b>Send to Google Sheets</b> or <b>Send to webhook</b> (Pro), and then
   only the rows you send, to the place you chose, as described below. Nothing ever goes to us.</p>
 
@@ -215,13 +216,18 @@
         <td>Read the page you are looking at, only when you open the popup on it.</td></tr>
     <tr><td><code>scripting</code></td>
         <td>Run the detection and extraction code inside that page.</td></tr>
+    <tr><td><code>sidePanel</code></td>
+        <td>Keep the extension open beside the page, in the browser&rsquo;s side panel, when you ask
+            it to. It reads nothing by itself.</td></tr>
     <tr><td><code>downloads</code></td>
         <td>Save your CSV / XLSX / JSON file &mdash; and, if you set a schedule, the CSV each
             run produces while you are not there.</td></tr>
     <tr><td><code>tabs</code>, <code>storage</code>, all-sites access <em>(optional)</em></td>
-        <td>Requested only if you switch on drill-down, which has to open each row's page in a
-            background tab and keep the results while it works. Decline it and the rest of the
-            extension still works.</td></tr>
+        <td>Requested only when you switch on drill-down, run one setup over a list of pages, or
+            set a schedule: each has to open pages in a background tab and keep the results while it
+            works. <code>storage</code> alone is also asked for when you save a setup, activate Pro,
+            or use Send to Google Sheets or the webhook, to keep that on your machine. Decline any of
+            them and the rest of the extension still works.</td></tr>
     <tr><td><code>alarms</code> <em>(optional)</em></td>
         <td>Requested only if you put one of your own saved setups on a schedule. It is a timer
             and nothing else: it wakes the extension when a run is due. Scheduled runs happen

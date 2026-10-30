@@ -38,7 +38,7 @@ def language_pages(sec, claim, table):
         slug=HUB,
         crumb="Other languages",
         title="Scraping websites in other languages: Next, Load more, Excel",
-        desc="Why a scraper stops on page one of a Japanese, German or Spanish site, why Excel garbles the accents, and how Magic Scraper reads pagers in over 80 languages.",
+        desc="Why a scraper stops on page one of a Japanese, German or Spanish site, why Excel garbles the accents, and how Magic Scraper reads pagers in many languages.",
         h1="Scraping a site that isn't in <i>English</i>.",
         standfirst="A scraper that finds the Next button by looking for the word &ldquo;Next&rdquo; stops at page one of a site that says 次へ, Weiter or Siguiente. A CSV opened in Excel can turn ü and 日本語 into gibberish, and a German 1.234 can arrive as one point two three four. Here is what goes wrong on sites in other languages, and what Magic Scraper does about each.",
         aside="Free, with no account. In your language: " + LANG_LINKS,
@@ -49,7 +49,7 @@ def language_pages(sec, claim, table):
                       "<code>rel=\"next\"</code> link, an arrow, an <code>aria-label</code>, a numbered pager. "
                       "Magic Scraper reads all of those, which is why Amazon.co.jp, Kleinanzeigen and LDLC crawl "
                       "the same as an English shop. The word only matters on sites that write nothing else, and "
-                      "there it reads the word, in more than 80 languages, and the Load more button too."),
+                      "there it reads the word, in more than 80 languages&dagger;, and the Load more button too."),
                 words([["Next", "Load more"],
                        ["Japanese", "次へ &middot; 次のページ &middot; 次の20件 &middot; 次&dagger;", "もっと見る&dagger; &middot; さらに表示&dagger;"],
                        ["Chinese", "下一页 &middot; 下一頁 &middot; 后页&dagger;", "加载更多&dagger; &middot; 查看更多&dagger;"],
@@ -70,7 +70,7 @@ def language_pages(sec, claim, table):
                        ["Arabic", "التالي&dagger; &middot; الصفحة التالية&dagger;", "تحميل المزيد&dagger;"],
                        ["Hebrew", "הבא&dagger; &middot; העמוד הבא&dagger;", "טען עוד&dagger;"],
                        ["Hindi", "अगला&dagger; &middot; अगला पेज&dagger;", "और देखें&dagger;"]]),
-                claim(f"&dagger; With the next update, 2.0.8 {s}. The rest is in the stores now. In all, Next and Previous are "
+                claim(f"&dagger; With the next update, 2.1.0 {s}. The rest is in the stores now. In all, Next and Previous are "
                       "read in 87 languages and Load more in about 68: every major European language, and Turkish, "
                       "Azerbaijani, Indonesian, Malay, Filipino, Vietnamese, Swahili, Arabic, Persian, Urdu, Hebrew, "
                       "the languages of India from Hindi and Bengali to Tamil and Malayalam, Sinhala, Thai, Lao, "
@@ -111,7 +111,7 @@ def language_pages(sec, claim, table):
         ],
         faq=[
             ("Why does my scraper stop at page one on a Japanese or German site?",
-             "Many scrapers find the next page by looking for the English word Next. Magic Scraper also reads rel=\"next\" links, arrows, aria-labels and numbered pagers, and the word for Next in more than 80 languages."),
+             "Many scrapers find the next page by looking for the English word Next. Magic Scraper also reads rel=\"next\" links, arrows, aria-labels and numbered pagers, and the word for Next in many languages (more than 80 from the next update)."),
             ("Why are the accents wrong when I open the CSV in Excel?",
              "Excel guessed the wrong encoding. Magic Scraper's CSV carries the byte-order mark that tells Excel it is UTF-8, and its .xlsx export avoids the problem altogether."),
             ("Does it work on right-to-left sites in Arabic or Hebrew?",
@@ -146,7 +146,7 @@ def language_pages(sec, claim, table):
                        ["続きを読み込む", "もっと見る&dagger; &middot; さらに表示&dagger; &middot; もっと読み込む&dagger;"],
                        ["前のページ（次と取り違えない）", "前へ &middot; 前のページ"],
                        ["ページ送りと見なさないもの", "目次 &middot; 画像スライダーの矢印&dagger; &middot; 注釈の番号&dagger;"]]),
-                claim(f"&dagger; は次回アップデート（2.0.8）から {s}。そのほかは現在ストアで配信中の版で動作します。"
+                claim(f"&dagger; は次回アップデート（2.1.0）から {s}。そのほかは現在ストアで配信中の版で動作します。"
                       "中国語の「下一页」「后页」、韓国語の「다음」「더보기」も読み、全部で80以上の言語のページ送りに対応します&dagger;。"),
             ])),
             sec("excel", "Excelで開くと文字化けする", claim(
@@ -177,7 +177,7 @@ def language_pages(sec, claim, table):
             ("日本語版はありますか？",
              "拡張機能の表示は英語のみです。データは日本語のまま取得できます。"),
             ("無料で使えますか？",
-             "はい。表の検出、ページ数無制限のクロール、CSV・Excel・JSONの書き出しは無料です。各行のリンク先を開いて項目を追加する「ドリルダウン」は、無料版では3行まで、Pro（25ドルの買い切り）では全行に使えます。"),
+             "はい。表の検出、ページ数無制限のクロール、CSV・Excel・JSONの書き出しは無料です。各行のリンク先を開いて項目を追加する「ドリルダウン」は、無料版では3行まで、Pro（買い切り。先着100名は19ドル、通常25ドル）では全行に使えます。"),
         ],
     ))
 
@@ -206,7 +206,7 @@ def language_pages(sec, claim, table):
                        ["Nachladen", "Mehr laden&dagger; &middot; Mehr anzeigen&dagger; &middot; Weitere anzeigen&dagger; &middot; Weitere Ergebnisse&dagger;"],
                        ["Zurück (nie für Weiter gehalten)", "Zurück &middot; Vorherige"],
                        ["Kein Blättern", "Pfeile von Bildergalerien&dagger; &middot; Fußnotennummern&dagger;"]]),
-                claim(f"&dagger; Ab dem nächsten Update, 2.0.8 {s}. Alles andere steckt schon in der Version, die "
+                claim(f"&dagger; Ab dem nächsten Update, 2.1.0 {s}. Alles andere steckt schon in der Version, die "
                       "die Stores gerade ausliefern. Insgesamt erkennt es Blätter-Links in mehr als 80 Sprachen&dagger;."),
             ])),
             sec("excel", "Umlaute, die in Excel kaputtgehen", claim(
@@ -246,7 +246,7 @@ def language_pages(sec, claim, table):
             ("Warum stimmen die Zahlen in Excel nicht?",
              "Weil 1.234 als Dezimalzahl gelesen wurde. Ab dem nächsten Update liest der Excel-Export von Magic Scraper eine Spalte in deutscher Schreibweise auch so."),
             ("Ist das DSGVO-konform?",
-             "Magic Scraper schickt die Daten nirgendwohin: Erkennung, Blättern und Export laufen in Ihrem Browser, und es gibt keinen Server von uns. Ob Sie personenbezogene Daten erheben und verwenden dürfen, hängt davon ab, was Sie damit tun, und bleibt Ihre Verantwortung."),
+             "Magic Scraper schickt die Daten nur dorthin, wohin Sie sie schicken: Erkennung, Blättern und Export laufen in Ihrem Browser, es gibt keinen Server von uns, und mit Pro gehen Zeilen nur auf Knopfdruck an Ihre eigene Google-Tabelle oder Webhook-Adresse. Ob Sie personenbezogene Daten erheben und verwenden dürfen, hängt davon ab, was Sie damit tun, und bleibt Ihre Verantwortung."),
             ("Gibt es Magic Scraper auf Deutsch?",
              "Die Oberfläche ist englisch. Die gesammelten Daten bleiben in der Sprache der Seite."),
         ],
@@ -276,7 +276,7 @@ def language_pages(sec, claim, table):
                        ["Cargar más resultados", "Cargar más&dagger; &middot; Ver más&dagger; &middot; Mostrar más&dagger; &middot; Más resultados&dagger;"],
                        ["Anterior (nunca se toma por Siguiente)", "Anterior"],
                        ["No es paginación", "Flechas de galerías de fotos&dagger; &middot; Números de notas&dagger;"]]),
-                claim(f"&dagger; Con la próxima actualización, 2.0.8 {s}. Lo demás ya está en la versión que "
+                claim(f"&dagger; Con la próxima actualización, 2.1.0 {s}. Lo demás ya está en la versión que "
                       "distribuyen las tiendas. En total reconoce la paginación en más de 80 idiomas&dagger;."),
             ])),
             sec("excel", "Tildes y eñes que Excel estropea", claim(
@@ -344,7 +344,7 @@ def language_pages(sec, claim, table):
                        ["Charger la suite", "Voir plus&dagger; &middot; Charger plus&dagger; &middot; Afficher plus&dagger; &middot; Plus de résultats&dagger;"],
                        ["Précédent (jamais pris pour Suivant)", "Précédent"],
                        ["Pas une pagination", "Flèches des galeries photo&dagger; &middot; Numéros de notes&dagger;"]]),
-                claim(f"&dagger; Avec la prochaine mise à jour, 2.0.8 {s}. Le reste est déjà dans la version que "
+                claim(f"&dagger; Avec la prochaine mise à jour, 2.1.0 {s}. Le reste est déjà dans la version que "
                       "distribuent les boutiques d’extensions. Au total, il reconnaît la pagination dans plus de 80 langues&dagger;."),
             ])),
             sec("excel", "Les accents qu’Excel abîme", claim(

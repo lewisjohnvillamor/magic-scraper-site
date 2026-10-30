@@ -71,9 +71,9 @@ PRIVACY_SVG = ('<svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg">'
     + _box(459, 10, 180, 96, ["Your CSV or", "Excel file"])
     + '<path class="l-acc" d="M184 58 h40 m-10 -9 l10 9 l-10 9"/><path class="l-acc" d="M413 58 h40 m-10 -9 l10 9 l-10 9"/>'
     + '<text x="1" y="160" font-size="21" class="t-mute">The only other requests, each one started by you:</text>'
-    + _box(1, 180, 200, 100, ["More pages of", "the same site,", "when you crawl"])
+    + _box(1, 180, 200, 100, ["Pages you ask for:", "more of a list,", "linked pages"])
     + _box(220, 180, 200, 100, ["Gumroad, once,", "to check a", "Pro licence"])
-    + _box(439, 180, 200, 100, ["Your own Google", "Sheet, if you", "send to it (Pro)"])
+    + _box(439, 180, 200, 100, ["Your own Sheet", "or webhook, if you", "send to it (Pro)"])
     + '<text x="1" y="320" font-size="21" class="t-mute">Never:</text>'
     + _box(1, 344, 200, 92, ["A server of ours", "(there isn't one)"], tcls="t-mute")
     + _box(220, 344, 200, 92, ["Analytics or", "tracking"], tcls="t-mute")
@@ -89,7 +89,7 @@ CREDITS_SVG = ('<svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg">'
     + '<path class="l-warm" d="M60 250 H160 V214 H260 V170 H360 V120 H460 V74 H560 V30 H620"/>'
     + '<text x="80" y="50" font-size="22" class="t-warm">Credits: grows with every row</text>'
     + '<path class="l-acc" d="M60 226 H620"/>'
-    + '<text x="380" y="216" font-size="22" class="t-acc">Pro: $25, once</text>'
+    + '<text x="380" y="216" font-size="22" class="t-acc">Pro: paid once</text>'
     + '<path class="l-dash" d="M60 266 H620"/>'
     + '<text x="380" y="256" font-size="22" class="t-mute">Free: $0</text>'
     + '</svg>')

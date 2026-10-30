@@ -157,10 +157,10 @@
           SharePoint or Drive, rows appended to Postgres or BigQuery, a JSON endpoint you can
           poll, a webhook into Slack or Zapier, or a file dropped in S3. If it takes an API key
           or an OAuth consent, that is our side of the job, not yours.</p>
-        <p class="aside">The extension deliberately cannot do this. Writing into your Google
-          account needs an OAuth token and somewhere to keep it, which means a server and an
-          account &mdash; the two things it promises never to have. So it lives here instead,
-          where there <em>is</em> a server and you know about it.</p>
+        <p class="aside">The extension can send rows to your own sheet or webhook when you press
+          it, or on a schedule while your browser is open (Pro). What it cannot do is refresh a
+          sheet with no browser running: that needs a server, the one thing it promises never to
+          have. So that lives here instead, where there <em>is</em> a server and you know about it.</p>
       </div>
       <div class="step">
         <span class="n">06</span>
