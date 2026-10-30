@@ -70,7 +70,7 @@ def language_pages(sec, claim, table):
                        ["Arabic", "التالي&dagger; &middot; الصفحة التالية&dagger;", "تحميل المزيد&dagger;"],
                        ["Hebrew", "הבא&dagger; &middot; העמוד הבא&dagger;", "טען עוד&dagger;"],
                        ["Hindi", "अगला&dagger; &middot; अगला पेज&dagger;", "और देखें&dagger;"]]),
-                claim(f"&dagger; With the next update, 2.0.7 {s}. The rest is in the stores now. In all, Next and Previous are "
+                claim(f"&dagger; With the next update, 2.0.8 {s}. The rest is in the stores now. In all, Next and Previous are "
                       "read in 87 languages and Load more in about 68: every major European language, and Turkish, "
                       "Azerbaijani, Indonesian, Malay, Filipino, Vietnamese, Swahili, Arabic, Persian, Urdu, Hebrew, "
                       "the languages of India from Hindi and Bengali to Tamil and Malayalam, Sinhala, Thai, Lao, "
@@ -146,7 +146,7 @@ def language_pages(sec, claim, table):
                        ["続きを読み込む", "もっと見る&dagger; &middot; さらに表示&dagger; &middot; もっと読み込む&dagger;"],
                        ["前のページ（次と取り違えない）", "前へ &middot; 前のページ"],
                        ["ページ送りと見なさないもの", "目次 &middot; 画像スライダーの矢印&dagger; &middot; 注釈の番号&dagger;"]]),
-                claim(f"&dagger; は次回アップデート（2.0.7）から {s}。そのほかは現在ストアで配信中の版で動作します。"
+                claim(f"&dagger; は次回アップデート（2.0.8）から {s}。そのほかは現在ストアで配信中の版で動作します。"
                       "中国語の「下一页」「后页」、韓国語の「다음」「더보기」も読み、全部で80以上の言語のページ送りに対応します&dagger;。"),
             ])),
             sec("excel", "Excelで開くと文字化けする", claim(
@@ -206,7 +206,7 @@ def language_pages(sec, claim, table):
                        ["Nachladen", "Mehr laden&dagger; &middot; Mehr anzeigen&dagger; &middot; Weitere anzeigen&dagger; &middot; Weitere Ergebnisse&dagger;"],
                        ["Zurück (nie für Weiter gehalten)", "Zurück &middot; Vorherige"],
                        ["Kein Blättern", "Pfeile von Bildergalerien&dagger; &middot; Fußnotennummern&dagger;"]]),
-                claim(f"&dagger; Ab dem nächsten Update, 2.0.7 {s}. Alles andere steckt schon in der Version, die "
+                claim(f"&dagger; Ab dem nächsten Update, 2.0.8 {s}. Alles andere steckt schon in der Version, die "
                       "die Stores gerade ausliefern. Insgesamt erkennt es Blätter-Links in mehr als 80 Sprachen&dagger;."),
             ])),
             sec("excel", "Umlaute, die in Excel kaputtgehen", claim(
@@ -276,7 +276,7 @@ def language_pages(sec, claim, table):
                        ["Cargar más resultados", "Cargar más&dagger; &middot; Ver más&dagger; &middot; Mostrar más&dagger; &middot; Más resultados&dagger;"],
                        ["Anterior (nunca se toma por Siguiente)", "Anterior"],
                        ["No es paginación", "Flechas de galerías de fotos&dagger; &middot; Números de notas&dagger;"]]),
-                claim(f"&dagger; Con la próxima actualización, 2.0.7 {s}. Lo demás ya está en la versión que "
+                claim(f"&dagger; Con la próxima actualización, 2.0.8 {s}. Lo demás ya está en la versión que "
                       "distribuyen las tiendas. En total reconoce la paginación en más de 80 idiomas&dagger;."),
             ])),
             sec("excel", "Tildes y eñes que Excel estropea", claim(
@@ -344,7 +344,7 @@ def language_pages(sec, claim, table):
                        ["Charger la suite", "Voir plus&dagger; &middot; Charger plus&dagger; &middot; Afficher plus&dagger; &middot; Plus de résultats&dagger;"],
                        ["Précédent (jamais pris pour Suivant)", "Précédent"],
                        ["Pas une pagination", "Flèches des galeries photo&dagger; &middot; Numéros de notes&dagger;"]]),
-                claim(f"&dagger; Avec la prochaine mise à jour, 2.0.7 {s}. Le reste est déjà dans la version que "
+                claim(f"&dagger; Avec la prochaine mise à jour, 2.0.8 {s}. Le reste est déjà dans la version que "
                       "distribuent les boutiques d’extensions. Au total, il reconnaît la pagination dans plus de 80 langues&dagger;."),
             ])),
             sec("excel", "Les accents qu’Excel abîme", claim(
