@@ -9,7 +9,7 @@ the language pages are, until the stores serve it.
 
 
 def painpoint_pages_2(sec, claim, steps, table):
-    soon = ' <span class="soon">next update</span>'
+    soon = ''   # 2.1.0 is in the stores: nothing here is waiting any more
     pages = []
 
     # ------------------------------------------------------------ stops partway
@@ -59,7 +59,7 @@ def painpoint_pages_2(sec, claim, steps, table):
                    ]),
         faq=[
             ("Why does my scraper stop after a few pages?", "Most often the site started rate-limiting it, showed a human check, began repeating pages past the end, or the tab closed. A scraper that says why it stopped tells you which, and Magic Scraper does on every run."),
-            ("Can I continue a crawl instead of starting over?", "Yes. After a human check or the max-pages limit, pressing Start carries on from the page it never read. In the next update the same goes for Stop and for a site that stopped answering."),
+            ("Can I continue a crawl instead of starting over?", "Yes. After a human check or the max-pages limit, pressing Start carries on from the page it never read. The same goes for Stop and for a site that stopped answering."),
             ("I closed the tab during a crawl. Are the rows gone?", "No. They are kept as the crawl goes. Open Magic Scraper on the same site and it offers to recover the run."),
             ("Will it get past a captcha for me?", "No, and no honest tool should. It stops, puts the page in front of you, and carries on once you have answered it yourself."),
             ("Is there a limit on pages or rows?", "No. Crawling is free, with no page or row limit."),
@@ -104,7 +104,7 @@ def painpoint_pages_2(sec, claim, steps, table):
             ("Why are my scraped column names random letters?", "They are the page's CSS class names, which modern sites generate automatically. A scraper that falls back on them gives you names like x193iq5w. Magic Scraper names columns from the page's headers and labels, or from the values, instead."),
             ("What does [object Object] mean in a scraped spreadsheet?", "The tool copied a programming structure where it should have copied its text. The value was on the page but never read out. Magic Scraper writes the text you see, or the link or image address."),
             ("Can I rename columns?", "Yes. Double-click a column header in the preview to rename it, click it to drop it. Your choices are remembered for that site."),
-            ("Why do I get Tag 2, Tag 3 ... Tag 14?", "Each record has a different number of tags and the tool made a column per position. The next update of Magic Scraper merges them into one Tag column, the tags separated by commas."),
+            ("Why do I get Tag 2, Tag 3 ... Tag 14?", "Each record has a different number of tags and the tool made a column per position. Magic Scraper merges them into one Tag column, the tags separated by commas."),
         ],
     ))
 
@@ -172,8 +172,8 @@ def painpoint_pages_2(sec, claim, steps, table):
                 "it again and the table is still there. But not having to reopen it is better.")),
             sec("how", "Two ways to keep it open", "\n".join([
                 steps([
-                    ("Beside the page: the side panel", "Press the pin button in the popup's header (from the next update: open the &#9881; menu and choose <b>Keep open beside the page</b>). Magic Scraper moves into the browser's side panel (the sidebar in Firefox), stays there while you click, scroll and pick, and follows the tab in front."),
-                    ("A window of its own" + soon, "Open the &#9881; menu and choose <b>Open in its own window</b>. Magic Scraper opens as a window with its own place in the taskbar: move it, resize it, put it on another screen, pin it. It reads the tab it was opened from."),
+                    ("Beside the page: the side panel", "Open the &#9881; menu and choose <b>Keep open beside the page</b>. Magic Scraper moves into the browser's side panel (the sidebar in Firefox), stays there while you click, scroll and pick, and follows the tab in front."),
+                    ("A window of its own", "Open the &#9881; menu and choose <b>Open in its own window</b>. Magic Scraper opens as a window with its own place in the taskbar: move it, resize it, put it on another screen, pin it. It reads the tab it was opened from."),
                 ]),
                 claim("In either, picking by hand works without anything closing: click the block your rows "
                       "come from, shift-click extra fields, and the table updates as you go."),
@@ -188,8 +188,8 @@ def painpoint_pages_2(sec, claim, steps, table):
         faq=[
             ("Why does my scraper extension close when I click the page?", "Browsers close an extension's toolbar popup whenever focus leaves it. No extension can stop that, but Magic Scraper can move into the side panel, or open in its own window, which stay open."),
             ("Do I lose my data when the popup closes?", "No. The rows are kept in the page; open the popup again and the table is still there."),
-            ("How do I open Magic Scraper in its own window?", "In the next update, open the \u2699 menu and choose Open in its own window. It opens as a separate window that you can move, resize and pin to the taskbar."),
-            ("Does the side panel work in Firefox?", "Yes: Firefox calls it the sidebar, and the same control opens it: the pin in the popup's header, or from the next update the \u2699 menu."),
+            ("How do I open Magic Scraper in its own window?", "Open the \u2699 menu and choose Open in its own window. It opens as a separate window that you can move, resize and pin to the taskbar."),
+            ("Does the side panel work in Firefox?", "Yes: Firefox calls it the sidebar, and the same menu item opens it."),
         ],
     ))
 
@@ -218,8 +218,7 @@ def painpoint_pages_2(sec, claim, steps, table):
                     ("Drill-down out of pages says so once" + soon, "When a row\u2019s page budget runs out, one row says it stopped, instead of a copy of the parent for every link left over."),
                 ]),
                 claim("Drop a row you do not want with the &times; beside it. Rows that are identical in every "
-                      "column are treated as one, so dropping it drops its copies too. From the next update, the &times; "
-                      "removes just the one you clicked."),
+                      "column are kept as they are, and the &times; removes just the one you clicked."),
             ]), deck="Without setting anything up."),
             sec("export", "When the export does not match the preview", claim(
                 "The preview draws the first 100 rows of a large run, and says so: &ldquo;Showing the first "
@@ -227,7 +226,7 @@ def painpoint_pages_2(sec, claim, steps, table):
                 "copy, writes the same table you see, with your dropped columns, renamed columns and "
                 "filter applied, and the status line says how many rows went into the file.",
                 "If the page behind the popup has been closed or reloaded, it no longer holds the rows. The "
-                "next update refuses to export the 100-row preview as if it were the run" + soon + ", and "
+                "extension refuses to export the 100-row preview as if it were the run, and "
                 "the rows of a crawl that stopped can be brought back with Recover run.")),
         ],
         faq=[

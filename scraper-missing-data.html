@@ -168,7 +168,7 @@
   <section id="excel">
     <h2>When Excel mangles the export</h2>
     <div class="claim">
-      <p><b>Phone numbers lose their leading zero</b> or turn into 4.47E+11 when a CSV is opened in Excel, because Excel guesses they are numbers. Export <b>XLSX</b> instead: every cell is written as text, so 0207&hellip; stays 0207&hellip;.</p>
+      <p><b>Phone numbers lose their leading zero</b> or turn into 4.47E+11 when a CSV is opened in Excel, because Excel guesses they are numbers. Export to <b>Excel</b> (the arrow beside Export CSV) instead: every cell is written as text, so 0207&hellip; stays 0207&hellip;.</p>
       <p><b>Accents and symbols turn into &Atilde;&copy;</b> when a file has no marker saying it is UTF-8. Magic Scraper's CSV includes that marker, so Excel reads caf&eacute; as caf&eacute;.</p>
       <p><b>A cell that starts with = runs as a formula</b> when the file opens, which a hostile page can abuse. CSV exports defuse those cells; XLSX cells are never evaluated.</p>
     </div>

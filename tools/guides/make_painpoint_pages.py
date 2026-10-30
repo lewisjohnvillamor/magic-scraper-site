@@ -344,8 +344,8 @@ PAGES.append(dict(
     sections=[
         sec("try", "Try these first", steps([
             ("Let it finish loading", "Many pages draw their rows a second or two after the page appears, or only as you scroll. Wait, scroll down once, then click the icon again."),
-            ("Press Another table", "A page often has several lists: menus, filters, related items. If the outline is on the wrong one, cycle to the next."),
-            ("Pick it by hand", "Press <b>&#9995; Pick manually</b> and click one row of what you want: the extension finds the rest that look the same. Shift-click any extra field, such as a price that sits outside the row, and it joins as a column."),
+            ("Press Wrong list? &rarr; Another table", "A page often has several lists: menus, filters, related items. If the outline is on the wrong one, open <b>Wrong list?</b> and cycle to the next with <b>Another table</b>."),
+            ("Pick it by hand", "Under <b>Wrong list?</b>, choose <b>&#9995; Pick manually</b> and click one row of what you want: the extension finds the rest that look the same. Shift-click any extra field, such as a price that sits outside the row, and it joins as a column."),
             ("Open the page behind each row", "If the list only shows names, the details may live on each item's own page. <a href=\"/drill-down\">Drill-down</a> opens them and adds their fields, free for 3 rows."),
         ]) + "\n" + shot("assets/guides/pick-manually.webp",
                  "Magic Scraper beside a product table it was picked from by hand, with a Discount column of -35% on every row, taken from a callout outside the table",
@@ -422,7 +422,7 @@ PAGES.append(dict(
             "Your choices are remembered for that site.")),
         sec("excel", "When Excel mangles the export", "\n".join([
             claim("<b>Phone numbers lose their leading zero</b> or turn into 4.47E+11 when a CSV is opened in "
-                  "Excel, because Excel guesses they are numbers. Export <b>XLSX</b> instead: every cell is "
+                  "Excel, because Excel guesses they are numbers. Export to <b>Excel</b> (the arrow beside Export CSV) instead: every cell is "
                   "written as text, so 0207&hellip; stays 0207&hellip;.",
                   "<b>Accents and symbols turn into &Atilde;&copy;</b> when a file has no marker saying it is "
                   "UTF-8. Magic Scraper's CSV includes that marker, so Excel reads caf&eacute; as caf&eacute;.",
@@ -606,7 +606,7 @@ PAGES.append(dict(
                 ("Start a receiver", "Run either one: <code>node receiver.mjs</code> or <code>php -S localhost:8787 hook.php</code>. Both listen on port 8787."),
                 ("Give Magic Scraper the address", "In the popup: gear &rarr; Saving and exporting &rarr; Webhook. Address <code>http://localhost:8787/hook</code>, and the same secret if you set one."),
                 ("Press Save and test", "One made-up row is sent. It is saved only if your receiver answers 200, so a typo shows up now, not at 3am on a schedule."),
-                ("Send some rows", "Open any list, press <b>Send to webhook</b>, and watch them arrive in <code>rows.jsonl</code>."),
+                ("Send some rows", "Open any list, choose <b>Send to webhook</b> from the arrow beside Export CSV, and watch them arrive in <code>rows.jsonl</code>."),
             ]),
             shot("assets/guides/webhook-settings.webp", "The Saving and exporting dialog with the Webhook section: address http://localhost:8787/hook, an optional secret, Send as Batches of rows, and Save and test",
                  "The webhook settings, pointed at a receiver on the same computer.", 460, 600),
