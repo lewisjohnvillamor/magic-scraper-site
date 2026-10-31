@@ -46,6 +46,8 @@ extension, not in storage the scraped website can read.
   exhibitor from a show's online list, with details from each exhibitor's profile, to Excel
 - [Guides](https://magicscraper.app/guides): every guide, grouped: business lists, spreadsheet
   how-tos, comparisons and the rules
+- [Web scraper extension for Microsoft Edge](https://magicscraper.app/web-scraper-extension-for-edge):
+  installing from Edge Add-ons, tables over many pages, lists that are not tables, exports
 - [Copy a table from a website to Excel](https://magicscraper.app/copy-table-from-website-to-excel):
   keeping the columns, Excel's From Web, Wikipedia tables, Google Sheets IMPORTHTML, tables over
   many pages
