@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scrape a website into Google Sheets &mdash; when IMPORTXML won&rsquo;t</title>
+<meta name="description" content="Get a web page&rsquo;s table or list into Google Sheets with its columns intact, including pages IMPORTXML and IMPORTHTML can&rsquo;t read. Free one-click copy, or rows sent straight into your own sheet." />
+<link rel="canonical" href="https://magicscraper.app/scrape-website-to-google-sheets" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scrape-website-to-google-sheets" />
+<meta property="og:title" content="Scrape a website into Google Sheets &mdash; when IMPORTXML won&rsquo;t" />
+<meta property="og:description" content="Get a web page&rsquo;s table or list into Google Sheets with its columns intact, including pages IMPORTXML and IMPORTHTML can&rsquo;t read. Free one-click copy, or rows sent straight into your own sheet." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Scrape a website into Google Sheets",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Open the page",
+      "text": "Open the page with the list in Chrome or Edge.",
+      "url": "https://magicscraper.app/scrape-website-to-google-sheets#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Click the extension",
+      "text": "The table is found with named columns. Crawl every page from the Crawl tab if the list runs on.",
+      "url": "https://magicscraper.app/scrape-website-to-google-sheets#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Open in Google Sheets",
+      "text": "From the arrow beside Export CSV, choose Open in Google Sheets and paste into the new sheet, or send the rows into your sheet with Pro.",
+      "url": "https://magicscraper.app/scrape-website-to-google-sheets#quick"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is IMPORTXML returning empty or Could not fetch url?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IMPORTXML fetches the page from Google&rsquo;s servers and reads only what the server sends before JavaScript runs. Lists drawn by scripts, pages behind a login and sites that refuse Google&rsquo;s servers come back empty. An extension that reads the page in your own browser gets them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I scrape a website into Google Sheets for free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Open in Google Sheets is free: it copies the table the extension found and opens a new sheet to paste into, with every column intact."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it scrape multiple pages into Google Sheets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Start crawling on the Crawl tab follows the list through every page first, then the whole table goes to Sheets at once."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Google Sheets update automatically from a website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IMPORTHTML and IMPORTXML refresh by themselves for simple public tables. For anything else, Magic Scraper Pro can run a saved setup on a schedule and add each run&rsquo;s rows to the same sheet, while your browser is running."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it get access to my Google Drive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Send to Google Sheets uses Google&rsquo;s narrowest permission: the extension can open only the spreadsheets it created itself."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Scrape a website to Google Sheets",
+      "item": "https://magicscraper.app/scrape-website-to-google-sheets"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide</p>
+    <h1>A website into <i>Google Sheets</i>, columns and all.</h1>
+    <p class="standfirst">IMPORTXML and IMPORTHTML are the first thing everyone tries, and they work &mdash; until the page builds its list with JavaScript, spreads it over twenty pages, or turns Google&rsquo;s servers away. Here is what those formulas can and can&rsquo;t do, and the one-click way for the pages they can&rsquo;t.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free: Open in Google Sheets. Pro: rows sent straight into your own sheet, on a schedule too.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="quick">
+    <h2>The one-click way</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Open the page</h3>
+        <p>In Chrome or Edge, the page with the list you want: search results, a directory, a product listing, a table.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Click the extension</h3>
+        <p>The rows are found and the columns named. If the list runs over many pages, <b>Start crawling</b> on the Crawl tab collects all of them first.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Into Sheets</h3>
+        <p>From the arrow beside <b>Export CSV</b>, <b>Open in Google Sheets</b> copies the table and opens a new sheet: paste, and every column lands in its own column. With Pro, <b>Send to Google Sheets</b> writes the rows into a sheet in your account directly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="formulas">
+    <h2>IMPORTXML and IMPORTHTML: what they can and can&rsquo;t do</h2>
+    <div class="claim">
+      <p><b>IMPORTHTML(url, "table", n)</b> pulls the nth real HTML table or list from a public page, and <b>IMPORTXML(url, xpath)</b> pulls whatever an XPath expression matches. For a simple public table that you want to refresh inside the sheet, they are the right tool, and free.</p>
+      <p>They fetch the page from Google&rsquo;s servers and read only what the server sends before any JavaScript runs. So they come back empty or with the wrong thing when the list is drawn by a script, when it is a grid of cards rather than a table, when it is behind a login, when it runs over several pages, or when the site refuses Google&rsquo;s servers &mdash; which many do. That is when <i>Imported content is empty</i> or <i>Could not fetch url</i> appears.</p>
+    </div>
+  </section>
+
+  <section id="extension">
+    <h2>Why an extension gets what the formulas can&rsquo;t</h2>
+    <div class="claim">
+      <p>The extension reads the page you have open, in your own browser, after it has finished loading: the same rows you see, signed in as you. It doesn&rsquo;t need a table or an XPath &mdash; it finds the repeating rows and names a column per field &mdash; and it follows Next, Load more and infinite scroll to collect every page.</p>
+      <p>Open in Google Sheets is free.</p>
+    </div>
+  </section>
+
+  <section id="send">
+    <h2>Rows sent straight into your sheet (Pro)</h2>
+    <div class="claim">
+      <p><b>Send to Google Sheets</b> signs you in with Google and writes the rows into a spreadsheet in your own account &mdash; no copy and paste. Put a saved setup on a schedule and each run adds its rows to the same sheet, so the sheet grows by itself.</p>
+      <p>Values go in exactly as written, so a phone number keeps its leading zero and a cell that starts with = is never run as a formula. There is no server of ours in between: the rows go from your browser to Google. The extension is only allowed to open spreadsheets it created, never the rest of your Drive. Pro is a one-time purchase: $19 at the founding price for the first 100 buyers, $25 after that, with every update included.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Why is IMPORTXML returning empty or Could not fetch url?</summary>
+        <p>IMPORTXML fetches the page from Google&rsquo;s servers and reads only what the server sends before JavaScript runs. Lists drawn by scripts, pages behind a login and sites that refuse Google&rsquo;s servers come back empty. An extension that reads the page in your own browser gets them.</p>
+      </details>
+      <details>
+        <summary>Can I scrape a website into Google Sheets for free?</summary>
+        <p>Yes. Open in Google Sheets is free: it copies the table the extension found and opens a new sheet to paste into, with every column intact.</p>
+      </details>
+      <details>
+        <summary>Can it scrape multiple pages into Google Sheets?</summary>
+        <p>Yes. Start crawling on the Crawl tab follows the list through every page first, then the whole table goes to Sheets at once.</p>
+      </details>
+      <details>
+        <summary>Can Google Sheets update automatically from a website?</summary>
+        <p>IMPORTHTML and IMPORTXML refresh by themselves for simple public tables. For anything else, Magic Scraper Pro can run a saved setup on a schedule and add each run&rsquo;s rows to the same sheet, while your browser is running.</p>
+      </details>
+      <details>
+        <summary>Does it get access to my Google Drive?</summary>
+        <p>No. Send to Google Sheets uses Google&rsquo;s narrowest permission: the extension can open only the spreadsheets it created itself.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>

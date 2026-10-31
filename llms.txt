@@ -101,6 +101,16 @@ extension, not in storage the scraped website can read.
   ([API docs](https://magicscraper.app/docs/api))
 - [Is it legal to scrape a business directory?](https://magicscraper.app/is-it-legal-to-scrape-a-business-directory):
   plain-language guide to site terms, GDPR and the UK/EU/US marketing rules; not legal advice
+- [Scrape a list of URLs](https://magicscraper.app/scrape-list-of-urls): one setup run over a
+  pasted list of addresses, every page of each, merged into one sheet with a List column (Pro)
+- [Scrape a website into Google Sheets](https://magicscraper.app/scrape-website-to-google-sheets):
+  IMPORTXML/IMPORTHTML limits, Open in Google Sheets (free), Send to Google Sheets (Pro)
+- [Track price changes on a website](https://magicscraper.app/track-website-price-changes):
+  scheduled runs, a file per run, and the Changes tab (Pro)
+- [Web Scraper (webscraper.io) alternative](https://magicscraper.app/webscraper-io-alternative):
+  no sitemap; schedules without a Cloud plan; when webscraper.io is the better fit
+- [Ultimate Web Scraper alternative](https://magicscraper.app/ultimate-web-scraper-alternative):
+  free exports and a one-time Pro versus yearly plans; when Ultimate does more
 - [Instant Data Scraper alternative](https://magicscraper.app/instant-data-scraper-alternative):
   an honest feature comparison. Both tools auto-detect tables and crawl pagination; the
   difference is per-row detail-page collection.
