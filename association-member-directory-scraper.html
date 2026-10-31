@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Association member directory to Excel &mdash; a lead list by industry</title>
+<meta name="description" content="Turn a trade association or professional body&rsquo;s member directory into a spreadsheet: every member company with address, phone, website and category, across every page or letter." />
+<link rel="canonical" href="https://magicscraper.app/association-member-directory-scraper" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/association-member-directory-scraper" />
+<meta property="og:title" content="Association member directory to Excel &mdash; a lead list by industry" />
+<meta property="og:description" content="Turn a trade association or professional body&rsquo;s member directory into a spreadsheet: every member company with address, phone, website and category, across every page or letter." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Export an association member directory to Excel",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Open the member directory",
+      "text": "Find the association&rsquo;s Find a member or Member directory page and list all members, or search your region.",
+      "url": "https://magicscraper.app/association-member-directory-scraper#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Click the extension",
+      "text": "The members are found as rows, with the columns named. Crawl every page of results.",
+      "url": "https://magicscraper.app/association-member-directory-scraper#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add profiles and export",
+      "text": "Drill-down adds each member&rsquo;s profile page; export to Excel or CSV.",
+      "url": "https://magicscraper.app/association-member-directory-scraper#quick"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I export an association member directory to Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open the association&rsquo;s member directory in Chrome or Edge, list all members, click Magic Scraper, crawl every page and export to Excel. Drill-down adds each member&rsquo;s profile page if the list shows only names."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the directory is split into A&ndash;Z pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste the letter pages into List of pages and they run with the same setup and merge into one sheet. A single page split under letter headings comes out as one table with a Section column."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it read a members-only directory?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It reads what you can see in your own browser, so a directory you can open when signed in can be read. Members-only directories usually have terms that limit their use, so check them first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Finding the members, crawling every page and exporting are free. Drill-down runs free on the first three rows; Pro, a one-time purchase, runs it on every row and adds schedules and Compare with a file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which associations does it work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Any whose member directory is a list on a web page. It isn&rsquo;t built for particular sites; it reads the page&rsquo;s structure, so the same steps work on most directories."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Association member directory scraper",
+      "item": "https://magicscraper.app/association-member-directory-scraper"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Lead generation</p>
+    <h1>An association&rsquo;s <i>member directory</i>, into a spreadsheet.</h1>
+    <p class="standfirst">Trade associations and professional bodies publish who their members are: every installer, every manufacturer, every accredited firm in one industry. That is a ready-made, industry-specific lead list. Here is how to get it into Excel, including the directories split into A&ndash;Z pages and the ones with a profile page per member.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free: every member on every page, to Excel or CSV.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="quick">
+    <h2>Four steps, start to finish</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Open the directory</h3>
+        <p>Most associations have a <b>Find a member</b> or <b>Member directory</b> page. Search with no filters to list everyone, or narrow it to your region or specialism.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Click the extension</h3>
+        <p>Each member becomes a row: company, town, phone, website, membership grade or category &mdash; the columns named from the page. If it picked the wrong list, <b>Wrong list?</b> has the others.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Every page, every letter</h3>
+        <p><b>Start crawling</b> follows the pages of results. A directory split into A&ndash;Z pages: paste the letter pages into <a href="/scrape-list-of-urls">List of pages</a> and they merge into one sheet. One long page split under letter headings comes out as one table with a Section column.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="n">04</span>
+        <h3>The profile behind each member</h3>
+        <p>When the list shows only a name, <a href="/drill-down">drill-down</a> opens each member&rsquo;s profile and adds what is there &mdash; address, phone, email, website, services &mdash; as columns. Then export to Excel or CSV.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <h2>Why member directories make good lead lists</h2>
+    <div class="claim">
+      <p>A member directory is one industry, already filtered: every firm on it paid to belong, so it is trading and it identifies with the sector. Many list a specialism, a region or an accreditation, which is the segmenting you would otherwise do by hand. And they are kept current by the association, which removes members who leave.</p>
+      <p>Put the directory on a schedule (Pro) and <b>Changes</b> shows new members as they join &mdash; the firms most likely to be buying.</p>
+    </div>
+  </section>
+
+  <section id="members-only">
+    <h2>Public lists and members-only lists</h2>
+    <div class="claim">
+      <p>Most associations publish a public directory so customers can find accredited firms; that is the list to use. Some keep a fuller directory behind a member login. The extension reads what you can see in your own browser, signed in as you &mdash; but a members-only directory usually comes with terms that limit what you may do with it, so check them before using it for outreach.</p>
+    </div>
+  </section>
+
+  <section id="clean">
+    <h2>Keeping it clean</h2>
+    <div class="claim">
+      <p>Keep to company-level fields and leave out named individuals unless you have a clear reason; contacting the firms is covered by the marketing rules where you are. <a href="/is-it-legal-to-scrape-a-business-directory">Is it legal to scrape a business directory?</a> covers the EU, UK and US in plain words. Already have some of these firms in your CRM? <a href="/lead-generation#new-only">Compare with a file</a> keeps just the new ones.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>How do I export an association member directory to Excel?</summary>
+        <p>Open the association&rsquo;s member directory in Chrome or Edge, list all members, click Magic Scraper, crawl every page and export to Excel. Drill-down adds each member&rsquo;s profile page if the list shows only names.</p>
+      </details>
+      <details>
+        <summary>What if the directory is split into A&ndash;Z pages?</summary>
+        <p>Paste the letter pages into List of pages and they run with the same setup and merge into one sheet. A single page split under letter headings comes out as one table with a Section column.</p>
+      </details>
+      <details>
+        <summary>Can it read a members-only directory?</summary>
+        <p>It reads what you can see in your own browser, so a directory you can open when signed in can be read. Members-only directories usually have terms that limit their use, so check them first.</p>
+      </details>
+      <details>
+        <summary>Is it free?</summary>
+        <p>Finding the members, crawling every page and exporting are free. Drill-down runs free on the first three rows; Pro, a one-time purchase, runs it on every row and adds schedules and Compare with a file.</p>
+      </details>
+      <details>
+        <summary>Which associations does it work with?</summary>
+        <p>Any whose member directory is a list on a web page. It isn&rsquo;t built for particular sites; it reads the page&rsquo;s structure, so the same steps work on most directories.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>
