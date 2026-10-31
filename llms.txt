@@ -111,6 +111,10 @@ extension, not in storage the scraped website can read.
   no sitemap; schedules without a Cloud plan; when webscraper.io is the better fit
 - [Ultimate Web Scraper alternative](https://magicscraper.app/ultimate-web-scraper-alternative):
   free exports and a one-time Pro versus yearly plans; when Ultimate does more
+- [Lead generation](https://magicscraper.app/lead-generation): building a B2B lead list from public
+  directories, chambers, associations and exhibitor lists; keeping only leads not in your CRM
+- [Association member directory scraper](https://magicscraper.app/association-member-directory-scraper):
+  a trade association or professional body's member list into Excel, A-Z pages and profiles included
 - [Instant Data Scraper alternative](https://magicscraper.app/instant-data-scraper-alternative):
   an honest feature comparison. Both tools auto-detect tables and crawl pagination; the
   difference is per-row detail-page collection.
