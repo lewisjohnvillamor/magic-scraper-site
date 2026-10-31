@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Track price changes on a website, in a spreadsheet</title>
+<meta name="description" content="Watch a competitor&rsquo;s prices or stock without checking by hand: a saved setup runs on a schedule, saves a file each time, and shows which rows changed, which are new and which are gone." />
+<link rel="canonical" href="https://magicscraper.app/track-website-price-changes" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/track-website-price-changes" />
+<meta property="og:title" content="Track price changes on a website, in a spreadsheet" />
+<meta property="og:description" content="Watch a competitor&rsquo;s prices or stock without checking by hand: a saved setup runs on a schedule, saves a file each time, and shows which rows changed, which are new and which are gone." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Track price changes on a website",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Set up the list once",
+      "text": "Open the page, click the extension, check the columns, crawl every page.",
+      "url": "https://magicscraper.app/track-website-price-changes#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Save it and schedule it",
+      "text": "Save the setup under a name in the gear menu, press Schedule and choose how often.",
+      "url": "https://magicscraper.app/track-website-price-changes#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "See what changed",
+      "text": "Open the Changes tab: rows that changed, are new or are gone since the last run.",
+      "url": "https://magicscraper.app/track-website-price-changes#quick"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How can I track a competitor&rsquo;s prices automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Set up their listing page once in Magic Scraper, save the setup and put it on a schedule. Each run collects the page again, saves a file, and the Changes tab shows which prices changed since the last run."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it email me when a price changes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No email. Each run saves a file and keeps the result for the Changes tab; it can also add rows to a Google Sheet or post them to a webhook, which can send an alert through Zapier, Make or your own code."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the computer have to be on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Scheduled runs happen inside your browser, so they run while it is open; a run that falls due while it is shut happens shortly after you next open it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often can it check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Once a day at a time you choose, every few hours, or every few minutes for something you need to watch closely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I compare with a list I already have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Compare with a file sets a CSV or Excel file against the current list and shows the changed, new and gone rows the same way."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Track price changes on a website",
+      "item": "https://magicscraper.app/track-website-price-changes"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide &middot; Pro</p>
+    <h1>Price changes on a website, <i>caught</i> for you.</h1>
+    <p class="standfirst">Checking a competitor&rsquo;s prices, a supplier&rsquo;s stock or a listing site&rsquo;s new entries by hand is a job that gets skipped. Set the list up once, put it on a schedule, and Magic Scraper collects it again at the time you choose and shows you what moved: the old price struck through beside the new one.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Scheduled runs and Changes are Pro, a one-time purchase.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="quick">
+    <h2>Set it once, see what moved</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Set up the list once</h3>
+        <p>Open the product listing, category or search page and click the extension. Leave out the columns you don&rsquo;t need; crawl every page if it runs on.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Save and schedule</h3>
+        <p>In the gear menu, <b>Saved setups</b>: give it a name, then <b>Schedule</b> &mdash; once a day at a time you choose, every few hours, or every few minutes.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>See what changed</h3>
+        <p>Each run saves a file and keeps the result. The <b>Changes</b> tab shows the rows that changed, the ones that are new and the ones that are gone, with the old value struck through beside the new.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="changes">
+    <h2>What the Changes tab shows</h2>
+    <div class="claim">
+      <p>Crawl a list twice and the Changes tab compares the two: <b>Changed</b>, <b>New</b> and <b>Gone</b>, each a filter of its own. Rows are matched on a column you choose &mdash; a SKU, a product name, a link &mdash; so a price that moved is a change, not one row gone and another new. <b>Export the changes</b> gives you just those rows.</p>
+      <p>Have last month&rsquo;s figures in a spreadsheet already? <b>Compare with a file</b> sets a CSV or Excel file against today&rsquo;s list instead.</p>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <h2>How scheduled runs work</h2>
+    <div class="claim">
+      <p>At the time you set, the extension opens the saved page in a background tab, collects it with your saved choices &mdash; the columns you left out stay out, the names you gave stay &mdash; saves a CSV to your downloads, and closes the tab. Your own tabs are not touched.</p>
+      <p>It runs inside your browser, so it runs <b>while the browser is running</b>: a run that falls due while it is shut happens shortly after you next open it. Each run can also add its rows to your own Google Sheet, or post them to a webhook for Zapier, Make or your own code.</p>
+    </div>
+  </section>
+
+  <section id="uses">
+    <h2>What people watch</h2>
+    <div class="claim">
+      <p>A competitor&rsquo;s prices on a category page. A supplier&rsquo;s stock levels. New listings in a directory or on a marketplace search. A job board, a property list, an exhibitor list as it fills up. Anything that is a list on a page you can open.</p>
+      <p>It reads pages the way you do, in your own browser, with a pause between pages. It stops at a &ldquo;verify you&rsquo;re human&rdquo; check rather than trying to get past it, and it is not built for watching thousands of pages a minute.</p>
+    </div>
+  </section>
+
+  <section id="price">
+    <h2>Free and Pro</h2>
+    <div class="claim">
+      <p>Detecting the list, crawling every page and exporting are free. Scheduled runs, saved setups and the Changes tab are part of Pro. Pro is a one-time purchase: $19 at the founding price for the first 100 buyers, $25 after that, with every update included.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>How can I track a competitor&rsquo;s prices automatically?</summary>
+        <p>Set up their listing page once in Magic Scraper, save the setup and put it on a schedule. Each run collects the page again, saves a file, and the Changes tab shows which prices changed since the last run.</p>
+      </details>
+      <details>
+        <summary>Does it email me when a price changes?</summary>
+        <p>No email. Each run saves a file and keeps the result for the Changes tab; it can also add rows to a Google Sheet or post them to a webhook, which can send an alert through Zapier, Make or your own code.</p>
+      </details>
+      <details>
+        <summary>Does the computer have to be on?</summary>
+        <p>Yes. Scheduled runs happen inside your browser, so they run while it is open; a run that falls due while it is shut happens shortly after you next open it.</p>
+      </details>
+      <details>
+        <summary>How often can it check?</summary>
+        <p>Once a day at a time you choose, every few hours, or every few minutes for something you need to watch closely.</p>
+      </details>
+      <details>
+        <summary>Can I compare with a list I already have?</summary>
+        <p>Yes. Compare with a file sets a CSV or Excel file against the current list and shows the changed, new and gone rows the same way.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>

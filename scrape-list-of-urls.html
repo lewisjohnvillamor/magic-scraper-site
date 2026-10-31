@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scrape a list of URLs into one spreadsheet &mdash; no code</title>
+<meta name="description" content="Paste a list of web addresses and get one spreadsheet back: the same setup run on every page, each page followed through its Next buttons, with a column saying which page each row came from." />
+<link rel="canonical" href="https://magicscraper.app/scrape-list-of-urls" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/scrape-list-of-urls" />
+<meta property="og:title" content="Scrape a list of URLs into one spreadsheet &mdash; no code" />
+<meta property="og:description" content="Paste a list of web addresses and get one spreadsheet back: the same setup run on every page, each page followed through its Next buttons, with a column saying which page each row came from." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Scrape a list of URLs into one spreadsheet",
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Magic Scraper browser extension"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Set it up on the first page",
+      "text": "Open the first address, click the extension and check the table: columns, any you leave out or rename.",
+      "url": "https://magicscraper.app/scrape-list-of-urls#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Paste the other addresses",
+      "text": "On the Crawl tab, open List of pages, tick Run this on a list of pages and paste the addresses, one per line.",
+      "url": "https://magicscraper.app/scrape-list-of-urls#quick"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Run it, then merge",
+      "text": "Press Start crawling. Each address opens in its own tab and is crawled with the same setup. Show all lists together merges them into one table to export.",
+      "url": "https://magicscraper.app/scrape-list-of-urls#quick"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I scrape data from multiple URLs at once into Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Paste the addresses into List of pages on the Crawl tab and start the run; each page is crawled with the same setup, and Show all lists together merges the rows into one table you export to Excel, CSV or JSON."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I paste the URLs from a spreadsheet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Copy the column of addresses and paste it into the box; each line becomes one address. You can also add the page you are on with + This page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it follow pagination on each URL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Each address is crawled the same way as the first page, following Next buttons, Load more or infinite scroll to the end of its list."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know which page a row came from?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The merged table has a List column naming the page each row came from, and every page also keeps its own tab with its own table."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The first two addresses run free, so you can check the result. Running the whole list is part of Pro, a one-time purchase rather than a subscription."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Scrape a list of URLs",
+      "item": "https://magicscraper.app/scrape-list-of-urls"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Guide &middot; Pro</p>
+    <h1>A list of URLs in, <i>one</i> spreadsheet out.</h1>
+    <p class="standfirst">You have the addresses &mdash; twenty supplier pages, every branch of a directory, a category per country &mdash; and the same kind of list on each. Set it up once on the first page, paste the rest, and Magic Scraper runs that setup on every one and hands back a single table, with a column naming the page each row came from.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free runs the first 2 addresses so you can see it work; Pro runs the whole list.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="quick">
+    <h2>From a list of addresses to one sheet</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Set it up on the first page</h3>
+        <p>Open the first address and click the extension. The list is found and named; leave out the columns you don&rsquo;t want, rename the rest. That setup is what every other page gets.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Paste the rest</h3>
+        <p>On the <b>Crawl</b> tab, open <b>List of pages</b>, tick <b>Run this on a list of pages</b> and paste the addresses &mdash; one per line, straight from a spreadsheet column. <b>+ This page</b> adds the one you are on.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Start, then merge</h3>
+        <p>Press <b>Start crawling</b>. Each address opens in a tab of its own, one at a time, and is crawled there &mdash; Next buttons and all. <b>Show all lists together</b> puts every row in one table, with a <b>List</b> column naming its page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="every-page">
+    <h2>Every page of every address</h2>
+    <div class="claim">
+      <p>Each address is crawled the way the first one was: if its list runs over several pages, the extension follows Next, Load more or infinite scroll to the end before it moves on, with a pause between pages so no site is hammered.</p>
+      <p>Turn on <a href="/drill-down">drill-down</a> as well and every row on every list gets the details from its own page added as columns. A list of ten category pages becomes every product in all ten, with its specs.</p>
+    </div>
+  </section>
+
+  <section id="one-sheet">
+    <h2>One sheet, and still each page on its own</h2>
+    <div class="claim">
+      <p>Every list keeps its own tab with its own table, so you can open the extension on any of them and check it. <b>Show all lists together</b> merges them into one table in the tab you started from, and the <b>List</b> column tells you where each row came from &mdash; ready for a pivot table or a filter.</p>
+      <p>If a page in the middle asks you to prove you are human, the run stops there and brings that tab to the front. Clear it and press <b>Resume</b>; the lists already finished are kept.</p>
+    </div>
+  </section>
+
+  <section id="when">
+    <h2>When this is the right tool</h2>
+    <div class="claim">
+      <p>It suits a list of pages that share a layout: a site&rsquo;s category or search pages, a directory by city or state, the same marketplace in different countries, every exhibitor list from a series of trade shows. It runs in your own browser, signed in as you, so it reaches what you can reach.</p>
+      <p>It is not a crawler that discovers addresses for you, and it is not built for thousands of unrelated sites with different layouts &mdash; each address is read with the setup you made on the first.</p>
+    </div>
+  </section>
+
+  <section id="price">
+    <h2>Free and Pro</h2>
+    <div class="claim">
+      <p>Free runs the first two addresses of the list, so you can see the result before paying. Pro is a one-time purchase: $19 at the founding price for the first 100 buyers, $25 after that, with every update included. It also adds saved setups, scheduled runs and the rest. <a href="/#price">Compare what is free</a>.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Can I scrape data from multiple URLs at once into Excel?</summary>
+        <p>Yes. Paste the addresses into List of pages on the Crawl tab and start the run; each page is crawled with the same setup, and Show all lists together merges the rows into one table you export to Excel, CSV or JSON.</p>
+      </details>
+      <details>
+        <summary>Can I paste the URLs from a spreadsheet?</summary>
+        <p>Yes. Copy the column of addresses and paste it into the box; each line becomes one address. You can also add the page you are on with + This page.</p>
+      </details>
+      <details>
+        <summary>Does it follow pagination on each URL?</summary>
+        <p>Yes. Each address is crawled the same way as the first page, following Next buttons, Load more or infinite scroll to the end of its list.</p>
+      </details>
+      <details>
+        <summary>How do I know which page a row came from?</summary>
+        <p>The merged table has a List column naming the page each row came from, and every page also keeps its own tab with its own table.</p>
+      </details>
+      <details>
+        <summary>Is it free?</summary>
+        <p>The first two addresses run free, so you can check the result. Running the whole list is part of Pro, a one-time purchase rather than a subscription.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>
