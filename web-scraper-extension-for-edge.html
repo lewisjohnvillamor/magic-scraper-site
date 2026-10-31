@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Web scraper extension for Microsoft Edge &mdash; free, to Excel &amp; CSV</title>
+<meta name="description" content="A free web scraper and table scraper extension for Microsoft Edge: finds the table or list on the page, follows Next through every page, and exports Excel, CSV or JSON." />
+<link rel="canonical" href="https://magicscraper.app/web-scraper-extension-for-edge" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/web-scraper-extension-for-edge" />
+<meta property="og:title" content="Web scraper extension for Microsoft Edge &mdash; free, to Excel &amp; CSV" />
+<meta property="og:description" content="A free web scraper and table scraper extension for Microsoft Edge: finds the table or list on the page, follows Next through every page, and exports Excel, CSV or JSON." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Magic Scraper",
+  "applicationCategory": "BrowserApplication",
+  "operatingSystem": "Microsoft Edge, Google Chrome",
+  "url": "https://magicscraper.app/web-scraper-extension-for-edge",
+  "downloadUrl": "https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a free web scraper extension for Microsoft Edge?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Magic Scraper is in the Microsoft Edge Add-ons store and is free to install with no account: finding the table or list on a page, crawling every page of it, and exporting to Excel, CSV or JSON all cost nothing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it scrape a table that goes over several pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. When the list has a Next button, Load more or infinite scroll, the Crawl tab follows it page after page and adds every page to the same table. It finds Next buttons in more than 80 languages."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on tables that are not real HTML tables?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It reads the page's structure rather than its text, so grids of cards, lists and div-based tables come out as one row each with a column per field, the same as a real table."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Edge version different from the Chrome version?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Edge runs Chrome extensions natively, and the Edge Add-ons listing is the same extension: the same detection, crawling, drill-down, side panel and exports."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my data get uploaded anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It runs inside Edge on the page you have open, and what it collects stays on your computer until you export it. There is no account and no server of ours in between."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Web scraper for Edge",
+      "item": "https://magicscraper.app/web-scraper-extension-for-edge"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Microsoft Edge</p>
+    <h1>A web scraper for <i>Edge</i>: any table, every page, into Excel.</h1>
+    <p class="standfirst">Magic Scraper is a free extension in the Microsoft Edge Add-ons store.
+      Open a page with a table, a list or a grid of results, click the icon, and the rows are
+      already found and named. One click follows Next through every page; another exports Excel,
+      CSV or JSON. No account, no code, and nothing uploaded.</p>
+    <div class="actions">
+      <a class="btn" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Get it for Edge &mdash; free</a>
+      <a class="btn btn-quiet" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Chrome version</a>
+      <span class="aside">Free: detection, crawling every page, and Excel, CSV and JSON exports.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="quick">
+    <h2>Scraping a table in Edge, start to finish</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Install from Edge Add-ons</h3>
+        <p>Press <b>Get</b> on the <a href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Magic Scraper listing</a>, then pin the icon from Edge's puzzle-piece menu so it is one click away.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Click it on the page</h3>
+        <p>The table or list is outlined on the page and shown with named columns. If it picked the wrong one, <b>Wrong list?</b> has the others, or point at the one you want.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Every page, then export</h3>
+        <p>On the <b>Crawl</b> tab, <b>Start crawling</b> follows Next, Load more or infinite scroll to the end. Then <b>Export CSV</b>, or Excel and JSON from the arrow beside it.</p>
+      </div>
+    </div>
+    <p class="aside">Want something to try it on first? The <a href="/demo/">practice site</a> has a paginated catalogue, tables, infinite scroll and more, built to be scraped.</p>
+  </section>
+
+  <section id="pagination">
+    <h2>Tables that run over many pages</h2>
+    <div class="claim">
+      <p>Most tables worth having don't fit on one page: search results, directories, product
+        listings, order histories. Copying page by page is where an afternoon goes. The Crawl tab
+        finds the page's Next button &mdash; in more than 80 languages &mdash; or its Load more button or infinite scroll, and keeps going, with a pause
+        between pages so the site isn't hammered. Every page lands in the same table.</p>
+      <p>If the site stops you with a "verify you're human" check, the run stops and tells you
+        rather than trying to get round it.</p>
+    </div>
+  </section>
+
+  <section id="not-tables">
+    <h2>Lists that aren't tables</h2>
+    <div class="claim">
+      <p>A lot of what looks like a table on screen is a grid of cards or a stack of boxes
+        underneath. Edge's copy and paste turns those into one long column of text. Magic Scraper
+        reads the repeating structure instead, so each card becomes a row and each field &mdash;
+        name, price, rating, link, image &mdash; becomes a column, named from the page.</p>
+      <p>The rows link somewhere? <a href="/drill-down">Drill-down</a> opens the page behind each
+        row and adds what is there as columns: specs, contact details, or a table of price tiers
+        with a row per tier.</p>
+    </div>
+  </section>
+
+  <section id="exports">
+    <h2>Excel, CSV, JSON &mdash; or straight into Google Sheets</h2>
+    <div class="claim">
+      <p>Excel files keep prices and counts as numbers, not text. CSV opens anywhere; JSON is there
+        for code. Leave out the columns you don't want and rename the rest before you export, and
+        it remembers those choices for that site next time.</p>
+      <p>Pro (a one-time purchase) adds saved setups, a list of pages run as one sheet, scheduled
+        runs, changes since last time, and sending rows to your own Google Sheet or webhook.</p>
+    </div>
+  </section>
+
+  <section id="edge-faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Is there a free web scraper extension for Microsoft Edge?</summary>
+        <p>Yes. Magic Scraper is in the Microsoft Edge Add-ons store and is free to install with no account: finding the table or list on a page, crawling every page of it, and exporting to Excel, CSV or JSON all cost nothing.</p>
+      </details>
+      <details>
+        <summary>Can it scrape a table that goes over several pages?</summary>
+        <p>Yes. When the list has a Next button, Load more or infinite scroll, the Crawl tab follows it page after page and adds every page to the same table. It finds Next buttons in more than 80 languages.</p>
+      </details>
+      <details>
+        <summary>Does it work on tables that are not real HTML tables?</summary>
+        <p>Yes. It reads the page's structure rather than its text, so grids of cards, lists and div-based tables come out as one row each with a column per field, the same as a real table.</p>
+      </details>
+      <details>
+        <summary>Is the Edge version different from the Chrome version?</summary>
+        <p>No. Edge runs Chrome extensions natively, and the Edge Add-ons listing is the same extension: the same detection, crawling, drill-down, side panel and exports.</p>
+      </details>
+      <details>
+        <summary>Does my data get uploaded anywhere?</summary>
+        <p>No. It runs inside Edge on the page you have open, and what it collects stays on your computer until you export it. There is no account and no server of ours in between.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>
