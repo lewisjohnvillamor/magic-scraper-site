@@ -16,6 +16,11 @@ binding = "ASSETS"
 # Serve the branded 404 instead of Cloudflare's bare one. Without this a
 # mistyped URL is a dead end with no way back to the site.
 not_found_handling = "404-page"
+# The Worker sees page requests too, not only /api/, so it can answer an AI
+# agent that asks for a page as Markdown (src/markdown.js). Everything else
+# passes straight through to the assets, with _headers applied as before.
+# Images and fonts under /assets/ skip the Worker entirely.
+run_worker_first = ["/*", "!/assets/*"]
 
 # ---------------------------------------------------------------------------
 # The API (src/index.js): the feature request board at /requests, the home

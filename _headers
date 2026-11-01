@@ -4,6 +4,7 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  Link: </llms.txt>; rel="describedby"; type="text/plain", </sitemap.xml>; rel="sitemap"; type="application/xml"
 
 # The admin page holds the admin token while it is open: nothing may frame it,
 # and it runs only its own scripts (the one inline line is allowed by hash).
