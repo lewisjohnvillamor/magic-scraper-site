@@ -30,4 +30,37 @@ add();
 window.addEventListener("scroll",function(){
   if(window.innerHeight+window.scrollY>=document.body.offsetHeight-320) add();
 });
-</script><footer class="site"><div class="shell"><div class="cols"><div><h5>Northwind Supply</h5><p style="color:var(--ink-2);font-size:14px;margin:0">Household goods for people who keep things. Trade accounts welcome.</p><div class="signup"><input type="email" placeholder="Email address" aria-label="Email address"><button type="button">Join</button></div></div><div><h5>Shop</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="table.html">Trade list</a></li><li><a href="scroll.html">New arrivals</a></li><li><a href="awkward.html">Clearance</a></li><li><a href="shadow.html">Shop the look</a></li><li><a href="#">Gift cards</a></li></ul></div><div><h5>Help</h5><ul><li><a href="rates.html">Delivery rates</a></li><li><a href="iframe.html">Stock &amp; delivery</a></li><li><a href="reviews.html">Customer reviews</a></li><li><a href="returns.html">Returns log</a></li><li><a href="#">Contact</a></li></ul></div><div><h5>About</h5><ul><li><a href="#">Our makers</a></li><li><a href="stock.html">Warehouse stock</a></li><li><a href="feed.html">Product data</a></li><li><a href="#">Journal</a></li></ul></div></div><div class="fine"><span>&copy; 2026 Northwind Supply</span><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a><span class="sep">A fictional shop. Nothing here is for sale.</span></div></div></footer></body></html>
+</script><!-- practice-notes --><style>.practice-notes{max-width:780px;margin:44px 0 56px;padding:24px 28px;background:#fffefb;border:1px solid #e0dbd0;border-radius:12px;color:#2a2720;font-size:15.5px;line-height:1.6}.practice-notes .kicker{font:600 11px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#b4491f;margin:0 0 10px}.practice-notes h2{font-size:21px;margin:22px 0 6px}.practice-notes h2:first-of-type{margin-top:4px}.practice-notes p{margin:0 0 10px}.practice-notes pre{background:#17150f;color:#f3efe6;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;line-height:1.5}.practice-notes code{font-size:.92em}.practice-notes .cta{margin-top:16px;font-weight:600}</style><style>.practice-notes figure{margin:18px 0 20px}.practice-notes figure img{display:block;width:100%;height:auto;border:1px solid #e0dbd0;border-radius:10px;background:#f6f3ec}.practice-notes figcaption{font-size:13.5px;color:#5d574a;margin-top:8px;line-height:1.5}.practice-notes .watch{display:flex;gap:14px;align-items:center;margin:14px 0 6px;text-decoration:none;color:inherit}.practice-notes .watch img{width:168px;height:auto;border-radius:8px;flex:none}.practice-notes .watch span{font-weight:600}</style><section class="practice-notes" id="practice-notes"><p class="kicker">About this practice page</p>
+<h2>A &ldquo;new arrivals&rdquo; feed with no page two</h2>
+<p>Fashion shops, marketplaces, job boards and social feeds have mostly given up on numbered pages.
+They show a first handful and add more as you near the bottom. It is pleasant to browse and awkward
+to collect, because nothing tells you how many there are or when you have reached the end. This
+page behaves like those: eight products on load, eight more each time you scroll close to the
+bottom, five times, and then the line &ldquo;No more items.&rdquo;</p>
+<h2>Why a single grab gets eight</h2>
+<p>When the page first appears only the first batch exists. Read it then and you have eight rows,
+and nothing looks wrong &mdash; there is no pager to remind you of what you missed. Fetch the address
+with a plain HTTP request and it is worse: the cards are drawn by a script, so the HTML holds no
+cards at all.</p>
+<h2>Collecting all forty</h2>
+<p>In Magic Scraper, turn on <b>Infinite scroll</b> on the Crawl tab and start crawling. It scrolls,
+waits for the new cards, adds them, and stops when two scrolls in a row bring nothing new. In the
+browser console the same idea is a short loop:</p>
+<pre><code>for (let i = 0; i &lt; 10; i++) {
+  window.scrollTo(0, document.body.scrollHeight);
+  await new Promise(r =&gt; setTimeout(r, 400));
+}
+document.querySelectorAll('#feed article.product').length   // 40</code></pre>
+<p>Before you scroll anything, look at the page source. Feeds like this often ship their whole list
+as JSON for the script to draw from, and here it is: an <code>ITEMS</code> array with all forty.
+When that is there, it beats scrolling:</p>
+<pre><code>import re, json, requests
+html = requests.get("https://magicscraper.app/demo/scroll").text
+items = json.loads(re.search(r"var ITEMS=(\[.*?\]);", html, re.S).group(1))
+len(items)   # 40</code></pre>
+<p>On real sites the list usually comes from a separate request instead &mdash; the Network tab in
+DevTools, filtered to Fetch/XHR, shows it as you scroll.</p>
+<h2>A correct result</h2>
+<p>40 rows, no repeats, each with name, maker, a price like $192.00, the rating as a number, a stock
+line and an SKU. If you have 8, the scroll never happened; 16 or 24 means the waits were too short
+for the feed to keep up.</p><p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p></section><!-- /practice-notes --><footer class="site"><div class="shell"><div class="cols"><div><h5>Northwind Supply</h5><p style="color:var(--ink-2);font-size:14px;margin:0">Household goods for people who keep things. Trade accounts welcome.</p><div class="signup"><input type="email" placeholder="Email address" aria-label="Email address"><button type="button">Join</button></div></div><div><h5>Shop</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="table.html">Trade list</a></li><li><a href="scroll.html">New arrivals</a></li><li><a href="awkward.html">Clearance</a></li><li><a href="shadow.html">Shop the look</a></li><li><a href="#">Gift cards</a></li></ul></div><div><h5>Help</h5><ul><li><a href="rates.html">Delivery rates</a></li><li><a href="iframe.html">Stock &amp; delivery</a></li><li><a href="reviews.html">Customer reviews</a></li><li><a href="returns.html">Returns log</a></li><li><a href="#">Contact</a></li></ul></div><div><h5>About</h5><ul><li><a href="#">Our makers</a></li><li><a href="stock.html">Warehouse stock</a></li><li><a href="feed.html">Product data</a></li><li><a href="#">Journal</a></li></ul></div></div><div class="fine"><span>&copy; 2026 Northwind Supply</span><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a><span class="sep">A fictional shop. Nothing here is for sale.</span></div></div></footer></body></html>

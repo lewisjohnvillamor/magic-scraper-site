@@ -138,7 +138,7 @@ extension, not in storage the scraped website can read.
 ## Practice site
 
 - [Scrape sandbox](https://magicscraper.app/demo/): a fictional shop built to be scraped.
-  Open to anyone, with any tool, and not rate-limited. Eleven pages, each one a different
+  Open to anyone, with any tool, and not rate-limited. Twenty pages, each one a different
   problem, and each one states its expected result so a scraper can be checked against it:
 
   - [Catalogue](https://magicscraper.app/demo/catalogue): a card grid, nine per page, six
@@ -157,11 +157,29 @@ extension, not in storage the scraped website can read.
   - [Customer reviews](https://magicscraper.app/demo/reviews): a Load more button — 12 on
     load, 48 after three clicks
   - [Warehouse stock](https://magicscraper.app/demo/stock): an ARIA data grid built from divs
-    — 30 rows, 6 columns, no table element on the page
+    — 30 rows, 6 columns (7 with the product link), no table element on the page
   - [Returns log](https://magicscraper.app/demo/returns): deliberately dirty data — 24 rows,
-    three date formats, three currency formats, 13 empty cells, 2 exact duplicates
+    three date formats, three refund formats, 13 empty cells, 2 exact duplicates
   - [Delivery rates](https://magicscraper.app/demo/rates): two tables of different widths on
     one page — 8 rows and 14
+  - [Bulk list](https://magicscraper.app/demo/bulk): 2,000 rows over 40 pages, with a pager
+    that shows a window of page numbers
+  - [Live board](https://magicscraper.app/demo/live): 25 rows that change a little every
+    minute, for comparing one run with the next
+  - [Seven kinds of Next button](https://magicscraper.app/demo/pagers): the same 30 products
+    paged by an icon arrow, page numbers only, Older posts, German, Japanese, a class name, and
+    a JavaScript button
+  - [Store locator](https://magicscraper.app/demo/stockists): 14 shops under A to Z headings,
+    expected as one table with the letter as a column
+  - [Wholesale prices](https://magicscraper.app/demo/wholesale-prices): four products whose own
+    pages hold price-break tables — 12 rows, one per tier
+  - [Business directory](https://magicscraper.app/demo/directory): 24 listings over three
+    pages, each with a profile page of label and value pairs
+  - [Multiple tables](https://magicscraper.app/demo/account): five tables on one page, each
+    paged its own way — the task is the 40 invoices over 4 pages and nothing else
+  - [Parts catalogue](https://magicscraper.app/demo/parts): a category sidebar, a brand
+    filter and a featured carousel beside a paged parts table — 26 fasteners over 3 pages, and
+    74 parts across six categories with the category on each row
   - [Journal](https://magicscraper.app/demo/journal): a five-page PDF short story, GRIT, for
     testing whole-page screenshots and scrolling videos of a PDF
 

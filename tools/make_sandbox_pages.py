@@ -670,7 +670,7 @@ def build_returns(items, rnd):
 
     empties = sum(1 for r in rows for k in ("sku", "reason", "qty", "refund", "status")
                   if r[k] == "")
-    blank_marks = sum(1 for r in rows if r["reason"] in ("N/A", "&mdash;"))
+    blank_marks = sum(1 for r in rows for k in ("reason", "refund") if r[k] in ("N/A", "&mdash;"))
 
     body = (
         '<div style="padding-bottom:70px">'
@@ -683,7 +683,7 @@ def build_returns(items, rnd):
         '</tbody></table></div>'
         '<p class="aside-note">This is a real returns log, in the sense that it is as untidy as '
         'a real one. Dates are written three different ways. Refunds appear as '
-        '<code>$1,240.00</code>, <code>USD 85</code> and bare <code>85.00</code>. %d cells are '
+        '<code>$420.00</code>, <code>USD 227</code> and bare <code>341.90</code>. %d cells are '
         'empty, %d more say <code>N/A</code> or an em dash instead, and two parcels were logged '
         'twice by two different people, so two rows repeat exactly. Getting it out is the easy '
         'part; the point of this page is what you do with it afterwards.</p>'

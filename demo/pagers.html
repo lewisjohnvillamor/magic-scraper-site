@@ -121,7 +121,71 @@
   </section>
 </div>
 
+
+
+
+
+
+
+<!-- practice-notes --><div class="wrap"><style>.practice-notes{max-width:780px;margin:44px 0 56px;padding:24px 28px;background:#fffefb;border:1px solid #e0dbd0;border-radius:12px;color:#2a2720;font-size:15.5px;line-height:1.6}.practice-notes .kicker{font:600 11px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#b4491f;margin:0 0 10px}.practice-notes h2{font-size:21px;margin:22px 0 6px}.practice-notes h2:first-of-type{margin-top:4px}.practice-notes p{margin:0 0 10px}.practice-notes pre{background:#17150f;color:#f3efe6;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;line-height:1.5}.practice-notes code{font-size:.92em}.practice-notes .cta{margin-top:16px;font-weight:600}</style><style>.practice-notes figure{margin:18px 0 20px}.practice-notes figure img{display:block;width:100%;height:auto;border:1px solid #e0dbd0;border-radius:10px;background:#f6f3ec}.practice-notes figcaption{font-size:13.5px;color:#5d574a;margin-top:8px;line-height:1.5}.practice-notes .watch{display:flex;gap:14px;align-items:center;margin:14px 0 6px;text-decoration:none;color:inherit}.practice-notes .watch img{width:168px;height:auto;border-radius:8px;flex:none}.practice-notes .watch span{font-weight:600}</style><section class="practice-notes" id="practice-notes"><p class="kicker">About these practice lists</p>
+<h2>Why &ldquo;it only scraped the first page&rdquo; is the commonest complaint</h2>
+<p>A scraper that pages through a list has to find the control that goes forward, and most of them
+look for a link that says <i>Next</i>. Real sites rarely make it that easy. A theme draws an arrow
+icon. A blog says <i>Older posts</i>. A shop in Munich says <i>Weiter</i>, one in Osaka <i>次へ</i>. A
+forum shows only page numbers. A framework renders an empty element whose only clue is its class
+name, or a button that runs JavaScript and has no address at all. Each of the seven lists above is
+paged one of those ways, with the same thirty products, so you can see exactly which ones a tool
+follows.</p>
+<h2>What each one asks of a scraper</h2>
+<p>The arrow needs the link&rsquo;s <code>aria-label</code> (&ldquo;Next page&rdquo;) read, because
+there is no text. Page numbers need the current number found and the link to the one after it
+chosen &mdash; without being fooled by a row of star ratings that also reads 1 2 3 4 5. <i>Older
+posts</i> needs the direction understood: on a blog, older is forward and <i>Newer</i> is back. The
+German and Japanese lists need words in other languages. The class-only link needs the markup&rsquo;s
+own names read. The JavaScript button needs clicking in a real page, then waiting for the list to
+change, because there is no URL to fetch.</p>
+<h2>In Magic Scraper</h2>
+<p>It finds all seven on its own: open it on the first page of any list and press <b>Start
+crawling</b>. To see which control it chose before you start, press <b>Auto-detect
+&ldquo;Next&rdquo;</b> on the Crawl tab. If a site has one it misses, <b>Pick &ldquo;Next&rdquo;
+manually</b> lets you click the control yourself.</p>
+<h2>A Next finder in Python</h2>
+<p>The six link-based lists can be walked with one function that tries the same clues in order:
+<code>rel="next"</code>, a label or word that means forward, a class with <i>next</i> in it, and
+finally the number after the current page.</p>
+<pre><code>import re, requests
+from urllib.parse import urljoin
+from bs4 import BeautifulSoup
+
+WORDS = re.compile(r"^(next|older|weiter|次へ|suivant|siguiente)\b|^[›»→]$", re.I)
+
+def next_link(soup):
+    for a in soup.select("a[href]"):
+        label = (a.get("aria-label") or a.get_text(" ", strip=True)).strip()
+        if a.get("rel") == ["next"] or WORDS.search(label) or "next" in " ".join(a.get("class", [])):
+            return a["href"]
+    on = soup.select_one(".pager .on")                 # page numbers only
+    if on and on.get_text(strip=True).isdigit():
+        a = on.find_next_sibling("a", string=str(int(on.get_text(strip=True)) + 1))
+        return a["href"] if a else None
+
+url, rows = "https://magicscraper.app/demo/pager-ja-1", 0
+while url:
+    soup = BeautifulSoup(requests.get(url).content, "html.parser")
+    rows += len(soup.select("article"))
+    href = next_link(soup)
+    url = urljoin(url, href) if href else None
+print(rows)   # 30</code></pre>
+<p>Pass <code>.content</code>, not <code>.text</code>, to BeautifulSoup: it then reads the page&rsquo;s
+own charset, and the Japanese list does not turn into mojibake on a server that leaves the charset
+out of its headers. The seventh list, the JavaScript button, cannot be done this way at all; it needs a
+browser, or the extension.</p>
+<h2>A correct result</h2>
+<p>30 items over 3 pages from every list. Ten means the Next was missed; twenty usually means a
+crawler went forward and then back.</p><p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p></section></div><!-- /practice-notes -->
 </main>
+
+
 
 <div class="wrap">
   <footer>

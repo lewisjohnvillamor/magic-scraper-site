@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Category and table scraping: a parts catalogue to practise on</title><meta name="description" content="Practise scraping a parts table beside a category sidebar, a brand filter and a featured carousel: 26 fasteners over 3 pages, then all 74 parts from six categories with the category on each row."><link rel="canonical" href="https://magicscraper.app/demo/parts"><meta property="og:type" content="website"><meta property="og:site_name" content="Magic Scraper"><meta property="og:url" content="https://magicscraper.app/demo/parts"><meta property="og:title" content="Category and table scraping: a parts catalogue to practise on"><meta property="og:description" content="Practise scraping a parts table beside a category sidebar, a brand filter and a featured carousel: 26 fasteners over 3 pages, then all 74 parts from six categories with the category on each row."><meta property="og:image" content="https://magicscraper.app/assets/screenshot.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/icon.png"><link rel="stylesheet" href="store.css"><style>
+.parts{display:grid;grid-template-columns:220px 1fr;gap:34px;margin:6px 0 40px}@media(max-width:860px){.parts{grid-template-columns:1fr}}
+.side h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6b6556;margin:0 0 8px}.side ul{list-style:none;margin:0 0 24px;padding:0}
+.side li{padding:5px 0;border-bottom:1px dashed #e7e2d8;font-size:15px}.side li a{text-decoration:none}.side li a[aria-current]{font-weight:700}.side .count{color:#8d8677;font-size:13px;margin-left:4px}
+.featured{border:1px solid #e0dbd0;border-radius:12px;padding:14px 16px;margin:0 0 22px;background:#fffefb}.featured h2{font-size:17px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:center}
+.carousel{display:flex;gap:14px;overflow:hidden}.carousel .card{flex:0 0 calc(25% - 11px);border:1px solid #ece7dc;border-radius:10px;padding:10px 12px;background:#fff}
+.carousel .card h3{font-size:14px;margin:0 0 4px}.carousel .card p{margin:0;font-size:14px;font-weight:700}
+.arrows button{font:inherit;border:1px solid #e0dbd0;background:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer;margin-left:6px}
+table.partlist{border-collapse:collapse;width:100%;font-size:14.5px}table.partlist th{text-align:left;padding:8px 10px;border-bottom:2px solid #17150f;white-space:nowrap}
+table.partlist td{padding:8px 10px;border-bottom:1px solid #ece7dc}table.partlist td.num,table.partlist th.num{text-align:right}
+.showing{color:#6b6556;font-size:14px;margin:0 0 8px}.parts .pager{margin:12px 0}
+.recent{margin-top:26px}.recent h2{font-size:17px;margin:0 0 8px}.recent ul{list-style:none;padding:0;margin:0;display:flex;gap:18px;flex-wrap:wrap}
+.recent li{border:1px solid #ece7dc;border-radius:8px;padding:8px 12px;font-size:14px}
+footer.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;border-top:1px solid #e0dbd0;padding:26px 0 40px;font-size:14px}
+footer.cols ul{list-style:none;padding:0;margin:0}footer.cols li{padding:3px 0}footer.cols h5{margin:0 0 8px;font-size:13px}
+</style></head><body><div class="sandbox"><div class="shell"><span class="tag">Sandbox</span><b>Practice site for Magic Scraper.</b> A category sidebar, a carousel and a paged table. The jobs: this table, every page of it &mdash; then every category&rsquo;s. <a href="index.html">All sandbox pages</a> &middot; <a href="../index.html"><b>Get Magic Scraper free</b></a></div></div>
+<header class="site"><div class="shell bar"><a class="brand" href="../" title="Magic Scraper home">Magic <b>Scraper</b> <span>Sandbox</span></a><nav><a href="catalogue.html">Catalogue</a><a href="parts.html" aria-current="page">Parts</a><a href="wholesale-prices.html">Wholesale</a><a href="account.html">Account</a></nav></div></header>
+<div class="shell"><p class="crumbs"><a href="index.html">Sandbox</a> / Parts / Fasteners</p><div class="head"><h1>Category and table scraping</h1><p>Trade parts catalogue &middot; 6 categories &middot; 74 parts</p></div><div class="parts"><aside class="side"><h4>Categories</h4><ul class="categories"><li><a href="parts.html" aria-current="page">Fasteners</a><span class="count">(26)</span></li><li><a href="parts-hinges.html">Hinges</a><span class="count">(8)</span></li><li><a href="parts-brackets.html">Brackets</a><span class="count">(14)</span></li><li><a href="parts-handles.html">Handles</a><span class="count">(5)</span></li><li><a href="parts-castors.html">Castors</a><span class="count">(12)</span></li><li><a href="parts-shelf-supports.html">Shelf supports</a><span class="count">(9)</span></li></ul><h4>Brand</h4><ul class="brands"><li><a href="#">Brock Forge</a></li><li><a href="#">Northwind Hardware</a></li><li><a href="#">Hallam &amp; Co.</a></li><li><a href="#">Aoyama Works</a></li><li><a href="#">Fieldhouse</a></li><li><a href="#">Kestrel Fixings</a></li><li><a href="#">Millbrook</a></li><li><a href="#">Thornbury</a></li></ul></aside><div><div class="featured"><h2>Featured this month<span class="arrows"><button type="button" class="carousel-prev" aria-label="Previous">&lsaquo;</button><button type="button" class="carousel-next" aria-label="Next">&rsaquo;</button></span></h2><div class="carousel"><div class="card"><h3>Soft-close concealed hinge</h3><p>$4.80</p></div><div class="card"><h3>Heavy-duty braked castor, 100 mm</h3><p>$12.40</p></div><div class="card"><h3>Brass cup handle</h3><p>$6.95</p></div><div class="card"><h3>Stainless coach bolt, M10</h3><p>$0.62</p></div><div class="card"><h3>Glass shelf clip</h3><p>$1.10</p></div><div class="card"><h3>Oiled bronze bar handle</h3><p>$9.30</p></div></div></div><h2 style="font-size:22px;margin:0 0 4px">Fasteners</h2><p class="showing">Showing 1&ndash;10 of 26 parts</p><table class="partlist"><thead><tr><th>Part no.</th><th>Description</th><th>Material</th><th class="num">Pack</th><th class="num">Price</th><th>Stock</th></tr></thead><tbody><tr><td>FX-1001</td><td>Wood screw, 4 x 30 mm</td><td>Black steel</td><td class="num">200</td><td class="num">$39.20</td><td>Low stock</td></tr><tr><td>FX-1002</td><td>Machine screw, M8</td><td>Nylon</td><td class="num">25</td><td class="num">$16.86</td><td>Back order</td></tr><tr><td>FX-1003</td><td>Coach bolt, 8 mm</td><td>Oiled bronze</td><td class="num">10</td><td class="num">$15.57</td><td>Low stock</td></tr><tr><td>FX-1004</td><td>Hex nut, M6</td><td>Zinc plated steel</td><td class="num">10</td><td class="num">$1.97</td><td>Back order</td></tr><tr><td>FX-1005</td><td>Washer, 6 mm</td><td>Stainless steel</td><td class="num">200</td><td class="num">$14.72</td><td>Low stock</td></tr><tr><td>FX-1006</td><td>Wall plug, 5 x 50 mm</td><td>Brass</td><td class="num">10</td><td class="num">$38.04</td><td>Low stock</td></tr><tr><td>FX-1007</td><td>Threaded insert, M10</td><td>Black steel</td><td class="num">100</td><td class="num">$33.86</td><td>Back order</td></tr><tr><td>FX-1008</td><td>Rivet, 4 x 30 mm</td><td>Nylon</td><td class="num">10</td><td class="num">$40.51</td><td>Back order</td></tr><tr><td>FX-1009</td><td>Wood screw, M8</td><td>Oiled bronze</td><td class="num">1</td><td class="num">$5.37</td><td>In stock</td></tr><tr><td>FX-1010</td><td>Machine screw, 8 mm</td><td>Zinc plated steel</td><td class="num">200</td><td class="num">$8.78</td><td>In stock</td></tr></tbody></table><div class="pager"><span class="on">1</span><a href="parts-fasteners-2.html">2</a><a href="parts-fasteners-3.html">3</a><a class="next" href="parts-fasteners-2.html">Next &rsaquo;</a></div><div class="recent"><h2>Recently viewed</h2><ul><li><a href="parts-brackets.html">Mending plate, 150 mm</a></li><li><a href="parts-shelf-supports.html">Shelf stud, 5 mm</a></li><li><a href="parts-castors.html">Swivel castor, 50 mm</a></li></ul></div></div></div><!-- practice-notes --><style>.practice-notes{max-width:780px;margin:44px 0 56px;padding:24px 28px;background:#fffefb;border:1px solid #e0dbd0;border-radius:12px;color:#2a2720;font-size:15.5px;line-height:1.6}.practice-notes .kicker{font:600 11px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#b4491f;margin:0 0 10px}.practice-notes h2{font-size:21px;margin:22px 0 6px}.practice-notes h2:first-of-type{margin-top:4px}.practice-notes p{margin:0 0 10px}.practice-notes pre{background:#17150f;color:#f3efe6;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;line-height:1.5}.practice-notes code{font-size:.92em}.practice-notes .cta{margin-top:16px;font-weight:600}</style><style>.practice-notes figure{margin:18px 0 20px}.practice-notes figure img{display:block;width:100%;height:auto;border:1px solid #e0dbd0;border-radius:10px;background:#f6f3ec}.practice-notes figcaption{font-size:13.5px;color:#5d574a;margin-top:8px;line-height:1.5}.practice-notes .watch{display:flex;gap:14px;align-items:center;margin:14px 0 6px;text-decoration:none;color:inherit}.practice-notes .watch img{width:168px;height:auto;border-radius:8px;flex:none}.practice-notes .watch span{font-weight:600}</style><section class="practice-notes" id="practice-notes"><p class="kicker">About this practice page</p>
+<h2>The page most wholesale sites are built on</h2>
+<p>Parts suppliers, trade counters, B2B shops and most catalogue sites share one layout: categories
+down the left with a count beside each, a filter or two under them, a featured strip across the top,
+the products as a table in the middle with a pager under it, and a recently-viewed row and a footer
+full of links below. Each of those is a list, and each is a list a scraper can take for the data. The
+two jobs people actually have are simple to say: this category&rsquo;s table, every page of it &mdash; and
+then every category&rsquo;s, in one sheet, with the category on each row.</p>
+<h2>Where it goes wrong</h2>
+<p>Picking the table is the easy part; a table with columns beats a list of short links. The traps
+are around it. The featured carousel has its own <i>Next</i> arrow above the table, and a scraper that
+takes the first Next on the page clicks through featured products instead of paging the parts. When
+the tool picks wrong and you ask for another list, it may offer every row of the table as a
+&ldquo;list&rdquo; of its six cells before it ever reaches the categories. And going through the
+categories, each category&rsquo;s table has its own pages: Fasteners is three pages, Brackets and Castors
+two, the others one. Reading the first page of each gets 52 parts of 74 and looks finished.</p>
+<h2>In Magic Scraper</h2>
+<p>It opens on the parts table, and <b>Start crawling</b> pages it by its own pager &mdash; 26 fasteners
+from three pages, the carousel left alone. For every category: open <b>Wrong list?</b> &rarr;
+<b>Another table</b> until the category list is outlined (six rows, with the counts), then on the
+Crawl tab turn on <a href="../drill-down">drill-down</a>, preview the first category, tick <b>Every row of
+its table &mdash; one row each</b> and run it. It opens each category, reads its parts table one row per
+part, follows that table&rsquo;s own pages, and keeps the category&rsquo;s name and link on every row: 74
+rows. Reading every category is a Pro feature; the free version reads the first three so you can see
+the result.</p>
+<h2>In Python</h2>
+<p>Take the categories from the sidebar, then page each one by the pager under its table:</p>
+<pre><code>import requests, pandas as pd
+from io import StringIO
+from urllib.parse import urljoin
+from bs4 import BeautifulSoup
+
+start = "https://magicscraper.app/demo/parts"
+soup = BeautifulSoup(requests.get(start).content, "html.parser")
+categories = [(a.get_text(strip=True), urljoin(start, a["href"])) for a in soup.select("ul.categories a")]
+frames = []
+for name, url in categories:
+    while url:
+        page = BeautifulSoup(requests.get(url).content, "html.parser")
+        df = pd.read_html(StringIO(str(page.select_one("table.partlist"))))[0]
+        df.insert(0, "Category", name)
+        frames.append(df)
+        nxt = page.select_one(".pager a.next")          # the table's pager, not the carousel
+        url = urljoin(url, nxt["href"]) if nxt else None
+parts = pd.concat(frames, ignore_index=True)
+parts.shape   # (74, 7)</code></pre>
+<h2>A correct result</h2>
+<p>This category: 26 rows, FX-1001 to FX-1026, six columns (Part no., Description, Material, Pack,
+Price, Stock). Every category: 74 rows with a category on each &mdash; 26 Fasteners, 8 Hinges, 14
+Brackets, 5 Handles, 12 Castors and 9 Shelf supports &mdash; and every part number different. If you
+have 52, the second and third pages of the longer categories were missed.</p><p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p></section><!-- /practice-notes --><footer class="cols"><div><h5>Shop</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="wholesale-prices.html">Wholesale</a></li><li><a href="stockists.html">Stockists</a></li></ul></div><div><h5>Account</h5><ul><li><a href="account.html">Trade account</a></li><li><a href="#">Orders</a></li><li><a href="#">Invoices</a></li></ul></div><div><h5>Help</h5><ul><li><a href="rates.html">Delivery</a></li><li><a href="returns.html">Returns</a></li><li><a href="#">Contact</a></li></ul></div><div><h5>Sandbox</h5><ul><li><a href="index.html">All practice pages</a></li><li><a href="../">Magic Scraper</a></li></ul></div></footer><script>
+(function () {
+  var track = document.querySelector('.carousel'), cards = track ? track.children : [], at = 0;
+  function show() { for (var i = 0; i < cards.length; i++) cards[i].style.display = (i >= at && i < at + 4) ? '' : 'none'; }
+  var n = document.querySelector('.carousel-next'), p = document.querySelector('.carousel-prev');
+  if (n) n.addEventListener('click', function () { at = Math.min(at + 1, cards.length - 4); show(); });
+  if (p) p.addEventListener('click', function () { at = Math.max(at - 1, 0); show(); });
+  show();
+})();
+</script></div></body></html>
