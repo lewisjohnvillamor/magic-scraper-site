@@ -57,4 +57,30 @@
 <tr><td><a href="item108.html">Walnut Jug, Ink</a></td><td>NW-1108</td><td>Northwind Own</td><td>Kitchen</td><td class="num">$324.00</td><td class="num">$201.00</td><td class="num">0</td></tr>
 <tr><td><a href="item109.html">Marble Mirror, Ink</a></td><td>NW-1109</td><td>Hallam & Co.</td><td>Decor</td><td class="num">$218.00</td><td class="num">$135.00</td><td class="num">152</td></tr>
 <tr><td><a href="item110.html">Oak Basket, Ecru</a></td><td>NW-1110</td><td>Textiles</td><td>Textiles</td><td class="num">$355.00</td><td class="num">$220.00</td><td class="num">110</td></tr>
-</tbody></table></div></div></div><footer class="site"><div class="shell"><div class="cols"><div><h5>Northwind Supply</h5><p style="color:var(--ink-2);font-size:14px;margin:0">Household goods for people who keep things. Trade accounts welcome.</p><div class="signup"><input type="email" placeholder="Email address" aria-label="Email address"><button type="button">Join</button></div></div><div><h5>Shop</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="table.html">Trade list</a></li><li><a href="scroll.html">New arrivals</a></li><li><a href="awkward.html">Clearance</a></li><li><a href="shadow.html">Shop the look</a></li><li><a href="#">Gift cards</a></li></ul></div><div><h5>Help</h5><ul><li><a href="rates.html">Delivery rates</a></li><li><a href="iframe.html">Stock &amp; delivery</a></li><li><a href="reviews.html">Customer reviews</a></li><li><a href="returns.html">Returns log</a></li><li><a href="#">Contact</a></li></ul></div><div><h5>About</h5><ul><li><a href="#">Our makers</a></li><li><a href="stock.html">Warehouse stock</a></li><li><a href="feed.html">Product data</a></li><li><a href="#">Journal</a></li></ul></div></div><div class="fine"><span>&copy; 2026 Northwind Supply</span><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a><span class="sep">A fictional shop. Nothing here is for sale.</span></div></div></footer></body></html>
+</tbody></table></div></div></div><!-- practice-notes --><style>.practice-notes{max-width:780px;margin:44px 0 56px;padding:24px 28px;background:#fffefb;border:1px solid #e0dbd0;border-radius:12px;color:#2a2720;font-size:15.5px;line-height:1.6}.practice-notes .kicker{font:600 11px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#b4491f;margin:0 0 10px}.practice-notes h2{font-size:21px;margin:22px 0 6px}.practice-notes h2:first-of-type{margin-top:4px}.practice-notes p{margin:0 0 10px}.practice-notes pre{background:#17150f;color:#f3efe6;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;line-height:1.5}.practice-notes code{font-size:.92em}.practice-notes .cta{margin-top:16px;font-weight:600}</style><section class="practice-notes" id="practice-notes"><p class="kicker">About this practice page</p>
+<h2>A supplier&rsquo;s trade price list</h2>
+<p>Wholesalers and distributors publish price lists exactly like this one: a plain table of
+products with a retail price, a trade price and what is on hand. It is the easiest page in the
+sandbox, and it is here for that reason &mdash; it is where to start, and the yardstick for every
+harder page.</p>
+<h2>The page where the built-in tools work too</h2>
+<p>Because this is a real <code>&lt;table&gt;</code> with a <code>&lt;thead&gt;</code>, delivered with
+the page rather than drawn by a script, the tools that fail elsewhere work here. Excel&rsquo;s
+<b>Data &rarr; From Web</b> imports it; in Google Sheets, <code>=IMPORTHTML("https://magicscraper.app/demo/table",
+"table", 1)</code> does too; in Python, one line:</p>
+<pre><code>import pandas as pd
+df = pd.read_html("https://magicscraper.app/demo/table")[0]
+df.shape   # (50, 7)</code></pre>
+<p>Notice the seven: each product name is a link to its own page, and all three of those tools keep
+the text and drop the link. Magic Scraper keeps the link as an eighth column &mdash; which matters the
+moment you want to open each product&rsquo;s page for more, as <a href="../drill-down">drill-down</a>
+does.</p>
+<h2>Small things to get right</h2>
+<p>The prices come through as written, with the dollar sign, so a spreadsheet treats them as
+text until you take it off: in Excel, Find and Replace <code>$</code> with nothing, or
+<code>=VALUE(SUBSTITUTE(E2,"$",""))</code> in a spare column. The <i>On hand</i> column is a plain
+count and arrives as numbers. The expected result is 50 rows and 8 columns.</p>
+<h2>Where to go next</h2>
+<p>The same products appear on the <a href="stock.html">warehouse stock</a> page drawn without a
+table at all, and on the <a href="catalogue.html">catalogue</a> as cards over six pages. Doing all
+three is a quick way to see which kinds of page your tool really handles.</p><p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p></section><!-- /practice-notes --><footer class="site"><div class="shell"><div class="cols"><div><h5>Northwind Supply</h5><p style="color:var(--ink-2);font-size:14px;margin:0">Household goods for people who keep things. Trade accounts welcome.</p><div class="signup"><input type="email" placeholder="Email address" aria-label="Email address"><button type="button">Join</button></div></div><div><h5>Shop</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="table.html">Trade list</a></li><li><a href="scroll.html">New arrivals</a></li><li><a href="awkward.html">Clearance</a></li><li><a href="shadow.html">Shop the look</a></li><li><a href="#">Gift cards</a></li></ul></div><div><h5>Help</h5><ul><li><a href="rates.html">Delivery rates</a></li><li><a href="iframe.html">Stock &amp; delivery</a></li><li><a href="reviews.html">Customer reviews</a></li><li><a href="returns.html">Returns log</a></li><li><a href="#">Contact</a></li></ul></div><div><h5>About</h5><ul><li><a href="#">Our makers</a></li><li><a href="stock.html">Warehouse stock</a></li><li><a href="feed.html">Product data</a></li><li><a href="#">Journal</a></li></ul></div></div><div class="fine"><span>&copy; 2026 Northwind Supply</span><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a><span class="sep">A fictional shop. Nothing here is for sale.</span></div></div></footer></body></html>
