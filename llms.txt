@@ -3,6 +3,9 @@
 > A browser extension for Chrome, Edge and other Chromium browsers that turns the table or list on the page you are viewing into a
 > spreadsheet, and a bespoke service for the scrapes that do not fit in a browser.
 
+Every page on this site is also available as Markdown: request it with `Accept: text/markdown`,
+or add `.md` to its address, for example https://magicscraper.app/lead-generation.md.
+
 Everything the extension does happens inside the browser. There is no server of ours and no
 account. Scraped rows go only where the user sends them: a file, or with Pro their own Google
 Sheet or webhook address. The free tier includes

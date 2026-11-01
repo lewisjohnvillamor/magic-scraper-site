@@ -2,8 +2,10 @@
  * The site's small API: the feature request board, the home page's
  * "I'd use this" votes, and the goodbye page's one question.
  *
- * Everything that is not /api/... is served straight from the assets binding,
- * so the site behaves exactly as a static site does.
+ * Everything that is not /api/... is served from the assets binding, so the
+ * site behaves exactly as a static site does -- with one addition: an AI agent
+ * that asks for a page as Markdown (Accept: text/markdown, or the address with
+ * .md on the end) gets the page's content as Markdown (see src/markdown.js).
  *
  * Storage is one D1 database bound as DB. Until it is bound, every endpoint
  * answers 503 and each page falls back to an email link, so the site is never
@@ -26,6 +28,8 @@
  * Moderation: a new request is stored as "pending" and is not shown until it
  * is approved on /requests/admin, which needs the ADMIN_TOKEN secret.
  */
+
+import { toMarkdown, wantsMarkdown } from './markdown.js';
 
 const STATUSES = ['pending', 'open', 'planned', 'building', 'shipped', 'declined'];
 const PUBLIC = ['open', 'planned', 'building', 'shipped', 'declined'];
@@ -310,10 +314,57 @@ async function allowed(request, env) {
   }
 }
 
+// Pages that are not for agents or search engines: robots.txt keeps them out,
+// and they are not offered as Markdown.
+const NOT_FOR_AGENTS = /^\/(admin-requests|thanks)(\.html|\.md)?$/;
+
+// A page as Markdown, when the request asks for it. Null when it does not, or
+// when there is no HTML page at that address -- the caller then serves the
+// request as usual, 404 and all.
+async function asMarkdown(request, env, url) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null;
+  const byName = url.pathname.endsWith('.md');
+  if (!byName && !wantsMarkdown(request)) return null;
+  if (NOT_FOR_AGENTS.test(url.pathname)) return null;
+  let target = new URL(url);
+  if (byName) target.pathname = url.pathname.replace(/(\/index)?\.md$/, '') || '/';
+  let res = await env.ASSETS.fetch(new Request(target, { headers: { accept: 'text/html' } }));
+  // /demo -> /demo/ and the like: follow the assets' own redirect once.
+  if (res.status >= 300 && res.status < 400 && res.headers.get('location')) {
+    target = new URL(res.headers.get('location'), target);
+    res = await env.ASSETS.fetch(new Request(target, { headers: { accept: 'text/html' } }));
+  }
+  if (!res.ok || !/text\/html/i.test(res.headers.get('content-type') || '')) return null;
+  const md = toMarkdown(await res.text(), target.href);
+  return new Response(request.method === 'HEAD' ? null : md, {
+    headers: {
+      'content-type': 'text/markdown; charset=utf-8',
+      'vary': 'Accept',
+      'x-content-type-options': 'nosniff',
+      'cache-control': 'public, max-age=300',
+      'link': `<${target.href}>; rel="canonical"`,
+    },
+  });
+}
+
+// An HTML page says where its Markdown is, and that the answer depends on
+// Accept, so a cache never hands Markdown to a browser or HTML to an agent.
+async function page(request, env, url) {
+  const md = await asMarkdown(request, env, url);
+  if (md) return md;
+  const res = await env.ASSETS.fetch(request);
+  if (!/text\/html/i.test(res.headers.get('content-type') || '') || NOT_FOR_AGENTS.test(url.pathname)) return res;
+  const out = new Response(res.body, res);
+  out.headers.append('vary', 'Accept');
+  const mdPath = url.pathname.endsWith('/') ? url.pathname + 'index.md' : url.pathname.replace(/\.html$/, '') + '.md';
+  out.headers.append('link', `<${mdPath}>; rel="alternate"; type="text/markdown"`);
+  return out;
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (!url.pathname.startsWith('/api/')) return env.ASSETS.fetch(request);
+    if (!url.pathname.startsWith('/api/')) return page(request, env, url);
     if (!env.DB) return json({ error: 'not configured' }, 503);
     try {
       await schema(env.DB);
