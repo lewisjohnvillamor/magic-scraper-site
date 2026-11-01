@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pagination practice: 7 kinds of Next button to scrape</title>
+<meta name="description" content="Seven practice lists, each paged a different way: an icon arrow, page numbers only, Older posts, German and Japanese, a class name only and a JavaScript button. Test any scraper." />
+<link rel="canonical" href="https://magicscraper.app/demo/pagers" />
+<link rel="icon" href="../assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="../style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Magic Scraper" />
+<meta property="og:url" content="https://magicscraper.app/demo/pagers" />
+<meta property="og:title" content="Pagination practice: 7 kinds of Next button to scrape" />
+<meta property="og:description" content="Seven practice lists, each paged a different way: an icon arrow, page numbers only, Older posts, German and Japanese, a class name only and a JavaScript button. Test any scraper." />
+<meta property="og:image" content="https://magicscraper.app/assets/screenshot.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/#price">Pricing</a>
+      <a href="/drill-down">Drill-down</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/instant-data-scraper-alternative">Compare</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Sandbox &middot; pagination</p>
+    <h1>Seven kinds of <i>Next</i> button, to practise on.</h1>
+    <p class="standfirst">Most scrapers stop at page one because they look for a link that says
+      &ldquo;Next&rdquo;. Real sites say it with an arrow, a page number, &ldquo;Older posts&rdquo;,
+      another language, a class name, or a button with no address at all. Here is the same list of
+      thirty products paged each of those ways, so you can see which ones your tool follows.</p>
+  </div>
+</div>
+<div class="wrap">
+  <section id="styles">
+    <h2>The seven</h2>
+    <p class="deck">Each list is 30 items over three pages of ten. Start on the first page and crawl;
+      anything short of 30 means the Next was missed.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3><a href="pager-arrow-1.html">An arrow with no word</a></h3>
+        <p>The Next control is an icon: a chevron in a circle with an <code>aria-label</code> and no visible text. Tests whether your scraper reads labels, not just link text.</p>
+        <p class="expect">Expected: 30 products across 3 pages.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3><a href="pager-numbers-1.html">Page numbers only</a></h3>
+        <p>A row of page numbers with the current one marked, and no Next or arrow at all. Tests whether your scraper can work out which number comes next.</p>
+        <p class="expect">Expected: 30 products across 3 pages.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3><a href="pager-older-1.html">A blog&rsquo;s &ldquo;Older posts&rdquo;</a></h3>
+        <p>A journal of posts, newest first, paged by <i>Older posts &rarr;</i> and <i>&larr; Newer posts</i>. Tests whether &ldquo;next&rdquo; is understood as &ldquo;older&rdquo; here.</p>
+        <p class="expect">Expected: 30 posts across 3 pages.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3><a href="pager-de-1.html">Next in German</a></h3>
+        <p>The same list in German: <i>Weiter &rsaquo;</i> and <i>&lsaquo; Zur&uuml;ck</i>, prices written <i>39,00 &euro;</i>. Tests a scraper that only knows English.</p>
+        <p class="expect">Expected: 30 products across 3 pages.</p>
+      </div>
+      <div class="step">
+        <span class="n">05</span>
+        <h3><a href="pager-ja-1.html">Next in Japanese</a></h3>
+        <p>The same list in Japanese, paged by <i>次へ</i> and <i>前へ</i>, with prices in yen. Tests a scraper that only knows the Latin alphabet.</p>
+        <p class="expect">Expected: 30 products across 3 pages.</p>
+      </div>
+      <div class="step">
+        <span class="n">06</span>
+        <h3><a href="pager-class-1.html">A class name and nothing else</a></h3>
+        <p>An empty, styled button whose only clue is <code>class="pagination__next"</code> &mdash; no text, no label, the arrow drawn in CSS. Tests whether your scraper reads the markup&rsquo;s own names.</p>
+        <p class="expect">Expected: 30 products across 3 pages.</p>
+      </div>
+      <div class="step">
+        <span class="n">07</span>
+        <h3><a href="pager-js.html">A button, and no address</a></h3>
+        <p>One page. <i>Next page</i> is a <code>&lt;button&gt;</code> that swaps the products in with JavaScript; the address never changes. Tests whether your scraper can click as well as follow links.</p>
+        <p class="expect">Expected: 30 products from 3 clicks.</p>
+      </div>
+    </div>
+  </section>
+  <section id="more">
+    <h2>And the ones the rest of the sandbox covers</h2>
+    <div class="claim">
+      <p>A plain <a href="catalogue.html">Next button over six pages</a>, <a href="scroll.html">infinite
+        scroll</a>, a <a href="stock.html">Load more button</a> and a <a href="bulk.html">2,000-row list over
+        40 pages</a>. Magic Scraper follows all of them, and every one above, from the Crawl tab&rsquo;s
+        <b>Start crawling</b>; when it can&rsquo;t tell which control is Next, point at it once and it uses
+        that for the rest.</p>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Scrape sandbox</span>
+    <a href="/">Magic Scraper</a>
+    <a href="/drill-down">Drill-down guide</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="../nav.js" defer></script>
+</body>
+</html>

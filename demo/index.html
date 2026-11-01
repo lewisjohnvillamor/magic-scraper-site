@@ -244,6 +244,44 @@
     </div>
   </section>
 
+  <section id="newer">
+    <h2>And four for what scrapers learned lately</h2>
+    <p class="deck">Pagination that isn&rsquo;t a Next link, lists split under headings, prices that
+      live on each product&rsquo;s own page, and the directory every lead list starts from.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="n">12</span>
+        <h3><a href="/demo/pagers">Seven kinds of Next button</a></h3>
+        <p>The same thirty products paged seven ways: an icon arrow, page numbers only, <i>Older
+          posts</i>, German, Japanese, a class name and nothing else, and a JavaScript button with no
+          address.<br>
+          <b>Expected: 30 items from each, across 3 pages.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">13</span>
+        <h3><a href="/demo/stockists">A store locator split A to Z</a></h3>
+        <p>Stockists listed under letter headings, the way store locators and member lists often
+          are. A scraper that stops at the first heading gets three shops.<br>
+          <b>Expected: 14 rows in one table, with the letter as a column.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">14</span>
+        <h3><a href="/demo/wholesale-prices">Volume pricing on product pages</a></h3>
+        <p>Four products; the price breaks are only on each product&rsquo;s own page, in a table of
+          quantity, unit price and discount, next to a spec table.<br>
+          <b>Expected: 4 rows, or 12 &mdash; one per price tier &mdash; with the specs on each.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">15</span>
+        <h3><a href="/demo/directory">A business directory with profile pages</a></h3>
+        <p>Twenty-four local trades over three pages. The list shows the name, trade and phone;
+          the address, email, website and hours are on each profile, as label and value pairs.<br>
+          <b>Expected: 24 rows; with each profile read, 6 more columns.</b></p>
+      </div>
+    </div>
+  </section>
+
   <section id="chain">
     <h2>A ten-level link chain</h2>
     <p class="deck">One hop proves nothing, and three is where most practice sites stop. Northwind
