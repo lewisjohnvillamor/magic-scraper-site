@@ -28,21 +28,11 @@ OG_IMAGE = SITE + "/assets/screenshot.png"
 # slug -> title. One shape across all of them: what the page tests, then the
 # head term. Every one is under 60 characters, which is roughly where Google
 # truncates.
-TITLES = {
-    "catalogue": "Paginated card grid &mdash; web scraping practice",
-    "table":     "HTML table with a header row &mdash; web scraping practice",
-    "scroll":    "Infinite scroll &mdash; web scraping practice",
-    "awkward":   "A value outside the table &mdash; web scraping practice",
-    "shadow":    "Shadow DOM &mdash; web scraping practice",
-    "iframe":    "Table inside an iframe &mdash; web scraping practice",
-    "feed":      "JSON-LD and microdata &mdash; web scraping practice",
-    "reviews":   "Load more button &mdash; web scraping practice",
-    "stock":     "ARIA data grid, no table &mdash; web scraping practice",
-    "returns":   "Messy data to clean up &mdash; web scraping practice",
-    "rates":     "Two tables on one page &mdash; web scraping practice",
-    "bulk":      "2,000 rows across 40 pages &mdash; web scraping practice",
-    "live":      "A page that changes every minute &mdash; web scraping practice",
-}
+# The titles now live in sandbox_keywords.py, which leads each with the search
+# it should be found by; read from there so the two never disagree.
+import sys as _sys
+_sys.path.insert(0, HERE)
+from sandbox_keywords import TITLES  # noqa: E402
 
 # The catalogue's other five pages are noindex, so their titles are only ever
 # read in a tab. They still get to say which page they are.

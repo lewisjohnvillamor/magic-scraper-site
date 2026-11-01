@@ -50,8 +50,8 @@ def shell(title, body, lang='en', noindex=False, head_extra=''):
 .pagination__next{{display:inline-block;width:40px;height:40px;border-radius:8px;background:#17150f;position:relative}}
 .pagination__next::after{{content:"";position:absolute;left:14px;top:13px;width:10px;height:10px;border-top:2px solid #fff;border-right:2px solid #fff;transform:rotate(45deg)}}
 .pageinfo{{margin:26px 0 40px;color:#6b6556}}
-</style></head><body><div class="sandbox"><div class="shell"><span class="tag">Sandbox</span><b>Practice site for Magic Scraper.</b> Seven kinds of Next button. <a href="pagers.html">All of them</a> &middot; <a href="index.html">All sandbox pages</a></div></div>
-<header class="site"><div class="shell bar"><a class="brand" href="catalogue.html">North<b>wind</b> <span>Supply</span></a><nav><a href="catalogue.html">Catalogue</a><a href="table.html">Trade list</a><a href="scroll.html">New arrivals</a></nav></div></header>
+</style></head><body><div class="sandbox"><div class="shell"><span class="tag">Sandbox</span><b>Practice site for Magic Scraper.</b> Seven kinds of Next button. <a href="pagers.html">All of them</a> &middot; <a href="index.html">All sandbox pages</a> &middot; <a href="../index.html"><b>Get Magic Scraper free</b></a></div></div>
+<header class="site"><div class="shell bar"><a class="brand" href="../" title="Magic Scraper home">Magic <b>Scraper</b> <span>Sandbox</span></a><nav><a href="catalogue.html">Catalogue</a><a href="table.html">Trade list</a><a href="scroll.html">New arrivals</a></nav></div></header>
 <div class="shell">{body}</div></body></html>'''
 
 CHEVRON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>'

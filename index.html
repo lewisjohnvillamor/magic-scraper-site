@@ -235,7 +235,7 @@
           "name": "Will it work on the site I have in mind?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Probably. It reads what your browser has already rendered, so what you can see, it can usually take, pages you are signed in to included. It cannot reach closed shadow roots, cross-origin iframes, data only a private API returns, or anything behind a bot challenge — those are limits of the browser itself. When a site asks you to prove you are human, the run stops and hands you the tab rather than trying to get past it. Try the free version on that exact site before paying."
+            "text": "Probably. It reads what your browser has already rendered, so what you can see, it can usually take, pages you are signed in to included. Where the browser gets in the way, it hands over to you: a bot check pauses the run until you have solved it and pressed Resume, and a table shown from another site in a frame opens in a tab of its own with one click. It cannot reach closed shadow roots or data only a private API returns. Try the free version on that exact site before paying."
           }
         },
         {
@@ -298,7 +298,7 @@
 <main id="main">
 <div class="wrap">
   <div class="hero">
-    <p class="eyebrow">Browser extension<span class="sep" aria-hidden="true">/</span><span class="building"><i aria-hidden="true"></i>In active development</span></p>
+    <p class="eyebrow">Browser extension<span class="sep" aria-hidden="true">/</span><span class="building"><i aria-hidden="true"></i>Actively maintained</span></p>
     <h1>Scrape any web list into a <i>spreadsheet</i>.</h1>
     <p class="standfirst">Open the popup and the table is already found — columns named, links
       kept, ready to export. It follows pagination, opens the page behind each row, and
@@ -418,15 +418,22 @@
         </ul>
       </div>
       <div class="panel">
-        <h3>Can't, and won't pretend to</h3>
+        <h3>Where it hands over to you</h3>
         <ul class="dots">
-          <li><b>Anything behind a bot check.</b> When a site asks you to prove you're human, the
-            run stops and hands you the tab. It never tries to get past the check</li>
-          <li><b>Content drawn as a picture</b> &mdash; maps, charts drawn on a canvas, text
-            inside images</li>
+          <li><b>A bot check pauses the run for you.</b> When a site asks you to prove you're
+            human, the run pauses and brings that tab to the front. Solve it yourself, press
+            <b>Resume</b>, and it carries on with everything collected so far. It never tries to
+            get past the check on its own</li>
+          <li><b>A table shown from another site in a frame:</b> the browser keeps the frame out of
+            reach, so the panel names the site and offers <b>Open it on its own</b> &mdash; one click,
+            and it reads the table there</li>
+          <li><b>A grid drawn on a canvas</b> is a picture with no text in it. The panel says so and
+            points you to the grid&rsquo;s own Export, or copy and paste</li>
+        </ul>
+        <h3 style="margin-top:18px">Can't, and won't pretend to</h3>
+        <ul class="dots">
           <li><b>Files</b> &mdash; PDFs and downloads. It reads web pages</li>
-          <li><b>Frames from another site</b> and closed shadow roots, which the browser keeps
-            out of reach</li>
+          <li><b>Closed shadow roots</b>, which the browser keeps out of reach</li>
           <li><b>Data a page never shows</b> &mdash; a private API, or what's behind a login you
             don't have</li>
         </ul>
@@ -753,11 +760,11 @@
         <summary>Will it work on the site I have in mind?</summary>
         <p>Probably. It reads what your browser has already rendered, so what you can see, it can
           usually take &mdash; pages you're signed in to included. <a href="#scrapes">The kinds of
-          page it handles</a> are listed above. It can't reach closed shadow roots, cross-origin iframes, data only a
-          private API returns, or anything behind a bot challenge — those are limits of the
-          browser itself, not of this extension. When a site does ask you to prove you're human,
-          the run stops and hands you the tab rather than trying to get past it. Try the free
-          version on that exact site before paying.</p>
+          page it handles</a> are listed above. Where the browser gets in the way, it hands over to
+          you: a bot check pauses the run until you've solved it and pressed Resume, and a table
+          shown from another site in a frame opens on its own with one click. It can't reach closed
+          shadow roots or data only a private API returns. Try the free version on that exact site
+          before paying.</p>
       </details>
       <details>
         <summary>Am I allowed to scrape a site?</summary>
