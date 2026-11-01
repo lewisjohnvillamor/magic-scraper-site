@@ -36,7 +36,7 @@
    "name": "What scraping problems does it cover?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Eighteen practice pages. Four straightforward ones: a paginated card grid, a plain HTML table, infinite scroll, and a discount that applies to every row but sits outside the table. Seven harder ones: products inside an open shadow root, a table inside a same-origin iframe, twenty products marked up as both JSON-LD and microdata, a Load more button, a data grid built from divs with ARIA roles, a deliberately dirty returns log, and two tables of different widths on one page. Two that need scale or time: a 2,000-row list over 40 pages, and a price board that changes every minute. And five newer ones: seven kinds of Next button, a store locator split under A to Z headings, volume pricing on each product's own page, a business directory whose details are on profile pages, and a trade account page with five tables each paged its own way. Behind the catalogue there is also a ten-level link chain."
+    "text": "Nineteen practice pages. Four straightforward ones: a paginated card grid, a plain HTML table, infinite scroll, and a discount that applies to every row but sits outside the table. Seven harder ones: products inside an open shadow root, a table inside a same-origin iframe, twenty products marked up as both JSON-LD and microdata, a Load more button, a data grid built from divs with ARIA roles, a deliberately dirty returns log, and two tables of different widths on one page. Two that need scale or time: a 2,000-row list over 40 pages, and a price board that changes every minute. And six newer ones: seven kinds of Next button, a store locator split under A to Z headings, volume pricing on each product's own page, a business directory whose details are on profile pages, a trade account page with five tables each paged its own way, and a parts catalogue with a category sidebar beside a paged table. Behind the catalogue there is also a ten-level link chain."
    }
   },
   {
@@ -44,7 +44,7 @@
    "name": "How do I know my scraper got it right?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Every page gives its expected result, and each has notes on what a correct export looks like. The catalogue is 54 products over 6 pages. The trade list is 50 rows. New arrivals reaches 40 rows after five scroll batches. Clearance is 10 rows plus one discount no row contains. Shop the look is 12 products in a shadow root. Stock and delivery is 24 rows inside an iframe. Product data is 20 products marked up twice. Customer reviews is 12 on load and 48 after three clicks. Warehouse stock is 30 rows with no table element. The returns log is 24 rows including two exact duplicates. Delivery rates is two tables, 8 rows and 14. The bulk list is 2,000 rows. The live board is 25 rows, a few different each minute. Each Next-button list is 30 items over 3 pages. The store locator is 14 rows with the letter as a column. Wholesale prices is 12 rows, one per price break. The directory is 24 businesses, with 6 more columns from each profile. On the account page, the invoices are 40 rows over 4 pages, with nothing from the other four tables."
+    "text": "Every page gives its expected result, and each has notes on what a correct export looks like. The catalogue is 54 products over 6 pages. The trade list is 50 rows. New arrivals reaches 40 rows after five scroll batches. Clearance is 10 rows plus one discount no row contains. Shop the look is 12 products in a shadow root. Stock and delivery is 24 rows inside an iframe. Product data is 20 products marked up twice. Customer reviews is 12 on load and 48 after three clicks. Warehouse stock is 30 rows with no table element. The returns log is 24 rows including two exact duplicates. Delivery rates is two tables, 8 rows and 14. The bulk list is 2,000 rows. The live board is 25 rows, a few different each minute. Each Next-button list is 30 items over 3 pages. The store locator is 14 rows with the letter as a column. Wholesale prices is 12 rows, one per price break. The directory is 24 businesses, with 6 more columns from each profile. On the account page, the invoices are 40 rows over 4 pages, with nothing from the other four tables. The parts catalogue is 26 fasteners over 3 pages, and 74 parts across its six categories."
    }
   },
   {
@@ -119,7 +119,7 @@
   <div class="hero">
     <p class="eyebrow">Free practice site</p>
     <h1>Somewhere safe to point a <i>scraper</i>.</h1>
-    <p class="standfirst">A fictional shop, built to be scraped. Eighteen pages, each one a
+    <p class="standfirst">A fictional shop, built to be scraped. Nineteen pages, each one a
       different thing that breaks scrapers &mdash; up to and including shadow DOM, iframes and
       a returns log with nothing tidy in it. Nothing here is real, nothing is rate-limited, and
       there is no login and no bot detection. Use it with <b>any tool</b> &mdash; a browser
@@ -275,10 +275,10 @@
   </section>
 
   <section id="newer">
-    <h2>And five for what scrapers learned lately</h2>
+    <h2>And six for what scrapers learned lately</h2>
     <p class="deck">Pagination that isn&rsquo;t a Next link, lists split under headings, prices that
-      live on each product&rsquo;s own page, the directory every lead list starts from, and a page of
-      five tables where only one is wanted.</p>
+      live on each product&rsquo;s own page, the directory every lead list starts from, a page of
+      five tables where only one is wanted, and a catalogue of categories to go through one by one.</p>
 
     <div class="steps">
       <div class="step">
@@ -317,6 +317,14 @@
           own way &mdash; two by address with identical Next links, one by a JavaScript button, one by
           Show more, one not at all. Choose one table and page only that one.<br>
           <b>Expected: 40 invoices over 4 pages, and no rows from the other tables.</b></p>
+      </div>
+      <div class="step">
+        <span class="n">19</span>
+        <h3><a href="/demo/parts">Categories beside a paged table</a></h3>
+        <p>A parts catalogue the way wholesale sites are built: a category sidebar with counts, a
+          brand filter, a featured carousel with its own Next arrow, a paged table, and a footer of
+          links. Page the table, then go through every category, every page of each.<br>
+          <b>Expected: 26 fasteners over 3 pages; 74 parts from six categories.</b></p>
       </div>
     </div>
   </section>
@@ -386,9 +394,9 @@
       <h3>Is this practice site free to scrape?</h3>
       <p>Yes. It is free, open to anyone, and works with any tool — a browser extension, Python and BeautifulSoup, Scrapy, Playwright, Puppeteer, curl, or whatever you are learning. Nothing on it is real and nothing is rate-limited.</p>
       <h3>What scraping problems does it cover?</h3>
-      <p>Eighteen practice pages. Four straightforward ones: a paginated card grid, a plain HTML table, infinite scroll, and a discount that applies to every row but sits outside the table. Seven harder ones: products inside an open shadow root, a table inside a same-origin iframe, twenty products marked up as both JSON-LD and microdata, a Load more button, a data grid built from divs with ARIA roles, a deliberately dirty returns log, and two tables of different widths on one page. Two that need scale or time: a 2,000-row list over 40 pages, and a price board that changes every minute. And five newer ones: seven kinds of Next button, a store locator split under A to Z headings, volume pricing on each product's own page, a business directory whose details are on profile pages, and a trade account page with five tables each paged its own way. Behind the catalogue there is also a ten-level link chain.</p>
+      <p>Nineteen practice pages. Four straightforward ones: a paginated card grid, a plain HTML table, infinite scroll, and a discount that applies to every row but sits outside the table. Seven harder ones: products inside an open shadow root, a table inside a same-origin iframe, twenty products marked up as both JSON-LD and microdata, a Load more button, a data grid built from divs with ARIA roles, a deliberately dirty returns log, and two tables of different widths on one page. Two that need scale or time: a 2,000-row list over 40 pages, and a price board that changes every minute. And six newer ones: seven kinds of Next button, a store locator split under A to Z headings, volume pricing on each product's own page, a business directory whose details are on profile pages, a trade account page with five tables each paged its own way, and a parts catalogue with a category sidebar beside a paged table. Behind the catalogue there is also a ten-level link chain.</p>
       <h3>How do I know my scraper got it right?</h3>
-      <p>Every page gives its expected result, and each has notes on what a correct export looks like. The catalogue is 54 products over 6 pages. The trade list is 50 rows. New arrivals reaches 40 rows after five scroll batches. Clearance is 10 rows plus one discount no row contains. Shop the look is 12 products in a shadow root. Stock and delivery is 24 rows inside an iframe. Product data is 20 products marked up twice. Customer reviews is 12 on load and 48 after three clicks. Warehouse stock is 30 rows with no table element. The returns log is 24 rows including two exact duplicates. Delivery rates is two tables, 8 rows and 14. The bulk list is 2,000 rows. The live board is 25 rows, a few different each minute. Each Next-button list is 30 items over 3 pages. The store locator is 14 rows with the letter as a column. Wholesale prices is 12 rows, one per price break. The directory is 24 businesses, with 6 more columns from each profile. On the account page, the invoices are 40 rows over 4 pages, with nothing from the other four tables.</p>
+      <p>Every page gives its expected result, and each has notes on what a correct export looks like. The catalogue is 54 products over 6 pages. The trade list is 50 rows. New arrivals reaches 40 rows after five scroll batches. Clearance is 10 rows plus one discount no row contains. Shop the look is 12 products in a shadow root. Stock and delivery is 24 rows inside an iframe. Product data is 20 products marked up twice. Customer reviews is 12 on load and 48 after three clicks. Warehouse stock is 30 rows with no table element. The returns log is 24 rows including two exact duplicates. Delivery rates is two tables, 8 rows and 14. The bulk list is 2,000 rows. The live board is 25 rows, a few different each minute. Each Next-button list is 30 items over 3 pages. The store locator is 14 rows with the letter as a column. Wholesale prices is 12 rows, one per price break. The directory is 24 businesses, with 6 more columns from each profile. On the account page, the invoices are 40 rows over 4 pages, with nothing from the other four tables. The parts catalogue is 26 fasteners over 3 pages, and 74 parts across its six categories.</p>
       <h3>Does it have a shadow DOM or iframe page to test against?</h3>
       <p>Yes, one of each. Shop the look renders twelve products inside an open shadow root, so a scraper that only queries the light DOM finds nothing on the page at all. Stock and delivery puts its table inside a same-origin iframe, which is a separate document with its own DOM. Both are the cases people most often discover their tool cannot handle, which is why they are here rather than described.</p>
       <h3>Will scraping it get me blocked?</h3>

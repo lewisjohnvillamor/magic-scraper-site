@@ -670,6 +670,8 @@ FIGURES = {
            "Read from the JSON-LD: 20 products in 11 columns, with the price as a plain number and availability as its own column."),
  'account': ("Magic Scraper after crawling the invoices table: 40 rows from four pages",
            "Invoices chosen and crawled: 40 rows from four pages, and none from the orders table whose pager comes first."),
+ 'parts': ("Magic Scraper after drill-down over the six categories: 74 parts",
+           "From the category list, drill-down with one row per table row: every page of every category, 74 parts, each with its category."),
  'pagers': ("Magic Scraper after following page numbers to the end: 30 products",
            "The page-numbers list, crawled: 30 products from three pages, with no Next link anywhere on them."),
 }
@@ -752,6 +754,60 @@ followed.</p>
 '''
 
 
+NOTES['parts'] = '''
+<p class="kicker">About this practice page</p>
+<h2>The page most wholesale sites are built on</h2>
+<p>Parts suppliers, trade counters, B2B shops and most catalogue sites share one layout: categories
+down the left with a count beside each, a filter or two under them, a featured strip across the top,
+the products as a table in the middle with a pager under it, and a recently-viewed row and a footer
+full of links below. Each of those is a list, and each is a list a scraper can take for the data. The
+two jobs people actually have are simple to say: this category&rsquo;s table, every page of it &mdash; and
+then every category&rsquo;s, in one sheet, with the category on each row.</p>
+<h2>Where it goes wrong</h2>
+<p>Picking the table is the easy part; a table with columns beats a list of short links. The traps
+are around it. The featured carousel has its own <i>Next</i> arrow above the table, and a scraper that
+takes the first Next on the page clicks through featured products instead of paging the parts. When
+the tool picks wrong and you ask for another list, it may offer every row of the table as a
+&ldquo;list&rdquo; of its six cells before it ever reaches the categories. And going through the
+categories, each category&rsquo;s table has its own pages: Fasteners is three pages, Brackets and Castors
+two, the others one. Reading the first page of each gets 52 parts of 74 and looks finished.</p>
+<h2>In Magic Scraper</h2>
+<p>It opens on the parts table, and <b>Start crawling</b> pages it by its own pager &mdash; 26 fasteners
+from three pages, the carousel left alone. For every category: open <b>Wrong list?</b> &rarr;
+<b>Another table</b> until the category list is outlined (six rows, with the counts), then on the
+Crawl tab turn on <a href="../drill-down">drill-down</a>, preview the first category, tick <b>Every row of
+its table &mdash; one row each</b> and run it. It opens each category, reads its parts table one row per
+part, follows that table&rsquo;s own pages, and keeps the category&rsquo;s name and link on every row: 74
+rows. Reading every category is a Pro feature; the free version reads the first three so you can see
+the result.</p>
+<h2>In Python</h2>
+<p>Take the categories from the sidebar, then page each one by the pager under its table:</p>
+<pre><code>import requests, pandas as pd
+from io import StringIO
+from urllib.parse import urljoin
+from bs4 import BeautifulSoup
+
+start = "https://magicscraper.app/demo/parts"
+soup = BeautifulSoup(requests.get(start).content, "html.parser")
+categories = [(a.get_text(strip=True), urljoin(start, a["href"])) for a in soup.select("ul.categories a")]
+frames = []
+for name, url in categories:
+    while url:
+        page = BeautifulSoup(requests.get(url).content, "html.parser")
+        df = pd.read_html(StringIO(str(page.select_one("table.partlist"))))[0]
+        df.insert(0, "Category", name)
+        frames.append(df)
+        nxt = page.select_one(".pager a.next")          # the table's pager, not the carousel
+        url = urljoin(url, nxt["href"]) if nxt else None
+parts = pd.concat(frames, ignore_index=True)
+parts.shape   # (74, 7)</code></pre>
+<h2>A correct result</h2>
+<p>This category: 26 rows, FX-1001 to FX-1026, six columns (Part no., Description, Material, Pack,
+Price, Stock). Every category: 74 rows with a category on each &mdash; 26 Fasteners, 8 Hinges, 14
+Brackets, 5 Handles, 12 Castors and 9 Shelf supports &mdash; and every part number different. If you
+have 52, the second and third pages of the longer categories were missed.</p>
+'''
+
 def main():
     for slug, body in NOTES.items():
         path = os.path.join(DEMO, slug + '.html')
@@ -770,6 +826,8 @@ def main():
                  '</section>' + END)
         if '<footer class="site">' in s:
             s = s.replace('<footer class="site">', block + '<footer class="site">', 1)
+        elif '<footer class="cols">' in s:
+            s = s.replace('<footer class="cols">', block + '<footer class="cols">', 1)
         elif '</main>' in s:
             # the hub-style pages: content in <main>, each part in a .wrap
             i = s.rindex('</main>')
