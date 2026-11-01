@@ -138,7 +138,7 @@ extension, not in storage the scraped website can read.
 ## Practice site
 
 - [Scrape sandbox](https://magicscraper.app/demo/): a fictional shop built to be scraped.
-  Open to anyone, with any tool, and not rate-limited. Nineteen pages, each one a different
+  Open to anyone, with any tool, and not rate-limited. Twenty pages, each one a different
   problem, and each one states its expected result so a scraper can be checked against it:
 
   - [Catalogue](https://magicscraper.app/demo/catalogue): a card grid, nine per page, six
@@ -180,6 +180,8 @@ extension, not in storage the scraped website can read.
   - [Parts catalogue](https://magicscraper.app/demo/parts): a category sidebar, a brand
     filter and a featured carousel beside a paged parts table — 26 fasteners over 3 pages, and
     74 parts across six categories with the category on each row
+  - [Journal](https://magicscraper.app/demo/journal): a five-page PDF short story, GRIT, for
+    testing whole-page screenshots and scrolling videos of a PDF
 
   Behind the catalogue is a ten-level link chain for testing drill-down, running product ->
   maker -> sourcing -> material lot -> supplier -> origin site -> certificate -> certifying
