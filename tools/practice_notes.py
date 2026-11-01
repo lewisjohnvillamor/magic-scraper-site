@@ -3,7 +3,8 @@
 
 Written page by page, by hand -- each page has its own real-world twin, its own
 trap and its own way out, and the notes say those, not a template. They go
-below the data in a <section class="practice-notes">, as prose under headings
+below the data in an <aside class="practice-notes"> (an aside, not a <section>:
+a sixth <section> beside a page's own five made them a list), as prose under headings
 (no lists, no tables), so the page's own data stays the only list on it and a
 scraper practising on the page is not handed a second one.
 
@@ -821,9 +822,9 @@ def main():
         if fig:   # after the first section: what the page is, then what the result looks like
             i = b.index('</p>', b.index('<h2>')) + 4
             b = b[:i] + fig + b[i:]
-        block = (START + CSS + FIG_CSS + '<section class="practice-notes" id="practice-notes">' + b +
+        block = (START + CSS + FIG_CSS + '<aside class="practice-notes" id="practice-notes" aria-label="About this practice page">' + b +
                  '<p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p>'
-                 '</section>' + END)
+                 '</aside>' + END)
         if '<footer class="site">' in s:
             s = s.replace('<footer class="site">', block + '<footer class="site">', 1)
         elif '<footer class="cols">' in s:
