@@ -162,6 +162,8 @@ extension, not in storage the scraped website can read.
     three date formats, three currency formats, 13 empty cells, 2 exact duplicates
   - [Delivery rates](https://magicscraper.app/demo/rates): two tables of different widths on
     one page — 8 rows and 14
+  - [Journal](https://magicscraper.app/demo/journal): a five-page PDF short story, GRIT, for
+    testing whole-page screenshots and scrolling videos of a PDF
 
   Behind the catalogue is a ten-level link chain for testing drill-down, running product ->
   maker -> sourcing -> material lot -> supplier -> origin site -> certificate -> certifying
