@@ -13,7 +13,7 @@ open jobs is to see what changed since last time. That cannot be practised on a 
 changes, so this one changes every minute, on a fixed rule worked out from the clock: a couple of
 lines are repriced, one sells out, one leaves the board and the one that left last minute comes back.
 Everything else holds still, including each row&rsquo;s <i>Updated</i> time, which is when that row
-last moved.</p><figure><img src="img/live-result.webp" width="1400" height="672" loading="lazy" decoding="async" alt="Magic Scraper reading the live price board: 25 rows"><figcaption>25 rows from the board this minute. Open it again once the minute turns, and the <b>Changes</b> tab compares the two.</figcaption></figure>
+last moved.</p><figure><img src="img/live-result.webp" width="1400" height="672" loading="lazy" decoding="async" alt="Magic Scraper reading the live price board: 25 rows"><figcaption>25 rows from the board this minute. Open it again once the minute turns, and with Pro the <b>Changes</b> tab compares the two.</figcaption></figure>
 <h2>Why comparing is harder than collecting</h2>
 <p>Two snapshots are easy. Knowing which differences are real is not. Rows move position when one
 drops off, so comparing line 7 with line 7 reports changes that are not there. The fix is to match
@@ -21,8 +21,9 @@ rows by something that identifies them &mdash; here the SKU &mdash; and then the
 only the real ones: a few changed lines, one row gone and one row back.</p>
 <h2>Doing it in Magic Scraper</h2>
 <p>Open it on this page and export, or simply leave it. When the countdown passes zero, open it again:
-the <b>Changes</b> tab compares this run with your last run of the same list. Set <i>Match rows on</i>
-to SKU, and it lists what was added, removed and changed, which you can export on their own. Below the
+with Pro, the <b>Changes</b> tab compares this run with your last run of the same list. Set <i>Match rows on</i>
+to SKU, and it lists what was added, removed and changed, which you can export on their own.
+Comparing runs is part of Pro. Below the
 board, the page prints what moved this minute, so you can check the answer instead of trusting it. Run
 it on a <a href="../track-website-price-changes">schedule</a> and the comparison happens without you.</p>
 <h2>In code</h2>

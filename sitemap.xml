@@ -127,6 +127,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://magicscraper.app/how-to-use-magic-scraper</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://magicscraper.app/business-directory-scraper</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
