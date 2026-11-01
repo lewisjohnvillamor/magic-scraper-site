@@ -668,6 +668,8 @@ FIGURES = {
            "25 rows from the board this minute. Open it again once the minute turns, and the <b>Changes</b> tab compares the two."),
  'feed': ("Magic Scraper reading 20 products from the page's JSON-LD",
            "Read from the JSON-LD: 20 products in 11 columns, with the price as a plain number and availability as its own column."),
+ 'account': ("Magic Scraper after crawling the invoices table: 40 rows from four pages",
+           "Invoices chosen and crawled: 40 rows from four pages, and none from the orders table whose pager comes first."),
  'pagers': ("Magic Scraper after following page numbers to the end: 30 products",
            "The page-numbers list, crawled: 30 products from three pages, with no Next link anywhere on them."),
 }
@@ -694,6 +696,61 @@ def figure(slug):
                 '<img src="../assets/video/%s.webp" width="168" height="94" loading="lazy" alt="">'
                 '<span>Watch it done on this page: &ldquo;%s&rdquo; (YouTube)</span></a>' % (vid, vid, title))
     return out
+
+NOTES['account'] = '''
+<p class="kicker">About this practice page</p>
+<h2>One table out of five, every page of it</h2>
+<p>Customer portals, supplier accounts, admin panels and analytics dashboards put several tables on
+one screen &mdash; orders, invoices, shipments, messages &mdash; and give each its own pager. The job is
+almost always one of them: every invoice for the accountant, every shipment for a claim. This page is
+that screen. The task it sets is specific: all 40 invoices across their four pages, and not one row
+from the other tables.</p>
+<h2>Why scrapers page the wrong table</h2>
+<p>Choosing the invoices is the easy half. The trap is the Next button. The orders table above them
+has a pager worded and styled exactly like the invoices&rsquo; pager &mdash; same &ldquo;Next &rsaquo;&rdquo;,
+same class &mdash; and it comes first on the page. A scraper that looks for &ldquo;the Next button on the
+page&rdquo; finds the orders&rsquo; one, opens orders page two, where the invoices are back at page one, and
+stops with ten invoices and a message about repeated rows. The other tables add their own twists:
+shipments are paged by a JavaScript button that has no address, returns by a <i>Show more</i> button, and
+messages have no pager at all &mdash; so a scraper that borrows a neighbour&rsquo;s Next for them is wrong
+too.</p>
+<h2>In Magic Scraper</h2>
+<p>It opens on the invoices, the biggest table here; for another, use <b>Wrong list?</b> &rarr;
+<b>Another table</b> until the right one is outlined, or <b>Pick manually</b> and click it. Then
+<b>Start crawling</b>. It looks for the Next that belongs to the table you chose &mdash; the one in the
+part of the page around that table, not another table&rsquo;s &mdash; so the invoices come back as 40 rows
+from four addresses, the shipments as 15 rows from three clicks, the returns as 12 after one
+<i>Show more</i>, and the messages as their 5 rows with nothing to page. If a site ever fools it,
+<b>Pick &ldquo;Next&rdquo; manually</b> on the Crawl tab settles it: click the right table&rsquo;s Next.</p>
+<p>To collect all five tables, each fully paged, do them one after another the same way and export
+each one: five tables, five files.</p>
+<h2>In Python</h2>
+<p>Scope everything to the table&rsquo;s own section: find the table there, and the Next there too.</p>
+<pre><code>import requests, pandas as pd
+from io import StringIO
+from urllib.parse import urljoin
+from bs4 import BeautifulSoup
+
+url, pages = "https://magicscraper.app/demo/account", []
+while url:
+    soup = BeautifulSoup(requests.get(url).content, "html.parser")
+    section = soup.select_one("section#invoices")            # this table's own part of the page
+    pages.append(pd.read_html(StringIO(str(section.table)))[0])
+    nxt = section.select_one(".pager a.next")                 # its Next, not the orders' one
+    url = urljoin(url, nxt["href"]) if nxt else None
+df = pd.concat(pages, ignore_index=True)
+df.shape   # (40, 5)</code></pre>
+<p>Search the whole page instead &mdash; <code>soup.select_one(".pager a.next")</code> &mdash; and you can
+watch the trap happen. The loop wanders through the orders&rsquo; pages, reads invoices page one three
+times and page two once, and ends with 40 rows of which only 20 are different invoices. The row count
+looks right; the invoice numbers give it away.</p>
+<h2>A correct result</h2>
+<p>Invoices: 40 rows and 5 columns, INV-2026-1301 to INV-2026-1340, no order numbers among them.
+Orders: 18. Shipments: 15. Returns: 12. Messages: 5. Check that the invoice numbers are all
+different, not only that there are 40 of them: repeated numbers mean another table&rsquo;s pager was
+followed.</p>
+'''
+
 
 def main():
     for slug, body in NOTES.items():
