@@ -4,9 +4,9 @@
 
 Each style is the same shop's 30 products over three pages of ten, so the only
 thing that changes between them is how the page says "there is more". The
-first page of each is linked from demo/pagers.html; the rest carry noindex,
-like the sandbox's other generated pages, so they can be followed without
-filling an index with fictional stock.
+pages are linked from demo/pagers.html, which is the one page meant for search;
+the lists themselves carry noindex -- seven near-copies of the same ten
+products would only compete with it -- and can still be followed and crawled.
 """
 import html, os
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'demo')
@@ -94,7 +94,7 @@ for style, title, _, lang in STYLES:
                 'function show(){document.getElementById("list").innerHTML=ITEMS.slice(p*10,p*10+10).join("");'
                 'document.getElementById("where").textContent=(p+1)+" / 3";document.getElementById("prev").disabled=p===0;document.getElementById("next").disabled=p===2;}'
                 'document.getElementById("next").onclick=()=>{if(p<2){p++;show();window.scrollTo(0,0);}};document.getElementById("prev").onclick=()=>{if(p>0){p--;show();}};show();</script>')
-        write('pager-js.html', shell('A button, and no address &mdash; pagination practice', body))
+        write('pager-js.html', shell('A button, and no address &mdash; pagination practice', body, noindex=True))
         continue
     for p in (1, 2, 3):
         if style == 'older':
@@ -106,7 +106,7 @@ for style, title, _, lang in STYLES:
             listing = f'<div class="grid">{items}</div>'
             heading = f'<div class="head"><h1>{H1.get(lang, H1["en"])}</h1><p>30 / {p}</p></div>' if lang != 'en' else f'<div class="head"><h1>{H1["en"]}</h1><p>Page {p} of 3</p></div>'
         crumbs = f'<p class="crumbs"><a href="pagers.html">Pagination practice</a> / {title}</p>'
-        write(f'pager-{style}-{p}.html', shell(f'{title} (page {p}) &mdash; pagination practice', crumbs + heading + listing + pager(style, p), lang=lang, noindex=p > 1))
+        write(f'pager-{style}-{p}.html', shell(f'{title} (page {p}) &mdash; pagination practice', crumbs + heading + listing + pager(style, p), lang=lang, noindex=True))
 
 # ---- the hub
 cards = ''.join(f'''      <div class="step">
