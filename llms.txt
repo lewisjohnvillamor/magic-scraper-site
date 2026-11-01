@@ -37,6 +37,9 @@ extension, not in storage the scraped website can read.
   the Chrome Web Store listing. Installs on Chrome, Edge, Brave, Opera, Vivaldi, Arc and
   any other Chromium browser.
 - [Home](https://magicscraper.app): what the extension does, pricing, and where the data goes
+- [How to use Magic Scraper](https://magicscraper.app/how-to-use-magic-scraper): the nine jobs
+  people use it for, each with its steps, what is free and what is Pro, a practice page and the
+  deeper guide
 - [Drill-down guide](https://magicscraper.app/drill-down): how to collect a list and the page
   behind every row in one pass, with a worked example on the practice site
 - [Business directory scraper](https://magicscraper.app/business-directory-scraper): turning

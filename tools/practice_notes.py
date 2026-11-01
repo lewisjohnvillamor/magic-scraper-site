@@ -446,8 +446,9 @@ rows by something that identifies them &mdash; here the SKU &mdash; and then the
 only the real ones: a few changed lines, one row gone and one row back.</p>
 <h2>Doing it in Magic Scraper</h2>
 <p>Open it on this page and export, or simply leave it. When the countdown passes zero, open it again:
-the <b>Changes</b> tab compares this run with your last run of the same list. Set <i>Match rows on</i>
-to SKU, and it lists what was added, removed and changed, which you can export on their own. Below the
+with Pro, the <b>Changes</b> tab compares this run with your last run of the same list. Set <i>Match rows on</i>
+to SKU, and it lists what was added, removed and changed, which you can export on their own.
+Comparing runs is part of Pro. Below the
 board, the page prints what moved this minute, so you can check the answer instead of trusting it. Run
 it on a <a href="../track-website-price-changes">schedule</a> and the comparison happens without you.</p>
 <h2>In code</h2>
@@ -574,8 +575,8 @@ shops. A scraper that takes &ldquo;the biggest list&rdquo; gets the four under B
 gathers every shop without its heading gets fourteen rows and loses the grouping, which on a real
 locator is usually the region you wanted to filter by.</p>
 <h2>In Magic Scraper</h2>
-<p>It sees that the five lists are the same kind of thing, joins them into one table and adds the
-heading each shop sat under as a <i>Section</i> column: 14 rows with Section, Shop Name, Town Name and
+<p>Since version 2.1 it sees that the five lists are the same kind of thing, joins them into one
+table and adds the heading each shop sat under as a <i>Section</i> column: 14 rows with Section, Shop Name, Town Name and
 Tel. Nothing to set.</p>
 <h2>In Python</h2>
 <p>Walk the groups and carry each heading down to its rows:</p>
@@ -666,7 +667,7 @@ FIGURES = {
  'bulk': ("Magic Scraper after crawling all 40 pages: 2,000 rows",
            "2,000 rows from 40 pages. The preview shows the first 100 to stay quick; the export holds every row."),
  'live': ("Magic Scraper reading the live price board: 25 rows",
-           "25 rows from the board this minute. Open it again once the minute turns, and the <b>Changes</b> tab compares the two."),
+           "25 rows from the board this minute. Open it again once the minute turns, and with Pro the <b>Changes</b> tab compares the two."),
  'feed': ("Magic Scraper reading 20 products from the page's JSON-LD",
            "Read from the JSON-LD: 20 products in 11 columns, with the price as a plain number and availability as its own column."),
  'account': ("Magic Scraper after crawling the invoices table: 40 rows from four pages",
@@ -720,7 +721,7 @@ too.</p>
 <h2>In Magic Scraper</h2>
 <p>It opens on the invoices, the biggest table here; for another, use <b>Wrong list?</b> &rarr;
 <b>Another table</b> until the right one is outlined, or <b>Pick manually</b> and click it. Then
-<b>Start crawling</b>. It looks for the Next that belongs to the table you chose &mdash; the one in the
+<b>Start crawling</b>. Since version 2.1 it looks for the Next that belongs to the table you chose &mdash; the one in the
 part of the page around that table, not another table&rsquo;s &mdash; so the invoices come back as 40 rows
 from four addresses, the shipments as 15 rows from three clicks, the returns as 12 after one
 <i>Show more</i>, and the messages as their 5 rows with nothing to page. If a site ever fools it,
@@ -778,7 +779,7 @@ from three pages, the carousel left alone. For every category: open <b>Wrong lis
 <b>Another table</b> until the category list is outlined (six rows, with the counts), then on the
 Crawl tab turn on <a href="../drill-down">drill-down</a>, preview the first category, tick <b>Every row of
 its table &mdash; one row each</b> and run it. It opens each category, reads its parts table one row per
-part, follows that table&rsquo;s own pages, and keeps the category&rsquo;s name and link on every row: 74
+part, follows that table&rsquo;s own pages (from version 2.1), and keeps the category&rsquo;s name and link on every row: 74
 rows. Reading every category is a Pro feature; the free version reads the first three so you can see
 the result.</p>
 <h2>In Python</h2>
@@ -813,7 +814,7 @@ def main():
     for slug, body in NOTES.items():
         path = os.path.join(DEMO, slug + '.html')
         s = open(path, encoding='utf-8').read()
-        s = re.sub(re.escape(START) + r'.*?' + re.escape(END), '', s, flags=re.S)
+        s = re.sub(re.escape(START) + r'.*?' + re.escape(END) + r'\n?', '', s, flags=re.S)
         # the old one-paragraph note under the stock grid is folded into these notes
         if slug == 'stock':
             s = re.sub(r'<p class="aside">There is no &lt;table&gt; on this page\..*?</p>', '', s, flags=re.S)
