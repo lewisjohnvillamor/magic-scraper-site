@@ -353,8 +353,14 @@ async function page(request, env, url) {
   const md = await asMarkdown(request, env, url);
   if (md) return md;
   const res = await env.ASSETS.fetch(request);
-  if (!/text\/html/i.test(res.headers.get('content-type') || '') || NOT_FOR_AGENTS.test(url.pathname)) return res;
+  if (!/text\/html/i.test(res.headers.get('content-type') || '')) return res;
   const out = new Response(res.body, res);
+  // The asset server says text/html and no more. Browsers fall back on the
+  // page's own <meta charset>, but requests, curl and most agents fall back on
+  // Latin-1, and every dash, quote and Japanese page arrives garbled. Every
+  // page here is UTF-8, so say so.
+  if (!/charset=/i.test(out.headers.get('content-type') || '')) out.headers.set('content-type', 'text/html; charset=utf-8');
+  if (NOT_FOR_AGENTS.test(url.pathname)) return out;
   out.headers.append('vary', 'Accept');
   const mdPath = url.pathname.endsWith('/') ? url.pathname + 'index.md' : url.pathname.replace(/\.html$/, '') + '.md';
   out.headers.append('link', `<${mdPath}>; rel="alternate"; type="text/markdown"`);

@@ -178,7 +178,7 @@ def main():
         body,
         scripts=script,
     )
-    print("\n%d lines in the pool; roughly 20-24 on the board in any minute" % POOL)
+    print("\n%d lines in the pool; one off the board, so 25 shown, in any minute" % POOL)
 
     # As in make_bulk_pages.py: seo_sandbox.py owns the titles and link-preview
     # tags. Regenerating this page to fix its board logic put the shop's
