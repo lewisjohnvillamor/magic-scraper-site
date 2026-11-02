@@ -303,22 +303,26 @@ products at their old price, and a banner above it that changes everything &mdas
 buy, the price you would pay is the one you want, and the page never writes it down.</p>
 <h2>What a scraper can and can&rsquo;t know</h2>
 <p>Any good tool gets the table: ten lines with Product, SKU, Category, Was and Left, plus the
-product link. None of them can know that the banner applies to the rows. That is not a detection
-problem a better tool solves; it is a sentence written for people, and the connection between it and
-the rows exists only in the reader&rsquo;s head. A scraper that silently invents a &ldquo;Now&rdquo;
-column would be worse than one that leaves it out.</p>
-<h2>Adding the missing column yourself</h2>
-<p>Collect the ten rows with Magic Scraper and export them, then add the discount as one formula.
-With <i>Was</i> in column D, put this in a spare column and fill down:</p>
+product link. No automatic detection can know that the banner applies to the rows: it is a sentence
+written for people, and the connection between it and the rows exists only in the reader&rsquo;s
+head. A scraper that silently invented a &ldquo;Now&rdquo; column would be worse than one that left
+it out. What you can do is tell it.</p>
+<h2>Pointing at it yourself</h2>
+<p>In Magic Scraper, open <b>Wrong list?</b> and choose <b>Pick manually</b>. Click one of the rows,
+then shift-click the &minus;35% in the banner, and press <b>Use selection</b>: the ten rows come back
+with the discount as a column of its own, the same value on every row. That puts the rule in the
+data, which is the part that matters &mdash; in a week the sheet will be the only record of it.</p>
+<h2>Turning it into a price</h2>
+<p>The column holds &ldquo;&minus;35%&rdquo;, not the price you would pay; the arithmetic is one
+formula in the sheet. With <i>Was</i> in column D, put this in a spare column and fill down:</p>
 <pre><code>=VALUE(SUBSTITUTE(D2,"$",""))*(1-35%)</code></pre>
 <p>In pandas it is one line once the table is read:</p>
 <pre><code>import pandas as pd
 df = pd.read_html("https://magicscraper.app/demo/awkward")[0]
 df["Now"] = (df["Was"].str.lstrip("$").astype(float) * 0.65).round(2)</code></pre>
-<p>Write the rule down next to the data &mdash; &ldquo;&minus;35% from the banner, ends Sunday&rdquo; &mdash;
-because in a week the sheet will be the only record of it. If you scrape the page on a
-<a href="../track-website-price-changes">schedule</a>, a change to the banner will not show up as a
-change to any row, so check it by eye.</p>
+<p>If you track the page on a <a href="../track-website-price-changes">schedule</a>, keep the picked
+discount in the saved setup: a new banner then shows up as a change on every row, where a table read
+without it would never notice.</p>
 <h2>A correct result</h2>
 <p>10 rows. Walnut Tray was $429.00, so it is $278.85 after the discount; Jute Tray, Bone goes from
 $488.00 to $317.20. The <i>Left</i> column is a count, from 1 to 18, and arrives as numbers.</p>
@@ -659,7 +663,7 @@ FIGURES = {
  'iframe': ("Magic Scraper reading the stock table inside the iframe",
            "24 rows read from inside the same-origin frame: product, link, SKU, maker, Wigan, Rotterdam and next dispatch."),
  'awkward': ("Magic Scraper showing the 10 clearance rows",
-           "The 10 clearance rows. The &minus;35% in the banner is not in any row, so it is not a column &mdash; add it after the export."),
+           "The 10 clearance rows as detection finds them. The &minus;35% in the banner is in no row; <b>Pick manually</b> and a shift-click on it adds it as a column."),
  'returns': ("Magic Scraper showing the returns log as 24 rows and 8 columns",
            "24 rows and 8 columns, kept exactly as typed &mdash; the mixed dates, refunds and statuses, and both duplicate lines."),
  'rates': ("Magic Scraper choosing the 14-row international rates table",
