@@ -22,25 +22,29 @@
 <p>End-of-line pages, outlet sections and trade promotions often work like this one: a table of
 products at their old price, and a banner above it that changes everything &mdash; here,
 &ldquo;&minus;35% applies to every line below&rdquo;. If you are comparing prices or deciding what to
-buy, the price you would pay is the one you want, and the page never writes it down.</p><figure><img src="img/awkward-result.webp" width="1400" height="672" loading="lazy" decoding="async" alt="Magic Scraper showing the 10 clearance rows"><figcaption>The 10 clearance rows. The &minus;35% in the banner is not in any row, so it is not a column &mdash; add it after the export.</figcaption></figure>
+buy, the price you would pay is the one you want, and the page never writes it down.</p><figure><img src="img/awkward-result.webp" width="1400" height="672" loading="lazy" decoding="async" alt="Magic Scraper showing the 10 clearance rows"><figcaption>The 10 clearance rows as detection finds them. The &minus;35% in the banner is in no row; <b>Pick manually</b> and a shift-click on it adds it as a column.</figcaption></figure>
 <h2>What a scraper can and can&rsquo;t know</h2>
 <p>Any good tool gets the table: ten lines with Product, SKU, Category, Was and Left, plus the
-product link. None of them can know that the banner applies to the rows. That is not a detection
-problem a better tool solves; it is a sentence written for people, and the connection between it and
-the rows exists only in the reader&rsquo;s head. A scraper that silently invents a &ldquo;Now&rdquo;
-column would be worse than one that leaves it out.</p>
-<h2>Adding the missing column yourself</h2>
-<p>Collect the ten rows with Magic Scraper and export them, then add the discount as one formula.
-With <i>Was</i> in column D, put this in a spare column and fill down:</p>
+product link. No automatic detection can know that the banner applies to the rows: it is a sentence
+written for people, and the connection between it and the rows exists only in the reader&rsquo;s
+head. A scraper that silently invented a &ldquo;Now&rdquo; column would be worse than one that left
+it out. What you can do is tell it.</p>
+<h2>Pointing at it yourself</h2>
+<p>In Magic Scraper, open <b>Wrong list?</b> and choose <b>Pick manually</b>. Click one of the rows,
+then shift-click the &minus;35% in the banner, and press <b>Use selection</b>: the ten rows come back
+with the discount as a column of its own, the same value on every row. That puts the rule in the
+data, which is the part that matters &mdash; in a week the sheet will be the only record of it.</p>
+<h2>Turning it into a price</h2>
+<p>The column holds &ldquo;&minus;35%&rdquo;, not the price you would pay; the arithmetic is one
+formula in the sheet. With <i>Was</i> in column D, put this in a spare column and fill down:</p>
 <pre><code>=VALUE(SUBSTITUTE(D2,"$",""))*(1-35%)</code></pre>
 <p>In pandas it is one line once the table is read:</p>
 <pre><code>import pandas as pd
 df = pd.read_html("https://magicscraper.app/demo/awkward")[0]
 df["Now"] = (df["Was"].str.lstrip("$").astype(float) * 0.65).round(2)</code></pre>
-<p>Write the rule down next to the data &mdash; &ldquo;&minus;35% from the banner, ends Sunday&rdquo; &mdash;
-because in a week the sheet will be the only record of it. If you scrape the page on a
-<a href="../track-website-price-changes">schedule</a>, a change to the banner will not show up as a
-change to any row, so check it by eye.</p>
+<p>If you track the page on a <a href="../track-website-price-changes">schedule</a>, keep the picked
+discount in the saved setup: a new banner then shows up as a change on every row, where a table read
+without it would never notice.</p>
 <h2>A correct result</h2>
 <p>10 rows. Walnut Tray was $429.00, so it is $278.85 after the discount; Jute Tray, Bone goes from
 $488.00 to $317.20. The <i>Left</i> column is a count, from 1 to 18, and arrives as numbers.</p><p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p></aside><!-- /practice-notes --><footer class="site"><div class="shell"><div class="cols"><div><h5>Northwind Supply</h5><p style="color:var(--ink-2);font-size:14px;margin:0">Household goods for people who keep things. Trade accounts welcome.</p><div class="signup"><input type="email" placeholder="Email address" aria-label="Email address"><button type="button">Join</button></div></div><div><h5>Shop</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="table.html">Trade list</a></li><li><a href="scroll.html">New arrivals</a></li><li><a href="awkward.html">Clearance</a></li><li><a href="shadow.html">Shop the look</a></li><li><a href="#">Gift cards</a></li></ul></div><div><h5>Help</h5><ul><li><a href="rates.html">Delivery rates</a></li><li><a href="iframe.html">Stock &amp; delivery</a></li><li><a href="reviews.html">Customer reviews</a></li><li><a href="returns.html">Returns log</a></li><li><a href="#">Contact</a></li></ul></div><div><h5>About</h5><ul><li><a href="#">Our makers</a></li><li><a href="stock.html">Warehouse stock</a></li><li><a href="feed.html">Product data</a></li><li><a href="#">Journal</a></li></ul></div></div><div class="fine"><span>&copy; 2026 Northwind Supply</span><a href="../terms.html">Terms</a><a href="../privacy.html">Privacy</a><span class="sep">A fictional shop. Nothing here is for sale.</span></div></div></footer></body></html>
