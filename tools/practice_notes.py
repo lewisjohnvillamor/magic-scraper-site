@@ -831,7 +831,11 @@ def main():
                  '<p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p>'
                  '</aside>' + END)
         if '<footer class="site">' in s:
-            s = s.replace('<footer class="site">', block + '<footer class="site">', 1)
+            # The store-style pages close their .shell before the footer, so the
+            # guide goes in a .shell of its own: without one it sat flush to the
+            # left edge of the window, with no padding.
+            wrapped = START + '<div class="shell">' + block[len(START):-len(END)] + '</div>' + END
+            s = s.replace('<footer class="site">', wrapped + '<footer class="site">', 1)
         elif '<footer class="cols">' in s:
             s = s.replace('<footer class="cols">', block + '<footer class="cols">', 1)
         elif '</main>' in s:
