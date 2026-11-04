@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reddit scraper: posts and comments to Excel or CSV, free</title>
+<meta name="description" content="Scrape Reddit posts and comment threads to Excel, CSV or JSON, free: score, author, time, flair, permalinks and reply depth in columns. No API key, no account." />
+<link rel="canonical" href="https://magicscraper.app/reddit-scraper" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/reddit-scraper" />
+<meta property="og:title" content="Reddit scraper: posts and comments to Excel or CSV, free" />
+<meta property="og:description" content="Scrape Reddit posts and comment threads to Excel, CSV or JSON, free: score, author, time, flair, permalinks and reply depth in columns. No API key, no account." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a free Reddit scraper?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Magic Scraper reads Reddit posts and comments, follows the pages and exports CSV, Excel or JSON for free, with no API key and no account."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on new Reddit and old Reddit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both. It recognises posts and comments from how each design builds them. Old Reddit pages through next; the current design loads more as you scroll, which Infinite scroll follows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it scrape the comments of a thread?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. A thread opens on its comments: author, text, score, time, reply depth and the parent comment’s id. The post is one Another table away."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need Reddit API access?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It reads the page your browser is showing, the way you see it. For very large collections, Reddit’s Data API is the right tool."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account or an API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It reads the page you are looking at, in your own browser. Nothing is sent to us; there is no server of ours to send it to."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if Reddit changes its design?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Magic Scraper falls back to reading the page the ordinary way, which usually still finds the list. Tell us and the site reading is updated in the next release."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Reddit scraper",
+      "item": "https://magicscraper.app/reddit-scraper"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Site guide</p>
+    <h1>Scrape <i>Reddit</i> posts and comments into a spreadsheet.</h1>
+    <p class="standfirst">Open a subreddit, your feed or a thread, click the icon, and every post or comment arrives with its score, author, time and permalink in columns of their own. It works on the current design and on old.reddit.com, with no API key and no account.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free exports, no paywall on your data. Reddit has been read by name since version 1.22; see <a href="/supported-sites">every site read by name</a>.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="columns">
+    <h2>What you get</h2>
+    <p class="deck">Columns nobody on the page has are left out, so a subreddit without flair has no empty Flair column.</p>
+    <h3 class="tcap">Posts</h3>
+    <table class="compare">
+      <thead><tr><td>Column</td><th>What it holds</th></tr></thead>
+      <tbody>
+        <tr><td>Title</td><td>The post title</td></tr>
+        <tr><td>Subreddit</td><td>Where it was posted, as r/name</td></tr>
+        <tr><td>Author</td><td>The username</td></tr>
+        <tr><td>Score</td><td>Its score when you read it</td></tr>
+        <tr><td>Comments</td><td>The comment count</td></tr>
+        <tr><td>Posted</td><td>The exact time, as a date and time</td></tr>
+        <tr><td>Flair</td><td>The post flair, if any</td></tr>
+        <tr><td>Type</td><td>Text, link, image and so on</td></tr>
+        <tr><td>Domain</td><td>The site a link post points to</td></tr>
+        <tr><td>Link</td><td>Where a link post goes</td></tr>
+        <tr><td>Permalink</td><td>The post&rsquo;s own address on Reddit</td></tr>
+        <tr><td>Promoted</td><td>Whether it is an ad</td></tr>
+        <tr><td>NSFW</td><td>Whether it is marked NSFW</td></tr>
+        <tr><td>ID</td><td>Reddit&rsquo;s id for the post</td></tr>
+      </tbody>
+    </table>
+    <h3 class="tcap">Comments, on a thread</h3>
+    <table class="compare">
+      <thead><tr><td>Column</td><th>What it holds</th></tr></thead>
+      <tbody>
+        <tr><td>Author</td><td>The username</td></tr>
+        <tr><td>Text</td><td>The comment</td></tr>
+        <tr><td>Score</td><td>Its score</td></tr>
+        <tr><td>Posted</td><td>The exact time</td></tr>
+        <tr><td>Depth</td><td>How deep the reply sits: 0 for top level</td></tr>
+        <tr><td>Permalink</td><td>The comment&rsquo;s own address</td></tr>
+        <tr><td>ID</td><td>Its id</td></tr>
+        <tr><td>Parent</td><td>The id of the comment it replies to, so the thread can be rebuilt</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="how">
+    <h2>How to do it</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Open the page</h3>
+        <p>A subreddit, your home feed, or a single thread. Signed in or not, as you already are.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Click the icon</h3>
+        <p>Posts come out one per row. On a thread you get the comments first; the post itself is under <b>Wrong list?</b> &rarr; <b>Another table</b>.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Get more than one screen</h3>
+        <p>On old.reddit.com, press <b>Start crawling</b> and it follows <b>next &rsaquo;</b>. On the current design, tick <b>Infinite scroll</b> in the Crawl tab and it scrolls until no new posts arrive.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Export</h3>
+        <p>CSV, Excel or JSON, or paste into a new Google Sheet. Free, no row cap.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="further">
+    <h2>Going further, and the limits</h2>
+    <div class="claim">
+      <p>For research, it suits the sample a person collects while looking: a few subreddits, a few threads. For a dataset of millions, Reddit&rsquo;s own Data API exists for exactly that. Usernames and comments are personal data: ethics boards generally expect usernames replaced and quotations paraphrased, since a quoted comment can be searched back to its author.</p>
+      <p>Whether you may collect from a site is between you and that site: its terms, its robots.txt and data-protection law. Magic Scraper reads only what your browser already shows you, paces itself gently by default, and a &ldquo;verify you&rsquo;re human&rdquo; check stops the run and hands you the tab; it never tries to get past one.</p>
+    </div>
+  </section>
+
+  <section id="more">
+    <h2>Other sites read by name</h2>
+    <div class="claim">
+      <p><a href="/amazon-search-results-scraper">Amazon search results scraper</a> &middot; <a href="/hacker-news-scraper">Hacker News scraper</a> &middot; <a href="/pubmed-scraper">PubMed scraper</a> &middot; <a href="/arxiv-scraper">arXiv scraper</a>. Most other sites need nothing special: the ordinary detection finds the list and names its columns. Choosing a tool? See <a href="/best-free-web-scraper-extensions">the best free web scraper extensions</a>, compared on whether they let you export.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Is there a free Reddit scraper?</summary>
+        <p>Yes. Magic Scraper reads Reddit posts and comments, follows the pages and exports CSV, Excel or JSON for free, with no API key and no account.</p>
+      </details>
+      <details>
+        <summary>Does it work on new Reddit and old Reddit?</summary>
+        <p>Both. It recognises posts and comments from how each design builds them. Old Reddit pages through next; the current design loads more as you scroll, which Infinite scroll follows.</p>
+      </details>
+      <details>
+        <summary>Can it scrape the comments of a thread?</summary>
+        <p>Yes. A thread opens on its comments: author, text, score, time, reply depth and the parent comment&rsquo;s id. The post is one Another table away.</p>
+      </details>
+      <details>
+        <summary>Do I need Reddit API access?</summary>
+        <p>No. It reads the page your browser is showing, the way you see it. For very large collections, Reddit&rsquo;s Data API is the right tool.</p>
+      </details>
+      <details>
+        <summary>Do I need an account or an API key?</summary>
+        <p>No. It reads the page you are looking at, in your own browser. Nothing is sent to us; there is no server of ours to send it to.</p>
+      </details>
+      <details>
+        <summary>What happens if Reddit changes its design?</summary>
+        <p>Magic Scraper falls back to reading the page the ordinary way, which usually still finds the list. Tell us and the site reading is updated in the next release.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>
