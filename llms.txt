@@ -133,6 +133,21 @@ extension, not in storage the scraped website can read.
   journal, year and DOI; abstracts by drill-down
 - [arXiv scraper](https://magicscraper.app/arxiv-scraper): listings and search results with every
   author, abstract, subjects and PDF link
+- [Site guides](https://magicscraper.app/site-guides): Magic Scraper tested on real websites on
+  4 November 2026, with rows, columns and pages for each
+- [Wikipedia scraper](https://magicscraper.app/wikipedia-table-scraper): tested on List of largest cities, 85 rows and 17 columns
+- [Yellow Pages scraper](https://magicscraper.app/yellow-pages-scraper): tested on plumbers in Austin, TX, 30 rows and 11 columns; 90 rows over 3 pages
+- [CoinMarketCap scraper](https://magicscraper.app/coinmarketcap-scraper): tested on the front page, 101 rows and 14 columns; 301 rows over 3 pages
+- [Yahoo Finance scraper](https://magicscraper.app/yahoo-finance-scraper): tested on Most Active stocks, 25 rows and 13 columns; 75 rows over 3 pages
+- [Eventbrite scraper](https://magicscraper.app/eventbrite-scraper): tested on events in San Francisco, 40 rows and 15 columns
+- [Stack Overflow scraper](https://magicscraper.app/stack-overflow-scraper): tested on questions tagged python, 15 rows and 19 columns; 45 rows over 3 pages
+- [Steam scraper](https://magicscraper.app/steam-scraper): tested on a search for "strategy", 50 rows and 15 columns
+- [Rotten Tomatoes scraper](https://magicscraper.app/rotten-tomatoes-scraper): tested on movies in theaters, 28 rows and 10 columns; 87 rows over 3 pages
+- [Hugging Face scraper](https://magicscraper.app/hugging-face-scraper): tested on the models list, 30 rows and 13 columns; 60 rows over 2 pages
+- [Capterra scraper](https://magicscraper.app/capterra-scraper): tested on CRM software, 25 rows and 3 columns; 125 rows over 3 pages
+- [DEV scraper](https://magicscraper.app/dev-to-scraper): tested on the javascript tag, 15 rows and 31 columns; 45 rows over 3 pages
+- [We Work Remotely scraper](https://magicscraper.app/we-work-remotely-scraper): tested on remote design jobs, 18 rows and 17 columns
+- [Shopify stores scraper](https://magicscraper.app/shopify-store-scraper): tested on Allbirds' men's shoes, 38 rows and 22 columns
 - [Lead generation](https://magicscraper.app/lead-generation): building a B2B lead list from public
   directories, chambers, associations and exhibitor lists; keeping only leads not in your CRM
 - [Association member directory scraper](https://magicscraper.app/association-member-directory-scraper):
