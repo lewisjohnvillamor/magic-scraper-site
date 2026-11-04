@@ -36,7 +36,7 @@
       "name": "Warum hört mein Scraper auf deutschen Seiten nach Seite 1 auf?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Viele Scraper suchen die nächste Seite am englischen Wort Next. Magic Scraper liest außerdem rel=\"next\", Pfeile, aria-labels und nummerierte Seiten, und Weiter, Nächste und, ab dem nächsten Update, Nächste Seite und Mehr laden."
+        "text": "Viele Scraper suchen die nächste Seite am englischen Wort Next. Magic Scraper liest außerdem rel=\"next\", Pfeile, aria-labels und nummerierte Seiten, und Weiter, Nächste, Nächste Seite und Mehr laden."
       }
     },
     {
@@ -52,7 +52,7 @@
       "name": "Warum stimmen die Zahlen in Excel nicht?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Weil 1.234 als Dezimalzahl gelesen wurde. Ab dem nächsten Update liest der Excel-Export von Magic Scraper eine Spalte in deutscher Schreibweise auch so."
+        "text": "Weil 1.234 als Dezimalzahl gelesen wurde. Der Excel-Export von Magic Scraper liest eine Spalte in deutscher Schreibweise auch so."
       }
     },
     {
@@ -129,8 +129,8 @@
     <h1>Deutsche Seiten, <i>bis zur letzten</i>.</h1>
     <p class="standfirst">Ein Scraper, der den Weiter-Link am englischen Wort &bdquo;Next&ldquo; erkennt, bleibt auf einer Seite mit &bdquo;Nächste Seite&ldquo; oder &bdquo;Mehr laden&ldquo; hängen. In Excel wird aus Müller schnell MÃ¼ller, und aus 1.234 die Zahl eins Komma zwei drei vier. Was auf deutschsprachigen Seiten schiefgeht, und was Magic Scraper dagegen tut.</p>
     <div class="actions">
-      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Für Chrome installieren &ndash; kostenlos</a>
-      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Für Edge installieren</a>
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper-%E2%80%93-lead-web/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Für Chrome installieren &ndash; kostenlos</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper-%E2%80%93-lead-we/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Für Edge installieren</a>
       <span class="aside">Kostenlos, ohne Konto.</span>
     </div>
   </div>
@@ -146,14 +146,14 @@
     <table class="compare">
       <thead><tr><td></td><th>Erkannte Beschriftung</th></tr></thead>
       <tbody>
-        <tr><td>Nächste Seite</td><td class="">Weiter &middot; Nächste &middot; Nächste Seite&dagger;</td></tr>
-        <tr><td>Nachladen</td><td class="">Mehr laden&dagger; &middot; Mehr anzeigen&dagger; &middot; Weitere anzeigen&dagger; &middot; Weitere Ergebnisse&dagger;</td></tr>
+        <tr><td>Nächste Seite</td><td class="">Weiter &middot; Nächste &middot; Nächste Seite</td></tr>
+        <tr><td>Nachladen</td><td class="">Mehr laden &middot; Mehr anzeigen &middot; Weitere anzeigen &middot; Weitere Ergebnisse</td></tr>
         <tr><td>Zurück (nie für Weiter gehalten)</td><td class="">Zurück &middot; Vorherige</td></tr>
-        <tr><td>Kein Blättern</td><td class="">Pfeile von Bildergalerien&dagger; &middot; Fußnotennummern&dagger;</td></tr>
+        <tr><td>Kein Blättern</td><td class="">Pfeile von Bildergalerien &middot; Fußnotennummern</td></tr>
       </tbody>
     </table>
     <div class="claim">
-      <p>&dagger; Ab dem nächsten Update, 2.1.0 <span class="soon">nächstes Update</span>. Alles andere steckt schon in der Version, die die Stores gerade ausliefern. Insgesamt erkennt es Blätter-Links in mehr als 80 Sprachen&dagger;.</p>
+      <p>Insgesamt erkennt es Blätter-Links in mehr als 80 Sprachen.</p>
     </div>
   </section>
 
@@ -169,7 +169,7 @@
     <h2>1.234 ist nicht 1,234</h2>
     <div class="claim">
       <p>Im Deutschen trennt der Punkt die Tausender und das Komma die Dezimalstellen. Wer 1.234 als Dezimalzahl liest, macht aus eintausendzweihundertvierunddreißig eins Komma zwei drei vier, ohne jede Warnung.</p>
-      <p>Ab dem nächsten Update <span class="soon">nächstes Update</span> schaut der Excel-Export auf die ganze Spalte. Zeigt sie deutsche Schreibweise (83.200.000, 12,50, 1.234,56), wird jeder Wert so gelesen, und die Spalte lässt sich summieren. Eine Spalte nur aus Werten wie 1.234 könnte beides sein; sie bleibt Text: nie falsch, nur nicht summierbar. Die CSV behält jeden Wert genau so, wie die Seite ihn schreibt.</p>
+      <p>Der Excel-Export schaut auf die ganze Spalte. Zeigt sie deutsche Schreibweise (83.200.000, 12,50, 1.234,56), wird jeder Wert so gelesen, und die Spalte lässt sich summieren. Eine Spalte nur aus Werten wie 1.234 könnte beides sein; sie bleibt Text: nie falsch, nur nicht summierbar. Die CSV behält jeden Wert genau so, wie die Seite ihn schreibt.</p>
     </div>
   </section>
 
@@ -195,7 +195,7 @@
     <div class="qa">
       <details>
         <summary>Warum hört mein Scraper auf deutschen Seiten nach Seite 1 auf?</summary>
-        <p>Viele Scraper suchen die nächste Seite am englischen Wort Next. Magic Scraper liest außerdem rel="next", Pfeile, aria-labels und nummerierte Seiten, und Weiter, Nächste und, ab dem nächsten Update, Nächste Seite und Mehr laden.</p>
+        <p>Viele Scraper suchen die nächste Seite am englischen Wort Next. Magic Scraper liest außerdem rel="next", Pfeile, aria-labels und nummerierte Seiten, und Weiter, Nächste, Nächste Seite und Mehr laden.</p>
       </details>
       <details>
         <summary>Wie verhindere ich kaputte Umlaute in Excel?</summary>
@@ -203,7 +203,7 @@
       </details>
       <details>
         <summary>Warum stimmen die Zahlen in Excel nicht?</summary>
-        <p>Weil 1.234 als Dezimalzahl gelesen wurde. Ab dem nächsten Update liest der Excel-Export von Magic Scraper eine Spalte in deutscher Schreibweise auch so.</p>
+        <p>Weil 1.234 als Dezimalzahl gelesen wurde. Der Excel-Export von Magic Scraper liest eine Spalte in deutscher Schreibweise auch so.</p>
       </details>
       <details>
         <summary>Ist das DSGVO-konform?</summary>

@@ -11,8 +11,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from figures import shot, video, diagram, PAGER_SVG, ZEROS_SVG, PRIVACY_SVG, CREDITS_SVG
 
 ROOT = sys.argv[1]
-CWS = "https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck"
-EDGE = "https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp"
+CWS = "https://chromewebstore.google.com/detail/magic-scraper-%E2%80%93-lead-web/lcdaikobgjpakcgbkdedoapnckeobbck"
+EDGE = "https://microsoftedge.microsoft.com/addons/detail/magic-scraper-%E2%80%93-lead-we/palbdbeiidhladdgdmlolckafkjackfp"
 
 HURRY = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "hurry.html"), encoding="utf-8").read()
 
@@ -635,13 +635,25 @@ PAGES.append(dict(
     eyebrow="Changelog",
     crumb="Changelog",
     title="Magic Scraper changelog: every update, in plain words",
-    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 1.23.",
+    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 2.1.",
     og="Every Magic Scraper update in plain words, including what was removed or moved to Pro.",
     h1="What changed, <i>update</i> by update.",
     standfirst="Updates arrive by themselves through the Chrome Web Store and Edge Add-ons, once each one clears store review. This page lists what each one changed, in plain words, including anything that was removed or moved to Pro, so an update never surprises you.",
-    aside="In the stores now: v1.23.",
+    aside="In the stores now: v2.1.",
     sections=[
-        release("v1-23", "v1.23", "23 October 2026.", "In the Chrome and Edge stores now", [
+        release("v2-1", "v2.1", "4 November 2026 in the Chrome Web Store (2.1.1); Edge Add-ons has 2.1.0, the same apart from the export menu's wording.", "In the Chrome and Edge stores now", [
+            "<b>A calmer panel.</b> The Data tab opens on one row of controls: <b>Export CSV</b>, with Excel, JSON, copy and Google Sheets under the arrow beside it, each saying what it does. <b>Wrong list?</b> holds Another table and Pick manually. The side panel and a window of its own are in the gear menu, and the header is one count.",
+            "<b>Paste into a new Google Sheet</b> is the new name for Open in Google Sheets: it copies the table and opens a blank sheet, ready to paste into. Nothing about it changed but the name.",
+            "<b>A window of its own</b>: open Magic Scraper as a window that stays put while you click the page.",
+            "<b>Next and Load more in more than 80 languages</b>, and carousel arrows, footnote numbers and &ldquo;Next season&rdquo; links are no longer taken for a Next button. <a href=\"/scrape-websites-in-other-languages\">What it reads</a>.",
+            "<b>European numbers in Excel</b>: a column written 1.234,56 is read as such, so it sums.",
+            "<b>Lists split under headings come out as one table</b>, with a Section column holding each row's heading.",
+            "<b>On a page of several paged tables, the crawl pages the one you chose</b>, and Another table reaches a table beside a category sidebar.",
+            "<b><a href=\"/drill-down\">Drill-down</a>: one row per row of a detail page's table</b> (price breaks, branches, a category's parts), every page of it.",
+            "A Load more crawl keeps its last batch. A scheduled run exports the columns you set up. A free user's column choices are remembered. Grids built of divs, scrolling panels and virtual lists are read.",
+            "<b>A new name in the stores</b>: Magic Scraper &ndash; Lead &amp; Web Scraper to Excel.",
+        ]),
+        release("v1-23", "v1.23", "23 October 2026.", None, [
             "<b>Open in Google Sheets</b> (free): copies the table and opens a new sheet, ready to paste into.",
             "<b>Send to Google Sheets</b> (Pro): writes the rows into a sheet in your own Google account, and the next send adds under the last. It can open only the sheets it created, and nothing passes through a server of ours. <a href=\"/privacy#google-sheets\">What it sends and keeps</a>.",
             "A scheduled setup can add each run's rows to its sheet. If Google needs you to sign in again, the run still saves its CSV and says so.",
@@ -692,7 +704,7 @@ PAGES.append(dict(
             "changed and isn't listed, <a href=\"/support\">tell us</a>.")),
     ],
     faq=[
-        ("Which version of Magic Scraper is in the stores?", "Version 1.23, on both the Chrome Web Store and Edge Add-ons. A Firefox version is built and on its way to Firefox Add-ons."),
+        ("Which version of Magic Scraper is in the stores?", "Version 2.1: 2.1.1 in the Chrome Web Store and 2.1.0 in Edge Add-ons, which differ only in the export menu's wording. A Firefox version is in review at Firefox Add-ons."),
         ("How do Magic Scraper updates arrive?", "Automatically, through the Chrome Web Store or Edge Add-ons, once each update has cleared store review. You don't need to reinstall."),
         ("Do I have to pay for updates?", "No. A Pro licence is paid once and keeps working across every update."),
         ("Will an update remove a feature I use?", "Anything removed, or moved between Free and Pro, is listed on this page under the version that changed it."),
