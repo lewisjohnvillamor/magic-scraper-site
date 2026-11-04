@@ -117,6 +117,9 @@ extension, not in storage the scraped website can read.
   no sitemap; schedules without a Cloud plan; when webscraper.io is the better fit
 - [Ultimate Web Scraper alternative](https://magicscraper.app/ultimate-web-scraper-alternative):
   free exports and a one-time Pro versus yearly plans; when Ultimate does more
+- [No Code Web Scraper alternative](https://magicscraper.app/no-code-web-scraper-alternative):
+  free exports versus a $69-$249 licence to export; drill-down that follows each row's link;
+  when No Code Web Scraper's site presets, image downloader or email extractor fit better
 - [Lead generation](https://magicscraper.app/lead-generation): building a B2B lead list from public
   directories, chambers, associations and exhibitor lists; keeping only leads not in your CRM
 - [Association member directory scraper](https://magicscraper.app/association-member-directory-scraper):
