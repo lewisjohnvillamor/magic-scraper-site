@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Site guides: Magic Scraper tested on real websites</title>
+<meta name="description" content="Magic Scraper tested on real websites, with the result: rows, columns and pages from Wikipedia, Yellow Pages, CoinMarketCap, Yahoo Finance, Stack Overflow and more." />
+<link rel="canonical" href="https://magicscraper.app/site-guides" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/site-guides" />
+<meta property="og:title" content="Site guides: Magic Scraper tested on real websites" />
+<meta property="og:description" content="Magic Scraper tested on real websites, with the result: rows, columns and pages from Wikipedia, Yellow Pages, CoinMarketCap, Yahoo Finance, Stack Overflow and more." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which websites does Magic Scraper work on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most pages that show a list or a table: it finds the repeating rows on whatever page you open. These guides are the sites we tested on 4 November 2026, with the result each gave, plus five sites it reads by name."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my favourite site not here?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Either we have not written it up yet, or it showed our automated test browser a “verify you’re human” check, which a person’s own browser usually does not see. Guides for those are being recorded in a normal browser."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on LinkedIn, Google Maps or Zillow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We do not promise those. They are built to resist automated reading, and Magic Scraper never tries to get past a check."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Site guides",
+      "item": "https://magicscraper.app/site-guides"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Site guides</p>
+    <h1>Tested on real sites, <i>with the result</i>.</h1>
+    <p class="standfirst">Each guide below was run with the released extension on a real page, recorded as it happened, and written up with what came out: how many rows, which columns, how many pages. No ready-made presets: the same detection works on each.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free exports, no paywall on your data. Tested 4 November 2026; sites change, so tell us if one stops working.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="tested">
+    <h2>Tested sites</h2>
+    <table class="compare">
+      <thead><tr><td>Site</td><th>Page tested</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/wikipedia-table-scraper">Wikipedia</a></td><td>List of largest cities</td><td class="y">85 rows, 17 columns</td></tr>
+        <tr><td><a href="/yellow-pages-scraper">Yellow Pages</a></td><td>plumbers in Austin, TX</td><td class="y">30 rows, 11 columns; 90 rows over 3 pages</td></tr>
+        <tr><td><a href="/coinmarketcap-scraper">CoinMarketCap</a></td><td>the front page</td><td class="y">101 rows, 14 columns; 301 rows over 3 pages</td></tr>
+        <tr><td><a href="/yahoo-finance-scraper">Yahoo Finance</a></td><td>Most Active stocks</td><td class="y">25 rows, 13 columns; 75 rows over 3 pages</td></tr>
+        <tr><td><a href="/eventbrite-scraper">Eventbrite</a></td><td>events in San Francisco</td><td class="y">40 rows, 15 columns</td></tr>
+        <tr><td><a href="/stack-overflow-scraper">Stack Overflow</a></td><td>questions tagged python</td><td class="y">15 rows, 19 columns; 45 rows over 3 pages</td></tr>
+        <tr><td><a href="/steam-scraper">Steam</a></td><td>a search for &ldquo;strategy&rdquo;</td><td class="y">50 rows, 15 columns</td></tr>
+        <tr><td><a href="/rotten-tomatoes-scraper">Rotten Tomatoes</a></td><td>movies in theaters</td><td class="y">28 rows, 10 columns; 87 rows over 3 pages</td></tr>
+        <tr><td><a href="/hugging-face-scraper">Hugging Face</a></td><td>the models list</td><td class="y">30 rows, 13 columns; 60 rows over 2 pages</td></tr>
+        <tr><td><a href="/capterra-scraper">Capterra</a></td><td>CRM software</td><td class="y">25 rows, 3 columns; 125 rows over 3 pages</td></tr>
+        <tr><td><a href="/dev-to-scraper">DEV</a></td><td>the javascript tag</td><td class="y">15 rows, 31 columns; 45 rows over 3 pages</td></tr>
+        <tr><td><a href="/we-work-remotely-scraper">We Work Remotely</a></td><td>remote design jobs</td><td class="y">18 rows, 17 columns</td></tr>
+        <tr><td><a href="/shopify-store-scraper">Shopify stores</a></td><td>Allbirds&rsquo; men&rsquo;s shoes</td><td class="y">38 rows, 22 columns</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="by-name">
+    <h2>Read by name</h2>
+    <p class="deck">Five sites whose posts, products and papers come out with a fixed set of columns of their own.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3><a href="/reddit-scraper">Reddit</a></h3>
+        <p>Posts and comment threads, both designs.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3><a href="/amazon-search-results-scraper">Amazon search results</a></h3>
+        <p>Price, rating, reviews, sponsored, ASIN.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3><a href="/hacker-news-scraper">Hacker News</a></h3>
+        <p>Stories with points, author and exact time.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3><a href="/pubmed-scraper">PubMed</a></h3>
+        <p>PMID, authors, journal, year and DOI.</p>
+      </div>
+      <div class="step">
+        <span class="n">05</span>
+        <h3><a href="/arxiv-scraper">arXiv</a></h3>
+        <p>Every author, abstract and PDF link.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="others">
+    <h2>Everything else</h2>
+    <div class="claim">
+      <p>Most sites need no guide: open the page, click the icon, export. If the first list is not the one you wanted, <b>Wrong list?</b> has the others, or point at the rows yourself. Practise on the <a href="/demo/">sandbox</a>, and see <a href="/best-free-web-scraper-extensions">how the free extensions compare</a>.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Which websites does Magic Scraper work on?</summary>
+        <p>Most pages that show a list or a table: it finds the repeating rows on whatever page you open. These guides are the sites we tested on 4 November 2026, with the result each gave, plus five sites it reads by name.</p>
+      </details>
+      <details>
+        <summary>Why is my favourite site not here?</summary>
+        <p>Either we have not written it up yet, or it showed our automated test browser a &ldquo;verify you&rsquo;re human&rdquo; check, which a person&rsquo;s own browser usually does not see. Guides for those are being recorded in a normal browser.</p>
+      </details>
+      <details>
+        <summary>Does it work on LinkedIn, Google Maps or Zillow?</summary>
+        <p>We do not promise those. They are built to resist automated reading, and Magic Scraper never tries to get past a check.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>

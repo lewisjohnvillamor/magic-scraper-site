@@ -12,28 +12,21 @@ table.tiers th{text-align:left;padding:8px 12px;border-bottom:2px solid #17150f}
 <div class="shell"><p class="crumbs"><a href="index.html">Sandbox</a> / Business directory</p><div class="head"><h1>Business directory scraping</h1><p>Trades in Lakeside &middot; 24 listings &middot; page 1 of 3</p></div><article class="biz"><h3><a href="biz-1.html">Harbour Plumber &amp; Sons</a></h3><p class="trade">Plumber &middot; Lakeside</p><p class="phone">01632 555 100</p></article><article class="biz"><h3><a href="biz-2.html">Kestrel Electricians</a></h3><p class="trade">Electrician &middot; Lakeside</p><p class="phone">01632 555 107</p></article><article class="biz"><h3><a href="biz-3.html">Millbrook Roofers</a></h3><p class="trade">Roofer &middot; Lakeside</p><p class="phone">01632 555 114</p></article><article class="biz"><h3><a href="biz-4.html">Oakfield Joiner &amp; Sons</a></h3><p class="trade">Joiner &middot; Lakeside</p><p class="phone">01632 555 121</p></article><article class="biz"><h3><a href="biz-5.html">Riverside Plasterers</a></h3><p class="trade">Plasterer &middot; Lakeside</p><p class="phone">01632 555 128</p></article><article class="biz"><h3><a href="biz-6.html">Stonegate Locksmiths</a></h3><p class="trade">Locksmith &middot; Lakeside</p><p class="phone">01632 555 135</p></article><article class="biz"><h3><a href="biz-7.html">Thornbury Glazier &amp; Sons</a></h3><p class="trade">Glazier &middot; Lakeside</p><p class="phone">01632 555 142</p></article><article class="biz"><h3><a href="biz-8.html">Westcliff Painters</a></h3><p class="trade">Painter &middot; Lakeside</p><p class="phone">01632 555 149</p></article><div class="pager"><span class="on">1</span><a href="directory-2.html">2</a><a href="directory-3.html">3</a><a class="next" href="directory-2.html">Next &rsaquo;</a></div><!-- practice-notes --><style>.practice-notes{max-width:780px;margin:44px 0 56px;padding:24px 28px;background:#fffefb;border:1px solid #e0dbd0;border-radius:12px;color:#2a2720;font-size:15.5px;line-height:1.6}.practice-notes .kicker{font:600 11px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#b4491f;margin:0 0 10px}.practice-notes h2{font-size:21px;margin:22px 0 6px}.practice-notes h2:first-of-type{margin-top:4px}.practice-notes p{margin:0 0 10px}.practice-notes pre{background:#17150f;color:#f3efe6;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;line-height:1.5}.practice-notes code{font-size:.92em}.practice-notes .cta{margin-top:16px;font-weight:600}</style><style>.practice-notes figure{margin:18px 0 20px}.practice-notes figure img{display:block;width:100%;height:auto;border:1px solid #e0dbd0;border-radius:10px;background:#f6f3ec}.practice-notes figcaption{font-size:13.5px;color:#5d574a;margin-top:8px;line-height:1.5}.practice-notes .watch{display:flex;gap:14px;align-items:center;margin:14px 0 6px;text-decoration:none;color:inherit}.practice-notes .watch img{width:168px;height:auto;border-radius:8px;flex:none}.practice-notes .watch span{font-weight:600}</style><aside class="practice-notes" id="practice-notes" aria-label="About this practice page"><p class="kicker">About this practice page</p>
 <h2>A local directory, and the lead list behind it</h2>
 <p>Trade directories, chamber of commerce member lists and &ldquo;find a tradesperson&rdquo; sites all
-look like this: a short card per business in the list, and the useful details &mdash; email, website,
-address, opening hours &mdash; one click away on its own profile page. If you are building a list of
-businesses to contact, this is the job, and it has two halves.</p><figure><img src="img/directory-result.webp" width="1400" height="672" loading="lazy" decoding="async" alt="Magic Scraper after crawling the directory and reading every profile"><figcaption>24 businesses from three pages, with Address, Phone, Email, Website, Opening hours and Established added from each profile by drill-down.</figcaption></figure><a class="watch" href="https://www.youtube.com/watch?v=lnpNfYghYbQ" rel="noopener"><img src="../assets/video/lnpNfYghYbQ.webp" width="168" height="94" loading="lazy" alt=""><span>Watch it done on this page: &ldquo;Turn any business directory into a lead list in 1 click&rdquo; (YouTube)</span></a>
-<h2>The first half: every listing</h2>
-<p>The list shows a name, a trade and a phone number, eight to a page, over three pages. Collect
-all three pages and you have 24 businesses with a phone each &mdash; in Magic Scraper, open it on this
-page and press <b>Start crawling</b>.</p>
-<h2>The second half: what is on each profile</h2>
-<p>Each profile lays its details out as label and value pairs (<i>Address</i>, <i>Phone</i>,
-<i>Email</i>, <i>Website</i>, <i>Opening hours</i>, <i>Established</i>). Turn on
-<a href="../drill-down">drill-down</a>, preview the first profile, and those become columns on every
-row. The free version reads the first three profiles so you can see the result; Pro reads all of
-them. Writing it yourself, it is a loop over the profile links, reading the pairs into a dictionary:</p>
-<pre><code>for link in soup.select("article.biz h3 a"):
-    page = BeautifulSoup(requests.get(urljoin(url, link["href"])).text, "html.parser")
-    labels = [dt.get_text(strip=True) for dt in page.select("dl.profile dt")]
-    values = [dd.get_text(strip=True) for dd in page.select("dl.profile dd")]
-    record = dict(zip(labels, values))</code></pre>
-<h2>Checking the result, and using it well</h2>
-<p>24 rows; with the profiles read, six more columns. The phone number appears twice, once from
-the list and once from the profile &mdash; keep one. On a real directory, keep to business details,
-check the site&rsquo;s terms, and mind the rules on contacting people where you are:
+look like this: a short card per business, and the useful details &mdash; email, website, address,
+opening hours &mdash; one click away on each business&rsquo;s own profile. If you are building a list
+of businesses to contact, this is the job.</p><figure><img src="img/directory-result.webp" width="1400" height="672" loading="lazy" decoding="async" alt="Magic Scraper after crawling the directory and reading every profile"><figcaption>24 businesses from three pages, with Address, Phone, Email, Website, Opening hours and Established added from each profile by drill-down.</figcaption></figure><a class="watch" href="https://www.youtube.com/watch?v=lnpNfYghYbQ" rel="noopener"><img src="../assets/video/lnpNfYghYbQ.webp" width="168" height="94" loading="lazy" alt=""><span>Watch it done on this page: &ldquo;Turn any business directory into a lead list in 1 click&rdquo; (YouTube)</span></a>
+<h2>Why it is two steps</h2>
+<p>The list itself only has a name, a trade and a phone number, over three pages. Everything else
+is on the profiles, one page per business. Magic Scraper does both in one run: it collects every
+listing, then opens each profile and adds its details as columns.</p>
+<h2>How to do it</h2>
+<p>Open Magic Scraper on this page and press <b>Start crawling</b> to collect all three pages. Then,
+on the Crawl tab, turn on <a href="../drill-down">drill-down</a>, preview the first profile and press
+<b>Use this for all rows</b>. The free version reads the first three profiles so you can see the
+result; Pro reads all of them. With Pro, <b>Compare with a file</b> takes your CRM export and marks
+the businesses you do not have yet.</p>
+<h2>What you should get</h2>
+<p>24 businesses, and with the profiles read, six more columns: Address, Phone, Email, Website,
+Opening hours and Established. Keep to business details and check the site&rsquo;s terms:
 <a href="../is-it-legal-to-scrape-a-business-directory">is it legal to scrape a business directory?</a>
-For the whole workflow, from finding the directory to keeping only the leads you don&rsquo;t have, see
-<a href="../lead-generation">building a B2B lead list</a>.</p><p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p></aside><!-- /practice-notes --></div></body></html>
+The whole workflow is in <a href="../lead-generation">building a B2B lead list</a>.</p><p class="cta">Try it yourself: <a href="../">get Magic Scraper free</a> and open it on this page.</p></aside><!-- /practice-notes --></div></body></html>

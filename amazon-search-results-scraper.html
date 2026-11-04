@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Amazon search results scraper: prices, ratings and ASINs to Excel, free</title>
+<meta name="description" content="Scrape Amazon search results to Excel, CSV or JSON, free: title, price, rating, review count, sponsored, Prime and ASIN. Every Amazon country site." />
+<link rel="canonical" href="https://magicscraper.app/amazon-search-results-scraper" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/amazon-search-results-scraper" />
+<meta property="og:title" content="Amazon search results scraper: prices, ratings and ASINs to Excel, free" />
+<meta property="og:description" content="Scrape Amazon search results to Excel, CSV or JSON, free: title, price, rating, review count, sponsored, Prime and ASIN. Every Amazon country site." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a free Amazon scraper?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For search results, yes. Magic Scraper reads each result’s title, price, rating, review count, ASIN and link, follows every page and exports CSV, Excel or JSON for free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on amazon.co.uk, amazon.de and the others?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It recognises the results by how they are built, which is the same in every country."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it scrape Amazon reviews or product pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not by name. It reads search results. Drill-down can open each product’s page and add the fields it finds; check the three free rows before relying on it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if Amazon asks me to prove I am human?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The run stops and hands you the tab. Magic Scraper never tries to get past a check like that."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account or an API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It reads the page you are looking at, in your own browser. Nothing is sent to us; there is no server of ours to send it to."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if Amazon changes its design?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Magic Scraper falls back to reading the page the ordinary way, which usually still finds the list. Tell us and the site reading is updated in the next release."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Amazon search results scraper",
+      "item": "https://magicscraper.app/amazon-search-results-scraper"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Site guide</p>
+    <h1>Scrape <i>Amazon</i> search results into a spreadsheet.</h1>
+    <p class="standfirst">Search Amazon, click the icon, and every result arrives with its price, rating, review count, ASIN and a clean product link in columns of their own, sponsored results marked. It works on every Amazon country site and follows Amazon&rsquo;s own pager.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free exports, no paywall on your data. Amazon has been read by name since version 1.22; see <a href="/supported-sites">every site read by name</a>.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="columns">
+    <h2>What you get</h2>
+    <p class="deck">Columns nobody on the page has are left out: no coupons today means no empty Coupon column.</p>
+    <h3 class="tcap">Each result</h3>
+    <table class="compare">
+      <thead><tr><td>Column</td><th>What it holds</th></tr></thead>
+      <tbody>
+        <tr><td>Title</td><td>The product title</td></tr>
+        <tr><td>Brand</td><td>The brand, where the card shows one</td></tr>
+        <tr><td>Price</td><td>The price shown</td></tr>
+        <tr><td>List Price</td><td>The struck-through price, if any</td></tr>
+        <tr><td>Coupon</td><td>A coupon on the card</td></tr>
+        <tr><td>Rating</td><td>Average stars</td></tr>
+        <tr><td>Reviews</td><td>The review count</td></tr>
+        <tr><td>Bought Past Month</td><td>Amazon&rsquo;s &ldquo;bought in past month&rdquo; figure</td></tr>
+        <tr><td>Sponsored</td><td>Yes for ads, so you can keep or drop them</td></tr>
+        <tr><td>Prime</td><td>Whether it carries the Prime badge</td></tr>
+        <tr><td>Delivery</td><td>The delivery line</td></tr>
+        <tr><td>ASIN</td><td>Amazon&rsquo;s product id</td></tr>
+        <tr><td>Link</td><td>The product&rsquo;s own address, without the search tracking</td></tr>
+        <tr><td>Image</td><td>The largest image the card offers</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="how">
+    <h2>How to do it</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Search Amazon</h3>
+        <p>On amazon.com, .co.uk, .de or any other Amazon site, in your own browser.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Click the icon</h3>
+        <p>The results are read by name: one row per product, sponsored ones marked rather than mixed in unannounced.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Every page</h3>
+        <p>Press <b>Start crawling</b>. It follows Amazon&rsquo;s own Next button to the last page of results.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Export</h3>
+        <p>CSV, Excel or JSON, or paste into a new Google Sheet. Free, no row cap.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="further">
+    <h2>Going further, and the limits</h2>
+    <div class="claim">
+      <p>This reads Amazon <b>search results</b>, the list a search shows. It is not a product-page or review scraper. Drill-down can open each product&rsquo;s page from the Link column and add what it finds there; try it on the three free rows to see what comes back before relying on it. If Amazon shows a robot check, the run stops and hands you the tab.</p>
+      <p>Whether you may collect from a site is between you and that site: its terms, its robots.txt and data-protection law. Magic Scraper reads only what your browser already shows you, paces itself gently by default, and a &ldquo;verify you&rsquo;re human&rdquo; check stops the run and hands you the tab; it never tries to get past one.</p>
+    </div>
+  </section>
+
+  <section id="more">
+    <h2>Other sites read by name</h2>
+    <div class="claim">
+      <p><a href="/reddit-scraper">Reddit scraper</a> &middot; <a href="/hacker-news-scraper">Hacker News scraper</a> &middot; <a href="/pubmed-scraper">PubMed scraper</a> &middot; <a href="/arxiv-scraper">arXiv scraper</a>. Most other sites need nothing special: the ordinary detection finds the list and names its columns. Choosing a tool? See <a href="/best-free-web-scraper-extensions">the best free web scraper extensions</a>, compared on whether they let you export.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Is there a free Amazon scraper?</summary>
+        <p>For search results, yes. Magic Scraper reads each result&rsquo;s title, price, rating, review count, ASIN and link, follows every page and exports CSV, Excel or JSON for free.</p>
+      </details>
+      <details>
+        <summary>Does it work on amazon.co.uk, amazon.de and the others?</summary>
+        <p>Yes. It recognises the results by how they are built, which is the same in every country.</p>
+      </details>
+      <details>
+        <summary>Does it scrape Amazon reviews or product pages?</summary>
+        <p>Not by name. It reads search results. Drill-down can open each product&rsquo;s page and add the fields it finds; check the three free rows before relying on it.</p>
+      </details>
+      <details>
+        <summary>What if Amazon asks me to prove I am human?</summary>
+        <p>The run stops and hands you the tab. Magic Scraper never tries to get past a check like that.</p>
+      </details>
+      <details>
+        <summary>Do I need an account or an API key?</summary>
+        <p>No. It reads the page you are looking at, in your own browser. Nothing is sent to us; there is no server of ours to send it to.</p>
+      </details>
+      <details>
+        <summary>What happens if Amazon changes its design?</summary>
+        <p>Magic Scraper falls back to reading the page the ordinary way, which usually still finds the list. Tell us and the site reading is updated in the next release.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>

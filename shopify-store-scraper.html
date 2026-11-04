@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shopify store scraper: a collection&rsquo;s products to Excel, free</title>
+<meta name="description" content="Scrape a Shopify store&rsquo;s collection page to Excel or CSV, free: product name, link, image and price. Tested on Allbirds: 38 products." />
+<link rel="canonical" href="https://magicscraper.app/shopify-store-scraper" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://magicscraper.app/shopify-store-scraper" />
+<meta property="og:title" content="Shopify store scraper: a collection&rsquo;s products to Excel, free" />
+<meta property="og:description" content="Scrape a Shopify store&rsquo;s collection page to Excel or CSV, free: product name, link, image and price. Tested on Allbirds: 38 products." />
+<meta property="og:image" content="https://magicscraper.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a free Shopify stores scraper?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Magic Scraper reads Shopify stores pages and exports CSV, Excel or JSON for free, with no account and no row cap. In our test on Allbirds’ men’s shoes it found 38 rows and 22 columns on the first page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Did you really test it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, on 4 November 2026, with the released extension, on the page shown in the clip. Sites change; if yours does not come out right, tell us and it gets looked at."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account or an API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It reads the page you are looking at, in your own browser. Nothing is sent to us; there is no server of ours to send it to."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if Shopify stores shows me a check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A “verify you’re human” check stops the run and hands you the tab. Magic Scraper never tries to get past one."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Magic Scraper",
+      "item": "https://magicscraper.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Shopify store scraper",
+      "item": "https://magicscraper.app/shopify-store-scraper"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Site guide &middot; tested 4 November 2026</p>
+    <h1>Scrape a <i>Shopify store</i> into a spreadsheet.</h1>
+    <p class="standfirst">Open a shop&rsquo;s collection page, click the icon, and every product comes out with its name, link, image and price. We tested Allbirds, which runs on Shopify; collection pages on other Shopify themes are laid out differently, so try yours.</p>
+    <div class="actions">
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Install for Chrome &mdash; free</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Install for Edge</a>
+      <span class="aside">Free exports, no paywall on your data. No account.</span>
+    </div>
+    <div class="stage">
+      <video src="/assets/sites/allbirds.mp4" poster="/assets/sites/allbirds.webp" width="1280" height="720" autoplay muted loop playsinline controls preload="metadata"
+             aria-label="Magic Scraper reading Allbirds&rsquo; men&rsquo;s shoes on Shopify stores"></video>
+      <p class="caption"><b>Tested</b> 4 November 2026 on <a href="https://www.allbirds.com/collections/mens" rel="nofollow noopener" target="_blank">Allbirds&rsquo; men&rsquo;s shoes</a>: <b>38 rows and 22 columns</b> on the first page.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="columns">
+    <h2>What comes out</h2>
+    <div class="claim"><ul><li>Product link and image</li><li>Product name and colour</li><li>Price</li><li>Badges and colour counts, in plainly named columns you can leave out</li></ul></div>
+  </section>
+
+  <section id="how">
+    <h2>How to do it</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>Open a collection</h3>
+        <p>Any category or search page in the shop.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Click the icon</h3>
+        <p>Every product on the page, one per row.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Tidy it</h3>
+        <p>This page gave 22 columns, two of them mostly empty; click the headers you do not need.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>Export</h3>
+        <p>CSV, Excel or JSON.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="limits">
+    <h2>Going further, and the limits</h2>
+    <div class="claim">
+      <p>Sizes, stock and descriptions are on each product&rsquo;s page. Drill-down can open each one and add them; free runs it on three rows. Shops ask for email sign-ups in pop-ups; close one before you click the icon.</p>
+      <p>Whether you may collect from a site is between you and that site: its terms, its robots.txt and data-protection law. Magic Scraper reads only what your browser already shows you, paces itself gently by default, and a &ldquo;verify you&rsquo;re human&rdquo; check stops the run and hands you the tab; it never tries to get past one.</p>
+    </div>
+  </section>
+
+  <section id="more">
+    <h2>More site guides</h2>
+    <div class="claim">
+      <p><a href="/wikipedia-table-scraper">Wikipedia</a> &middot; <a href="/yellow-pages-scraper">Yellow Pages</a> &middot; <a href="/coinmarketcap-scraper">CoinMarketCap</a> &middot; <a href="/yahoo-finance-scraper">Yahoo Finance</a> &middot; <a href="/eventbrite-scraper">Eventbrite</a> &middot; <a href="/stack-overflow-scraper">Stack Overflow</a> &middot; <a href="/steam-scraper">Steam</a> &middot; <a href="/rotten-tomatoes-scraper">Rotten Tomatoes</a> &middot; <a href="/hugging-face-scraper">Hugging Face</a> &middot; <a href="/capterra-scraper">Capterra</a> &middot; <a href="/dev-to-scraper">DEV</a> &middot; <a href="/we-work-remotely-scraper">We Work Remotely</a>. Read by name, with their own columns: <a href="/reddit-scraper">Reddit</a> &middot; <a href="/amazon-search-results-scraper">Amazon search results</a> &middot; <a href="/hacker-news-scraper">Hacker News</a> &middot; <a href="/pubmed-scraper">PubMed</a> &middot; <a href="/arxiv-scraper">arXiv</a>. All of them: <a href="/site-guides">site guides</a>.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Reasonable questions</h2>
+    <div class="qa">
+      <details>
+        <summary>Is there a free Shopify stores scraper?</summary>
+        <p>Yes. Magic Scraper reads Shopify stores pages and exports CSV, Excel or JSON for free, with no account and no row cap. In our test on Allbirds&rsquo; men&rsquo;s shoes it found 38 rows and 22 columns on the first page.</p>
+      </details>
+      <details>
+        <summary>Did you really test it?</summary>
+        <p>Yes, on 4 November 2026, with the released extension, on the page shown in the clip. Sites change; if yours does not come out right, tell us and it gets looked at.</p>
+      </details>
+      <details>
+        <summary>Do I need an account or an API key?</summary>
+        <p>No. It reads the page you are looking at, in your own browser. Nothing is sent to us; there is no server of ours to send it to.</p>
+      </details>
+      <details>
+        <summary>What if Shopify stores shows me a check?</summary>
+        <p>A &ldquo;verify you&rsquo;re human&rdquo; check stops the run and hands you the tab. Magic Scraper never tries to get past one.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Magic Scraper</span>
+    <a href="/">Home</a>
+    <a href="/guides">Guides</a>
+    <a href="/desktop">Desktop</a>
+    <a href="/privacy">Privacy</a>
+    <a class="sep" href="/support">Support</a>
+  </footer>
+</div>
+
+<script src="nav.js" defer></script>
+<script src="video.js" defer></script>
+</body>
+</html>
