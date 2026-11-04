@@ -36,7 +36,7 @@
       "name": "¿Por qué mi scraper se queda en la página 1 de un sitio en español?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Muchas herramientas buscan la página siguiente por la palabra inglesa Next. Magic Scraper también lee rel=\"next\", flechas, aria-labels y páginas numeradas, además de Siguiente y, desde la próxima actualización, Página siguiente y Cargar más."
+        "text": "Muchas herramientas buscan la página siguiente por la palabra inglesa Next. Magic Scraper también lee rel=\"next\", flechas, aria-labels y páginas numeradas, además de Siguiente, Página siguiente y Cargar más."
       }
     },
     {
@@ -52,7 +52,7 @@
       "name": "¿Por qué los números salen mal en Excel?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Porque 1.234 se leyó como decimal. Desde la próxima actualización, la exportación a Excel de Magic Scraper lee una columna en formato europeo como tal."
+        "text": "Porque 1.234 se leyó como decimal. La exportación a Excel de Magic Scraper lee una columna en formato europeo como tal."
       }
     },
     {
@@ -121,8 +121,8 @@
     <h1>Sitios en español, <i>hasta la última página</i>.</h1>
     <p class="standfirst">Una herramienta que busca el botón de paginación por la palabra inglesa &laquo;Next&raquo; se detiene en la página 1 de un sitio que dice &laquo;Página siguiente&raquo; o &laquo;Cargar más&raquo;. Y al abrir el CSV en Excel, &laquo;España&raquo; puede convertirse en &laquo;EspaÃ±a&raquo;. Esto es lo que falla en los sitios en español, y lo que hace Magic Scraper en cada caso.</p>
     <div class="actions">
-      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Instalar en Chrome, gratis</a>
-      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Instalar en Edge</a>
+      <a class="btn" href="https://chromewebstore.google.com/detail/magic-scraper-%E2%80%93-lead-web/lcdaikobgjpakcgbkdedoapnckeobbck" target="_blank" rel="noopener">Instalar en Chrome, gratis</a>
+      <a class="btn btn-quiet" href="https://microsoftedge.microsoft.com/addons/detail/magic-scraper-%E2%80%93-lead-we/palbdbeiidhladdgdmlolckafkjackfp" target="_blank" rel="noopener">Instalar en Edge</a>
       <span class="aside">Gratis, sin cuenta.</span>
     </div>
   </div>
@@ -138,14 +138,14 @@
     <table class="compare">
       <thead><tr><td></td><th>Texto que reconoce</th></tr></thead>
       <tbody>
-        <tr><td>Página siguiente</td><td class="">Siguiente &middot; Página siguiente&dagger;</td></tr>
-        <tr><td>Cargar más resultados</td><td class="">Cargar más&dagger; &middot; Ver más&dagger; &middot; Mostrar más&dagger; &middot; Más resultados&dagger;</td></tr>
+        <tr><td>Página siguiente</td><td class="">Siguiente &middot; Página siguiente</td></tr>
+        <tr><td>Cargar más resultados</td><td class="">Cargar más &middot; Ver más &middot; Mostrar más &middot; Más resultados</td></tr>
         <tr><td>Anterior (nunca se toma por Siguiente)</td><td class="">Anterior</td></tr>
-        <tr><td>No es paginación</td><td class="">Flechas de galerías de fotos&dagger; &middot; Números de notas&dagger;</td></tr>
+        <tr><td>No es paginación</td><td class="">Flechas de galerías de fotos &middot; Números de notas</td></tr>
       </tbody>
     </table>
     <div class="claim">
-      <p>&dagger; Con la próxima actualización, 2.1.0 <span class="soon">próxima actualización</span>. Lo demás ya está en la versión que distribuyen las tiendas. En total reconoce la paginación en más de 80 idiomas&dagger;.</p>
+      <p>En total reconoce la paginación en más de 80 idiomas.</p>
     </div>
   </section>
 
@@ -161,7 +161,7 @@
     <h2>1.234 no es uno coma dos</h2>
     <div class="claim">
       <p>En España y en buena parte de Sudamérica se escribe 1.234,56; en México y Centroamérica, 1,234.56. Una hoja de cálculo que toma el punto como decimal convierte 1.234 (mil doscientos treinta y cuatro) en 1,234, mil veces menos, sin avisar.</p>
-      <p>Desde la próxima actualización <span class="soon">próxima actualización</span>, la exportación a Excel mira la columna entera. Si muestra el formato europeo (83.200.000, 12,50, 1.234,56), lee cada valor así y la columna se puede sumar. Una columna formada solo por valores como 1.234 podría ser cualquiera de los dos, así que se queda como texto: nunca incorrecta, solo no sumable. El CSV guarda cada valor tal como lo escribe la página.</p>
+      <p>La exportación a Excel mira la columna entera. Si muestra el formato europeo (83.200.000, 12,50, 1.234,56), lee cada valor así y la columna se puede sumar. Una columna formada solo por valores como 1.234 podría ser cualquiera de los dos, así que se queda como texto: nunca incorrecta, solo no sumable. El CSV guarda cada valor tal como lo escribe la página.</p>
     </div>
   </section>
 
@@ -186,7 +186,7 @@
     <div class="qa">
       <details>
         <summary>¿Por qué mi scraper se queda en la página 1 de un sitio en español?</summary>
-        <p>Muchas herramientas buscan la página siguiente por la palabra inglesa Next. Magic Scraper también lee rel="next", flechas, aria-labels y páginas numeradas, además de Siguiente y, desde la próxima actualización, Página siguiente y Cargar más.</p>
+        <p>Muchas herramientas buscan la página siguiente por la palabra inglesa Next. Magic Scraper también lee rel="next", flechas, aria-labels y páginas numeradas, además de Siguiente, Página siguiente y Cargar más.</p>
       </details>
       <details>
         <summary>¿Cómo evito que Excel estropee las tildes?</summary>
@@ -194,7 +194,7 @@
       </details>
       <details>
         <summary>¿Por qué los números salen mal en Excel?</summary>
-        <p>Porque 1.234 se leyó como decimal. Desde la próxima actualización, la exportación a Excel de Magic Scraper lee una columna en formato europeo como tal.</p>
+        <p>Porque 1.234 se leyó como decimal. La exportación a Excel de Magic Scraper lee una columna en formato europeo como tal.</p>
       </details>
       <details>
         <summary>¿Magic Scraper está en español?</summary>

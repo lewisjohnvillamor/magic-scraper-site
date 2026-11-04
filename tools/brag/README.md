@@ -160,10 +160,10 @@ already are, and if the links get it held, the pin survives. A second top-level
 comment on a Short with no engagement sinks under *Top* and is read by nobody.
 
 > Chrome (also Brave, Opera, Vivaldi, Arc):
-> https://chromewebstore.google.com/detail/magic-scraper/lcdaikobgjpakcgbkdedoapnckeobbck
+> https://chromewebstore.google.com/detail/magic-scraper-%E2%80%93-lead-web/lcdaikobgjpakcgbkdedoapnckeobbck
 >
 > Edge:
-> https://microsoftedge.microsoft.com/addons/detail/magic-scraper/palbdbeiidhladdgdmlolckafkjackfp
+> https://microsoftedge.microsoft.com/addons/detail/magic-scraper-%E2%80%93-lead-we/palbdbeiidhladdgdmlolckafkjackfp
 >
 > Edge is a version behind while this build clears Microsoft's review -- the
 > crawl and the drill chain work there today, the Changes tab lands with that
