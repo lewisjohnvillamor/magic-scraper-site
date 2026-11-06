@@ -13,6 +13,7 @@ from figures import shot, video, diagram, PAGER_SVG, ZEROS_SVG, PRIVACY_SVG, CRE
 ROOT = sys.argv[1]
 CWS = "https://chromewebstore.google.com/detail/magic-scraper-%E2%80%93-lead-web/lcdaikobgjpakcgbkdedoapnckeobbck"
 EDGE = "https://microsoftedge.microsoft.com/addons/detail/magic-scraper-%E2%80%93-lead-we/palbdbeiidhladdgdmlolckafkjackfp"
+FIREFOX = "https://addons.mozilla.org/firefox/addon/magic-scraper/"
 
 HURRY = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "hurry.html"), encoding="utf-8").read()
 
@@ -23,7 +24,7 @@ def plain(s):
 # The words a page in another language needs in its own language; the site's
 # navigation stays English, since that is where its links go.
 UI_EN = dict(lang="en", locale="", skip="Skip to content", install="Install for Chrome &mdash; free",
-             edge="Install for Edge", faq="Reasonable questions")
+             edge="Install for Edge", firefox="Install for Firefox", faq="Reasonable questions")
 
 def page(p):
     url = "https://magicscraper.app/" + p["slug"]
@@ -131,6 +132,7 @@ def page(p):
     <div class="actions">
       <a class="btn" href="{CWS}" target="_blank" rel="noopener">{ui['install']}</a>
       <a class="btn btn-quiet" href="{EDGE}" target="_blank" rel="noopener">{ui['edge']}</a>
+      <a class="btn btn-quiet" href="{FIREFOX}" target="_blank" rel="noopener">{ui['firefox']}</a>
       <span class="aside">{p['aside']}</span>
     </div>
   </div>
@@ -635,13 +637,13 @@ PAGES.append(dict(
     eyebrow="Changelog",
     crumb="Changelog",
     title="Magic Scraper changelog: every update, in plain words",
-    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. The version in the Chrome and Edge stores now is 2.1.",
+    desc="What changed in each Magic Scraper update: new features, fixes and anything removed or moved to Pro. Chrome, Edge and Firefox all have version 2.1 now.",
     og="Every Magic Scraper update in plain words, including what was removed or moved to Pro.",
     h1="What changed, <i>update</i> by update.",
     standfirst="Updates arrive by themselves through the Chrome Web Store and Edge Add-ons, once each one clears store review. This page lists what each one changed, in plain words, including anything that was removed or moved to Pro, so an update never surprises you.",
     aside="In the stores now: v2.1.",
     sections=[
-        release("v2-1", "v2.1", "4 November 2026 in the Chrome Web Store (2.1.1); Edge Add-ons has 2.1.0, the same apart from the export menu's wording.", "In the Chrome and Edge stores now", [
+        release("v2-1", "v2.1", "4 November 2026 in the Chrome Web Store (2.1.1). Firefox Add-ons has 2.1.1 too; Edge Add-ons has 2.1.0, the same apart from the export menu's wording.", "In the Chrome, Edge and Firefox stores now", [
             "<b>A calmer panel.</b> The Data tab opens on one row of controls: <b>Export CSV</b>, with Excel, JSON, copy and Google Sheets under the arrow beside it, each saying what it does. <b>Wrong list?</b> holds Another table and Pick manually. The side panel and a window of its own are in the gear menu, and the header is one count.",
             "<b>Paste into a new Google Sheet</b> is the new name for Open in Google Sheets: it copies the table and opens a blank sheet, ready to paste into. Nothing about it changed but the name.",
             "<b>A window of its own</b>: open Magic Scraper as a window that stays put while you click the page.",
@@ -704,7 +706,7 @@ PAGES.append(dict(
             "changed and isn't listed, <a href=\"/support\">tell us</a>.")),
     ],
     faq=[
-        ("Which version of Magic Scraper is in the stores?", "Version 2.1: 2.1.1 in the Chrome Web Store and 2.1.0 in Edge Add-ons, which differ only in the export menu's wording. A Firefox version is in review at Firefox Add-ons."),
+        ("Which version of Magic Scraper is in the stores?", "Version 2.1: 2.1.1 in the Chrome Web Store and Firefox Add-ons, and 2.1.0 in Edge Add-ons, which differ only in the export menu's wording."),
         ("How do Magic Scraper updates arrive?", "Automatically, through the Chrome Web Store or Edge Add-ons, once each update has cleared store review. You don't need to reinstall."),
         ("Do I have to pay for updates?", "No. A Pro licence is paid once and keeps working across every update."),
         ("Will an update remove a feature I use?", "Anything removed, or moved between Free and Pro, is listed on this page under the version that changed it."),
