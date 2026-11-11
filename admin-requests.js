@@ -251,44 +251,47 @@
   };
   function reason(r) { return REASONS[r] || r; }
 
+  // A small table: rows of cells, each [text, className].
+  function table(heads, rows) {
+    var w = el('div', 'adm-scroll'), t = el('table', 'adm-table');
+    var h = el('tr'); heads.forEach(function (x) { h.appendChild(el('th', x[1] || null, x[0])); });
+    var th = el('thead'); th.appendChild(h); t.appendChild(th);
+    var tb = el('tbody');
+    rows.forEach(function (r) { var tr = el('tr'); r.forEach(function (c) { tr.appendChild(el('td', c[1] || null, c[0])); }); tb.appendChild(tr); });
+    t.appendChild(tb); w.appendChild(t); return w;
+  }
   function loadFeedback() {
     return call('GET', 'feedback').then(function (d) {
       fbBox.textContent = '';
-      var total = (d.counts || []).reduce(function (s, c) { return s + c.n; }, 0);
+      var recent = d.recent || [];
+      // Reports from the panel's "Tell us which site" are not reasons for
+      // leaving: they get their own table and stay out of the shares.
+      var reports = recent.filter(function (f) { return f.reason === 'report'; });
+      var goodbyes = recent.filter(function (f) { return f.reason !== 'report'; });
+      var counts = (d.counts || []).filter(function (c) { return c.reason !== 'report'; });
+
+      fbBox.appendChild(el('h2', null, 'Sites reported from the panel'));
+      fbBox.appendChild(el('p', 'rq-msg', 'Pages where Magic Scraper found nothing, sent with "Tell us which site" (2.1.2 on).'));
+      if (!reports.length) fbBox.appendChild(el('p', 'rq-msg', 'No reports yet.'));
+      else fbBox.appendChild(table([['Date'], ['Version'], ['Page'], ['What they wanted']], reports.map(function (f) {
+        return [[day(f.at), 'muted nowrap'], [f.v ? 'v' + f.v : '', 'muted'], [f.site || '\u2014', 'what'], [f.note || '\u2014', 'what' + (f.note ? '' : ' muted')]];
+      })));
+
+      var total = counts.reduce(function (s, c) { return s + c.n; }, 0);
       fbBox.appendChild(el('h2', null, 'Why people removed it'));
       if (!total) fbBox.appendChild(el('p', 'rq-msg', 'No answers yet.'));
-      else {
-        var w1 = el('div', 'adm-scroll'), t = el('table', 'adm-table');
-        var h = el('tr'); ['Reason', 'Answers', 'Share'].forEach(function (x, i) { h.appendChild(el('th', i ? 'num' : null, x)); });
-        var th = el('thead'); th.appendChild(h); t.appendChild(th);
-        var tb = el('tbody');
-        d.counts.forEach(function (c) {
-          var tr = el('tr');
-          tr.appendChild(el('td', null, reason(c.reason)));
-          tr.appendChild(el('td', 'num', String(c.n)));
-          tr.appendChild(el('td', 'num muted', Math.round(100 * c.n / total) + '%'));
-          tb.appendChild(tr);
-        });
-        t.appendChild(tb); w1.appendChild(t); fbBox.appendChild(w1);
-      }
-      fbBox.appendChild(el('h2', null, 'Every answer, newest first'));
-      if (!d.recent || !d.recent.length) { fbBox.appendChild(el('p', 'rq-msg', 'No answers yet.')); return; }
-      var typed = d.recent.filter(function (f) { return f.site || f.note; }).length;
-      fbBox.appendChild(el('p', 'rq-msg', typed + ' of ' + d.recent.length + ' named a site or wrote something. The site box is optional; since this version of the goodbye page, choosing "didn\u2019t find the data" asks for it.'))
-      var w2 = el('div', 'adm-scroll'), t2 = el('table', 'adm-table');
-      var h2 = el('tr'); ['Date', 'Reason', 'Version', 'Site', 'What they wrote'].forEach(function (x) { h2.appendChild(el('th', null, x)); });
-      var th2 = el('thead'); th2.appendChild(h2); t2.appendChild(th2);
-      var tb2 = el('tbody');
-      d.recent.forEach(function (f) {
-        var tr = el('tr');
-        tr.appendChild(el('td', 'muted nowrap', day(f.at)));
-        tr.appendChild(el('td', null, reason(f.reason)));
-        tr.appendChild(el('td', 'muted', f.v ? 'v' + f.v : ''));
-        tr.appendChild(el('td', 'what' + (f.site ? '' : ' muted'), f.site || '\u2014'));
-        tr.appendChild(el('td', 'what' + (f.note ? '' : ' muted'), f.note || '\u2014'));
-        tb2.appendChild(tr);
-      });
-      t2.appendChild(tb2); w2.appendChild(t2); fbBox.appendChild(w2);
+      else fbBox.appendChild(table([['Reason'], ['Answers', 'num'], ['Share', 'num']], counts.map(function (c) {
+        return [[reason(c.reason)], [String(c.n), 'num'], [Math.round(100 * c.n / total) + '%', 'num muted']];
+      })));
+
+      fbBox.appendChild(el('h2', null, 'Every goodbye answer, newest first'));
+      if (!goodbyes.length) { fbBox.appendChild(el('p', 'rq-msg', 'No answers yet.')); return; }
+      var typed = goodbyes.filter(function (f) { return f.site || f.note; }).length;
+      fbBox.appendChild(el('p', 'rq-msg', typed + ' of ' + goodbyes.length + ' named a site or wrote something. The site box is optional; since this version of the goodbye page, choosing "didn\u2019t find the data" asks for it.'));
+      fbBox.appendChild(table([['Date'], ['Reason'], ['Version'], ['Site'], ['What they wrote']], goodbyes.map(function (f) {
+        return [[day(f.at), 'muted nowrap'], [reason(f.reason)], [f.v ? 'v' + f.v : '', 'muted'],
+          [f.site || '\u2014', 'what' + (f.site ? '' : ' muted')], [f.note || '\u2014', 'what' + (f.note ? '' : ' muted')]];
+      })));
     });
   }
 

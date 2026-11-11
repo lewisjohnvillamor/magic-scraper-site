@@ -34,7 +34,9 @@ import { toMarkdown, wantsMarkdown } from './markdown.js';
 const STATUSES = ['pending', 'open', 'planned', 'building', 'shipped', 'declined'];
 const PUBLIC = ['open', 'planned', 'building', 'shipped', 'declined'];
 const PRODUCTS = ['extension', 'desktop', 'website'];
-const REASONS = new Set(['no-data', 'confusing', 'once', 'missing', 'price', 'other-tool', 'other']);
+// 'report' is not a reason for leaving: it is /report, a page the extension's
+// panel offers when it found nothing -- the address, sent by the person.
+const REASONS = new Set(['no-data', 'confusing', 'once', 'missing', 'price', 'other-tool', 'other', 'report']);
 const SUBMITS_PER_DAY = 3;
 const MAX_PENDING = 200;          // unmoderated requests held at once
 const MAX_EMAILS = 5000;          // addresses kept for one request
@@ -318,7 +320,7 @@ async function allowed(request, env) {
 
 // Pages that are not for agents or search engines: robots.txt keeps them out,
 // and they are not offered as Markdown.
-const NOT_FOR_AGENTS = /^\/(admin-requests|thanks)(\.html|\.md)?$/;
+const NOT_FOR_AGENTS = /^\/(admin-requests|thanks|report)(\.html|\.md)?$/;
 
 // A page as Markdown, when the request asks for it. Null when it does not, or
 // when there is no HTML page at that address -- the caller then serves the

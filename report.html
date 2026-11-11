@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tell us which site didn’t work — Magic Scraper</title>
+<meta name="description" content="Magic Scraper found nothing on a page? Send the address and it is what gets fixed next." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="canonical" href="https://magicscraper.app/report" />
+<link rel="icon" href="assets/icon.png" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-var.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-var.woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  .reasons { display: grid; gap: 8px; margin: 18px 0 20px; max-width: 560px; }
+  .reasons label {
+    display: flex; gap: 10px; align-items: flex-start; padding: 11px 14px; cursor: pointer;
+    border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); font-size: 16px;
+  }
+  .reasons label:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .reasons input { margin-top: 4px; accent-color: var(--ink); }
+  .more { display: grid; gap: 12px; max-width: 560px; margin: 0 0 18px; }
+  .more label { display: grid; gap: 5px; font-size: 14.5px; color: var(--ink-2); }
+  .more input, .more textarea {
+    font: inherit; font-size: 15px; padding: 9px 11px; color: var(--ink);
+    border: 1px solid var(--rule); border-radius: 8px; background: var(--paper);
+  }
+  .more textarea { min-height: 84px; resize: vertical; }
+  .more label.ask { color: var(--ink); font-weight: 600; }
+  .more label.ask input { border-color: var(--warm); box-shadow: 0 0 0 2px rgba(180,73,31,.15); }
+  #gbDone { font-size: 17px; }
+  #gbFallback { font-size: 15px; }
+  .hint { font-size: 13.5px; color: var(--ink-2); margin: -4px 0 4px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap">
+  <div class="masthead">
+    <a class="logo" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--paper)"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20 L14 10" /><path d="M18 3 v5 M15.5 5.5 h5" />
+        </svg>
+      </span>
+      <span class="wordmark">Magic Scraper</span>
+    </a>
+    <button class="burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="site-nav"><span class="bars"></span></button>
+    <nav id="site-nav">
+      <a href="/guides">Guides</a>
+      <a href="/desktop">Desktop</a>
+      <a href="/#price">Pricing</a>
+      <a href="/demo/">Sandbox</a>
+      <a href="/services">Services</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap narrow doc">
+  <h1>Didn&rsquo;t find your data?</h1>
+  <p class="dateline">Send the address, and it is what gets fixed next.</p>
+
+  <p>Magic Scraper collects nothing, so a page it can&rsquo;t read stays invisible unless you say
+    which one. Nothing below has been sent yet: check the address, take out anything private,
+    and press Send.</p>
+
+  <form id="rp" novalidate>
+    <div class="more">
+      <label>The page that didn&rsquo;t work
+        <input type="text" name="site" maxlength="200" placeholder="https://www.example.com/directory" autocomplete="off" /></label>
+      <p class="hint" id="rpHint" hidden>Filled in from the page you were on. It went no further than
+        this tab: it travels after the <code>#</code>, which browsers never send to a website.</p>
+      <label>What did you want from it? <span>(optional)</span>
+        <textarea name="note" maxlength="800" placeholder="e.g. the list of companies, with their phone numbers"></textarea></label>
+    </div>
+    <div class="actions"><button class="btn" type="submit" id="rpSend">Send</button></div>
+  </form>
+
+  <p id="rpDone" hidden><b>Thank you.</b> It&rsquo;s on the list. Pages behind a login can&rsquo;t be
+    checked from here, so if that&rsquo;s the case, the
+    <a href="/support">support page</a> says how to send an example instead.</p>
+  <p id="rpFallback" hidden></p>
+
+  <p>Stored: the address and anything you type, the extension&rsquo;s version and the date. No name,
+    email or IP address. <a href="/privacy#website">Privacy policy</a>.</p>
+
+  <footer><a href="/">Magic Scraper</a> <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a> <a href="/support">Support</a></footer>
+</main>
+<script src="nav.js" defer></script>
+<script src="report.js" defer></script>
+</body>
+</html>

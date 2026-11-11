@@ -42,6 +42,7 @@ Disallow: /thanks
 Disallow: /admin-requests
 Disallow: /goodbye
 Disallow: /welcome
+Disallow: /report
 # The sandbox's generated pages: products, makers and their traceability chain,
 # business profiles, price-break pages, later pages of each practice list and
 # the inside of a frame -- 280 of them, all noindex. Crawling them taught a
@@ -96,6 +97,7 @@ Disallow: /thanks
 Disallow: /admin-requests
 Disallow: /goodbye
 Disallow: /welcome
+Disallow: /report
 # The sandbox's generated pages: products, makers and their traceability chain,
 # business profiles, price-break pages, later pages of each practice list and
 # the inside of a frame -- 280 of them, all noindex. Crawling them taught a
