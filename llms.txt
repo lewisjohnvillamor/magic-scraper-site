@@ -24,6 +24,7 @@ extension, not in storage the scraped website can read.
 
 ## Magic Snippers
 
+- [Install Magic Snippers](https://chromewebstore.google.com/detail/magic-snippers-%E2%80%93-full-pag/mdbafbckoiidadhechgnihmabgeadbgo): the Chrome Web Store listing.
 - [Magic Snippers](https://magicscraper.app/magic-snippers): a separate Chrome extension from the
   same maker. It scrapes tables and lists to CSV or JSON, takes whole-page screenshots, and opens
   every link in a list to save a named full-page screenshot of each page, with an index
