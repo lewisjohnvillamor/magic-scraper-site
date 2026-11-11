@@ -641,24 +641,59 @@ table.compare td.q::before { content: "\00b7\00a0\00a0"; color: var(--warm); }
 }
 
 /* ---------- admin (/admin-requests), never linked ---------- */
-.adm-row { border: 1px solid var(--rule); border-radius: 10px; padding: 14px; margin-top: 12px; background: var(--card); }
-.adm-row.pending { border-color: var(--warm); }
-.adm-row .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-.adm-row input, .adm-row textarea, .adm-row select, .adm-auth input {
+main.adm-wide { max-width: 1240px; padding-bottom: 40px; }
+.adm-auth { display: flex; gap: 8px; max-width: 520px; align-items: end; }
+.adm-auth input, .adm-bar input, .adm-form input, .adm-form textarea, .adm-form select {
   width: 100%; font: inherit; font-size: 14px; padding: 7px 9px; border: 1px solid var(--rule);
   border-radius: 6px; background: var(--paper); color: var(--ink); margin-top: 4px; }
-.adm-row textarea { min-height: 70px; }
-.adm-row label { font-size: 13px; color: var(--ink-2); display: block; margin-top: 8px; }
-.adm-row .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
-.adm-row .acts button, .adm-auth button, .adm-tabs button {
-  font: inherit; font-size: 13px; padding: 7px 12px; border: 1px solid var(--rule); border-radius: 6px;
-  background: none; color: var(--ink); cursor: pointer; }
-.adm-row .acts button.primary, .adm-auth button { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.adm-row .acts button.danger { color: var(--warm); border-color: var(--warm); }
+.adm-auth button, .adm-tabs button, .adm-chips button, .adm-table th button, .adm-table .act button, .adm-edit .acts button {
+  font: inherit; font-size: 13px; padding: 6px 11px; border: 1px solid var(--rule); border-radius: 6px;
+  background: none; color: var(--ink); cursor: pointer; white-space: nowrap; }
+.adm-auth button, .adm-table .act button.primary, .adm-edit .acts button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.adm-edit .acts button.danger { color: var(--warm); border-color: var(--warm); }
 .adm-tabs { display: flex; gap: 8px; margin-top: 18px; }
-.adm-tabs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-.adm-auth { display: flex; gap: 8px; max-width: 520px; align-items: end; }
-@media (max-width: 720px) { .adm-row .grid { grid-template-columns: 1fr; } }
+.adm-tabs button[aria-pressed="true"], .adm-chips button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.adm-chips button.warn { border-color: var(--warm); color: var(--warm); }
+.adm-chips button.warn[aria-pressed="true"] { background: var(--warm); color: var(--paper); }
+.adm-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin: 18px 0 8px; }
+.adm-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.adm-bar input { width: 240px; margin-top: 0; }
+#admFeedback h2 { font-size: 20px; margin: 26px 0 8px; }
+/* Wide tables scroll inside their own box, never the page. */
+.adm-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); }
+.adm-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.adm-table th, .adm-table td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.adm-table tbody tr:last-child td { border-bottom: 0; }
+.adm-table th { font-size: 12px; color: var(--ink-2); font-variation-settings: 'wght' 600; background: var(--paper); white-space: nowrap; }
+.adm-table th button { border: 0; padding: 0; font-size: 12px; color: inherit; font-variation-settings: inherit; }
+.adm-table .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.adm-table th.num button { text-align: right; }
+.adm-table .muted { color: var(--ink-2); }
+.adm-table .nowrap { white-space: nowrap; }
+.adm-table td.what { min-width: 260px; max-width: 460px; overflow-wrap: anywhere; }
+.adm-table td.what b { display: block; font-variation-settings: 'wght' 600; }
+.adm-table td.what .sub { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  color: var(--ink-2); font-size: 13px; margin-top: 2px; }
+.adm-table td.what .reply { display: block; font-size: 12px; color: var(--ink-2); margin-top: 4px; padding-left: 8px; border-left: 2px solid var(--rule); }
+.adm-table td.act { text-align: right; white-space: nowrap; }
+.adm-table td.act button + button { margin-left: 6px; }
+.adm-table tr.pending td:first-child { box-shadow: inset 3px 0 0 var(--warm); }
+.adm-st { font: inherit; font-size: 13px; padding: 4px 6px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); }
+.adm-st.st-pending { border-color: var(--warm); color: var(--warm); }
+.adm-st.st-planned, .adm-st.st-building { border-color: var(--accent); }
+.adm-st.st-shipped { border-color: #1d7a4f; color: #1d7a4f; }
+.adm-st.st-declined { color: var(--ink-2); }
+@media (prefers-color-scheme: dark) { .adm-st.st-shipped { border-color: #5fc795; color: #5fc795; } }
+.adm-edit td { background: var(--paper); }
+.adm-form { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; }
+.adm-form label { font-size: 13px; color: var(--ink-2); display: block; margin-top: 6px; }
+.adm-form label.wide { grid-column: 1 / -1; }
+.adm-form textarea { min-height: 64px; resize: vertical; }
+.adm-edit .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+@media (max-width: 720px) {
+  .adm-form { grid-template-columns: 1fr; }
+  .adm-bar input { width: 100%; }
+}
 /* Figures in the guides: real screenshots and small diagrams. Diagrams are
    inline SVG coloured from the same tokens, so they follow dark mode. */
 .fig { margin: 26px 0 0; }
