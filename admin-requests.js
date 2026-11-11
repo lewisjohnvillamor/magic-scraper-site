@@ -239,6 +239,18 @@
 
   /* ---------- goodbye answers ---------- */
 
+  // The goodbye page's choices, as people read them.
+  var REASONS = {
+    'no-data': "It didn't find the data on my site",
+    'confusing': "Couldn't work out how to use it",
+    'once': 'Only needed it once',
+    'missing': 'Missing something I needed',
+    'price': "Free wasn't enough, Pro not worth it",
+    'other-tool': 'Using a different tool',
+    'other': 'Something else'
+  };
+  function reason(r) { return REASONS[r] || r; }
+
   function loadFeedback() {
     return call('GET', 'feedback').then(function (d) {
       fbBox.textContent = '';
@@ -252,15 +264,17 @@
         var tb = el('tbody');
         d.counts.forEach(function (c) {
           var tr = el('tr');
-          tr.appendChild(el('td', null, c.reason));
+          tr.appendChild(el('td', null, reason(c.reason)));
           tr.appendChild(el('td', 'num', String(c.n)));
           tr.appendChild(el('td', 'num muted', Math.round(100 * c.n / total) + '%'));
           tb.appendChild(tr);
         });
         t.appendChild(tb); w1.appendChild(t); fbBox.appendChild(w1);
       }
-      fbBox.appendChild(el('h2', null, 'What they wrote'));
-      if (!d.recent || !d.recent.length) { fbBox.appendChild(el('p', 'rq-msg', 'No typed answers yet.')); return; }
+      fbBox.appendChild(el('h2', null, 'Every answer, newest first'));
+      if (!d.recent || !d.recent.length) { fbBox.appendChild(el('p', 'rq-msg', 'No answers yet.')); return; }
+      var typed = d.recent.filter(function (f) { return f.site || f.note; }).length;
+      fbBox.appendChild(el('p', 'rq-msg', typed + ' of ' + d.recent.length + ' named a site or wrote something. The site box is optional; since this version of the goodbye page, choosing "didn\u2019t find the data" asks for it.'))
       var w2 = el('div', 'adm-scroll'), t2 = el('table', 'adm-table');
       var h2 = el('tr'); ['Date', 'Reason', 'Version', 'Site', 'What they wrote'].forEach(function (x) { h2.appendChild(el('th', null, x)); });
       var th2 = el('thead'); th2.appendChild(h2); t2.appendChild(th2);
@@ -268,10 +282,10 @@
       d.recent.forEach(function (f) {
         var tr = el('tr');
         tr.appendChild(el('td', 'muted nowrap', day(f.at)));
-        tr.appendChild(el('td', null, f.reason));
+        tr.appendChild(el('td', null, reason(f.reason)));
         tr.appendChild(el('td', 'muted', f.v ? 'v' + f.v : ''));
-        tr.appendChild(el('td', 'what', f.site || ''));
-        tr.appendChild(el('td', 'what', f.note || ''));
+        tr.appendChild(el('td', 'what' + (f.site ? '' : ' muted'), f.site || '\u2014'));
+        tr.appendChild(el('td', 'what' + (f.note ? '' : ' muted'), f.note || '\u2014'));
         tb2.appendChild(tr);
       });
       t2.appendChild(tb2); w2.appendChild(t2); fbBox.appendChild(w2);

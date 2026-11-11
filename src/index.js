@@ -295,7 +295,9 @@ async function admin(request, env, parts) {
   }
   if (what === 'feedback' && request.method === 'GET') {
     const counts = (await db.prepare('SELECT reason, COUNT(*) AS n FROM feedback GROUP BY reason ORDER BY n DESC').all()).results;
-    const recent = (await db.prepare(`SELECT reason, v, site, note, at FROM feedback WHERE site != '' OR note != '' ORDER BY id DESC LIMIT 200`).all()).results;
+    // Every answer, newest first: the version and the day say something even
+    // when nothing was typed.
+    const recent = (await db.prepare(`SELECT reason, v, site, note, at FROM feedback ORDER BY id DESC LIMIT 300`).all()).results;
     return json({ counts, recent });
   }
   return json({ error: 'not found' }, 404);
