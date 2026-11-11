@@ -48,7 +48,7 @@
 
 <main id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="sub">Last updated 30 October 2026 · applies to the Magic Scraper browser extension for Chrome, Edge and Firefox, to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux, and to the <a href="#snippers">Magic Snippers</a> extension</p>
+  <p class="sub">Last updated 11 November 2026 · applies to the Magic Scraper browser extension for Chrome, Edge and Firefox, to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux, and to the <a href="#snippers">Magic Snippers</a> extension</p>
 
   <p class="lead"><b>Magic Scraper is built for privacy.</b> It has no servers of its own, no
   account, no analytics and no telemetry. What it reads stays in your browser, and what it
@@ -208,6 +208,13 @@
   only thing the extension puts in either address is its version number, on the goodbye page, so
   an answer can be matched to the build it is about. Neither page receives anything you scraped,
   and the goodbye question is optional &mdash; see <a href="#website">About this website</a>.</p>
+
+  <p><strong>&ldquo;Tell us which site&rdquo;.</strong> When Magic Scraper finds nothing on a page,
+  the panel offers a link to <code>magicscraper.app/report</code>. Only if you click it does the
+  extension open that page, with the address of the page you were on and its version number
+  written after a <code>#</code> &mdash; the part of an address that browsers keep to themselves
+  and never send to a website. The report page shows the address in a box you can edit, and
+  nothing reaches this website unless you press <b>Send</b>.</p>
 
   <h2>Permissions, and why each one exists</h2>
   <table>
@@ -397,7 +404,8 @@
   <p>The <b>goodbye page</b> works the same way. If you answer it, what is stored is the reason
   you picked, the version you had, the date, and anything you chose to type in its two optional
   boxes. No name, email or IP address is stored with it, and a typed answer is deleted after
-  about a year.</p>
+  about a year. A <b>report</b> sent from <code>/report</code> is kept the same way: the address
+  and anything you typed, the version and the date, deleted after about a year.</p>
   <p>The site counts page views with <b>Cloudflare Web Analytics</b>, which is built into the
   hosting. It sets no cookies and does not identify or follow you: it reports totals, such as how
   many people opened a page and which site linked to it.</p>
