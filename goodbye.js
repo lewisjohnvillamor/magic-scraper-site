@@ -10,6 +10,24 @@
     LABELS[r.value] = r.parentNode.textContent.trim();
   });
 
+  // "It didn't find the data on my site" is the answer that can be fixed,
+  // and only with the site: two people picked it and left the box empty. So
+  // picking it asks for the address, there and then.
+  var siteLabel = form.site.closest('label');
+  var siteAsk = siteLabel.firstChild.nodeValue;
+  Array.prototype.forEach.call(form.querySelectorAll('input[name=reason]'), function (r) {
+    r.addEventListener('change', function () {
+      var need = r.checked && (r.value === 'no-data' || r.value === 'missing');
+      siteLabel.classList.toggle('ask', need);
+      siteLabel.firstChild.nodeValue = need
+        ? (r.value === 'no-data' ? 'Which site was it? Paste the address: it is what gets it fixed. '
+                                  : 'On which site did you need it? ')
+        : siteAsk;
+      if (need) { form.site.placeholder = 'e.g. https://www.example.com/directory'; form.site.focus({ preventScroll: true }); siteLabel.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+      else form.site.placeholder = 'e.g. a directory, a shop, a search page';
+    });
+  });
+
   function done() { form.hidden = true; document.getElementById('gbDone').hidden = false; }
 
   function fallback(body) {
