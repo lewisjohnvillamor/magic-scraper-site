@@ -64,7 +64,7 @@
     if (!body.reason) body.reason = 'other';
     if (body.reason === 'no-data' && !body.site && !nudged) {
       nudged = true;
-      nudge.textContent = 'Which site was it? Even just its name helps us fix it. Or press Send again to skip.';
+      nudge.textContent = 'Even just the site\'s name helps us fix it \u2014 or press Send again to skip.';
       nudge.hidden = false;
       form.site.focus();
       return;
