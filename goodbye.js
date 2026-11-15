@@ -15,10 +15,19 @@
   // picking it asks for the address, there and then.
   var siteLabel = form.site.closest('label');
   var siteAsk = siteLabel.firstChild.nodeValue;
+  var optional = siteLabel.querySelector('span');
+  // Asking was not enough (a "no data" answer still came without a site), so
+  // Send asks once more, in words, and the second press sends regardless.
+  var nudge = document.createElement('p');
+  nudge.id = 'gbNudge'; nudge.hidden = true; nudge.setAttribute('role', 'status');
+  siteLabel.parentNode.insertBefore(nudge, siteLabel.nextSibling);
+  var nudged = false;
   Array.prototype.forEach.call(form.querySelectorAll('input[name=reason]'), function (r) {
     r.addEventListener('change', function () {
       var need = r.checked && (r.value === 'no-data' || r.value === 'missing');
       siteLabel.classList.toggle('ask', need);
+      if (optional) optional.hidden = need;
+      if (!need) nudge.hidden = true;
       siteLabel.firstChild.nodeValue = need
         ? (r.value === 'no-data' ? 'Which site was it? Paste the address: it is what gets it fixed. '
                                   : 'On which site did you need it? ')
@@ -53,6 +62,13 @@
     };
     if (!body.reason && !body.site && !body.note) { form.querySelector('input[name=reason]').focus(); return; }
     if (!body.reason) body.reason = 'other';
+    if (body.reason === 'no-data' && !body.site && !nudged) {
+      nudged = true;
+      nudge.textContent = 'Even just the site\'s name helps us fix it \u2014 or press Send again to skip.';
+      nudge.hidden = false;
+      form.site.focus();
+      return;
+    }
     var btn = document.getElementById('gbSend');
     btn.disabled = true;
     fetch('/api/feedback', {
