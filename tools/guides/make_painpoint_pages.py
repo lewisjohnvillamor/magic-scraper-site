@@ -159,6 +159,7 @@ def page(p):
     <a href="/guides">Guides</a>
     <a href="/desktop">Desktop</a>
     <a href="/privacy">Privacy</a>
+    <a href="/affiliates">Affiliates</a>
     <a class="sep" href="/support">Support</a>
   </footer>
 </div>
