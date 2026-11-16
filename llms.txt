@@ -31,6 +31,7 @@ extension, not in storage the scraped website can read.
   spreadsheet. Free, with drill-down on the first 3 links of a run; Pro ($19 one-time, sold on
   Gumroad) drills every link. Everything stays in the browser; the only request it makes is a Pro
   licence check with Gumroad. Privacy: https://magicscraper.app/privacy#snippers
+- [Affiliates](https://magicscraper.app/affiliates): 50% of every Magic Scraper Pro and Magic Snippers Pro sale referred, tracked and paid by Gumroad.
 
 ## Product
 
