@@ -22,6 +22,30 @@
   nudge.id = 'gbNudge'; nudge.hidden = true; nudge.setAttribute('role', 'status');
   siteLabel.parentNode.insertBefore(nudge, siteLabel.nextSibling);
   var nudged = false;
+  // "Something else" and "I couldn't work out how to use it" came back with
+  // nothing written, twice each: the answers that most need a sentence. Picking
+  // either asks its own question in the note box, and Send asks once more.
+  var NOTE_ASK = {
+    other: 'What happened? One sentence is plenty. ',
+    confusing: 'What were you trying to do, and where did you get stuck? '
+  };
+  var noteLabel = form.note.closest('label');
+  var noteAsk = noteLabel.firstChild.nodeValue;
+  var noteOptional = noteLabel.querySelector('span');
+  var noteNudge = document.createElement('p');
+  noteNudge.id = 'gbNoteNudge'; noteNudge.className = 'gb-nudge'; noteNudge.hidden = true; noteNudge.setAttribute('role', 'status');
+  noteLabel.parentNode.insertBefore(noteNudge, noteLabel.nextSibling);
+  var noteNudged = false;
+  Array.prototype.forEach.call(form.querySelectorAll('input[name=reason]'), function (r) {
+    r.addEventListener('change', function () {
+      var ask = r.checked && NOTE_ASK[r.value];
+      noteLabel.classList.toggle('ask', !!ask);
+      if (noteOptional) noteOptional.hidden = !!ask;
+      if (!ask) noteNudge.hidden = true;
+      noteLabel.firstChild.nodeValue = ask || noteAsk;
+      if (ask) { form.note.focus({ preventScroll: true }); noteLabel.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+    });
+  });
   Array.prototype.forEach.call(form.querySelectorAll('input[name=reason]'), function (r) {
     r.addEventListener('change', function () {
       var need = r.checked && (r.value === 'no-data' || r.value === 'missing');
@@ -67,6 +91,13 @@
       nudge.textContent = 'Even just the site\'s name helps us fix it \u2014 or press Send again to skip.';
       nudge.hidden = false;
       form.site.focus();
+      return;
+    }
+    if (NOTE_ASK[body.reason] && !body.note && !noteNudged) {
+      noteNudged = true;
+      noteNudge.textContent = 'Even a few words help us fix it \u2014 or press Send again to skip.';
+      noteNudge.hidden = false;
+      form.note.focus();
       return;
     }
     var btn = document.getElementById('gbSend');
