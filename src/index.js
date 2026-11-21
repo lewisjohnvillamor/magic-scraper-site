@@ -36,7 +36,10 @@ const PUBLIC = ['open', 'planned', 'building', 'shipped', 'declined'];
 const PRODUCTS = ['extension', 'desktop', 'website'];
 // 'report' is not a reason for leaving: it is /report, a page the extension's
 // panel offers when it found nothing -- the address, sent by the person.
-const REASONS = new Set(['no-data', 'confusing', 'once', 'missing', 'price', 'other-tool', 'other', 'report']);
+// 'debug-bar' is Magic Snippers' own: Chrome's "started debugging this browser" bar, which only it shows.
+const REASONS = new Set(['no-data', 'confusing', 'once', 'missing', 'price', 'other-tool', 'other', 'report', 'debug-bar']);
+// Which extension a goodbye answer is about: Magic Scraper (all answers before this column existed) or Magic Snippers.
+const FEEDBACK_PRODUCTS = new Set(['scraper', 'snippers']);
 const SUBMITS_PER_DAY = 3;
 const MAX_PENDING = 200;          // unmoderated requests held at once
 const MAX_EMAILS = 5000;          // addresses kept for one request
@@ -91,7 +94,11 @@ function schema(db) {
       ...SEED.map(([slug, title, body, status]) => db.prepare(
         `INSERT OR IGNORE INTO requests (slug, title, body, product, status, created, updated)
          VALUES (?, ?, ?, 'extension', ?, ?, ?)`).bind(slug, title, body, status, t, t)),
-    ]).catch((e) => { ready = null; throw e; });
+    ])
+      // The goodbye answers gained a product column when Magic Snippers got the page too. Adding it fails
+      // harmlessly once it exists, so it is tried on every cold start instead of tracked.
+      .then(() => db.prepare(`ALTER TABLE feedback ADD COLUMN product TEXT NOT NULL DEFAULT 'scraper'`).run().catch(() => {}))
+      .catch((e) => { ready = null; throw e; });
   }
   return ready;
 }
@@ -217,14 +224,15 @@ async function feedback(request, env) {
   const reason = String(body.reason || '');
   if (!REASONS.has(reason)) return json({ error: 'unknown reason' }, 400);
   const v = String(body.v || '').slice(0, 20);
+  const product = FEEDBACK_PRODUCTS.has(body.p) ? body.p : 'scraper';
   const day = now().slice(0, 10);
   const today = await env.DB.prepare('SELECT COUNT(*) AS n FROM feedback WHERE at = ?').bind(day).first();
   // Past the day's ceiling the answer is thanked and not kept: the page has
   // nothing else to say to the person leaving, and a flood stops counting.
   if (today && today.n >= MAX_FEEDBACK_DAY) return json({ ok: true });
   await env.DB.batch([
-    env.DB.prepare('INSERT INTO feedback (reason, v, site, note, at) VALUES (?, ?, ?, ?, ?)')
-      .bind(reason, /^\d+(\.\d+){0,3}$/.test(v) ? v : '', clip(body.site, 200), clipText(body.note, 800), day),
+    env.DB.prepare('INSERT INTO feedback (reason, v, site, note, at, product) VALUES (?, ?, ?, ?, ?, ?)')
+      .bind(reason, /^\d+(\.\d+){0,3}$/.test(v) ? v : '', clip(body.site, 200), clipText(body.note, 800), day, product),
     // A typed answer is kept for about a year; the reason itself stays as a count.
     env.DB.prepare(`UPDATE feedback SET site = '', note = '' WHERE at < date('now', '-400 days') AND (site != '' OR note != '')`),
   ]);
@@ -296,10 +304,10 @@ async function admin(request, env, parts) {
     return json({ emails: rows });
   }
   if (what === 'feedback' && request.method === 'GET') {
-    const counts = (await db.prepare('SELECT reason, COUNT(*) AS n FROM feedback GROUP BY reason ORDER BY n DESC').all()).results;
+    const counts = (await db.prepare('SELECT product, reason, COUNT(*) AS n FROM feedback GROUP BY product, reason ORDER BY product, n DESC').all()).results;
     // Every answer, newest first: the version and the day say something even
     // when nothing was typed.
-    const recent = (await db.prepare(`SELECT reason, v, site, note, at FROM feedback ORDER BY id DESC LIMIT 300`).all()).results;
+    const recent = (await db.prepare(`SELECT product, reason, v, site, note, at FROM feedback ORDER BY id DESC LIMIT 300`).all()).results;
     return json({ counts, recent });
   }
   return json({ error: 'not found' }, 404);

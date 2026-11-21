@@ -247,9 +247,12 @@
     'missing': 'Missing something I needed',
     'price': "Free wasn't enough, Pro not worth it",
     'other-tool': 'Using a different tool',
-    'other': 'Something else'
+    'other': 'Something else',
+    'debug-bar': 'The \u201cstarted debugging\u201d bar put them off'
   };
   function reason(r) { return REASONS[r] || r; }
+  // Which extension a goodbye answer is about (answers from before Magic Snippers had the page are Magic Scraper's).
+  function product(p) { return p === 'snippers' ? 'Magic Snippers' : 'Magic Scraper'; }
 
   // A small table: rows of cells, each [text, className].
   function table(heads, rows) {
@@ -277,19 +280,25 @@
         return [[day(f.at), 'muted nowrap'], [f.v ? 'v' + f.v : '', 'muted'], [f.site || '\u2014', 'what'], [f.note || '\u2014', 'what' + (f.note ? '' : ' muted')]];
       })));
 
-      var total = counts.reduce(function (s, c) { return s + c.n; }, 0);
+      // One table per extension: each share is of that extension's own answers.
       fbBox.appendChild(el('h2', null, 'Why people removed it'));
-      if (!total) fbBox.appendChild(el('p', 'rq-msg', 'No answers yet.'));
-      else fbBox.appendChild(table([['Reason'], ['Answers', 'num'], ['Share', 'num']], counts.map(function (c) {
-        return [[reason(c.reason)], [String(c.n), 'num'], [Math.round(100 * c.n / total) + '%', 'num muted']];
-      })));
+      var byProduct = {};
+      counts.forEach(function (c) { var k = product(c.product); (byProduct[k] = byProduct[k] || []).push(c); });
+      if (!counts.length) fbBox.appendChild(el('p', 'rq-msg', 'No answers yet.'));
+      Object.keys(byProduct).forEach(function (k) {
+        var rows = byProduct[k], total = rows.reduce(function (s, c) { return s + c.n; }, 0);
+        fbBox.appendChild(el('h3', null, k + ' \u00b7 ' + total + ' answer' + (total === 1 ? '' : 's')));
+        fbBox.appendChild(table([['Reason'], ['Answers', 'num'], ['Share', 'num']], rows.map(function (c) {
+          return [[reason(c.reason)], [String(c.n), 'num'], [Math.round(100 * c.n / total) + '%', 'num muted']];
+        })));
+      });
 
       fbBox.appendChild(el('h2', null, 'Every goodbye answer, newest first'));
       if (!goodbyes.length) { fbBox.appendChild(el('p', 'rq-msg', 'No answers yet.')); return; }
       var typed = goodbyes.filter(function (f) { return f.site || f.note; }).length;
       fbBox.appendChild(el('p', 'rq-msg', typed + ' of ' + goodbyes.length + ' named a site or wrote something. The site box is optional; since this version of the goodbye page, choosing "didn\u2019t find the data" asks for it.'));
-      fbBox.appendChild(table([['Date'], ['Reason'], ['Version'], ['Site'], ['What they wrote']], goodbyes.map(function (f) {
-        return [[day(f.at), 'muted nowrap'], [reason(f.reason)], [f.v ? 'v' + f.v : '', 'muted'],
+      fbBox.appendChild(table([['Date'], ['Extension'], ['Reason'], ['Version'], ['Site'], ['What they wrote']], goodbyes.map(function (f) {
+        return [[day(f.at), 'muted nowrap'], [product(f.product), 'nowrap'], [reason(f.reason)], [f.v ? 'v' + f.v : '', 'muted'],
           [f.site || '\u2014', 'what' + (f.site ? '' : ' muted')], [f.note || '\u2014', 'what' + (f.note ? '' : ' muted')]];
       })));
     });
