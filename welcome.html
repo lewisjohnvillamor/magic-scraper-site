@@ -26,6 +26,9 @@
 
   .browser-note { font-size: 14.5px; color: var(--ink-2); margin: -6px 0 18px; }
   .go { margin: 4px 0 30px; }
+  .howto { margin: 6px 0 30px; max-width: 300px; }
+  .howto video { display: block; width: 100%; aspect-ratio: 9 / 16; height: auto; background: var(--card); border: 1px solid var(--rule); }
+  .howto figcaption { font-size: 14.5px; color: var(--ink-2); margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -58,6 +61,7 @@
   <h1>Magic Scraper is installed.</h1>
   <p class="dateline">Two minutes, three steps, and you will have your first spreadsheet.</p>
 
+
   <ol class="steps-n">
     <li><b>Pin the icon.</b> New extensions hide in the puzzle-piece menu at the top right of
       the browser. Click the puzzle piece, then the pin beside <b>Magic Scraper</b>, and it stays
@@ -80,6 +84,22 @@
       If it picked the wrong list, open <b>Wrong list?</b> and press <b>Another table</b>; if it
       picked none, choose <b>Pick manually</b> there and click one of the rows.</li>
   </ol>
+<figure class="howto">
+<video controls playsinline preload="none" poster="assets/video/how-to-use-poster.jpg"
+       width="540" height="960" aria-label="How to use Magic Scraper, in 34 seconds">
+<source src="assets/video/how-to-use.mp4" type="video/mp4" />
+</video>
+<figcaption>Stuck? Watch the whole thing in 34 seconds, captions on.</figcaption>
+</figure>
+
+<h2>The detailed walkthrough</h2>
+<p>Every feature in under three minutes: finding the list, tidying the columns, exporting to CSV,
+Excel, JSON or Google Sheets, crawling every page, picking the right table on a busy page, and
+drill-down.</p>
+<div class="yt" data-id="8Sa4VE9GocI" data-title="Magic Scraper 2.1: every feature in under 3 minutes">
+<a href="https://www.youtube.com/watch?v=8Sa4VE9GocI" aria-label="Play video: Magic Scraper 2.1: every feature in under 3 minutes (YouTube)"><img src="assets/video/8Sa4VE9GocI.webp" alt="" width="960" height="540" loading="lazy" /></a>
+</div>
+<p class="yt-cap">With subtitles. It plays from YouTube when you press play; until then nothing is loaded from YouTube.</p>
 
   <h2>Three things worth knowing</h2>
   <p><b>Every page, not just this one.</b> The Crawl tab finds the page's <b>Next</b> button
@@ -95,8 +115,9 @@
     and it gets looked at.</p>
 
   <footer><a href="/">Magic Scraper</a> <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms</a> <a href="/support">Support</a></footer>
+    <a href="/terms">Terms</a> <a href="/affiliates">Affiliates</a> <a href="/support">Support</a></footer>
 </main>
 <script src="nav.js" defer></script>
+<script src="video.js" defer></script>
 </body>
 </html>

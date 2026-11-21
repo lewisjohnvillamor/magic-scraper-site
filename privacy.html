@@ -48,7 +48,7 @@
 
 <main id="main" class="wrap narrow doc">
   <h1>Magic Scraper — Privacy Policy</h1>
-  <p class="sub">Last updated 4 November 2026 · applies to the Magic Scraper browser extension for Chrome, Edge and Firefox, to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux, and to the <a href="#snippers">Magic Snippers</a> extension</p>
+  <p class="sub">Last updated 21 November 2026 · applies to the Magic Scraper browser extension for Chrome, Edge and Firefox, to <a href="#desktop">Magic Scraper Desktop</a> for Windows and Linux, and to the <a href="#snippers">Magic Snippers</a> extension</p>
 
   <p class="lead"><b>Magic Scraper is built for privacy.</b> It has no servers of its own, no
   account, no analytics and no telemetry. What it reads stays in your browser, and what it
@@ -106,7 +106,11 @@
             report</b>. The last 40 errors, with web addresses removed and no scraped data. It is
             kept by the extension, removing the extension deletes it, and it goes nowhere unless you
             copy it and send it yourself.</td></tr>
-    <tr><td>A file you choose to compare with</td>
+    <tr><td>A count of exports that worked, and whether it has asked for a rating</td>
+<td>So that after your third export it can ask, once, whether you would rate it, and never again.
+Two small numbers in the popup's own storage; removing the extension deletes them, and they are
+never sent anywhere. (From version 2.1.4.)</td></tr>
+<tr><td>A file you choose to compare with</td>
         <td>Only if you use <b>Compare with a file</b> on the Changes tab. The file is read in the
             popup, on your computer, and compared there. It is not uploaded, not sent anywhere, and
             not kept: close the popup and it is gone.</td></tr>
@@ -209,6 +213,13 @@
   an answer can be matched to the build it is about. Neither page receives anything you scraped,
   and the goodbye question is optional &mdash; see <a href="#website">About this website</a>.</p>
 
+  <p><strong>&ldquo;Tell us which site&rdquo;.</strong> When Magic Scraper finds nothing on a page,
+  the panel offers a link to <code>magicscraper.app/report</code>. Only if you click it does the
+  extension open that page, with the address of the page you were on and its version number
+  written after a <code>#</code> &mdash; the part of an address that browsers keep to themselves
+  and never send to a website. The report page shows the address in a box you can edit, and
+  nothing reaches this website unless you press <b>Send</b>.</p>
+
   <h2>Permissions, and why each one exists</h2>
   <table>
     <tr><th>Permission</th><th>Why</th></tr>
@@ -250,7 +261,7 @@
   </table>
 
   <h3 id="firefox">In Firefox</h3>
-  <p>The Firefox version works the same way, with three differences. Firefox grants
+  <p>The <a href="https://addons.mozilla.org/firefox/addon/magic-scraper/" target="_blank" rel="noopener">Firefox version</a> works the same way, with three differences. Firefox grants
     <code>storage</code> and <code>alarms</code> at install, without a prompt, because it cannot
     ask for them later; they still do nothing until you use the features above.
     <b>Send to Google Sheets is not available in Firefox yet</b> (Paste into a new Google Sheet is). And
@@ -409,7 +420,8 @@
   <p>The <b>goodbye page</b> works the same way. If you answer it, what is stored is the reason
   you picked, the version you had, the date, and anything you chose to type in its two optional
   boxes. No name, email or IP address is stored with it, and a typed answer is deleted after
-  about a year.</p>
+  about a year. A <b>report</b> sent from <code>/report</code> is kept the same way: the address
+  and anything you typed, the version and the date, deleted after about a year.</p>
   <p>The site counts page views with <b>Cloudflare Web Analytics</b>, which is built into the
   hosting. It sets no cookies and does not identify or follow you: it reports totals, such as how
   many people opened a page and which site linked to it.</p>
@@ -436,7 +448,7 @@
   <p>Questions or reports: email
   <a href="mailto:support@magicscraper.app">support@magicscraper.app</a>.</p>
 
-  <footer><a href="/">Magic Scraper</a> <a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/support">Support</a></footer>
+  <footer><a href="/">Magic Scraper</a> <a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/affiliates">Affiliates</a> <a href="/support">Support</a></footer>
 </main>
 <script src="nav.js" defer></script>
 </body>

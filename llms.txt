@@ -1,6 +1,6 @@
 # Magic Scraper
 
-> A browser extension for Chrome, Edge and other Chromium browsers that turns the table or list on the page you are viewing into a
+> A browser extension for Chrome, Edge, other Chromium browsers and Firefox that turns the table or list on the page you are viewing into a
 > spreadsheet, and a bespoke service for the scrapes that do not fit in a browser.
 
 Every page on this site is also available as Markdown: request it with `Accept: text/markdown`,
@@ -24,18 +24,22 @@ extension, not in storage the scraped website can read.
 
 ## Magic Snippers
 
+- [Install Magic Snippers](https://chromewebstore.google.com/detail/magic-snippers-%E2%80%93-full-pag/mdbafbckoiidadhechgnihmabgeadbgo): the Chrome Web Store listing.
 - [Magic Snippers](https://magicscraper.app/magic-snippers): a separate Chrome extension from the
   same maker. It scrapes tables and lists to CSV or JSON, takes whole-page screenshots, and opens
   every link in a list to save a named full-page screenshot of each page, with an index
   spreadsheet. Free, with drill-down on the first 3 links of a run; Pro ($19 one-time, sold on
   Gumroad) drills every link. Everything stays in the browser; the only request it makes is a Pro
   licence check with Gumroad. Privacy: https://magicscraper.app/privacy#snippers
+- [Affiliates](https://magicscraper.app/affiliates): 50% of every Magic Scraper Pro and Magic Snippers Pro sale referred, tracked and paid by Gumroad.
 
 ## Product
 
 - [Install free](https://chromewebstore.google.com/detail/magic-scraper-%E2%80%93-lead-web/lcdaikobgjpakcgbkdedoapnckeobbck):
   the Chrome Web Store listing. Installs on Chrome, Edge, Brave, Opera, Vivaldi, Arc and
   any other Chromium browser.
+- [Install for Firefox](https://addons.mozilla.org/en-US/firefox/addon/magic-scraper/):
+  the Firefox Add-ons listing, for Firefox 140 or later.
 - [Home](https://magicscraper.app): what the extension does, pricing, and where the data goes
 - [How to use Magic Scraper](https://magicscraper.app/how-to-use-magic-scraper): the nine jobs
   people use it for, each with its steps, what is free and what is Pro, a practice page and the

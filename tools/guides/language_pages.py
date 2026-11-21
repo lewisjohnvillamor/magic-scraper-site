@@ -134,7 +134,7 @@ def language_pages(sec, claim, table):
         standfirst="英語の「Next」という文字でページ送りを探すツールは、「次へ」としか書かれていないサイトでは1ページ目で止まります。CSVをExcelで開くと、「東京」が「æ±äº¬」に化けることもあります。日本語のサイトで起きやすい問題と、Magic Scraperでの扱いをまとめました。",
         aside="無料、アカウント登録は不要です。",
         ui=dict(lang="ja", locale="ja_JP", skip="本文へスキップ", install="Chrome に追加（無料）",
-                edge="Edge に追加", faq="よくある質問"),
+                edge="Edge に追加", firefox="Firefox に追加", faq="よくある質問"),
         alternates=ALTERNATES,
         sections=[
             sec("pager", "2ページ目以降も取得する", "\n".join([
@@ -193,7 +193,7 @@ def language_pages(sec, claim, table):
         standfirst="Ein Scraper, der den Weiter-Link am englischen Wort &bdquo;Next&ldquo; erkennt, bleibt auf einer Seite mit &bdquo;Nächste Seite&ldquo; oder &bdquo;Mehr laden&ldquo; hängen. In Excel wird aus Müller schnell MÃ¼ller, und aus 1.234 die Zahl eins Komma zwei drei vier. Was auf deutschsprachigen Seiten schiefgeht, und was Magic Scraper dagegen tut.",
         aside="Kostenlos, ohne Konto.",
         ui=dict(lang="de", locale="de_DE", skip="Zum Inhalt springen", install="Für Chrome installieren &ndash; kostenlos",
-                edge="Für Edge installieren", faq="Häufige Fragen"),
+                edge="Für Edge installieren", firefox="Für Firefox installieren", faq="Häufige Fragen"),
         alternates=ALTERNATES,
         sections=[
             sec("pager", "Seite 2, Seite 3, bis zum Ende", "\n".join([
@@ -263,7 +263,7 @@ def language_pages(sec, claim, table):
         standfirst="Una herramienta que busca el botón de paginación por la palabra inglesa &laquo;Next&raquo; se detiene en la página 1 de un sitio que dice &laquo;Página siguiente&raquo; o &laquo;Cargar más&raquo;. Y al abrir el CSV en Excel, &laquo;España&raquo; puede convertirse en &laquo;EspaÃ±a&raquo;. Esto es lo que falla en los sitios en español, y lo que hace Magic Scraper en cada caso.",
         aside="Gratis, sin cuenta.",
         ui=dict(lang="es", locale="es_ES", skip="Saltar al contenido", install="Instalar en Chrome, gratis",
-                edge="Instalar en Edge", faq="Preguntas frecuentes"),
+                edge="Instalar en Edge", firefox="Instalar en Firefox", faq="Preguntas frecuentes"),
         alternates=ALTERNATES,
         sections=[
             sec("pager", "La página 2, y la 3, hasta el final", "\n".join([
@@ -329,7 +329,7 @@ def language_pages(sec, claim, table):
         standfirst="Un outil qui cherche le bouton de pagination grâce au mot anglais &laquo;&nbsp;Next&nbsp;&raquo; s’arrête à la page 1 d’un site qui écrit &laquo;&nbsp;Page suivante&nbsp;&raquo; ou &laquo;&nbsp;Voir plus&nbsp;&raquo;. Et dans Excel, &laquo;&nbsp;Café&nbsp;&raquo; peut devenir &laquo;&nbsp;CafÃ©&nbsp;&raquo;. Voici ce qui coince sur les sites francophones, et ce que fait Magic Scraper à chaque fois.",
         aside="Gratuit, sans compte.",
         ui=dict(lang="fr", locale="fr_FR", skip="Aller au contenu", install="Installer pour Chrome, gratuit",
-                edge="Installer pour Edge", faq="Questions fréquentes"),
+                edge="Installer pour Edge", firefox="Installer pour Firefox", faq="Questions fréquentes"),
         alternates=ALTERNATES,
         sections=[
             sec("pager", "La page 2, la 3, jusqu’au bout", "\n".join([
