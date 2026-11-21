@@ -64,6 +64,9 @@
     script, no queue.</p>
   </div>
 
+  <p>Using <b>Magic Snippers</b>, the screenshot extension? Its answers are
+  <a href="#snippers">further down</a>; the same inbox handles both.</p>
+
   <h2>What to put in the email</h2>
   <p>The single most useful thing is <b>the URL of the page you were scraping</b>. Almost every
   problem is specific to one page's markup, and without the address there is nothing to look at.
@@ -130,6 +133,46 @@
   <h2>Asking for a feature</h2>
   <p>Post it on the <a href="/requests">request board</a>, or vote for one that is already
   there. The most-wanted requests are built first, and you can be told when yours ships.</p>
+
+  <h2 id="snippers">Magic Snippers</h2>
+  <p>Magic Snippers saves full page screenshots, scrolling videos and images of one page, of every
+  page of a list, or of every item a list links to, inside your own login. Email
+  <a href="mailto:support@magicscraper.app?subject=Magic%20Snippers%20support">support@magicscraper.app</a>
+  with the address of the page and what the panel said. The panel's <b>&#9432;</b> button explains
+  every permission it uses.</p>
+
+  <table class="symptoms">
+    <tr><th>Chrome says it &ldquo;started debugging this browser&rdquo;</th>
+        <td>That bar appears while a whole-page screenshot or a scrolling video is captured: it is
+        how an extension can photograph the whole page. It covers only the tab being captured and
+        goes away when the capture ends. Pressing <b>Cancel</b> on it stops the capture.</td></tr>
+    <tr><th>Chrome asks to allow a site</th>
+        <td>The first time Magic Snippers works on a site, or opens the items of a list on another
+        site, Chrome asks you to allow it. Click <b>Allow</b>; it only ever asks for the sites you
+        use it on.</td></tr>
+    <tr><th>It clicked the wrong &ldquo;Next&rdquo;, or stopped early</th>
+        <td>The panel says why it stopped. In an item run you can name the button yourself, by its
+        text or a CSS selector: the list's own Next in <b>Scan options</b>, each item's in <b>Pages
+        inside each item</b>. In <b>This page and the next pages</b> it is found automatically; if it
+        picks the wrong one, email the page's address.</td></tr>
+    <tr><th>Some items failed</th>
+        <td>Press <b>Retry failed</b> when the run ends. A link that downloads a file instead of
+        opening a page is reported as failed, and the <code>_index.csv</code> says which.</td></tr>
+    <tr><th>An image wasn't saved</th>
+        <td>Images smaller than <b>Smallest image</b> (100 px by default) are left out, so lower it
+        to include icons and thumbnails. Images drawn by CSS backgrounds, or that exist only inside
+        the page's code, can't be saved.</td></tr>
+    <tr><th>A PDF won't capture</th>
+        <td>Open the PDF in Chrome first, then capture it. A PDF the site sends as a download, rather
+        than showing it, can't be captured yet.</td></tr>
+    <tr><th>The file names are wrong</th>
+        <td>Open <b>Change the file name</b> (or <b>Change the folder and file names</b> for an item
+        run): the preview above it shows exactly what will be saved.</td></tr>
+  </table>
+  <p>Magic Snippers Pro is a separate licence from Magic Scraper Pro, bought and activated the same
+  way (Upgrade &rarr; paste the key &rarr; Activate), with the same seven-day refund. More on the
+  <a href="/magic-snippers">Magic Snippers page</a>; what it stores and sends is in the
+  <a href="/privacy#snippers">privacy policy</a>.</p>
 
   <h2>Reporting a bug</h2>
   <p>Email <a href="mailto:support@magicscraper.app?subject=Magic%20Scraper%20bug">support@magicscraper.app</a>
