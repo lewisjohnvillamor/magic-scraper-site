@@ -146,3 +146,54 @@
   var skip = document.querySelector('.skip');
   if (skip && skip.parentNode === document.body) skip.after(bar); else document.body.prepend(bar);
 })();
+
+/* Pricing icons (see style.css): a staggered jiggle the first time the plans
+   come into view, and a soft tap when a line is clicked, its sound panned
+   toward where the icon sits on screen. The sound is made here with Web
+   Audio -- no file is fetched -- and only after a click, which browsers
+   require anyway. Reduced motion skips the jiggle; the sound stays tied to
+   the click. */
+(function () {
+  var plans = document.querySelector('.plans');
+  if (!plans || !plans.querySelector('.ico')) return;
+  // Each plan jiggles in turn the first time it comes into view: on a phone
+  // the two are stacked, taller than the screen together.
+  var cards = plans.querySelectorAll('.plan');
+  for (var c = 0; c < cards.length; c++) {
+    var icons = cards[c].querySelectorAll('.ico');
+    for (var i = 0; i < icons.length; i++) icons[i].style.setProperty('--n', i);
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } });
+    }, { threshold: 0.3 });
+    for (var k = 0; k < cards.length; k++) io.observe(cards[k]);
+  }
+  var ac = null;
+  function tap(x) {
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      var t = ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(880, t);
+      o.frequency.exponentialRampToValueAtTime(1320, t + 0.05);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.07, t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.13);
+      var out = g;
+      if (ac.createStereoPanner) { var p = ac.createStereoPanner(); p.pan.value = Math.max(-0.8, Math.min(0.8, x * 2 - 1)); g.connect(p); out = p; }
+      o.connect(g); out.connect(ac.destination);
+      o.start(t); o.stop(t + 0.15);
+    } catch (e) {}
+  }
+  plans.addEventListener('click', function (e) {
+    var li = e.target.closest('li');
+    if (!li || !li.querySelector('.ico') || e.target.closest('a')) return;
+    var ico = li.querySelector('.ico'), r = ico.getBoundingClientRect();
+    if (ico.animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      ico.animate([{ transform: 'none' }, { transform: 'rotate(-14deg) scale(1.16)', offset: .18 }, { transform: 'rotate(11deg) scale(1.16)', offset: .36 },
+        { transform: 'rotate(-7deg) scale(1.08)', offset: .54 }, { transform: 'rotate(4deg)', offset: .72 }, { transform: 'none' }], { duration: 550, easing: 'ease-in-out' });
+    }
+    tap((r.left + r.width / 2) / window.innerWidth);
+  });
+})();
