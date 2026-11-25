@@ -107,3 +107,42 @@
   }
   label();
 })();
+
+/* Black Friday, 2026: Magic Scraper Pro for $5 with the code BLACKFRIDAY,
+   Friday 27 November only, then back to the $19 founding price. A strip
+   above the masthead on every page, by the visitor's own calendar: "this
+   Friday" before it, "today only" on the day, and nothing from Saturday on,
+   so it needs no second deploy to take down. Closing it hides it for the
+   rest of the visit. Nothing is stored beyond this tab, nothing is sent. */
+(function () {
+  var now = new Date(), y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  if (y !== 2026 || m !== 10 || d < 20 || d > 27) return;   // 20-27 November 2026, local time
+  try { if (sessionStorage.getItem('mds_bf_closed')) return; } catch (e) {}
+  var today = d === 27;
+  var bar = document.createElement('div');
+  bar.className = 'bf-bar';
+  bar.setAttribute('role', 'region');
+  bar.setAttribute('aria-label', 'Black Friday offer');
+  var text = document.createElement('p');
+  var tag = document.createElement('b');
+  tag.textContent = today ? 'Today only' : 'Black Friday';
+  text.appendChild(tag);
+  text.appendChild(document.createTextNode(today
+    ? ': Magic Scraper Pro for $5 (normally $19) with the code BLACKFRIDAY. One time only.'
+    : ': Magic Scraper Pro for $5 (normally $19), this Friday, 27 November only. Code BLACKFRIDAY.'));
+  var go = document.createElement('a');
+  go.href = today ? 'https://magicscraper.gumroad.com/l/magicscraper/BLACKFRIDAY' : '/#price';
+  go.textContent = today ? 'Get Pro for $5' : 'See Pro';
+  var close = document.createElement('button');
+  close.type = 'button';
+  close.className = 'bf-close';
+  close.setAttribute('aria-label', 'Close the Black Friday notice');
+  close.textContent = '×';
+  close.addEventListener('click', function () {
+    bar.remove();
+    try { sessionStorage.setItem('mds_bf_closed', '1'); } catch (e) {}
+  });
+  bar.appendChild(text); bar.appendChild(go); bar.appendChild(close);
+  var skip = document.querySelector('.skip');
+  if (skip && skip.parentNode === document.body) skip.after(bar); else document.body.prepend(bar);
+})();
